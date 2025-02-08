@@ -1,0 +1,166 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* GLOBAL STYLES */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 80px; /* Spazio per il footer */
+  }
+  
+  /* HEADER */
+  header {
+    background-color: #222;
+    padding: 10px 20px;
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo img {
+    height: 50px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #4CAF50;
+  }
+  
+  /* HERO SECTION */
+  .hero {
+    background-color: #e2e2e2;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+  }
+  .hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  /* MAIN CONTENT - CLASSIFICA */
+  main {
+    text-align: center;
+    padding: 0 20px 40px;
+  }
+  .classifica-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .classifica-table th,
+  .classifica-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 1.1em;
+    text-align: center;
+  }
+  .classifica-table th {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  /* FOOTER: ancorato in fondo alla pagina */
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 20px;
+  }
+  
+  /* MODAL (se presente) */
+  .modal {
+    display: none; /* Nascosto di default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    margin: auto;
+  }
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+  .modal-content input[type="text"],
+  .modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  .modal-content button:hover {
+    background-color: #45a049;
+  }
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+  }
+  .close-modal:hover {
+    color: #000;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav ul {
+      gap: 10px;
+    }
+    .classifica-table th,
+    .classifica-table td {
+      padding: 8px;
+    }
+  }
+  

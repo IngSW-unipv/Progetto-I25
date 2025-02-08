@@ -1,21 +1,16 @@
-
-
-HOMEPAGE (Andrea)
-
 CHI SIAMO (Andrea)
 -aggiungere un immagine del nostro team ?
-
-TRACCIATO (Andrea)
--Sistemare le immagini
 
 CLASSIFICA (Andrea)
 -Integrazione con java per prendere i dati della Classifica
 
 LOGIN (Andrea)
--Pulsante dove se non si è registrato è possibile inserire i propri dati anagrafici per diventare socio
 -parlare con java per verificare che il nome utente e password siano corretti
 -aggiungere una funzionalità che quando si effettua la login correttamente appare un bottone premibile dove
 ti porta alla tua pagina privata
+
+REGISTRAZIONE(Andrea)
+-Integrazione con Java
 
 CONCESSIONARIA (Alessandro)
 -copiare da tonykart https://www.tonykart.com/telai-racer-401T.php
@@ -40,8 +35,6 @@ GESTORE DELLA CONCESSIONARIA (Alessandro)
 UTENTE (Andrea)
 -Nella homepage dopo essersi registrato, può andare nella pagina personale cliccando il bottone
 il alto a destra
--Nella pagina personale è possibile cliccare il bottone per vedere i propri tempi migliori
--Nella pagina personale è possibile prenotare una gara libera
 -Nella pagina personale è possibile vedere il proprio kart con la descrizione delle sue caratteristiche ??
 
 ARBITRO (da analizzare meglio) ?? (Alessandro)

@@ -7,28 +7,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/styles.css">
-  
-  <!-- Stili aggiuntivi per la sezione descrizione/immagine -->
-  <style>
-    .additional-details {
-      display: flex;
-      flex-wrap: wrap; /* In caso di schermi piccoli, gli elementi andranno in colonna */
-      align-items: center;
-      padding: 20px;
-      gap: 20px;
-    }
-    .additional-text, 
-    .additional-image {
-      flex: 1;
-    }
-    /* Rende l'immagine responsiva */
-    .additional-image img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-  </style>
+  <link rel="stylesheet" href="css/tracciato.css">
 </head>
 <body>
   <!-- Header comune -->
@@ -76,7 +55,7 @@
       </div>
     </div>
     
-    <!-- Sezione: Descrizione a sinistra e immagine a destra -->
+    <!-- Sezione: Descrizione a sinistra, immagine a destra -->
     <section class="additional-details">
       <div class="additional-text">
         <p>
@@ -93,7 +72,7 @@
         </p>
       </div>
       <div class="additional-image">
-        <img src="immagini/pista2.jpg" alt="Dettagli Pista">
+        <img src="immagini/pista2.png" alt="Dettagli Pista">
       </div>
     </section>
   </main>
@@ -113,10 +92,11 @@
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Accedi</button>
       </form>
+      <p class="register-link">Non sei iscritto? <a href="registrazione.html">Iscriviti qui</a></p>
     </div>
   </div>
   
-  <!-- Script per il Modal -->
+  <!-- Script per la gestione del Modal -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var loginBtn = document.getElementById("loginBtn");
@@ -124,7 +104,8 @@
       var closeModal = document.getElementById("closeModal");
       
       if (loginBtn) {
-        loginBtn.addEventListener("click", function() {
+        loginBtn.addEventListener("click", function(e) {
+          e.preventDefault();
           modal.style.display = "flex";
         });
       }

@@ -1,0 +1,151 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* GLOBAL STYLES */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 80px; /* Spazio per il footer */
+  }
+  
+  /* HEADER */
+  header {
+    background-color: #222;
+    padding: 10px 20px;
+  }
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo img {
+    height: 50px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #4CAF50;
+  }
+  
+  /* MAIN CONTENT */
+  main {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #222;
+  }
+  
+  /* FORM STYLES */
+  .reservation-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Sezione Orari */
+  .timeslot-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #222;
+  }
+  .timeslots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  /* Nascondi i radio button */
+  .timeslots input[type="radio"] {
+    display: none;
+  }
+  /* Label come bottoni */
+  .timeslots label {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #e2e2e2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  .timeslots label:hover {
+    background-color: #d0d0d0;
+  }
+  /* Stato selezionato */
+  .timeslots input[type="radio"]:checked + label {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: #fff;
+  }
+  
+  /* Sezione Data e Pilota */
+  .additional-info {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .additional-info .form-group {
+    margin-bottom: 15px;
+  }
+  .additional-info label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .additional-info input[type="date"],
+  .additional-info input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Bottone Submit */
+  .submit-group button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .submit-group button:hover {
+    background-color: #45a049;
+  }
+  
+  /* FOOTER: ancorato in fondo alla pagina */
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 20px;
+  }
+  
