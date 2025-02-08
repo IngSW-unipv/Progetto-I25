@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sfondo -->
+  <rect width="100%" height="100%" fill="#f7f7f7"/>
+
+  <!-- Titolo -->
+  <text x="50%" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#333">
+    Sessioni di corsa da 10 minuti
+  </text>
+  
+  <!-- Sottotitolo -->
+  <text x="50%" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#666">
+    Non si accettano prenotazioni
+  </text>
+  
+  <!-- Prezzi individuali -->
+  <text x="50" y="130" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    Una corsa da 10 minuti
+  </text>
+  <text x="500" y="130" text-anchor="end" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    15€
+  </text>
+  
+  <text x="50" y="165" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    Dalla seconda in giornata
+  </text>
+  <text x="500" y="165" text-anchor="end" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    13€
+  </text>
+  
+  <!-- Linea divisoria -->
+  <line x1="50" y1="190" x2="550" y2="190" stroke="#ccc" stroke-width="2"/>
+
+  <!-- Abbonamenti -->
+  <text x="50" y="230" font-family="Arial, sans-serif" font-size="18" fill="#000">
+    Abbonamento nominale e non condivisibile con altri
+  </text>
+  
+  <text x="50" y="265" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    6 corse da 10 minuti
+  </text>
+  <text x="500" y="265" text-anchor="end" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    70€
+  </text>
+  
+  <text x="50" y="300" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    10 corse da 10 minuti
+  </text>
+  <text x="500" y="300" text-anchor="end" font-family="Arial, sans-serif" font-size="20" fill="#000">
+    100€
+  </text>
+</svg>
