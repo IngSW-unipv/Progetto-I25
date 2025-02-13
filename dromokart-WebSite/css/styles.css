@@ -340,3 +340,72 @@ footer {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+.kart-container {
+  max-width: 1000px;
+  display: flex;
+  margin: 20px auto;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.kart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%; /* Per avere tre kart per riga */
+}
+
+.kart-image {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.kart-description {
+  flex: 2;
+}
+
+.kart-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-button {
+  background-color: white;
+  color: black;
+  border: 2px solid grey;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px; /* Bordi smussati */
+  transition: background-color 0.3s, color 0.3s; /* Transizione per il cambiamento di colore */
+}
+
+.custom-button:hover {
+  background-color: #4CAF50; /* Colore quando l'utente ci passa sopra */
+  color: white; /* Colore del testo durante il hover */
+  border-color: #3e8a41; /* Colore del bordo durante il hover */
+}
+
+div div a {
+  color: black;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+div div a:hover {
+  color: #4CAF50;
+}
+
+.product-details {
+  max-width: 1000px;
+  display: flex;
+  margin: 20px auto;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between
+}
