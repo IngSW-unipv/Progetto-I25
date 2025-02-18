@@ -11,5 +11,7 @@ public class Main {
         a=a+10;
         System.out.println("somma" + a);
     }
+    /*ciao luca, complimenti per il 30 in basi*/
+
 
 }
