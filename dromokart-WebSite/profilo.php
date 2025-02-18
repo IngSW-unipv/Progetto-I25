@@ -1,3 +1,17 @@
+
+<?php
+session_start();
+
+// Verifico se l'utente ha effettuato il login
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php");
+    exit();
+}
+
+// Recupero lo username dalla sessione
+$username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -31,7 +45,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Benvenuto nel tuo profilo</h1>
+    <h1>Benvenuto <?php echo htmlspecialchars($username); ?></h1>
     <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
   </section>
 

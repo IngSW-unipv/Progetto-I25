@@ -26,7 +26,7 @@
           <li><a href="chi-siamo.php">Chi Siamo</a></li>
           <li><a href="tracciato.php">Il Tracciato</a></li>
           <li><a href="classifica.php">Classifica</a></li>
-          <li><a href="concessionario.php">Concessionario</a></li>
+          <li><a href="concessionaria-home.php">Concessionario</a></li>
           <li><a id="loginBtn">LOGIN</a></li>
         </ul>
       </nav>
