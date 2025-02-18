@@ -34,7 +34,7 @@
   <main>
     <section class="product-details">
       <div class="product-image">
-        <img src="immagini/50cc.jpg" alt="Kart in vendita" width="600" height=auto>
+        <img src="immagini/50cc.png" alt="Kart in vendita" width="600" height=auto>
       </div>
       <div class="product-info">
         <h1>Kart 50cc</h1>
