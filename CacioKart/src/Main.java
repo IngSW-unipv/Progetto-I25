@@ -7,7 +7,7 @@ public class Main {
            }
        }
         System.out.println("alba world!,wow");
-        int a;
+        int a=0;
         a=a+10;
         System.out.println("somma" + a);
     }
