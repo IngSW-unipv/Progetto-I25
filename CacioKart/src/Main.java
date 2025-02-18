@@ -6,6 +6,10 @@ public class Main {
                i++;
            }
        }
+        System.out.println("alba world!,wow");
+        int a;
+        a=a+10;
+        System.out.println("somma" + a);
     }
 
 }
