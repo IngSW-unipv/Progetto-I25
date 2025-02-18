@@ -1,6 +1,6 @@
-<?php include 'default/footer.php'; ?>
-<?php include 'default/header.php'; ?>
-<?php include 'default/modal.php'; ?>
+<?php include 'default/footerHome.php'; ?>
+<?php include 'default/headerHome.php'; ?>
+<?php include 'default/modalHome.php'; ?>
 
 <!DOCTYPE html>
 <html lang="it">

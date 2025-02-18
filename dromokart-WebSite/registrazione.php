@@ -1,3 +1,5 @@
+<?php include 'default/footerHome.php'; ?>
+<?php include 'default/headerHome.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,25 +12,6 @@
   <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo Dromokart">
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="chi-siamo.php">Chi Siamo</a></li>
-          <li><a href="tracciato.php">Il Tracciato</a></li>
-          <li><a href="classifica.php">Classifica</a></li>
-          <li><a href="concessionaria-home.php">Concessionario</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   <!-- Main Content - Form di Registrazione -->
   <main>
@@ -66,9 +49,5 @@
     </section>
   </main>
 
-  <!-- Footer ancorato in fondo alla pagina -->
-  <footer>
-    <p>&copy; 2025 KacioKart S.R.L. Tutti i diritti riservati.</p>
-  </footer>
 </body>
 </html>

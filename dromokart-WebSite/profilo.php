@@ -1,17 +1,5 @@
-
-<!-- <?php
-session_start();
-
-// Verifico se l'utente ha effettuato il login
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
-    exit();
-}
-
-// Recupero lo username dalla sessione
-$username = $_SESSION['username'];
-?> -->
-
+<?php include 'default/footerHome.php'; ?>
+<?php include 'default/headerProfilo.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -24,28 +12,10 @@ $username = $_SESSION['username'];
   <link rel="stylesheet" href="css/profilo.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo Dromokart">
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="profilo.php">Profilo</a></li>
-          <!-- Il link Logout ora reindirizza alla homepage -->
-          <li><a href="index.php">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
+ 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Benvenuto <?php echo htmlspecialchars($username); ?></h1>
+    <h1>Benvenuto</h1>
     <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
   </section>
 
@@ -57,10 +27,5 @@ $username = $_SESSION['username'];
       <button onclick="location.href='caratteristiche_kart.php'">Caratteristiche del Kart</button>
     </div>
   </main>
-
-  <!-- Footer ancorato in fondo alla pagina -->
-  <footer>
-    <p>&copy; 2025 KacioKart S.R.L. Tutti i diritti riservati.</p>
-  </footer>
 </body>
 </html>
