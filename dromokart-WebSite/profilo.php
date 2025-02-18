@@ -14,16 +14,16 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <img src="immagini/LOGO_KART.png" alt="Logo Dromokart">
         </a>
       </div>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="profilo.html">Profilo</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="profilo.php">Profilo</a></li>
           <!-- Il link Logout ora reindirizza alla homepage -->
-          <li><a href="index.html">Logout</a></li>
+          <li><a href="index.php">Logout</a></li>
         </ul>
       </nav>
     </div>
@@ -38,9 +38,9 @@
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='migliori_tempi.html'">Migliori Tempi</button>
-      <button onclick="location.href='prenota_gara.html'">Prenota Gara Libera</button>
-      <button onclick="location.href='caratteristiche_kart.html'">Caratteristiche del Kart</button>
+      <button onclick="location.href='migliori_tempi.php'">Migliori Tempi</button>
+      <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
+      <button onclick="location.href='caratteristiche_kart.php'">Caratteristiche del Kart</button>
     </div>
   </main>
 

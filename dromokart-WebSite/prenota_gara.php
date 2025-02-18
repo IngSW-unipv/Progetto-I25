@@ -14,15 +14,15 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <img src="immagini/LOGO_KART.png" alt="Logo Dromokart">
         </a>
       </div>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="profilo.html">Profilo</a></li>
-          <li><a href="index.html">Logout</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="profilo.php">Profilo</a></li>
+          <li><a href="index.php">Logout</a></li>
         </ul>
       </nav>
     </div>
