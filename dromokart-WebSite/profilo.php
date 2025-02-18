@@ -1,5 +1,5 @@
 
-<?php
+<!-- <?php
 session_start();
 
 // Verifico se l'utente ha effettuato il login
@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Recupero lo username dalla sessione
 $username = $_SESSION['username'];
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="it">

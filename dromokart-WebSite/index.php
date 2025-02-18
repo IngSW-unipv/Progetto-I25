@@ -1,3 +1,7 @@
+<?php include 'default/footer.php'; ?>
+<?php include 'default/header.php'; ?>
+<?php include 'default/modal.php'; ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,26 +14,6 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo Dromokart">
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="chi-siamo.php">Chi Siamo</a></li>
-          <li><a href="tracciato.php">Il Tracciato</a></li>
-          <li><a href="classifica.php">Classifica</a></li>
-          <li><a href="concessionaria-home.php">Concessionario</a></li>
-          <li><a id="loginBtn">LOGIN</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   <!-- Main Content -->
   <main>
@@ -100,52 +84,5 @@
     </div>
   </div>
 </section>
-
-    
-
-  <!-- Footer fisso -->
-  <footer>
-    <p>&copy; 2025 KacioKart S.R.L. Tutti i diritti riservati.</p>
-  </footer>
-
-<!-- Modal per il Login -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeModal">&times;</span>
-    <h2>Login</h2>
-    <form action="profilo.php" method="post">
-      <input type="text" name="username" placeholder="Nome utente" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Accedi</button>
-    </form>
-    <p class="register-link">Non sei iscritto? <a href="registrazione.php">Iscriviti qui</a></p>
-  </div>
-</div>
-
-
-  <!-- Script per la gestione del Modal -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var loginBtn = document.getElementById("loginBtn");
-      var modal = document.getElementById("loginModal");
-      var closeModal = document.getElementById("closeModal");
-      
-      if (loginBtn) {
-        loginBtn.addEventListener("click", function() {
-          modal.style.display = "flex";
-        });
-      }
-      if (closeModal) {
-        closeModal.addEventListener("click", function() {
-          modal.style.display = "none";
-        });
-      }
-      window.addEventListener("click", function(event) {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    });
-  </script>
 </body>
 </html>

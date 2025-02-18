@@ -1,221 +1,68 @@
 /* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* GLOBAL STYLES */
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* HEADER */
-  header {
-    background: #222;
-    padding: 10px 20px;
-  }
-  .header-container {
-    display: flex;
-    justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL STYLES */
+html, body {
+  height: 100%;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+/* WRAPPER: container per header, hero e main */
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER (stili già presenti nel tuo CSS) */
+header {
+  background: #222;
+  padding: 10px 20px;
+}
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: #e2e2e2;
+  margin-bottom: 40px;
+}
+
+/* MAIN CONTENT */
+main {
+  flex: 1;
+  padding: 0 20px 40px;
+}
+
+/* CONTENT, TRACK-IMAGE, SPECS e altre sezioni */
+/* Inserisci qui gli stili già presenti per le altre sezioni... */
+
+/* FOOTER */
+footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 15px 20px;
+}
+
+/* MODAL e altri stili esistenti */
+/* ... */
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .content, .additional-details {
+    flex-direction: column;
     align-items: center;
   }
-  .logo img {
-    height: 50px;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s;
-  }
-  nav a:hover {
-    color: #4CAF50;
-  }
-  
-  /* HERO SECTION */
-  .hero {
-    text-align: center;
-    padding: 40px 20px;
-    background: #e2e2e2;
-    margin-bottom: 40px;
-  }
-  .hero h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-  }
-  .hero p {
-    font-size: 1.2em;
-    color: #666;
-  }
-  
-  /* MAIN CONTENT */
-  main {
-    padding: 0 20px 40px;
-  }
-  .content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  .track-image {
-    flex: 1 1 600px;
-    max-width: 800px;
-  }
-  .track-image img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  .specs {
-    flex: 1 1 300px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  .specs h2 {
-    margin-bottom: 20px;
-    color: #4CAF50;
-    font-size: 1.8em;
-  }
-  .specs ul {
-    list-style: none;
-    padding: 0;
-  }
-  .specs li {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-  }
-  .specs li span {
-    font-weight: bold;
-  }
-  
-  /* ADDITIONAL DETAILS SECTION */
-  .additional-details {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    text-align: left;
-  }
-  .additional-text {
-    flex: 1;
-  }
-  .additional-image {
-    flex: 1;
-  }
-  .additional-image img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  .additional-text p {
-    font-size: 1.1em;
-    color: #333;
-  }
-  
-  /* FOOTER */
-  footer {
-    background: #222;
-    color: #fff;
-    text-align: center;
-    padding: 15px 20px;
-    margin-top: 40px;
-  }
-  
-  /* MODAL */
-  .modal {
-    display: none; /* Nascondi il modal di default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    /* Il display verrà impostato a "flex" via JS al click del login */
-  }
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    position: relative;
-    margin: auto;
-    top: 20%;
-  }
-  .modal-content h2 {
-    margin-bottom: 20px;
-  }
-  .modal-content input[type="text"],
-  .modal-content input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .modal-content button {
-    background: #4CAF50;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    width: 100%;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-  }
-  .modal-content button:hover {
-    background: #45a049;
-  }
-  .close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    color: #aaa;
-    cursor: pointer;
-  }
-  .close-modal:hover {
-    color: #000;
-  }
-  .register-link {
-    margin-top: 15px;
-    font-size: 0.9em;
-    text-align: center;
-  }
-  .register-link a {
-    color: #4CAF50;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .register-link a:hover {
-    text-decoration: underline;
-  }
-  
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .content, .additional-details {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
+}
