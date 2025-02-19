@@ -410,4 +410,23 @@ div div a:hover {
   justify-content: space-between
 }
 
-
+.profile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.profile-buttons button {
+  padding: 15px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  background: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.profile-buttons button:hover {
+  background: #45a049;
+}

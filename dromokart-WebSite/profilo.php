@@ -23,7 +23,7 @@ $username = $_SESSION['username'];
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/profilo.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
  
