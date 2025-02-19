@@ -1,3 +1,8 @@
+<?php
+  include 'default/footerConce.php';
+  include 'default/modalHome.php';
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -20,7 +25,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="index.php">Home</a></li>
+          <li><a href="proprietario.php">Home</a></li>
           <li><a id="logoutBtn">Logout</a></li>
         </ul>
       </nav>
@@ -35,64 +40,15 @@
       <p>Clicca uno dei pulsanti qui sotto per aggiungere un dipendente, rimuoverlo o visionare il bilancio</p>
     </section>
 
-    <section class="description-section">
-      <a href="pagina-provvisoria.php">
-        <button class="custom-button">Visualizza il bilancio</button>
-      </a>
-      <a href="pagina-provvisoria.php">
-        <button class="custom-button">Aggiungi un dipendente</button>
-      </a>
-      <a href="pagina-provvisoria.php">
-        <button class="custom-button">Rimuovi un dipendente</button>
-      </a>
+    <div class="profile-buttons">
+    <button onclick="location.href='provvisoria.php'">Visualizza il bilancio</button>
+      <button onclick="location.href='provvisoria.php'">Aggiungi un dipendente</button>
+      <button onclick="location.href='provvisoria.php'">Rimuovi un dipendente</button>
     </section>
+</div>
 
 
   </main>
 
-  <!-- Footer fisso -->
-  <footer>
-    <p>&copy; 2025 CacioKart S.R.L. Tutti i diritti riservati.</p>
-    <p>contatti - telefono: +39 3331987477  email: cacioconc@universitadipavia.it</p>
-  </footer>
-
-  <!-- Modal per il Login -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeModal">&times;</span>
-      <h2>Login</h2>
-      <form action="login.php" method="post">
-        <input type="text" name="username" placeholder="Nome utente" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Accedi</button>
-      </form>
-      <p class="register-link">Non sei iscritto? <a href="registrazione.php">Iscriviti qui</a></p>
-    </div>
-  </div>
-
-  <!-- Script per la gestione del Modal -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var loginBtn = document.getElementById("loginBtn");
-      var modal = document.getElementById("loginModal");
-      var closeModal = document.getElementById("closeModal");
-
-      if (loginBtn) {
-        loginBtn.addEventListener("click", function() {
-          modal.style.display = "flex";
-        });
-      }
-      if (closeModal) {
-        closeModal.addEventListener("click", function() {
-          modal.style.display = "none";
-        });
-      }
-      window.addEventListener("click", function(event) {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    });
-  </script>
 </body>
 </html>

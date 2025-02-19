@@ -19,8 +19,9 @@
     fclose($socket);
 
     $str = explode(' ',$res);
-
-    if(!($str[0])){
+    //la seconda cifra indica: 0 utente semplice; 1 meccanico; 2 gestore concessionaria; 3 arbitro; 4 organizzatore;
+    //5 proprietario 
+    if(($str[0]) == 0){
         header('../index.php');
         die();
     } else{

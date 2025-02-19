@@ -13,7 +13,6 @@ REGISTRAZIONE(Andrea)
 -Integrazione con Java
 
 CONCESSIONARIA (Alessandro)
--copiare da tonykart https://www.tonykart.com/telai-racer-401T.php
 -per i kart sono 3 immagini bottone che se cliccate ti riporta alla pagina del kart con tutti i suoi dettagli
 e ti da la possibilità di comprarlo, il bottone appare solo se si è loggati
 
@@ -33,9 +32,7 @@ GESTORE DELLA CONCESSIONARIA (Alessandro)
 -tasto per aggiungere la quantità di pezzi di ricambio (i pezzi sono già presenti sul db)
 
 UTENTE (Andrea)
--Nella homepage dopo essersi registrato, può andare nella pagina personale cliccando il bottone
-il alto a destra
--Nella pagina personale è possibile vedere il proprio kart con la descrizione delle sue caratteristiche ??
+-Nella pagina personale è possibile vedere il proprio kart con la descrizione delle sue caratteristiche ??(implementare php)
 
 ARBITRO (da analizzare meglio) ?? (Alessandro)
 -appena entra l'ARBITRO seleziona la gara, gli verrà restituita una tabella dal database con i tempi di gara

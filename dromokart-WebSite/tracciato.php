@@ -22,44 +22,42 @@
     <p>Scopri le caratteristiche della nostra pista</p>
   </section>
   
-  <!-- Contenuto principale -->
-  <main>
-    <div class="content">
-      <!-- Sezione immagine e specifiche -->
-      <div class="track-image">
-        <img src="immagini/pista.png" alt="Pista di Kart">
-      </div>
-      <div class="specs">
-        <h2>Specifiche</h2>
+
+
+  <section class="description-section">
+  <div class="description-image">
+    <img src="immagini/pista.png" alt="Esperienza di Karting">
+  </div>
+  <div class="description-text">
+    <p>
         <ul>
-          <li><span>Lunghezza pista:</span> 1256 mt</li>
-          <li><span>Larghezza carreggiata:</span> 10 mt (8 - 10 mt)</li>
-          <li><span>Rettilineo più lungo:</span> 170 mt</li>
-          <li><span>Rettilineo minore:</span> 145 mt</li>
+          <br><strong>Lunghezza pista:<strong> 1256 mt
+          <br><strong>Larghezza carreggiata:<strong> 10 mt (8 - 10 mt)
+          <br><strong>Rettilineo più lungo:<strong> 170 mt
+          <br><strong>Rettilineo minore:<strong> 145 mt
         </ul>
-      </div>
-    </div>
-    
-    <!-- Sezione: Descrizione a sinistra, immagine a destra -->
-    <section class="additional-details">
-      <div class="additional-text">
-        <p>
-          <strong>Capienza piloti</strong><br>
-          in gara 34 – prove libere fino a 51<br><br>
-          <strong>Bande magnetiche</strong><br>
-          N. 3 bande magnetiche ALFANO<br><br>
-          <strong>Curve</strong><br>
-          Curve a raggio costante e variabile. Cordoli interni ed esterni a norme CIK<br><br>
-          <strong>Asfalto</strong><br>
-          Manto di asfalto realizzato con bitume STIRELF<br><br>
-          <strong>Area Paddock</strong><br>
-          Area Paddock interamente asfaltata e recintata
-        </p>
-      </div>
-      <div class="additional-image">
-        <img src="immagini/pista2.png" alt="Dettagli Pista">
-      </div>
-    </section>
+    </p>
+  </div>
+</section>
+
+
+<section class="description-section">
+  <div class="description-image">
+    <img src="immagini/pista2.png" alt="Esperienza di Karting">
+  </div>
+  <div class="description-text">
+    <p>
+        <ul>
+          <br><strong>Capienza piloti<strong> in gara 34 – prove libere fino a 51
+          <br><strong>Bande magnetiche<strong> N. 3 bande magnetiche ALFANO
+          <br><strong>Curve<strong> Curve a raggio costante e variabile. Cordoli interni ed esterni a norme CIK
+          <br><strong>Asfalto<strong> Manto di asfalto realizzato con bitume STIRELF
+          <br><strong>Area Paddock<strong> Area Paddock interamente asfaltata e recintata
+        </ul>
+    </p>
+  </div>
+</section>
+
   </main>
   
 </body>

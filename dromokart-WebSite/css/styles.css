@@ -111,13 +111,6 @@ nav ul li a:hover {
   font-size: 1.1em;
   color: #333;
 }
-.description-image {
-  flex: 1;
-}
-.description-image img {
-  width: 100%;
-  border-radius: 8px;
-}
 
 /* Sezione Prezzario */
 .pricing-section {
@@ -241,47 +234,10 @@ footer {
   flex: 1 1 1600px; /* Prova a usare una dimensione base di 600px */
   max-width: 1600px; /* Limita la larghezza massima a 600px */
 }
-.description-image img {
-  width: 100%;
-  border-radius: 8px;
-}
 
-/* Sezione Prezzario senza immagine */
-.pricing-section {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;  /* Centra il contenuto della sezione */
-}
-.pricing-text {
-  font-size: 1.1em;
-  color: #333;
-}
 
-/* Sezione descrizione con immagine e testo in pila */
-.description-section {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center; /* Centra il testo */
-  display: block;
-}
 .description-image {
   margin-bottom: 20px;
-}
-.description-image img {
-  width: 100%;
-  border-radius: 8px;
-}
-.description-text {
-  font-size: 1.1em;
-  color: #333;
 }
 
 /* Sezione Contatti */
