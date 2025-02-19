@@ -43,7 +43,7 @@ public class dbConnector {
 
     /** Metodo per eseguire query di lettura dati.
      * ResultSet permette alla classe chiamante di ricevere
-     * i dati richiesti.La presenza del throws e del try-catch
+     * i dati richiesti. La presenza del throws e del try-catch
      * costringe la classe chiamante a gestire un'eventuale eccezione
      *
      * @param query
