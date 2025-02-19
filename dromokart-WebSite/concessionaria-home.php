@@ -1,3 +1,8 @@
+<?php
+  include 'default/headerConce.php';
+  include 'default/footerConce.php';
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,25 +15,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="concessionaria-home.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="chi-siamo.php">Chi Siamo</a></li>
-          <li><a href="modelli.php">I Nostri Modelli</a></li>
-          <li><a href="parti.php">Parti di ricambio</a></li>
-          <li><a id="loginBtn">LOGIN</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  
 
   <!-- Main Content -->
 
@@ -108,11 +95,6 @@
     
   </main>
 
-  <!-- Footer fisso -->
-  <footer>
-    <p>&copy; 2025 CacioKart S.R.L. Tutti i diritti riservati.</p>
-    <p>contatti - telefono: +39 3331987477  email: cacioconc@universitadipavia.it</p>
-  </footer>
 
   <!-- Modal per il Login -->
   <div id="loginModal" class="modal">
