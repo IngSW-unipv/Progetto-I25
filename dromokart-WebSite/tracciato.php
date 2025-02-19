@@ -1,6 +1,7 @@
-
+<?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerHome.php'; ?>
 <?php include 'default/modalHome.php'; ?>
+<?php include 'default/sessione.php'; ?>
 
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/tracciato.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- Hero Section -->
@@ -60,11 +61,6 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2025 CacioKart S.R.L. Tutti i diritti riservati.</p>
-    <p>contatti - telefono: +39 3334455678  email: kaciokart@universitadipavia.it</p>
-</footer>
   
 </body>
 </html>
