@@ -1,6 +1,9 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerHome.php'; ?>
 <?php include 'default/modalHome.php'; ?>
+<?php include 'default/sessione.php'; ?>
+
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -75,14 +78,6 @@
   <p>
     Se sei alla ricerca di un'esperienza di guida emozionante o sei un fan delle corse sui Kart, KacioKart a Pavia è il luogo ideale per te. Siamo un tracciato di kart che offre una vasta gamma di servizi di guida per soddisfare le tue esigenze. Se hai domande o hai bisogno di maggiori informazioni, non esitare a contattarci. Puoi farlo attraverso il nostro numero di telefono o la nostra email.
   </p>
-  <div class="contact-details">
-    <div class="contact-box phone">
-      <p>+39 3334455678</p>
-    </div>
-    <div class="contact-box email">
-      <p>kaciokart@universitadipavia.it</p>
-    </div>
-  </div>
 </section>
 </body>
 </html>

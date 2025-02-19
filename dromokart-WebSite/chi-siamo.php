@@ -1,6 +1,8 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerHome.php'; ?>
 <?php include 'default/modalHome.php'; ?>
+<?php include 'default/sessione.php'; ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>

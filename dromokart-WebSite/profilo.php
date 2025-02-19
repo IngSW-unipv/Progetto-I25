@@ -1,5 +1,19 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
+
+<?php
+session_start();
+
+// Controlla se l'utente è loggato
+if (!isset($_SESSION['username'])) {
+    // Se non è loggato, reindirizza al login
+    header("Location: login.php");
+    exit;
+}
+
+$username = $_SESSION['username'];
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,7 +29,7 @@
  
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Benvenuto</h1>
+    <h2>Benvenuto, <?php echo htmlspecialchars($username); ?>!</h2>
     <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
   </section>
 

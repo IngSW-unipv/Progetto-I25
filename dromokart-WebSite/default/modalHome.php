@@ -3,7 +3,7 @@
   <div class="modal-content">
     <span class="close-modal" id="closeModal">&times;</span>
     <h2>Login</h2>
-    <form action="../profilo.php" method="post">
+    <form action="" method="post">
       <input type="text" name="username" placeholder="Nome utente" required>
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Accedi</button>
