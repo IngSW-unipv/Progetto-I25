@@ -5,7 +5,7 @@
     //$username = htmlspecialchars($_POST['username']);
     //$password = $_POST['password'];
 
-    $socket = connectionOpen();
+    $socket = connectionOpen($address, $port);
 
     fwrite($socket, 'login\n');
 
