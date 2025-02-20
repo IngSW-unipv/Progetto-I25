@@ -14,10 +14,21 @@ public class WebConnector {
             //out.println("1 2");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
             String messaggio = in.readLine();
 
-            System.out.println("Messaggio ricevuto: " + messaggio);
+            switch (messaggio) {
+                case "login ":
+                    System.out.println("Sono nel case");
+                    String username = in.readLine();
+                    String pwd = in.readLine();
+                    System.out.println("Utente ricevuto: " + username + "\nPassword ricevuta: " + pwd);
+                    break;
 
+                default:
+            }
+
+            System.out.println("Messaggio ricevuto: " + messaggio);
 
             socket.close();
         } catch (IOException e) {
