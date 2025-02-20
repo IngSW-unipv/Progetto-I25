@@ -12,16 +12,4 @@ function connectionOpen($address, $port) {
     }
     return $socket;
 }
-
-$socket = connectionOpen($address, $port);
-
-// Per test, puoi inviare qualche dato
-fwrite($socket, "Ciao dal PHP!\n");
-
-// Leggi una risposta dal server se prevista
-$response = fgets($socket);
-echo "Risposta dal server: " . $response;
-
-// Chiudi il socket
-fclose($socket);
 ?>
