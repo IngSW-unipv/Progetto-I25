@@ -7,10 +7,10 @@
 
     $socket = connectionOpen();
 
-    fwrite($socket, 'login');
+    fwrite($socket, 'login\n');
 
-    fwrite($socket, $username);
-    fwrite($socket, $password);
+    fwrite($socket, $username + '\n');
+    fwrite($socket, $password + '\n');
 
     //vengono ricevute due cifre intere separate da uno spazio: la prima è una cifra per un confronto booleano,
     //la seconda serve ad indicare il grado dell'utente e viene salvata nelle variabili di sessione
