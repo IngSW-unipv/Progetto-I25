@@ -7,6 +7,8 @@
 
     $socket = connectionOpen();
 
+    fwrite($socket, 'login');
+
     fwrite($socket, $username);
     fwrite($socket, $password);
 

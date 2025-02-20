@@ -1,6 +1,6 @@
 <?php
     $address = '127.0.0.1';
-    $port = 40000;
+    $port = 50000;
 
     function connectionOpen(){
         $socket = fsockopen($address, $port);
