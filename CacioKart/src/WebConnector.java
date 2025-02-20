@@ -10,6 +10,8 @@ public class WebConnector {
             Socket socket = serverSocket.accept(); // Attende connessioni
             System.out.println("Client connesso!");
 
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println("1 2");
             /*
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String messaggio = in.readLine(); // Legge il messaggio dal client
