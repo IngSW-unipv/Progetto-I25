@@ -3,14 +3,14 @@ import java.sql.*;
 /** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
  * Ver 1.0
  */
-public class dbConnector {
+public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
     private final static String USER = "";
     private final static String PASSWORD = "";
     private Connection conn;
-    private dbConnector db;
+    private DBConnector db;
 
-    public dbConnector() {
+    public DBConnector() {
     }
 
     /** Metodo per aprire la connessione al database.
