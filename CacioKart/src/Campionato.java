@@ -4,7 +4,7 @@ public class Campionato {
     private int anno;
 
     public Campionato(Kart [] karts,Secca [] camp,int anno) {
-        this.karts = new Kart[12];
+        this.karts = new Kart[20];
         this.camp = new Secca[20];
         this.anno = anno;
     }
