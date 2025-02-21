@@ -17,7 +17,7 @@
   <main>
     <section class="form-section">
       <h1>Iscriviti</h1>
-      <form action="register.php" method="post" class="registration-form">
+      <form action="logic/register.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" required>

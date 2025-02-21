@@ -4,8 +4,8 @@ require 'connection.php';
 
 $socket = connectionOpen($address, $port);
 
-$username = 'username';
-$password = 'password';
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 $password = hash('sha256', $password);
 

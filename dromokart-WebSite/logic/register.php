@@ -2,22 +2,24 @@
     session_start();
 
     require 'connection.php';
-    //$username = htmlspecialchars($_POST['username']);
-    //$password = $_POST['password'];
 
     $socket = connectionOpen($address, $port);
 
-    $name = 'nome';
-    $surname = 'cognome';
-    $date = date("03.10.2001");
-    $username = 'username';
-    $email = 'email@rc.it';
-    $password = 'password';
+     //data: anno-mese-giorno
+    
+    $name = $_POST['nome'];
+    $surname = $_POST['cognome'];
+    $date = $_POST['data_nascita'];
+    $username = htmlspecialchars($_POST['codice_fiscale']);
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
+    //cifratura password
     $password = hash('sha256', $password);
 
+    //invio codice registrazione
     fwrite($socket, "r ");
-
+    //invio dati
     fwrite($socket, $name . " ");
     fwrite($socket, $surname . " ");
     fwrite($socket, $date . " ");
