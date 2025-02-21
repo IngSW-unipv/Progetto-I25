@@ -1,4 +1,10 @@
 <?php
+  session_start();
+  if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
+    header('Location: index.php');
+    die();
+  }
+
   include 'default/footerConce.php';
   include 'default/modalHome.php';
 ?>
