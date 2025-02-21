@@ -7,7 +7,6 @@ public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
     private final static String USER = "root";
     private final static String PASSWORD = "";
-    private DBConnector db;
     private Connection conn;
 
     public DBConnector() {
@@ -21,7 +20,7 @@ public class DBConnector {
      */
     private void dbOpenConnection() throws SQLException {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/caciokart", "root", "");
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
