@@ -31,8 +31,6 @@ public class WebConnector {
 
                 System.out.println("Messaggio ricevuto: " + messaggio);
 
-
-
                 socket.close();
                 System.out.println("Connessione chiusa!\n");
             } catch (IOException e) {

@@ -10,7 +10,7 @@ $password = 'password';
 fwrite($socket, "l");
 fwrite($socket, $username . " ");
 $password = hash('sha256', $password);
-fwrite($socket, $password);
+fwrite($socket, $password . "\n");
 
 // Leggi l'intera riga di risposta dal socket
 $res = fgets($socket);
