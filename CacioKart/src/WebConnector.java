@@ -1,10 +1,14 @@
 import java.io.*;
 import java.net.*;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class WebConnector {
     int porta = 50000;
+    PHPResponseHandler responder;
+    ResultSet queryResult;
+    String response;
 
     public WebConnector() {
         while(true) {
@@ -13,11 +17,6 @@ public class WebConnector {
 
                 Socket socket = serverSocket.accept(); // Attende connessioni
                 System.out.println("Client connesso!\n");
-
-                /*PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                  out.println("1 0");
-                  System.out.println("Messaggio inviato\n");
-                */
 
                 /**La classe si aspetta in entrata una stringa che inizia con un valore ENUM dichiarato
                  * sopra in modo da interpretare la richiesta e decidere a che classe dare la responsabilità
@@ -29,10 +28,16 @@ public class WebConnector {
                 char comando = messaggio.charAt(0);
                 messaggio = messaggio.substring(1);
 
-
                  switch (comando) {
                     case 'l':
-
+                        //Mi aspetto 'l CF password\n'
+                        String[] loginData = messaggio.split(" ");
+                        Persona utente = null;
+                        utente.setcF(loginData[1]);
+                        utente.setPassword(loginData[2]);
+                        queryResult = utente.login();
+                        response = queryResult.getString("")
+                        responder.sendResponse(socket,);
                         break;
 
                     case 'r':
