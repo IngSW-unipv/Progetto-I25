@@ -31,7 +31,7 @@
         die();
     } else{
         $_SESSION['user'] = $username;
-        $_SESSION['rank'] = $str[1];
+        $_SESSION['rank'] = $str['1'];
         header('../profilo.php');
         die();
     }
