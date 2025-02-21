@@ -12,7 +12,7 @@ function connectionOpen($address, $port) {
     }
     return $socket;
 }
-
+/**
 // Apri la connessione
 $socket = connectionOpen($address, $port);
 
@@ -34,7 +34,7 @@ if ($data === "0") {
     exit();
 } else {
     echo "Valore non previsto: " . htmlspecialchars($data);
-}
+}*/
 ?>
 
 
