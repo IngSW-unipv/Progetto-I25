@@ -11,26 +11,28 @@ public class WebConnector {
                 Socket socket = serverSocket.accept(); // Attende connessioni
                 System.out.println("Client connesso!\n");
 
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                out.println("1 0");
-                System.out.println("Messaggio inviato\n");
-                /*BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                //out.println("1 0");
+                //System.out.println("Messaggio inviato\n");
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String messaggio = in.readLine();
-
-                switch (messaggio) {
-                    case "login ":
+                char firstChar = messaggio.charAt(0);
+                //spacchettamento stringa
+                switch (firstChar) {
+                    case 'l':
                         System.out.println("Sono nel case");
-                        String username = in.readLine();
-                        String pwd = in.readLine();
-                        System.out.println("Utente ricevuto: " + username + "\nPassword ricevuta: " + pwd);
+                        System.out.println("Pare che il messaggio fosse: " + messaggio.substring(1));
                         break;
 
                     default:
                 }
 
                 System.out.println("Messaggio ricevuto: " + messaggio);
-                */
+
+
+
                 socket.close();
                 System.out.println("Connessione chiusa!\n");
             } catch (IOException e) {
