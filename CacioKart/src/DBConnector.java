@@ -5,10 +5,10 @@ import java.sql.*;
  */
 public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
-    private final static String USER = "";
+    private final static String USER = "root";
     private final static String PASSWORD = "";
-    private Connection conn;
     private DBConnector db;
+    private Connection conn;
 
     public DBConnector() {
     }
@@ -21,7 +21,7 @@ public class DBConnector {
      */
     private void dbOpenConnection() throws SQLException {
         try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/caciokart", "root", "");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -52,6 +52,7 @@ public class DBConnector {
      */
     public ResultSet executeReturnQuery(String query) throws SQLException {
         try {
+            DBConnector db = new DBConnector();
             db.dbOpenConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -74,8 +75,10 @@ public class DBConnector {
      */
     public void executeUpdateQuery(String query) throws SQLException {
         try {
+            DBConnector db = new DBConnector();
             db.dbOpenConnection();
-            Statement stmt = conn.createStatement();
+            Statement stmt = db.conn.createStatement();
+            System.out.println("Executing query: " + query);
             stmt.executeUpdate(query);
             db.dbCloseConnection();
         } catch (SQLException e) {

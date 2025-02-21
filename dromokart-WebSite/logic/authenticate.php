@@ -17,7 +17,7 @@ fwrite($socket, $password);
 $res = fgets($socket);
 fclose($socket);
 
-// Rimuove eventuali spazi vuoti e newline
+// Rimuove eventuali spazi vuoti e newline dagli estremi
 $res = trim($res);
 
 // Dividi la stringa in base allo spazio

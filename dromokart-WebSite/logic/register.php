@@ -6,7 +6,7 @@
     $socket = connectionOpen($address, $port);
 
      //data: anno-mese-giorno
-    
+
     $name = $_POST['nome'];
     $surname = $_POST['cognome'];
     $date = $_POST['data_nascita'];

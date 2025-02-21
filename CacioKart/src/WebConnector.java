@@ -1,5 +1,8 @@
 import java.io.*;
 import java.net.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class WebConnector {
     int porta = 50000;
 
@@ -11,21 +14,35 @@ public class WebConnector {
                 Socket socket = serverSocket.accept(); // Attende connessioni
                 System.out.println("Client connesso!\n");
 
-                //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                //out.println("1 0");
-                //System.out.println("Messaggio inviato\n");
+                /*PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                  out.println("1 0");
+                  System.out.println("Messaggio inviato\n");
+                */
 
+                /**La classe si aspetta in entrata una stringa che inizia con un valore ENUM dichiarato
+                 * sopra in modo da interpretare la richiesta e decidere a che classe dare la responsabilità
+                 * di gestirla
+                 */
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
                 String messaggio = in.readLine();
-                char firstChar = messaggio.charAt(0);
-                //spacchettamento stringa
-                switch (firstChar) {
+                System.out.println(messaggio);
+                char comando = messaggio.charAt(0);
+                messaggio = messaggio.substring(1);
+
+
+                 switch (comando) {
                     case 'l':
-                        System.out.println("Sono nel case");
-                        System.out.println("Pare che il messaggio fosse: " + messaggio.substring(1));
+
                         break;
 
+                    case 'r':
+                        //Mi aspetto 'r Nome Cognome Data CF mail password\n'
+                        String[] socio = messaggio.split(" ");
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        LocalDate dataNascita = LocalDate.parse(socio[3], formatter);
+                        Socio nuovoUtente = new Socio(socio[1], socio[2], dataNascita, socio[4], socio[5], socio[6]);
+                        nuovoUtente.registrazione();
+                        break;
                     default:
                 }
 
