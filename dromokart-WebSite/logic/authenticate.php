@@ -1,38 +1,40 @@
 <?php
-    session_start();
+session_start();
+require 'connection.php';
 
-    require 'connection.php';
-    //$username = htmlspecialchars($_POST['username']);
-    //$password = $_POST['password'];
+$socket = connectionOpen($address, $port);
 
-    $socket = connectionOpen($address, $port);
+$username = 'username';
+$password = 'password';
 
-    $username = 'username';
-    $password = 'password';
+fwrite($socket, "login\n");
+fwrite($socket, $username . "\n");
+fwrite($socket, $password . "\n");
 
-    fwrite($socket, "login \n");
+// Leggi l'intera riga di risposta dal socket
+$res = fgets($socket);
+fclose($socket);
 
-    fwrite($socket, $username . "\n");
-    fwrite($socket, $password . "\n");
+// Rimuove eventuali spazi vuoti e newline
+$res = trim($res);
 
-    //vengono ricevute due cifre intere separate da uno spazio: la prima è una cifra per un confronto booleano,
-    //la seconda serve ad indicare il grado dell'utente e viene salvata nelle variabili di sessione
-    while(!feof($socket)){
-        $logged = fgets($socket, 1);
-        $rnk = fgets($socket, 1);
-    }
+// Dividi la stringa in base allo spazio
+$str = explode(' ', $res);
 
-    fclose($socket);
+// Verifica che la risposta sia nel formato atteso (almeno due elementi)
+if (count($str) < 2) {
+    echo "Risposta non valida: " . htmlspecialchars($res);
+    exit();
+}
 
-    //la seconda cifra indica: 0 utente semplice; 1 meccanico; 2 gestore concessionaria; 3 arbitro; 4 organizzatore;
-    //5 proprietario 
-    if($logged == 0){
-        header('../index.php');
-        die();
-    } else{
-        $_SESSION['user'] = $username;
-        $_SESSION['rank'] = $rnk;
-        header('../profilo.php');
-        die();
-    }
+// Controlla il primo valore e redirigi di conseguenza
+if ($str[0] === "0") {
+    header("Location: ../index.php");
+    exit();
+} else {
+    $_SESSION['user'] = $username;
+    $_SESSION['rank'] = $str[1];
+    header("Location: ../profilo.php");
+    exit();
+}
 ?>
