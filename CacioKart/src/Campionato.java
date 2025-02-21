@@ -4,8 +4,8 @@ public class Campionato {
     private int anno;
 
     public Campionato(Kart [] karts,Secca [] camp,int anno) {
-        this.karts = karts.clone();
-        this.camp = camp.clone();
+        this.karts = new Kart[12];
+        this.camp = new Secca[20];
         this.anno = anno;
     }
 

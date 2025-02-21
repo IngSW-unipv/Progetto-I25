@@ -10,7 +10,7 @@ public class Gara {
         this.idGara = idGara;
         this.nomeGara = nomeGara;
         this.dataGara = dataGara;
-        this.array = array.clone();
+        this.array = new Circuito[3];
     }
 
     public String getIdGara() {
