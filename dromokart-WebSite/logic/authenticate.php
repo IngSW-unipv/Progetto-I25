@@ -7,9 +7,10 @@ $socket = connectionOpen($address, $port);
 $username = 'username';
 $password = 'password';
 
-fwrite($socket, "l" . $username);
-fwrite($socket, $username . "\n");
-fwrite($socket, $password . "\n");
+fwrite($socket, "l");
+fwrite($socket, $username . " ");
+$password = hash('sha256', $password);
+fwrite($socket, $password);
 
 // Leggi l'intera riga di risposta dal socket
 $res = fgets($socket);
