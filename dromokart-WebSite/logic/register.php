@@ -9,10 +9,10 @@
 
     $name = 'nome';
     $surname = 'cognome';
-    $date = '12-12-2012';
+    $date = date("03.10.2001");
     $username = 'username';
-    $password = 'password';
     $email = 'email@rc.it';
+    $password = 'password';
 
     $password = hash('sha256', $password);
 
@@ -21,10 +21,9 @@
     fwrite($socket, $name + " ");
     fwrite($socket, $surname + " ");
     fwrite($socket, $date + " ");
-
     fwrite($socket, $username + " ");
-    fwrite($socket, $password + " ");
-    fwrite($socket, $email + "\n");
+    fwrite($socket, $email + " ");
+    fwrite($socket, $password + "\n");
 
     //vengono ricevute due cifre intere separate da uno spazio: la prima è una cifra per un confronto booleano,
     //la seconda serve ad indicare il grado dell'utente e viene salvata nelle variabili di sessione
