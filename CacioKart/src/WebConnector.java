@@ -4,35 +4,37 @@ public class WebConnector {
     int porta = 50000;
 
     public WebConnector() {
-        try (ServerSocket serverSocket = new ServerSocket(porta)) {
-            System.out.println("Server in ascolto sulla porta " + porta);
+        while(true) {
+            try (ServerSocket serverSocket = new ServerSocket(porta)) {
+                System.out.println("Server in ascolto sulla porta " + porta);
 
-            Socket socket = serverSocket.accept(); // Attende connessioni
-            System.out.println("Client connesso!");
+                Socket socket = serverSocket.accept(); // Attende connessioni
+                System.out.println("Client connesso!");
 
-            //PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            //out.println("1 2");
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                out.println("1 0");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                /*BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String messaggio = in.readLine();
+                String messaggio = in.readLine();
 
-            switch (messaggio) {
-                case "login ":
-                    System.out.println("Sono nel case");
-                    String username = in.readLine();
-                    String pwd = in.readLine();
-                    System.out.println("Utente ricevuto: " + username + "\nPassword ricevuta: " + pwd);
-                    break;
+                switch (messaggio) {
+                    case "login ":
+                        System.out.println("Sono nel case");
+                        String username = in.readLine();
+                        String pwd = in.readLine();
+                        System.out.println("Utente ricevuto: " + username + "\nPassword ricevuta: " + pwd);
+                        break;
 
-                default:
+                    default:
+                }
+
+                System.out.println("Messaggio ricevuto: " + messaggio);
+                */
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            System.out.println("Messaggio ricevuto: " + messaggio);
-
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
