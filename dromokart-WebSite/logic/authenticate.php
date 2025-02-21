@@ -32,7 +32,7 @@ if ($str[0] === "0") {
     header("Location: ../index.php");
     exit();
 } else {
-    $_SESSION['user'] = $username;
+    $_SESSION['username'] = $username;
     $_SESSION['rank'] = $str[1];
     header("Location: ../profilo.php");
     exit();
