@@ -7,7 +7,7 @@ $socket = connectionOpen($address, $port);
 $username = 'username';
 $password = 'password';
 
-fwrite($socket, "login\n");
+fwrite($socket, "l\n");
 fwrite($socket, $username . "\n");
 fwrite($socket, $password . "\n");
 
