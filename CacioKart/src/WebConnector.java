@@ -12,8 +12,8 @@ public class WebConnector {
                 System.out.println("Client connesso!");
 
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                out.println("1 0");
-
+                out.println("1");
+                System.out.println("Messaggio inviato");
                 /*BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String messaggio = in.readLine();
@@ -32,6 +32,7 @@ public class WebConnector {
                 System.out.println("Messaggio ricevuto: " + messaggio);
                 */
                 socket.close();
+                System.out.println("Connessione chiusa!");
             } catch (IOException e) {
                 e.printStackTrace();
             }
