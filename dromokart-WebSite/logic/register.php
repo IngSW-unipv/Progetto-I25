@@ -18,12 +18,12 @@
 
     fwrite($socket, "r ");
 
-    fwrite($socket, $name + " ");
-    fwrite($socket, $surname + " ");
-    fwrite($socket, $date + " ");
-    fwrite($socket, $username + " ");
-    fwrite($socket, $email + " ");
-    fwrite($socket, $password + "\n");
+    fwrite($socket, $name . " ");
+    fwrite($socket, $surname . " ");
+    fwrite($socket, $date . " ");
+    fwrite($socket, $username . " ");
+    fwrite($socket, $email . " ");
+    fwrite($socket, $password . "\n");
 
     //vengono ricevute due cifre intere separate da uno spazio: la prima è una cifra per un confronto booleano,
     //la seconda serve ad indicare il grado dell'utente e viene salvata nelle variabili di sessione
