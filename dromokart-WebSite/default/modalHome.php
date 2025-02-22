@@ -4,7 +4,7 @@
     <span class="close-modal" id="closeModal">&times;</span>
     <h2>Login</h2>
     <form action="" method="post">
-      <input type="text" name="username" placeholder="Nome utente" required>
+      <input type="text" name="username" placeholder="Codice Fiscale" required>
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Accedi</button>
     </form>

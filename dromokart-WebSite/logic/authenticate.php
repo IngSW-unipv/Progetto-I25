@@ -30,6 +30,8 @@ if (count($str) < 2) {
 }
 
 // Controlla il primo valore e redirigi di conseguenza
+//la seconda cifra indica: 0 utente semplice; 1 meccanico; 2 gestore concessionaria; 3 arbitro; 4 organizzatore;
+//5 proprietario 
 if ($str[0] === "0") {
     header("Location: ../index.php");
     exit();

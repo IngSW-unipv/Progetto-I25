@@ -1,12 +1,11 @@
-<?php
+<?php /*
   session_start();
   if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
     header('Location: index.php');
     die();
-  }
+  }*/
 
   include 'default/footerConce.php';
-  include 'default/modalHome.php';
 ?>
 
 
@@ -19,10 +18,26 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
   <main>
+   <!-- Header -->
+   <header>
+      <div class="header-container">
+         <div class="logo">
+         <a href="index.php">
+            <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
+         </a>
+         </div>
+         <nav>
+         <ul>
+            <li><a href="proprietario.php">Home</a></li>
+            <li><a id="logoutBtn">Logout</a></li>
+         </ul>
+         </nav>
+      </div>
+   </header>
     <section class="form-section">
       <h1>Inserisci un dipendente</h1>
       <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->
@@ -52,8 +67,13 @@
             <input type="date" id="data-nascita" name="data_nascita" required>
          </div>
          <div class="form-group">
-            <label for="rank">Ruolo</label> <!-- sara un dropdown-->
-            <input type="text" id="rank" name="rank" required>
+            <label for="rank">Ruolo</label> 
+            <select id="rank" name="rank">
+               <option value="1">Meccanico</option>
+               <option value="2">Gestore concessionaria</option>
+               <option value="3">Arbitro</option>
+               <option value="4">Organizzatore</option>
+            </select>
          </div>
          <div class="form-group">
             <button type="submit">Registra</button>
