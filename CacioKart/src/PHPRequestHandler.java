@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
     ResultSet queryResult;
+    PrintWriter out;
 
     public PHPRequestHandler() {
     }
@@ -41,6 +42,8 @@ public class PHPRequestHandler {
                     LocalDate dataNascita = LocalDate.parse(socio[3], formatter);
                     Socio nuovoUtente = new Socio(socio[1], socio[2], dataNascita, socio[4], socio[5], socio[6]);
                     nuovoUtente.registrazione(clientSocket);
+                    out = new PrintWriter(clientSocket.getOutputStream(), true);
+                    out.println("1");
                     break;
 
                 default:
