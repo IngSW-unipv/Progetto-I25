@@ -1,9 +1,9 @@
-<?php /*
+<?php
   session_start();
   if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
     header('Location: index.php');
     die();
-  }*/
+  }
 
   include 'default/footerConce.php';
 ?>
@@ -33,7 +33,7 @@
          <nav>
          <ul>
             <li><a href="proprietario.php">Home</a></li>
-            <li><a id="logoutBtn">Logout</a></li>
+            <li><a href="logout.php" id="logoutBtn">Logout</a></li>
          </ul>
          </nav>
       </div>
