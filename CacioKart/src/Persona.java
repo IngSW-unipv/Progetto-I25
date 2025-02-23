@@ -72,10 +72,18 @@ public class Persona {
         this.password = password;
     }
 
+    /**Metodo per effettuare la login.
+     * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
+     * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
+     *
+     * @param clientSocket
+     */
     public void login(Socket clientSocket){
         DBConnector db = new DBConnector();
         PHPResponseHandler responder = new PHPResponseHandler();
-        SELECT = "SELECT cf,pass FROM caciokart.socio WHERE cf = '" + this.getcF() + "' AND pass = '" + this.getPassword() +"'";
+        SELECT = "SELECT cf,pass FROM caciokart.socio WHERE cf = '"
+                + this.getcF() + "' AND pass = '"
+                + this.getPassword() +"'";
         try {
             result = db.executeReturnQuery(SELECT);
             if(result.isEmpty()){

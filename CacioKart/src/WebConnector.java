@@ -12,10 +12,16 @@ public class WebConnector {
         requestHandler = new PHPRequestHandler();
     }
 
+    /**Metodo utilizzato dal main per creare il server.
+     * Il metodo crea un socket per le connessioni e va in listen per qualsiasi client si voglia connettere.
+     * Una volta che riceve una connessione, va nella classe per gestirle e dopo aver risolto,
+     * chiude il socket e ne riapre un altro.
+     *
+     */
     public void createServer() {
         while(true) {
             try {
-                System.out.println("Creating server...");
+                System.out.println("Creazione server...");
                 serverSocket = new ServerSocket(porta);
                 System.out.println("Server in ascolto sulla porta " + porta);
                 clientSocket = serverSocket.accept(); // Attende connessioni

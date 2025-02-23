@@ -17,7 +17,6 @@ public class PHPRequestHandler {
      */
     public void handleRequests(Socket clientSocket) {
         try {
-
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String messaggio = in.readLine();
             char comando = messaggio.charAt(0);
