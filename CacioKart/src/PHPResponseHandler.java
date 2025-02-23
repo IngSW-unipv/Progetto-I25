@@ -3,7 +3,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class PHPResponseHandler {
-    PrintWriter out;
+    private PrintWriter out;
 
     public PHPResponseHandler() {
     }

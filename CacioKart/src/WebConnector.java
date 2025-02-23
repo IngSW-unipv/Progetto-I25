@@ -5,9 +5,14 @@ import java.net.Socket;
 public class WebConnector {
     int porta = 50000;
     private PHPRequestHandler requestHandler;
-    Socket clientSocket;
-    ServerSocket serverSocket;
+    private Socket clientSocket;
+    private ServerSocket serverSocket;
 
+    /**Costruttore della classe.
+     * Alla costruzione della classe per gestire l'apertura della connessione,
+     * viene anche creato un oggetto per gestire le possibili richieste.
+     *
+     */
     public WebConnector() {
         requestHandler = new PHPRequestHandler();
     }
@@ -35,6 +40,10 @@ public class WebConnector {
         }
     }
 
+    /**Metodo privato per chiudere i socket.
+     * Non necessario, ma presente per facilità di lettura.
+     *
+     */
     private void socketCloser(){
         try {
             clientSocket.close();
@@ -42,10 +51,6 @@ public class WebConnector {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public ServerSocket getServerSocket() {
-        return serverSocket;
     }
 
     public Socket getClientSocket() {

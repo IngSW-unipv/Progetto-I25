@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
-    BufferedReader in;
+    private BufferedReader in;
 
     public PHPRequestHandler() {
     }
 
     /**La classe riceve stringhe composte in questo modo: *lettera singola* *dati*
-     *La lettera indica la richiesta del client da eseguire
+     *La lettera indica la richiesta del client da eseguire.
      *
      * @param clientSocket
      */
@@ -44,7 +44,7 @@ public class PHPRequestHandler {
     }
 
     /**Metodo per gestire la logica di login
-     * Prendo il messaggio e lo divido nelle singole informazioni richieste
+     * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      *
      * @param messaggio
      * @param clientSocket
@@ -60,7 +60,7 @@ public class PHPRequestHandler {
     /**Metodo per gestire la logica di registrazione
      * Prendo il messaggio e lo divido nelle singole informazioni richieste
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
-     * il tipo Date presente nel database
+     * il tipo Date presente nel database.
      *
      * @param messaggio
      * @param clientSocket
