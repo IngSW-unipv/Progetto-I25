@@ -11,7 +11,7 @@ ti porta alla tua pagina privata
 
 CONCESSIONARIA (Alessandro)
 -per i kart sono 3 immagini bottone che se cliccate ti riporta alla pagina del kart con tutti i suoi dettagli
-e ti da la possibilità di comprarlo, il bottone appare solo se si è loggati
+e ti da la possibilità di comprarlo, il bottone appare solo se si è loggati(forse completato testare)
 
 PAGINA DEI PRODOTTI (Alessandro)
 -prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
