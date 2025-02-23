@@ -14,7 +14,7 @@ fwrite($socket, $username . " ");
 fwrite($socket, $password . "\n");
 
 // Leggi l'intera riga di risposta dal socket
-$res = fgets($socket);
+$res = fgets($socket, 3);
 fclose($socket);
 
 // Rimuove eventuali spazi vuoti e newline
