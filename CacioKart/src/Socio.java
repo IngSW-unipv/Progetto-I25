@@ -12,6 +12,11 @@ public class Socio extends Persona implements Iinventario{
 
     //metodo classifica gara?
 
+    /**Metodo per registrare un utente nel db
+     * La query viene eseguita tramite il metodo sendResponse della classe DBConnector
+     *
+     * @param clientSocket
+     */
     public void registrazione(Socket clientSocket){
         DBConnector db = new DBConnector();
         responder = new PHPResponseHandler();
