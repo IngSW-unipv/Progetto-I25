@@ -35,7 +35,7 @@
     <section class="description-section">
       <div class="description-text">
         <p>
-          Da CacioKart, siamo orgogliosi di offrire una selezione di kart di alta qualità made in Italy. Date un occhio alla gamma di kart 100cc,
+          Da CacioKart, siamo orgogliosi di offrire una selezione di kart di alta qualità made in Italy. Date un occhio alla gamma di kart 125cc,
           che è stata aggiornata di recente con un innovativo sistema ad iniezione diretta.
         </p>
       </div>
@@ -43,7 +43,7 @@
 
     <section class="hero">
       <h1>Acquista il Tuo Kart</h1>
-      <p>Scegli il kart perfetto per te, disponibile in tre categorie: 50cc, 100cc e 150cc.</p>
+      <p>Scegli il kart perfetto per te, disponibile in tre categorie: 50cc, 1252cc e 150cc.</p>
     </section>
 
     <!-- sezione vendita kart-->
@@ -65,13 +65,13 @@
     
       <div class="kart-item">
         <div class="kart-image">
-          <a href="kart100cc.php">
-          <img src="immagini/100cc.png" alt="Kart 100cc">
+          <a href="kart125cc.php">
+          <img src="immagini/100cc.png" alt="Kart 125cc">
           </a>
         </div>
         <div class="kart-description">
-          <a href="kart100cc.php">
-          <h3>Kart 100cc</h3>
+          <a href="kart125cc.php">
+          <h3>Kart 125cc</h3>
           </a>
           <p>Ideale per adolescenti e chi ha già esperienza con i kart. Potenza maggiore per chi cerca emozioni più forti. Ottimo per gare amatoriali.</p>
           <p><strong>Prezzo:</strong> 4.500€</p>

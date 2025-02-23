@@ -9,9 +9,6 @@ LOGIN (Andrea)
 -aggiungere una funzionalità che quando si effettua la login correttamente appare un bottone premibile dove
 ti porta alla tua pagina privata
 
-REGISTRAZIONE(Andrea)
--Integrazione con Java
-
 CONCESSIONARIA (Alessandro)
 -per i kart sono 3 immagini bottone che se cliccate ti riporta alla pagina del kart con tutti i suoi dettagli
 e ti da la possibilità di comprarlo, il bottone appare solo se si è loggati
@@ -20,11 +17,9 @@ PAGINA DEI PRODOTTI (Alessandro)
 -prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
 
 PROPRIETARIO (Alessandro)
--una volta loggato mi ritrovo in questa pagina
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
 -Chiedo una query e mi fa vedere tutti i dipendenti, da li posso premere una "X" e
 mi rimuove il dipendente
--Pagina aggiuntiva Aggiunta dei dipendenti con i suoi dati
 
 GESTORE DELLA CONCESSIONARIA (Alessandro)
 -una volta loggato mi ritrovo in questa pagina
