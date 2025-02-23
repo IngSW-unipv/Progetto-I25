@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
-    ResultSet queryResult;
-    PrintWriter out;
 
     public PHPRequestHandler() {
     }
@@ -27,12 +25,11 @@ public class PHPRequestHandler {
                 case 'l':
                     //Mi aspetto 'l CF password\n'
                     String[] loginData = messaggio.split(" ");
-                    Persona utente = null;
+                    Persona utente = new Persona(null,null,null,null,null,null);
                     utente.setcF(loginData[1]);
                     utente.setPassword(loginData[2]);
-                    queryResult = utente.login();
-                    //response = queryResult.getString("")
-                    //responder.sendResponse(socket,);
+                    utente.login(clientSocket);
+
                     break;
 
                 case 'r':
@@ -42,14 +39,6 @@ public class PHPRequestHandler {
                     LocalDate dataNascita = LocalDate.parse(socio[3], formatter);
                     Socio nuovoUtente = new Socio(socio[1], socio[2], dataNascita, socio[4], socio[5], socio[6]);
                     nuovoUtente.registrazione(clientSocket);
-                    out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    out.println("1");
-                    out.flush();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
 
                 default:

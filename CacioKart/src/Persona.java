@@ -1,6 +1,9 @@
+import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 public class Persona {
     private String nome;
@@ -10,7 +13,7 @@ public class Persona {
     private String mail;
     private String password;
     private String SELECT;
-    private ResultSet rs;
+    private List<Map<String, Object>> result;
 
     public Persona( String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         this.nome = nome;
@@ -69,21 +72,21 @@ public class Persona {
         this.password = password;
     }
 
-    public ResultSet login(){
+    public void login(Socket clientSocket){
         DBConnector db = new DBConnector();
+        PHPResponseHandler responder = new PHPResponseHandler();
         SELECT = "SELECT cf,pass FROM caciokart.socio WHERE cf = '" + this.getcF() + "' AND pass = '" + this.getPassword() +"'";
         try {
-            rs = db.executeReturnQuery(SELECT);
-
-            //MANCA LA LOGICA, SE NON TROVA RISULTATI SPEDISCE 0 TRAMITE PHPRESPONSE
+            result = db.executeReturnQuery(SELECT);
+            if(result.isEmpty()){
+                responder.sendResponse(clientSocket,"0 0");
+            }else{
+                responder.sendResponse(clientSocket,"1 1");
+            }
             //SE TROVA RISULTATI DOBBIAMO ASSOCIARE I VALORI AI RUOLI
 
-            if(rs != null){
-
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return rs;
     }
 }

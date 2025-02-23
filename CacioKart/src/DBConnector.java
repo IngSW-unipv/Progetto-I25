@@ -1,4 +1,8 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
  * Ver 1.0
@@ -8,6 +12,12 @@ public class DBConnector {
     private final static String USER = "root";
     private final static String PASSWORD = "";
     private Connection conn;
+    private List<Map<String, Object>> resultList = new ArrayList<>();
+    private ResultSet rs;
+    private Statement stmt;
+    private DBConnector db;
+    private ResultSetMetaData rsmd;
+    private int columnCount;
 
     public DBConnector() {
     }
@@ -49,14 +59,27 @@ public class DBConnector {
      * @return
      * @throws SQLException
      */
-    public ResultSet executeReturnQuery(String query) throws SQLException {
+    public List<Map<String, Object>> executeReturnQuery(String query) throws SQLException {
         try {
-            DBConnector db = new DBConnector();
+            db = new DBConnector();
             db.dbOpenConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt = db.conn.createStatement();
+            rs = stmt.executeQuery(query);
+            rsmd = rs.getMetaData();
+            columnCount = rsmd.getColumnCount();
+
+            while(rs.next()) {
+                Map<String, Object> row = new HashMap<>();
+                for(int i = 1; i <= columnCount; i++) {
+                    String columnName = rsmd.getColumnName(i);
+                    Object columnValue = rs.getObject(i);
+                    row.put(columnName, columnValue);
+                }
+                resultList.add(row);
+            }
             db.dbCloseConnection();
-            return rs;
+            return resultList;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
