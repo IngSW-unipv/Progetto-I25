@@ -28,11 +28,10 @@
     fwrite($socket, $password . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
-    //while(!feof($socket)){
+    while(!feof($socket)){
         $res = fgets($socket, 1);
 
-        echo "Ciao" . $res;
-    //}
+    }
 
     fclose($socket);
 

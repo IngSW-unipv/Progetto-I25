@@ -74,6 +74,7 @@ public class Persona {
         SELECT = "SELECT cf,pass FROM caciokart.socio WHERE cf = '" + this.getcF() + "' AND pass = '" + this.getPassword() +"'";
         try {
             rs = db.executeReturnQuery(SELECT);
+
             //MANCA LA LOGICA, SE NON TROVA RISULTATI SPEDISCE 0 TRAMITE PHPRESPONSE
             //SE TROVA RISULTATI DOBBIAMO ASSOCIARE I VALORI AI RUOLI
 

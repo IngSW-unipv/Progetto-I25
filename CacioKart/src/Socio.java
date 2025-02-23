@@ -22,7 +22,7 @@ public class Socio extends Persona implements Iinventario{
                 this.getMail() +"', '" +
                 this.getPassword() +"', '" +
                 this.getDataNascita() +"')";
-        responder.sendResponse(clientSocket, "1");
+        //responder.sendResponse(clientSocket, "1");
         System.out.println("Ho mandato la risposta\n");
         try {
             db.executeUpdateQuery(INSERT);

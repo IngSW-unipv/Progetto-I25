@@ -44,6 +44,12 @@ public class PHPRequestHandler {
                     nuovoUtente.registrazione(clientSocket);
                     out = new PrintWriter(clientSocket.getOutputStream(), true);
                     out.println("1");
+                    out.flush();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
 
                 default:
