@@ -33,6 +33,7 @@ public class PHPRequestHandler {
                     break;
 
                 default:
+                    break;
             }
 
             System.out.println("Messaggio ricevuto: " + messaggio);
@@ -43,8 +44,7 @@ public class PHPRequestHandler {
 
     }
 
-
-    /**Classe per gestire la logica di login
+    /**Metodo per gestire la logica di login
      * Prendo il messaggio e lo divido nelle singole informazioni richieste
      *
      * @param messaggio
@@ -58,6 +58,14 @@ public class PHPRequestHandler {
         utente.login(clientSocket);
     }
 
+    /**Metodo per gestire la logica di registrazione
+     * Prendo il messaggio e lo divido nelle singole informazioni richieste
+     * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
+     * il tipo Date presente nel database
+     *
+     * @param messaggio
+     * @param clientSocket
+     */
     private void registerCase(String messaggio, Socket clientSocket){
         String[] socio = messaggio.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
