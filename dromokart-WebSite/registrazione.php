@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/registration.css">
+  <script src="../logic/limits.js" defer></script>
 </head>
 <body>
 
@@ -28,11 +29,11 @@
          </div>
          <div class="form-group">
             <label for="data-nascita">Data di nascita</label>
-            <input type="date" id="data-nascita" name="data_nascita" required>
+            <input type="date" id="data-nascita" name="data_nascita" required max="<?php echo date('Y-m-d'); ?>" min="1950-01-01">
          </div>
          <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" required>
+            <input type="text" id="codice-fiscale" name="codice_fiscale" required >
          </div>
          <div class="form-group">
             <label for="email">Email</label>

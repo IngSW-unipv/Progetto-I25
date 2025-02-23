@@ -1,6 +1,7 @@
 <?php
-session_start();
-require 'connection.php';
+    session_start();
+
+    require 'connection.php';
 
 $socket = connectionOpen($address, $port);
 
@@ -13,28 +14,30 @@ $password = $_POST['password'];
 
 $password = hash('sha256', $password);
 
-fwrite($socket, "r ");
-fwrite($socket, $name . " ");
-fwrite($socket, $surname . " ");
-fwrite($socket, $date . " ");
-fwrite($socket, $username . " ");
-fwrite($socket, $email . " ");
-fwrite($socket, $password . "\n");
+    //invio codice registrazione
+    fwrite($socket, "r ");
+    //invio dati
+    fwrite($socket, $name . " ");
+    fwrite($socket, $surname . " ");
+    fwrite($socket, $date . " ");
+    fwrite($socket, $username . " ");
+    fwrite($socket, $email . " ");
+    fwrite($socket, $password . "\n");
 
-$res = trim(fgets($socket));
+    //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
+
+    $res = trim(fgets($socket));
 
 fclose($socket);
 
-// Rimuovi questo echo per evitare output prima del redirect
-// echo $res;
-
-if($res === '0'){
-    header('Location: ../registerError.php');
-    exit;
-} else{
-    $_SESSION['username'] = $username;
-    $_SESSION['rank'] = 0;
-    header('Location: ../profilo.php');
-    exit;
-}
+    //nel caso di successo, viene impostato il rango a 0 e si salva 
+    if($res === "0"){
+        header('../registerError.php');
+        die();
+    } else{
+        $_SESSION['username'] = $username;
+        $_SESSION['rank'] = 0;
+        header('../profilo.php');
+        die();
+    }
 ?>
