@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 /** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
- * Ver 1.2
  */
 public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
