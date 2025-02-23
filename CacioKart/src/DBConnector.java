@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
- * Ver 1.0
+ * Ver 1.2
  */
 public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
@@ -51,9 +51,9 @@ public class DBConnector {
     }
 
     /** Metodo per eseguire query di lettura dati.
-     * ResultSet permette alla classe chiamante di ricevere
-     * i dati richiesti. La presenza del throws e del try-catch
-     * costringe la classe chiamante a gestire un'eventuale eccezione
+     * Il metodo riceve in ingresso la query richiesta e
+     * ha come valore di ritorno una Map contenente i dati trovati
+     * dalla query.
      *
      * @param query
      * @return
@@ -65,6 +65,7 @@ public class DBConnector {
             db.dbOpenConnection();
             stmt = db.conn.createStatement();
             rs = stmt.executeQuery(query);
+            //System.out.println("Eseguo la query di lettura richiesta: " + query);
             rsmd = rs.getMetaData();
             columnCount = rsmd.getColumnCount();
 
@@ -89,19 +90,18 @@ public class DBConnector {
     /** Metodo per eseguire query di scritture dati.
      * Tramite la stringa in ingresso, il metodo esegue query
      * che modificano i dati presenti nel database, cancellando
-     * o aggiungendone di nuovi. La presenza del throws e del try-catch
-     * costringe la classe chiamante a gestire un'eventuale eccezione
+     * o aggiungendone di nuovi.
      *
      * @param query
      * @throws SQLException
      */
     public void executeUpdateQuery(String query) throws SQLException {
         try {
-            DBConnector db = new DBConnector();
+            db = new DBConnector();
             db.dbOpenConnection();
-            Statement stmt = db.conn.createStatement();
-            System.out.println("Executing query: " + query);
+            stmt = db.conn.createStatement();
             stmt.executeUpdate(query);
+            //System.out.println("Eseguo la query di modifica richiesta: " + query);
             db.dbCloseConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
