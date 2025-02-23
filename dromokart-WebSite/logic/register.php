@@ -5,7 +5,7 @@
 
     $socket = connectionOpen($address, $port);
 
-     //data: anno-mese-giorno
+    //data: anno-mese-giorno
 
     $name = $_POST['nome'];
     $surname = $_POST['cognome'];
@@ -29,7 +29,7 @@
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
-    $res = trim(fgets($socket, 1));
+    $res = trim(fgets($socket));
 
     fclose($socket);
 
