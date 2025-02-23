@@ -29,11 +29,11 @@
          </div>
          <div class="form-group">
             <label for="data-nascita">Data di nascita</label>
-            <input type="date" id="data-nascita" name="data_nascita" required>
+            <input type="date" id="data-nascita" name="data_nascita" required max="<?php echo date('Y-m-d'); ?>" min="1950-01-01">
          </div>
          <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" required>
+            <input type="text" id="codice-fiscale" name="codice_fiscale" required >
          </div>
          <div class="form-group">
             <label for="email">Email</label>
