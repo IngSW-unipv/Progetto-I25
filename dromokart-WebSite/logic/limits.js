@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.value.length > limits[id]) {
                     this.value = this.value.slice(0, limits[id]);
                 }
+
+                if(id === "nome" || id === "cognome"){
+                    this.value = this.value.replace(/[0-9]/g,'');
+                }
+
             });
         }
     });

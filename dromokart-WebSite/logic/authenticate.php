@@ -9,16 +9,18 @@ $password = $_POST['password'];
 
 $password = hash('sha256', $password);
 
+//invio codice login
 fwrite($socket, "l ");
+
+//invio dati
 fwrite($socket, $username . " ");
 fwrite($socket, $password . "\n");
 
-// Leggi l'intera riga di risposta dal socket
-$res = fgets($socket);
-fclose($socket);
+// Leggi l'intera riga di risposta dal socket e
+// rimuove eventuali spazi vuoti e newline
+$res = trim(fgets($socket));
 
-// Rimuove eventuali spazi vuoti e newline
-$res = trim($res);
+fclose($socket);
 
 // Dividi la stringa in base allo spazio
 $str = explode(' ', $res);
