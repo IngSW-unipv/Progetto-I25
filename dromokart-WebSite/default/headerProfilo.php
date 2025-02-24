@@ -1,3 +1,43 @@
+<?php
+session_start();
+// Imposta il testo e il link del bottone in base al rank
+switch ( $_SESSION['rank']) {
+    case "0":
+        $btnText = 'Profilo';
+        $link = 'profilo.php';
+        break;
+    case "1":
+        $btnText = 'Meccanico';
+        $link = 'meccanico.php';
+        break;
+    case "2":
+        $btnText = 'Gestore Concessionaria';
+        $link = 'gestoreConcessionaria.php';
+        break;
+    case "3":
+        $btnText = 'Arbitro';
+        $link = 'arbitro.php';
+        break;
+    case "4":
+        $btnText = 'Organizzatore';
+        $link = 'organizzatore.php';
+        break;
+    case "5":
+        $btnText = 'Proprietario';
+        $link = 'proprietario.php';
+        break;
+    default:
+        $btnText = 'Profilo';
+        $link = 'profilo.php';
+}
+?>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $btnText; ?></title>
+</head>
+<body>
   <!-- Header -->
   <header>
     <div class="header-container">
@@ -9,10 +49,13 @@
       <nav>
         <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="profilo.php">Profilo</a></li>
+          <li><a href="<?php echo $link; ?>"><?php echo $btnText; ?></a></li>
           <!-- Il link Logout ora reindirizza alla homepage -->
           <li><a href="default/logout.php">Logout</a></li>
         </ul>
       </nav>
     </div>
   </header>
+
+</body>
+</html>

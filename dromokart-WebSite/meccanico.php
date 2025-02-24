@@ -2,7 +2,6 @@
 <?php include 'default/headerProfilo.php'; ?>
 
 <?php
-session_start();
 
 // Controlla se l'utente è loggato
 if (!isset($_SESSION['username'])) {
