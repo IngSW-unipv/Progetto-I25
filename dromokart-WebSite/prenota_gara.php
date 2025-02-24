@@ -50,10 +50,6 @@
           <label for="date">Scegli il giorno:</label>
           <input type="date" id="date" name="date" required>
         </div>
-        <div class="form-group">
-          <label for="pilot">Nome del pilota:</label>
-          <input type="text" id="pilot" name="pilot" placeholder="Inserisci il tuo nome" required>
-        </div>
       </div>
       
       <!-- Bottone Submit -->

@@ -40,7 +40,34 @@ if ($str[0] === "0") {
 } else {
     $_SESSION['username'] = $username;
     $_SESSION['rank'] = $str[1];
-    header("Location: ../profilo.php");
-    exit();
+    switch($str[1]){
+        case "0":
+            header("Location: ../profilo.php");
+            die();
+            break;
+        case "1":
+            header("Location: ../meccanico.php");
+            die();
+            break;
+        case "2":
+            header("Location: ../gestoreConcessionaria.php");
+            die();
+            break;
+        case "3":
+            header("Location: ../arbitro.php");
+            die();
+            break;
+        case "4":
+            header("Location: ../organizzatore.php");
+            die();
+            break;
+        case "5":
+            header("Location: ../proprietario.php");
+            die();
+            break;
+        default:
+            header("Location: ../index.php");
+            die();
+    }
 }
 ?>
