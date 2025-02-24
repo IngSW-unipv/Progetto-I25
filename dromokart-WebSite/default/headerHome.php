@@ -1,5 +1,6 @@
-<!-- Header -->
 <?php session_Start();?>
+<!-- Header -->
+
 
 <header>
     <div class="header-container">
