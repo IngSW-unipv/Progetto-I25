@@ -21,11 +21,11 @@
       <form action="logic/register.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" id="nome" name="nome" maxlength="30" required>
          </div>
          <div class="form-group">
             <label for="cognome">Cognome</label>
-            <input type="text" id="cognome" name="cognome" required>
+            <input type="text" id="cognome" name="cognome" maxlength="30" required>
          </div>
          <div class="form-group">
             <label for="data-nascita">Data di nascita</label>
@@ -33,11 +33,11 @@
          </div>
          <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" required >
+            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" required >
          </div>
          <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" maxlength="70" required>
          </div>
          <div class="form-group">
             <label for="password">Password</label>
