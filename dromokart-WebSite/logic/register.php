@@ -32,12 +32,12 @@ fclose($socket);
 
     //nel caso di successo, viene impostato il rango a 0 e si salva 
     if($res === "0"){
-        header('../registerError.php');
+        header('Location: ../registerError.php');
         die();
     } else{
         $_SESSION['username'] = $username;
         $_SESSION['rank'] = 0;
-        header('../profilo.php');
+        header('Location: ../profilo.php');
         die();
     }
 ?>
