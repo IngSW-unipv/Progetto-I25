@@ -22,7 +22,11 @@ public class PHPRequestHandler {
             char comando = messaggio.charAt(0);
             messaggio = messaggio.substring(1);
 
+            /**Switch per gestire i comandi
+             *
+             */
             switch (comando) {
+
                 case 'l':
                     loginCase(messaggio, clientSocket);
                     break;
@@ -33,6 +37,14 @@ public class PHPRequestHandler {
 
                 case 'c':
                     break;
+                case 'p':
+                    //prenotationCase(messaggio,clientSocket);
+                    break;
+
+                    //riceve i dati della prenotazione dal sito
+                    //va in socio e crea una prenotazione
+                    //risponde al sito tramite phpresponsehandler
+                    //usa DBConnector e PHPResponsehandler
 
                 default:
                     break;

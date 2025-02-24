@@ -14,6 +14,7 @@ public class Persona {
     private String password;
     private String SELECT;
     private List<Map<String, Object>> result;
+    private String ruolo;
 
     public Persona( String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         this.nome = nome;
@@ -81,17 +82,56 @@ public class Persona {
     public void login(Socket clientSocket){
         DBConnector db = new DBConnector();
         PHPResponseHandler responder = new PHPResponseHandler();
-        SELECT = "SELECT cf,pass FROM caciokart.socio WHERE cf = '"
+        SELECT = "SELECT * FROM caciokart.socio WHERE cf = '"
                 + this.getcF() + "' AND pass = '"
                 + this.getPassword() +"'";
         try {
             result = db.executeReturnQuery(SELECT);
-            if(result.isEmpty()){
-                responder.sendResponse(clientSocket,"0 0");
+            if(!result.isEmpty()){
+                responder.sendResponse(clientSocket,"1 0");
+
             }else{
-                responder.sendResponse(clientSocket,"1 1");
+                SELECT = "SELECT * FROM caciokart.dipendente WHERE cf = '"
+                        + this.getcF() + "' AND pass = '"
+                        + this.getPassword() +"'";
+                result = db.executeReturnQuery(SELECT);
+
+                if(result.isEmpty()){
+                    responder.sendResponse(clientSocket,"0 0");
+
+                } else {
+
+                    ruolo = result.get(0).get("ruolo").toString();
+                    switch (ruolo) {
+                        case "meccanico":
+                            responder.sendResponse(clientSocket, "1 1");
+                            break;
+
+                        case "gestore":
+                            responder.sendResponse(clientSocket, "1 2");
+                            break;
+
+                        case "arbitro":
+                            responder.sendResponse(clientSocket, "1 3");
+                            break;
+
+                        case "organizzatore":
+                            responder.sendResponse(clientSocket, "1 4");
+                            break;
+
+                        case "proprietario":
+                            responder.sendResponse(clientSocket, "1 5");
+                            break;
+
+                        default:
+                            responder.sendResponse(clientSocket,"0 0");
+                            System.out.println("Ruolo non trovato");
+                            break;
+
+                    }
+                }
             }
-            //SE TROVA RISULTATI DOBBIAMO ASSOCIARE I VALORI AI RUOLI
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
