@@ -11,8 +11,8 @@ import java.util.Map;
  */
 public class DBConnector {
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
-    private static String USER;
-    private static String PASSWORD;
+    private static String USER = "root";
+    private static String PASSWORD = "";
     private Connection conn;
     private List<Map<String, Object>> resultList = new ArrayList<>();
     private ResultSet rs;
@@ -33,13 +33,13 @@ public class DBConnector {
      */
     private void dbOpenConnection() throws SQLException {
         try {
-            fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/src/credenzialiDB.txt"));
-            USER = fileReader.readLine();
-            PASSWORD = fileReader.readLine();
-            fileReader.close();
+            //fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/src/credenzialiDB.txt"));
+            //USER = fileReader.readLine();
+            //PASSWORD = fileReader.readLine();
+            //fileReader.close();
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
