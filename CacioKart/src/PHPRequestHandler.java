@@ -1,11 +1,13 @@
 import java.io.*;
 import java.net.*;
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
     private BufferedReader in;
+    private String comando;
+    private String info;
+    private String messaggio[];
 
     public PHPRequestHandler() {
     }
@@ -18,33 +20,30 @@ public class PHPRequestHandler {
     public void handleRequests(Socket clientSocket) {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String messaggio = in.readLine();
-            char comando = messaggio.charAt(0);
-            messaggio = messaggio.substring(1);
+            messaggio = in.readLine().split(" ",2);
+            comando = messaggio[0];
+            info = messaggio[1];
+            TipoComandi tipo = TipoComandi.requestedCommand(comando);
 
             /**Switch per gestire i comandi
              *
              */
-            switch (comando) {
+            switch (tipo) {
 
-                case 'l':
-                    loginCase(messaggio, clientSocket);
+                case LOGIN:
+                    loginCase(info, clientSocket);
                     break;
 
-                case 'r':
-                    registerCase(messaggio, clientSocket);
+                case REGISTRAZIONE:
+                    registerCase(info, clientSocket);
                     break;
 
-                case 'c':
-                    break;
-                case 'p':
-                    //prenotationCase(messaggio,clientSocket);
-                    break;
+                case CLASSIFICA_GENERALE:
 
-                    //riceve i dati della prenotazione dal sito
-                    //va in socio e crea una prenotazione
-                    //risponde al sito tramite phpresponsehandler
-                    //usa DBConnector e PHPResponsehandler
+                    break;
+                case PRENOTAZIONE:
+                    prenotationCase(info,clientSocket);
+                    break;
 
                 default:
                     break;
