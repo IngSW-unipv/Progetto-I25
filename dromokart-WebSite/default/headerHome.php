@@ -13,7 +13,13 @@
           <li><a href="tracciato.php">Il Tracciato</a></li>
           <li><a href="classifica.php">Classifica</a></li>
           <li><a href="concessionaria-home.php">Concessionario</a></li>
-          <li><a id="loginBtn">LOGIN</a></li>
+          <?php
+          if(isset($_SESSION['username'])){
+            echo '<li><a href="/default/logout.php">Logout</a></li>';
+          } else{
+            echo '<li><a id="loginBtn">LOGIN</a></li>';
+          }
+          ?>   
         </ul>
       </nav>
     </div>
