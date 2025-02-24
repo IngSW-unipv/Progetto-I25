@@ -87,4 +87,18 @@ public class PHPRequestHandler {
         nuovoUtente.registrazione(clientSocket);
     }
 
+    //riceve i dati della prenotazione dal sito
+    //va in socio e crea una prenotazione
+    //risponde al sito tramite phpresponsehandler
+    //usa DBConnector e PHPResponsehandler
+    private void prenotationCase(String messaggio, Socket clientSocket){
+        String[] prenotazione = messaggio.split(" ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataP = LocalDate.parse(prenotazione[0], formatter);
+        formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime orarioJava = LocalTime.parse(prenotazione[1], formatter);
+        Socio utente = new Socio(null, null, null, null, null, null);
+        utente.setcF(prenotazione[2]);
+
+    }
 }
