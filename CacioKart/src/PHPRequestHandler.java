@@ -31,6 +31,9 @@ public class PHPRequestHandler {
                     registerCase(messaggio, clientSocket);
                     break;
 
+                case 'c':
+                    break;
+
                 default:
                     break;
             }
