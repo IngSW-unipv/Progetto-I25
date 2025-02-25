@@ -42,10 +42,6 @@
       <h1>Inserisci un dipendente</h1>
       <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->
       <form action="logic/registerDip.php" method="post" class="registration-form">
-      <div class="form-group">
-            <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" minlength="16" required>
-         </div>
          <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
@@ -53,6 +49,14 @@
          <div class="form-group">
             <label for="cognome">Cognome</label>
             <input type="text" id="cognome" name="cognome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
+         </div>
+         <div class="form-group">
+            <label for="data-nascita">Data di nascita</label>
+            <input type="date" id="data-nascita" name="data_nascita" required max="<?php echo date('Y-m-d'); ?>" min="1950-01-01">
+         </div>
+         <div class="form-group">
+            <label for="codice-fiscale">Codice Fiscale</label>
+            <input type="text" id="codice-fiscale" name="codice_fiscale" pattern ="^[A-Z0-9]+$" maxlength="16" minlength="16" required>
          </div>         
          <div class="form-group">
             <label for="email">Email</label>
@@ -63,10 +67,6 @@
             <input type="password" id="password" name="password" minlength="8" maxlength="16" required>
          </div>
          <div class="form-group">
-            <label for="data-nascita">Data di nascita</label>
-            <input type="date" id="data-nascita" name="data_nascita" required max="<?php echo date('Y-m-d'); ?>" min="1950-01-01">
-         </div>
-         <div class="form-group">
             <label for="rank">Ruolo</label> 
             <select id="rank" name="rank">
                <option value="1">Meccanico</option>
@@ -74,6 +74,14 @@
                <option value="3">Arbitro</option>
                <option value="4">Organizzatore</option>
             </select>
+            <div class="form-group">
+            <label for="oreL">Ore lavorative</label>
+            <input type="text" id="oreL" name="oreL" maxlength="16" minlength="16" required>
+         </div>
+         <div class="form-group">
+            <label for="stipendio">Stipendio</label>
+            <input type="text" id="stipendio" name="stipendio" maxlength="16" minlength="16" required>
+         </div>
          </div>
          <div class="form-group">
             <button type="submit">Registra</button>
