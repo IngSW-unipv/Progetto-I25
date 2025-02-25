@@ -1,9 +1,9 @@
 <?php
   session_start();
-  if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
+  /*if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
     header('Location: index.php');
     die();
-  }
+  }*/
 
   include 'default/footerConce.php';
 ?>
@@ -14,7 +14,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina Proprietario</title>
+  <title>Pagina aggiunta dipendenti</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
@@ -44,19 +44,19 @@
       <form action="logic/registerDip.php" method="post" class="registration-form">
       <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" required>
+            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" minlength="16" required>
          </div>
          <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" required>
+            <input type="text" id="nome" name="nome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
          </div>
          <div class="form-group">
             <label for="cognome">Cognome</label>
-            <input type="text" id="cognome" name="cognome" required>
+            <input type="text" id="cognome" name="cognome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
          </div>         
          <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" maxlength="70" required>
          </div>
          <div class="form-group">
             <label for="password">Password</label>
@@ -64,7 +64,7 @@
          </div>
          <div class="form-group">
             <label for="data-nascita">Data di nascita</label>
-            <input type="date" id="data-nascita" name="data_nascita" required>
+            <input type="date" id="data-nascita" name="data_nascita" required max="<?php echo date('Y-m-d'); ?>" min="1950-01-01">
          </div>
          <div class="form-group">
             <label for="rank">Ruolo</label> 

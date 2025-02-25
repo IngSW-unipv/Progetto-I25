@@ -6,7 +6,6 @@
   }*/
 
   include 'default/footerConce.php';
-  include 'default/modalHome.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/profilo.css">
 </head>
 <body>
   <!-- Header -->
@@ -47,13 +46,10 @@
     </section>
 
     <div class="profile-buttons">
-    <button onclick="location.href='provvisoria.php'">Visualizza il bilancio</button>
-      <button onclick="location.href='provvisoria.php'">Aggiungi un dipendente</button>
+      <button onclick="location.href='provvisoria.php'">Visualizza il bilancio</button>
+      <button onclick="location.href='aggiuntaDipendenti.php'">Aggiungi un dipendente</button>
       <button onclick="location.href='provvisoria.php'">Rimuovi un dipendente</button>
-    </section>
-</div>
-
-
+    </div>
   </main>
 
 </body>

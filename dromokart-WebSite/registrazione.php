@@ -32,7 +32,7 @@
          </div>
          <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" required >
+            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" minlength="16" required >
          </div>
          <div class="form-group">
             <label for="email">Email</label>
