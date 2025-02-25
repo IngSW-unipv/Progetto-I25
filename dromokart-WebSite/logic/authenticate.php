@@ -10,7 +10,7 @@ $password = $_POST['password'];
 $password = hash('sha256', $password);
 
 //invio codice login
-fwrite($socket, "lo ");
+fwrite($socket, "login ");
 
 //invio dati
 fwrite($socket, $username . " ");

@@ -1,6 +1,6 @@
 public enum TipoComandi {
     REGISTRAZIONE("r"),
-    LOGIN("l"),
+    LOGIN("login"),
     CLASSIFICA_GENERALE("cg"),
     PRENOTAZIONE("p"),
     AGGIUNTA_KART("ak");
