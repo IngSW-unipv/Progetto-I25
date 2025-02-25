@@ -15,7 +15,7 @@ $serbatoio = $_POST['serbatoio'];
     //invio dati
     fwrite($socket, $targa . " ");
     fwrite($socket, $cilindrata . " ");
-    fwrite($socket, $serbatoio . " ");
+    fwrite($socket, $serbatoio . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 

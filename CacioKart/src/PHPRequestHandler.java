@@ -25,6 +25,7 @@ public class PHPRequestHandler {
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
             info = messaggio[1]; //I dati del comando saranno il resto del messaggio
             tipo = TipoComandi.requestedCommand(comando);
+            System.out.println("Messaggio ricevuto: " + messaggio[0] + " "+ messaggio[1]);
 
             /**Switch per gestire i comandi
              *
@@ -58,8 +59,6 @@ public class PHPRequestHandler {
                 default:
                     break;
             }
-
-            System.out.println("Messaggio ricevuto: " + messaggio);
 
         } catch (IOException e) {
             e.printStackTrace();
