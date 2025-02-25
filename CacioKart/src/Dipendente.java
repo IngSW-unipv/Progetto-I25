@@ -5,7 +5,7 @@ public class Dipendente extends Persona {
 
     public Dipendente(/*String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio*/) {
         super(/*nome, cognome, dataNascita, cF, mail, password*/);
-        this.stipendio = stipendio;
+        //this.stipendio = stipendio;
     }
 
     public double getStipendio() {

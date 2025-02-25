@@ -1,6 +1,6 @@
-import java.io.BufferedReader;
+/*import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.IOException;*/
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class DBConnector {
     private DBConnector db;
     private ResultSetMetaData rsmd;
     private int columnCount;
-    private BufferedReader fileReader;
+    //private BufferedReader fileReader;
     private String columnName;
     private Object columnValue;
 

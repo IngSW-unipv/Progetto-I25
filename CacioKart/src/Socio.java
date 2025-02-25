@@ -1,7 +1,10 @@
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 public class Socio extends Persona implements Iinventario{
     private final int MAX=20;
@@ -38,20 +41,33 @@ public class Socio extends Persona implements Iinventario{
 
     }
 
-    /* public int prenotation(LocalDate dataGara, LocalTime ora){
-        DBConnector db = new DBConnector();
+    public int prenotation(LocalDate dataGara, LocalTime ora) throws SQLException {
+        int nPartecipanti=0;
+        db = new DBConnector();
+        int idP=0;
+        Scanner scanner = new Scanner(System.in);
+        String input=null;
+        LocalDate dataP;
         responder = new PHPResponseHandler();
         SELECT="select max(idP) from prenotazione";
-
+        idP=db.executeReturnQuery(SELECT);
+        idP=idP+1;
+        do {
+            System.out.println("Inserisci una data della prenotazione(formato yyyy-MM-dd): ");
+            input = scanner.nextLine();
+            dataP=LocalDate.parse(input);
+        }while(dataP.isBefore(dataGara));
         SELECT=("select count(*) from prenotazione where dataG=dataGara and fasciaO=ora group by ora");
+        nPartecipanti=
         if(>=MAX){
             return 0;
         }else{
             INSERT= "INSERT INTO prenotazione(idP,dataP,dataG,fasciaO,tipologia,costo,numP
                     '" + idP");
         }
+        return 0;
     }
-*/
+
     public void comprareKart(){
 
     }
