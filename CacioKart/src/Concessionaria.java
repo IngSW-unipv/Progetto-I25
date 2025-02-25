@@ -24,7 +24,7 @@ public class Concessionaria implements Iinventario{
 
     };
 
-    /**Metodo per inserire i kart nella concessionaria (TEMPORANEO, IL DB STA CAMBIANDO)
+    /**Metodo per inserire i kart nella concessionaria.
      * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
      * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
      * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e

@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
@@ -46,7 +47,7 @@ public class PHPRequestHandler {
                     break;
 
                 case PRENOTAZIONE:
-                    //prenotationCase(info,clientSocket);
+                    prenotationCase(info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART:
@@ -103,15 +104,29 @@ public class PHPRequestHandler {
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandler
-    /*
     private void prenotationCase(String messaggio, Socket clientSocket){
         String[] prenotazione = messaggio.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataP = LocalDate.parse(prenotazione[0], formatter);
+        LocalDate dataG = LocalDate.parse(prenotazione[0], formatter);
         formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime orarioJava = LocalTime.parse(prenotazione[1], formatter);
+        LocalTime orario= LocalTime.parse(prenotazione[1], formatter);
         Socio utente = new Socio(null, null, null, null, null, null);
         utente.setcF(prenotazione[2]);
+        //utente.prenotation(dataG,orario);
 
-    }*/
+    }
+
+    /**Metodo di aggiunta kart
+     * Pressoché identico al metodo di registrazione.
+     *
+     * @param dati
+     * @param clientSocket
+     * @throws SQLException
+     */
+    private void aggiuntaKartCase(String dati, Socket clientSocket) throws SQLException {
+        String[] kart = dati.split(" ");
+        Concessionaria c = new Concessionaria();
+        c.inserimentoKart(kart,clientSocket);
+
+    }
 }

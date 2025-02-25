@@ -28,14 +28,11 @@ public class Meccanico extends Dipendente implements Iinventario {
     };
 
     public void mostraKart(Socket clientSocket) throws SQLException {
-        //Utilizzo DBConnector per ricevere tutte le informazioni dei kart
-        //Spedisco le targhe tramite ResponseHandler
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM caciokart.kart";
         kart = db.executeReturnQuery(SELECT);
 
-        //Kart è una map con svariati campi
         String targa = kart.get(0).get("targa").toString();
         String cilindrata = kart.get(0).get("cilindrata").toString();
         String serbatoio = kart.get(0).get("serbatoio").toString();

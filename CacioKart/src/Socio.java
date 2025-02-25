@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Socio extends Persona implements Iinventario{
+    private final int MAX=20;
     private String INSERT;
+    private String SELECT;
     private PHPResponseHandler responder;
     private int insertError;
     private DBConnector db;
@@ -34,6 +36,20 @@ public class Socio extends Persona implements Iinventario{
         insertError = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(insertError));
 
+    }
+
+    public int prenotation(LocalDate dataGara, LocalTime ora){
+        DBConnector db = new DBConnector();
+        responder = new PHPResponseHandler();
+        SELECT="select max(idP) from prenotazione";
+
+        SELECT=("select count(*) from prenotazione where dataG=dataGara and fasciaO=ora group by ora");
+        if(>=MAX){
+            return 0;
+        }else{
+            INSERT= "INSERT INTO prenotazione(idP,dataP,dataG,fasciaO,tipologia,costo,numP
+                    '" + idP");
+        }
     }
 
     public void comprareKart(){
