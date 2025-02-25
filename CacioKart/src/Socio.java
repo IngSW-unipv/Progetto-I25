@@ -40,7 +40,7 @@ public class Socio extends Persona implements Iinventario{
 
     }
 
-    public int
+    //public int
 
     //Override metodi Iinventario
 }

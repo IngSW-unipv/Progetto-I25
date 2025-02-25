@@ -8,6 +8,7 @@ public class PHPRequestHandler {
     private String comando;
     private String info;
     private String messaggio[];
+    private TipoComandi tipo;
 
     public PHPRequestHandler() {
     }
@@ -19,11 +20,11 @@ public class PHPRequestHandler {
      */
     public void handleRequests(Socket clientSocket) {
         try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            messaggio = in.readLine().split(" ",2);
-            comando = messaggio[0];
-            info = messaggio[1];
-            TipoComandi tipo = TipoComandi.requestedCommand(comando);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
+            messaggio = in.readLine().split(" ",2); //Divido il messaggio in due
+            comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
+            info = messaggio[1]; //I dati del comando saranno il resto del messaggio
+            tipo = TipoComandi.requestedCommand(comando);
 
             /**Switch per gestire i comandi
              *
@@ -42,7 +43,7 @@ public class PHPRequestHandler {
 
                     break;
                 case PRENOTAZIONE:
-                    prenotationCase(info,clientSocket);
+                    //prenotationCase(info,clientSocket);
                     break;
 
                 default:
@@ -66,8 +67,8 @@ public class PHPRequestHandler {
     private void loginCase(String messaggio, Socket clientSocket) {
         String[] loginData = messaggio.split(" ");
         Persona utente = new Persona(null, null, null, null, null, null);
-        utente.setcF(loginData[1]);
-        utente.setPassword(loginData[2]);
+        utente.setcF(loginData[0]);
+        utente.setPassword(loginData[1]);
         utente.login(clientSocket);
     }
 
@@ -91,6 +92,7 @@ public class PHPRequestHandler {
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandler
+    /*
     private void prenotationCase(String messaggio, Socket clientSocket){
         String[] prenotazione = messaggio.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -100,5 +102,5 @@ public class PHPRequestHandler {
         Socio utente = new Socio(null, null, null, null, null, null);
         utente.setcF(prenotazione[2]);
 
-    }
+    }*/
 }
