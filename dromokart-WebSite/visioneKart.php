@@ -9,7 +9,7 @@ $res = '';
 while (!feof($socket)) {
     $line = fgets($socket);
     // Se la riga, una volta rimossi spazi e newline, è "and", esci dal ciclo
-    if (trim($line) === "and") {
+    if (trim($line) === "end") {
         break;
     }
     $res .= $line;
