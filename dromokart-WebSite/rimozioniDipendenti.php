@@ -43,8 +43,8 @@
       <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->
       <form action="logic/deleteDip.php" method="post" class="registration-form">
          <div class="form-group">
-            <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" pattern ="^[A-Z0-9]+$" maxlength="16" minlength="16" required>
+            <label for="codice_fiscale">Codice Fiscale</label>
+            <input type="text" id="codice_fiscale" name="codice_fiscale" pattern ="^[A-Z0-9]+$" maxlength="16" minlength="16" required>
          </div>         
             <button type="submit">Elimina Dipendente</button>
          </div>

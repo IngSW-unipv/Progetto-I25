@@ -5,7 +5,8 @@ public enum TipoComandi {
     PRENOTAZIONE("prenotazione"),
     AGGIUNTA_KART("aggiungiKart"),
     ELIMINAZIONE_KART("eliminazioneKart"),
-    REGISTRAZIONE_DIPENDENTE("registrazioneDipen");
+    REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
+    ELIMINA_DIPENDENTE("eliminaDipen");
 
 
     private final String descrizione;
