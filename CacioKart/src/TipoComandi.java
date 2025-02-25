@@ -4,10 +4,10 @@ public enum TipoComandi {
     CLASSIFICA_GENERALE("classificaGenerale"),
     PRENOTAZIONE("prenotazione"),
     AGGIUNTA_KART("aggiungiKart"),
+    MOSTRA_KART("mostraKart"),
     ELIMINAZIONE_KART("eliminazioneKart"),
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen");
-
 
     private final String descrizione;
 
@@ -21,6 +21,12 @@ public enum TipoComandi {
         return descrizione;
     }
 
+    /**Metodo per riconoscere la stringa in entrata e
+     * convertirla in un ENUM per facilità di gestione.
+     *
+     * @param comando
+     * @return
+     */
     public static TipoComandi requestedCommand(String comando) {
         for (TipoComandi cmd : TipoComandi.values()) {
             if (cmd.getDescrizione().equalsIgnoreCase(comando)) {

@@ -24,7 +24,7 @@ public class PHPRequestHandler {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ",2); //Divido il messaggio in due
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
-            info = messaggio[1]; //I dati del comando saranno il resto del messaggio
+            info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
             tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
             System.out.println("Messaggio ricevuto: " + messaggio[0] + " "+ messaggio[1]);
 
@@ -50,9 +50,13 @@ public class PHPRequestHandler {
                     break;
 
                 case AGGIUNTA_KART:
-                    String[] kart = info.split(" ");
-                    Concessionaria c = new Concessionaria();
-                    c.inserimentoKart(kart,clientSocket);
+                    aggiuntaKartCase(info, clientSocket);
+                    break;
+
+                case MOSTRA_KART:
+                    Meccanico m = new Meccanico();
+                    m.mostraKart(clientSocket);
+
                     break;
 
                 default:
@@ -68,12 +72,12 @@ public class PHPRequestHandler {
     /**Metodo per gestire la logica di login
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      *
-     * @param messaggio
+     * @param dati
      * @param clientSocket
      */
-    private void loginCase(String messaggio, Socket clientSocket) {
-        String[] loginData = messaggio.split(" ");
-        Persona utente = new Persona(null, null, null, null, null, null);
+    private void loginCase(String dati, Socket clientSocket) {
+        String[] loginData = dati.split(" ");
+        Persona utente = new Persona(/*null, null, null, null, null, null*/);
         utente.setcF(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
@@ -84,11 +88,11 @@ public class PHPRequestHandler {
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
      * il tipo Date presente nel database.
      *
-     * @param messaggio
+     * @param dati
      * @param clientSocket
      */
-    private void registerCase(String messaggio, Socket clientSocket) throws SQLException {
-        String[] socio = messaggio.split(" ");
+    private void registerCase(String dati, Socket clientSocket) throws SQLException {
+        String[] socio = dati.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataNascita = LocalDate.parse(socio[2], formatter);
         Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);

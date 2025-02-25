@@ -1,14 +1,16 @@
 import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Socio extends Persona implements Iinventario{
     private String INSERT;
     private PHPResponseHandler responder;
     private int insertError;
+    private DBConnector db;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
-        super(nome, cognome, dataNascita, cF, mail, password);
+        super(/*nome, cognome, dataNascita, cF, mail, password*/);
     }
 
     //metodo classifica gara?
@@ -19,7 +21,7 @@ public class Socio extends Persona implements Iinventario{
      * @param clientSocket
      */
     public void registrazione(Socket clientSocket) throws SQLException {
-        DBConnector db = new DBConnector();
+        db = new DBConnector();
         responder = new PHPResponseHandler();
         INSERT = "INSERT INTO socio (cf, nome, cognome, mail, pass, dataN) VALUES('" +
                 this.getcF() + "', '" +

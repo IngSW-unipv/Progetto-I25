@@ -15,14 +15,16 @@ public class Persona {
     private String SELECT;
     private List<Map<String, Object>> result;
     private String ruolo;
+    private DBConnector db;
+    private PHPResponseHandler responder;
 
-    public Persona( String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
-        this.nome = nome;
+    public Persona(/* String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password*/) {
+        /*this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
         this.cF = cF;
         this.mail = mail;
-        this.password = password;
+        this.password = password;*/
     }
 
     public String getNome() {
@@ -79,25 +81,25 @@ public class Persona {
      *
      * @param clientSocket
      */
-    public void login(Socket clientSocket){
-        DBConnector db = new DBConnector();
-        PHPResponseHandler responder = new PHPResponseHandler();
+    public void login(Socket clientSocket) {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM caciokart.socio WHERE cf = '"
                 + this.getcF() + "' AND pass = '"
-                + this.getPassword() +"'";
+                + this.getPassword() + "'";
         try {
             result = db.executeReturnQuery(SELECT);
-            if(!result.isEmpty()){
-                responder.sendResponse(clientSocket,"1 0");
+            if (!result.isEmpty()) {
+                responder.sendResponse(clientSocket, "1 0");
 
-            }else{
+            } else {
                 SELECT = "SELECT * FROM caciokart.dipendente WHERE cf = '"
                         + this.getcF() + "' AND pass = '"
-                        + this.getPassword() +"'";
+                        + this.getPassword() + "'";
                 result = db.executeReturnQuery(SELECT);
 
-                if(result.isEmpty()){
-                    responder.sendResponse(clientSocket,"0 0");
+                if (result.isEmpty()) {
+                    responder.sendResponse(clientSocket, "0 0");
 
                 } else {
 
@@ -124,7 +126,7 @@ public class Persona {
                             break;
 
                         default:
-                            responder.sendResponse(clientSocket,"0 0");
+                            responder.sendResponse(clientSocket, "0 0");
                             System.out.println("Ruolo non trovato");
                             break;
 

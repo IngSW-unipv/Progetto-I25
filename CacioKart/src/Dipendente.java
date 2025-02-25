@@ -3,8 +3,8 @@ import java.time.LocalDate;
 public class Dipendente extends Persona {
     private double stipendio;
 
-    public Dipendente(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio) {
-        super(nome, cognome, dataNascita, cF, mail, password);
+    public Dipendente(/*String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio*/) {
+        super(/*nome, cognome, dataNascita, cF, mail, password*/);
         this.stipendio = stipendio;
     }
 

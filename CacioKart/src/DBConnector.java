@@ -21,6 +21,8 @@ public class DBConnector {
     private ResultSetMetaData rsmd;
     private int columnCount;
     private BufferedReader fileReader;
+    private String columnName;
+    private Object columnValue;
 
     public DBConnector() {
     }
@@ -80,8 +82,8 @@ public class DBConnector {
             while(rs.next()) {
                 Map<String, Object> row = new HashMap<>();
                 for(int i = 1; i <= columnCount; i++) {
-                    String columnName = rsmd.getColumnName(i);
-                    Object columnValue = rs.getObject(i);
+                    columnName = rsmd.getColumnName(i);
+                    columnValue = rs.getObject(i);
                     row.put(columnName, columnValue);
                 }
                 resultList.add(row);
