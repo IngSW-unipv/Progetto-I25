@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/registration.css">
-  <script src="../logic/limits.js" defer></script>
 </head>
 <body>
 

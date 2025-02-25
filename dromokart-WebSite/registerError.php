@@ -20,7 +20,7 @@
   <main>
     <!-- Sezione Hero -->
     <section class="hero">
-      <h1>Errore di Registrazione, torna alla <a href = "register.php">Registrazione</a></h1>
+      <h1>Errore di Registrazione, torna alla <a href = "registrazione.php">Registrazione</a></h1>
     </section>
 
 
