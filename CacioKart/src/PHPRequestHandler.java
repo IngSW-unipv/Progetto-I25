@@ -42,8 +42,17 @@ public class PHPRequestHandler {
                 case CLASSIFICA_GENERALE:
 
                     break;
+
                 case PRENOTAZIONE:
                     //prenotationCase(info,clientSocket);
+                    break;
+
+                case AGGIUNTA_KART:
+                    //In questo formato "targa" "cilindrata" "serbatoio"
+                    String[] kart = info.split(" ");
+                    //Chiamo la funzione di inserimento kart
+                    Concessionaria c = new Concessionaria();
+                    c.inserimentoKart(kart,clientSocket);
                     break;
 
                 default:
