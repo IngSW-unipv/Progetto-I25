@@ -11,7 +11,7 @@ $serbatoio = $_POST['serbatoio'];
 
 
     //invio codice gara libera
-    fwrite($socket, "ak ");
+    fwrite($socket, "aggiungiKart ");
     //invio dati
     fwrite($socket, $targa . " ");
     fwrite($socket, $cilindrata . " ");

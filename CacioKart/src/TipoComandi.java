@@ -1,9 +1,12 @@
 public enum TipoComandi {
-    REGISTRAZIONE("r"),
+    REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
-    CLASSIFICA_GENERALE("cg"),
-    PRENOTAZIONE("p"),
-    AGGIUNTA_KART("ak");
+    CLASSIFICA_GENERALE("classificaGenerale"),
+    PRENOTAZIONE("prenotazione"),
+    AGGIUNTA_KART("aggiungiKart"),
+    ELIMINAZIONE_KART("eliminazioneKart"),
+    REGISTRAZIONE_DIPENDENTE("registrazioneDipen");
+
 
     private final String descrizione;
 

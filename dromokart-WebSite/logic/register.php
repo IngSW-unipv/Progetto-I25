@@ -15,7 +15,7 @@ $password = $_POST['password'];
 $password = hash('sha256', $password);
 
     //invio codice registrazione
-    fwrite($socket, "r ");
+    fwrite($socket, "registrazioneSocio ");
     //invio dati
     fwrite($socket, $name . " ");
     fwrite($socket, $surname . " ");

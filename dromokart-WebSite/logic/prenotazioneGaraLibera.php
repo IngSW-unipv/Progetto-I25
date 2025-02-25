@@ -10,7 +10,7 @@ $date = $_POST['date'];
 
 
     //invio codice gara libera
-    fwrite($socket, "gl ");
+    fwrite($socket, "prenotazione ");
     //invio dati
     fwrite($socket, $tempo . " ");
     fwrite($socket, $date . " ");

@@ -18,7 +18,7 @@ $stipendio = $_POST['stipendio'];
 $password = hash('sha256', $password);
 
     //invio codice registrazione
-    fwrite($socket, "r ");
+    fwrite($socket, "registrazioneDipen ");
     //invio dati
     fwrite($socket, $name . " ");
     fwrite($socket, $surname . " ");

@@ -9,7 +9,7 @@ $targa = $_POST['targa'];
 
 
     //invio codice gara libera
-    fwrite($socket, "ek ");
+    fwrite($socket, "eliminazioneKart ");
     //invio dati
     fwrite($socket, $targa . " ");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
