@@ -15,6 +15,9 @@
 
   <!-- Main Content - Form di Registrazione -->
   <main>
+
+  
+
     <section class="form-section">
       <h1>Elimina Kart</h1>
       <form action="logic/eliminazioneKart.php" method="post" class="registration-form">

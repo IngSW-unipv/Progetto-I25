@@ -48,7 +48,7 @@
       <div class="additional-info">
         <div class="form-group">
           <label for="date">Scegli il giorno:</label>
-          <input type="date" id="date" name="date" required>
+          <input type="date" id="date" name="date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
         </div>
       </div>
       
