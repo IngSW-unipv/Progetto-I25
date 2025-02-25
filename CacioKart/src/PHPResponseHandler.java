@@ -19,9 +19,9 @@ public class PHPResponseHandler {
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println(messaggio);
-            //System.out.println("Il messaggio spedito è: " + messaggio);
             out.flush();    //Pulisco il buffer di dati per evitare problemi
             Thread.sleep(100);  //Attendo a chiudere il socket per dare tempo al client di ricevere la risposta
+            System.out.println("Il messaggio spedito è: " + messaggio);
 
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

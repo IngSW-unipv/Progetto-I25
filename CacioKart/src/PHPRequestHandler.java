@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -18,13 +19,13 @@ public class PHPRequestHandler {
      *
      * @param clientSocket
      */
-    public void handleRequests(Socket clientSocket) {
+    public void handleRequests(Socket clientSocket) throws SQLException {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ",2); //Divido il messaggio in due
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
             info = messaggio[1]; //I dati del comando saranno il resto del messaggio
-            tipo = TipoComandi.requestedCommand(comando);
+            tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
             System.out.println("Messaggio ricevuto: " + messaggio[0] + " "+ messaggio[1]);
 
             /**Switch per gestire i comandi
@@ -49,9 +50,7 @@ public class PHPRequestHandler {
                     break;
 
                 case AGGIUNTA_KART:
-                    //In questo formato "targa" "cilindrata" "serbatoio"
                     String[] kart = info.split(" ");
-                    //Chiamo la funzione di inserimento kart
                     Concessionaria c = new Concessionaria();
                     c.inserimentoKart(kart,clientSocket);
                     break;
@@ -61,7 +60,7 @@ public class PHPRequestHandler {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Errore nella lettura: " + e.getMessage());
         }
 
     }
@@ -88,11 +87,11 @@ public class PHPRequestHandler {
      * @param messaggio
      * @param clientSocket
      */
-    private void registerCase(String messaggio, Socket clientSocket){
+    private void registerCase(String messaggio, Socket clientSocket) throws SQLException {
         String[] socio = messaggio.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataNascita = LocalDate.parse(socio[3], formatter);
-        Socio nuovoUtente = new Socio(socio[1], socio[2], dataNascita, socio[4], socio[5], socio[6]);
+        LocalDate dataNascita = LocalDate.parse(socio[2], formatter);
+        Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);
         nuovoUtente.registrazione(clientSocket);
     }
 

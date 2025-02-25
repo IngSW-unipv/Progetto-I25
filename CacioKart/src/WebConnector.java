@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class WebConnector {
     int porta = 50000;
@@ -23,7 +24,7 @@ public class WebConnector {
      * chiude il socket e ne riapre un altro.
      *
      */
-    public void createServer() {
+    public void createServer() throws SQLException {
         while(true) {
             try {
                 System.out.println("Creazione server...");

@@ -27,8 +27,7 @@ $password = hash('sha256', $password);
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
     $res = trim(fgets($socket));
-
-fclose($socket);
+    fclose($socket);
 
     //nel caso di successo, viene impostato il rango a 0 e si salva 
     if($res === "0"){

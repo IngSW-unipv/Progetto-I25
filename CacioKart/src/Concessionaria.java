@@ -11,6 +11,7 @@ public class Concessionaria implements Iinventario{
     private String targa;
     private int cilindrata;
     private double serbatoio;
+    private int insertError;
 
     public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
         //this.pezzi = pezzi;
@@ -23,7 +24,16 @@ public class Concessionaria implements Iinventario{
 
     };
 
-    public void inserimentoKart(String kart[], Socket clientSocket){
+    /**Metodo per inserire i kart nella concessionaria (TEMPORANEO, IL DB STA CAMBIANDO)
+     * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
+     * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
+     * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
+     * il metodo di ResponseHandler per mandare una risposta
+     *
+     * @param kart
+     * @param clientSocket
+     */
+    public void inserimentoKart(String kart[], Socket clientSocket) throws SQLException {
         targa = kart[0];
         cilindrata = Integer.parseInt(kart[1]);
         serbatoio = Double.parseDouble(kart[2]);
@@ -35,14 +45,10 @@ public class Concessionaria implements Iinventario{
                 nuovoKart.getTarga() + "', '" +
                 nuovoKart.getCilindrata() + "', '" +
                 nuovoKart.getSerbatoio() +"')";
-        responder.sendResponse(clientSocket, "1");
-        System.out.println("Ho mandato la risposta\n");
 
-        try {
-            db.executeUpdateQuery(INSERT);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        insertError = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(insertError));
+
     };
 
     public void inserimentoPezzo(){

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Socio extends Persona implements Iinventario{
     private String INSERT;
     private PHPResponseHandler responder;
+    private int insertError;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -17,7 +18,7 @@ public class Socio extends Persona implements Iinventario{
      *
      * @param clientSocket
      */
-    public void registrazione(Socket clientSocket){
+    public void registrazione(Socket clientSocket) throws SQLException {
         DBConnector db = new DBConnector();
         responder = new PHPResponseHandler();
         INSERT = "INSERT INTO socio (cf, nome, cognome, mail, pass, dataN) VALUES('" +
@@ -27,13 +28,10 @@ public class Socio extends Persona implements Iinventario{
                 this.getMail() +"', '" +
                 this.getPassword() +"', '" +
                 this.getDataNascita() +"')";
-        responder.sendResponse(clientSocket, "1");
-        System.out.println("Ho mandato la risposta\n");
-        try {
-            db.executeUpdateQuery(INSERT);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        insertError = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(insertError));
+
     }
 
     public void comprareKart(){

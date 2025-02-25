@@ -99,11 +99,13 @@ public class DBConnector {
      * Tramite la stringa in ingresso, il metodo esegue query
      * che modificano i dati presenti nel database, cancellando
      * o aggiungendone di nuovi.
+     * In caso di errore (principalmente di PK duplicata) dà come
+     * valore di risposta 0.
      *
      * @param query
      * @throws SQLException
      */
-    public void executeUpdateQuery(String query) throws SQLException {
+    public int executeUpdateQuery(String query) throws SQLException {
         try {
             db = new DBConnector();
             db.dbOpenConnection();
@@ -111,8 +113,13 @@ public class DBConnector {
             stmt.executeUpdate(query);
             //System.out.println("Eseguo la query di modifica richiesta: " + query);
             db.dbCloseConnection();
+            return 1;
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("L'inserimento non è andato a buon fine: " + e.getMessage());
+            db.dbCloseConnection();
+            return 0;
+
         }
     }
 }
