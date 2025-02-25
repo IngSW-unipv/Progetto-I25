@@ -20,7 +20,7 @@
       <form action="logic/aggiuntaKart.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="targa">Targa</label>
-            <input type="text" id="targa" name="targa" maxlength="7" required>
+            <input type="text" id="targa" name="targa" maxlength="6" required>
          </div>
          <div class="form-group">
             <label for="cilindrata">Cilindrata</label>

@@ -38,7 +38,7 @@ public class Socio extends Persona implements Iinventario{
 
     }
 
-    public int prenotation(LocalDate dataGara, LocalTime ora){
+    /* public int prenotation(LocalDate dataGara, LocalTime ora){
         DBConnector db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT="select max(idP) from prenotazione";
@@ -51,7 +51,7 @@ public class Socio extends Persona implements Iinventario{
                     '" + idP");
         }
     }
-
+*/
     public void comprareKart(){
 
     }
