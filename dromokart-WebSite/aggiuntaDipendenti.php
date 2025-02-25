@@ -74,6 +74,7 @@
                <option value="3">Arbitro</option>
                <option value="4">Organizzatore</option>
             </select>
+         </div>
             <div class="form-group">
             <label for="oreL">Ore lavorative</label>
             <input type="text" id="oreL" name="oreL" maxlength="16" minlength="16" required>
@@ -81,7 +82,6 @@
          <div class="form-group">
             <label for="stipendio">Stipendio</label>
             <input type="text" id="stipendio" name="stipendio" maxlength="16" minlength="16" required>
-         </div>
          </div>
          <div class="form-group">
             <button type="submit">Registra</button>

@@ -20,11 +20,11 @@
       <form action="logic/register.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" maxlength="30" required>
+            <input type="text" id="nome" name="nome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
          </div>
          <div class="form-group">
             <label for="cognome">Cognome</label>
-            <input type="text" id="cognome" name="cognome" maxlength="30" required>
+            <input type="text" id="cognome" name="cognome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
          </div>
          <div class="form-group">
             <label for="data-nascita">Data di nascita</label>
@@ -32,7 +32,7 @@
          </div>
          <div class="form-group">
             <label for="codice-fiscale">Codice Fiscale</label>
-            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" minlength="16" required >
+            <input type="text" id="codice-fiscale" name="codice_fiscale" maxlength="16" minlength="16" required pattern="^[A-Z0-9]+$" >
          </div>
          <div class="form-group">
             <label for="email">Email</label>
