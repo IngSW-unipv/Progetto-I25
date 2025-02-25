@@ -30,7 +30,7 @@ fclose($socket);
     } else{
         $_SESSION['username'] = $username;
         $_SESSION['rank'] = 1;
-        header('Location: meccanico.php');
+        header('Location: ../meccanico.php');
         die();
     }
 ?>
