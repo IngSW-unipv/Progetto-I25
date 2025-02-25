@@ -29,8 +29,8 @@ fclose($socket);
         die();
     } else{
         $_SESSION['username'] = $username;
-        $_SESSION['rank'] = 0;
-        header('Location: profilo.php');
+        $_SESSION['rank'] = 1;
+        header('Location: meccanico.php');
         die();
     }
 ?>
