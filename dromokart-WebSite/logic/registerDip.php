@@ -11,6 +11,9 @@ $date = $_POST['data_nascita'];
 $username = htmlspecialchars($_POST['codice_fiscale']);
 $email = $_POST['email'];
 $password = $_POST['password'];
+$rank = $_POST['rank'];
+$oreL = $_POST['oreL'];
+$stipendio = $_POST['stipendio'];
 
 $password = hash('sha256', $password);
 
@@ -22,7 +25,10 @@ $password = hash('sha256', $password);
     fwrite($socket, $date . " ");
     fwrite($socket, $username . " ");
     fwrite($socket, $email . " ");
-    fwrite($socket, $password . "\n");
+    fwrite($socket, $password . " ");
+    fwrite($socket, $rank . " ");
+    fwrite($socket, $oreL . " ");
+    fwrite($socket, $stipendio . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
@@ -34,9 +40,7 @@ $password = hash('sha256', $password);
         header('Location: ../registerError.php');
         die();
     } else{
-        $_SESSION['username'] = $username;
-        $_SESSION['rank'] = 0;
-        header('Location: ../profilo.php');
+        header('Location: ../proprietario.php');
         die();
     }
 ?>

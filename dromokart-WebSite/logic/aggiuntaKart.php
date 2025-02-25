@@ -28,8 +28,6 @@ fclose($socket);
         header('Location: ../registerError.php');
         die();
     } else{
-        $_SESSION['username'] = $username;
-        $_SESSION['rank'] = 1;
         header('Location: ../meccanico.php');
         die();
     }

@@ -48,7 +48,7 @@
     <div class="profile-buttons">
       <button onclick="location.href='provvisoria.php'">Visualizza il bilancio</button>
       <button onclick="location.href='aggiuntaDipendenti.php'">Aggiungi un dipendente</button>
-      <button onclick="location.href='provvisoria.php'">Rimuovi un dipendente</button>
+      <button onclick="location.href='rimozioniDipendenti.php'">Rimuovi un dipendente</button>
     </div>
   </main>
 
