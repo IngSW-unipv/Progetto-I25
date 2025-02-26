@@ -25,26 +25,29 @@
           <div class="products-container">
         <?php
           //require 'logic/requestParts.php';
-          $str[0][0] = "Motore 125cc";
-          $str[0][1] = 3;
-          $str[1][0] = "Carburatore 28";
-          $str[1][1] = 7;
+          //queste di sotto sono delle prove
+          $part[0][0] = "Motore 125cc";
+          $part[0][1] = 3;
+          $part[0][2] = 2000;
+          $part[1][0] = "Carburatore 28";
+          $part[1][1] = 7;
+          $part[1][2] = 170;
 
-          $i = 2;
-
-          
+          $i = 2;          
 
           for($j = 0; $j < $i; $j++){
             echo '<div class="product">';
-            echo '<a href="/products/' .$str[$j][0] .'.php"><img src="immagini/' .$str[$j][0] .'.png" alt="' .$str[$j][0] .'"></a>';
-            echo '<a href="/products/' .$str[$j][0] .'.php"><h1>' .$str[$j][0] .'</h1></a>';
-            if($str[$j][1] > 0)
+            echo '<a href="/products/' .$part[$j][0] .'.php"><img src="immagini/' .$part[$j][0] .'.png" alt="' .$part[$j][0] .'"></a>';
+            echo '<a href="/products/' .$part[$j][0] .'.php"><h1>' .$part[$j][0] .'</h1></a>';
+            echo '<p><h3> prezzo: </h3>'.$part[$j][2] .'€</p>';
+            if($part[$j][1] > 0)
             echo '<p>Quantità: ';
-            if($str[$j][1] > 0){
-              echo $str[$j][1] .'</p>';
+            if($part[$j][1] > 0){
+              echo $part[$j][1] .'</p>';
             } else{
               echo 'esaurito</p>';
             }
+            
             echo'</div>';
           }
         ?>

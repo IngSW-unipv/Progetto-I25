@@ -68,7 +68,7 @@
          </div>
          <div class="form-group">
             <label for="rank">Ruolo</label> 
-            <select id="rank" name="rank">
+            <select id="rank" name="rank" required>
                <option value="1">Meccanico</option>
                <option value="2">Gestore concessionaria</option>
                <option value="3">Arbitro</option>
