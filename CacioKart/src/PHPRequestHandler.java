@@ -128,9 +128,10 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void aggiuntaKartCase(String dati, Socket clientSocket) throws SQLException {
-        String[] kart = dati.split(" ");
+        String[] kart = dati.split(" "); //Passare a kart
+        Kart k = new Kart(kart[0],Integer.parseInt(kart[1]),Double.parseDouble(kart[2]));
         Concessionaria c = new Concessionaria();
-        c.inserimentoKart(kart,clientSocket);
+        c.inserimentoKart(k,clientSocket);
 
     }
 

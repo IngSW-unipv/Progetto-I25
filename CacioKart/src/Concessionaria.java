@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Concessionaria implements Iinventario{
     //List<Kart> kart;
     //List<Pezzo> pezzi;
-    PHPResponseHandler responder;
+    private DBConnector db;
+    private PHPResponseHandler responder;
     private String INSERT;
     private String targa;
     private int cilindrata;
@@ -30,16 +31,11 @@ public class Concessionaria implements Iinventario{
      * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
      * il metodo di ResponseHandler per mandare una risposta
      *
-     * @param kart
+     * @param nuovoKart
      * @param clientSocket
      */
-    public void inserimentoKart(String kart[], Socket clientSocket) throws SQLException {
-        targa = kart[0];
-        cilindrata = Integer.parseInt(kart[1]);
-        serbatoio = Double.parseDouble(kart[2]);
-
-        Kart nuovoKart = new Kart(targa, cilindrata, serbatoio);
-        DBConnector db = new DBConnector();
+    public void inserimentoKart(Kart nuovoKart, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
         responder = new PHPResponseHandler();
         INSERT = "INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('" +
                 nuovoKart.getTarga() + "', '" +
