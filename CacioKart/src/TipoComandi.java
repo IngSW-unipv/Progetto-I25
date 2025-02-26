@@ -10,7 +10,7 @@ public enum TipoComandi {
     PRENOTAZIONE("prenotazione"),
     AGGIUNTA_KART("aggiungiKart"),
     MOSTRA_KART("mostraKart"),
-    ELIMINAZIONE_KART("eliminazioneKart"),
+    ELIMINAZIONE_KART("eliminaKart"),
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen");

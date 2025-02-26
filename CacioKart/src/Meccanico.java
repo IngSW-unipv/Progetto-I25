@@ -13,6 +13,8 @@ public class Meccanico extends Dipendente implements Iinventario {
     private String targa;
     private String cilindrata;
     private String serbatoio;
+    private String DELETE;
+    private int queryIndicator;
 
     public Meccanico(/*String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio*/) {
         super(/*nome, cognome, dataNascita, cF, mail, password, stipendio*/);
@@ -49,6 +51,14 @@ public class Meccanico extends Dipendente implements Iinventario {
         }else{
             responder.sendResponse(clientSocket, "end");
         }
+    }
+
+    public void rimozioneKart(String targaDaRimuovere, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        DELETE = "DELETE FROM caciokart.kart WHERE targa = '" + targaDaRimuovere + "'";
+        queryIndicator = db.executeUpdateQuery(DELETE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
 }

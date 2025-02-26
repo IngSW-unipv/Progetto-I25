@@ -1,17 +1,13 @@
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Scanner;
 
 public class Socio extends Persona implements Iinventario{
     private final int MAX=20;
     private String INSERT;
     private String SELECT;
     private PHPResponseHandler responder;
-    private int insertError;
+    private int queryIndicator;
     private DBConnector db;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
@@ -36,8 +32,8 @@ public class Socio extends Persona implements Iinventario{
                 this.getPassword() +"', '" +
                 this.getDataNascita() +"')";
 
-        insertError = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(insertError));
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
     /*

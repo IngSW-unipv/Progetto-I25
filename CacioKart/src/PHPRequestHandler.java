@@ -57,9 +57,10 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_KART:
-                    Meccanico m = new Meccanico();
-                    m.mostraKart(clientSocket);
+                    mostraKartCase(clientSocket);
+                    break;
 
+                case ELIMINAZIONE_KART:
                     break;
 
                 default:
@@ -130,5 +131,10 @@ public class PHPRequestHandler {
         Concessionaria c = new Concessionaria();
         c.inserimentoKart(kart,clientSocket);
 
+    }
+
+    private void mostraKartCase(Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        m.mostraKart(clientSocket);
     }
 }
