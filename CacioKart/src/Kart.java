@@ -3,10 +3,10 @@ public class Kart {
     private int cilindrata;
     private double serbatoio;
 
-    public Kart(/*String targa, int cilindrata, double serbatoio*/) {
-        /*this.targa = targa;
+    public Kart(String targa, int cilindrata, double serbatoio) {
+        this.targa = targa;
         this.cilindrata = cilindrata;
-        this.serbatoio = serbatoio;*/
+        this.serbatoio = serbatoio;
     }
 
     public String getTarga() {
