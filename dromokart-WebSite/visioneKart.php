@@ -23,7 +23,7 @@
       text-align: center; /* Testo centrato */
     }
     th { 
-      background-color: #f2f2f2; 
+      background-color:rgb(47, 255, 0); 
     }
   </style>
 </head>
@@ -40,7 +40,7 @@
             echo '<tr>';
             echo '<th>Targa</th>';
             echo '<th>Cilindrata</th>';
-            echo '<th>Serbatoione</th>';
+            echo '<th>Serbatoio</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
