@@ -9,9 +9,9 @@ $targa = $_POST['targa'];
 
 
     //invio codice gara libera
-    fwrite($socket, "eliminazioneKart ");
+    fwrite($socket, "eliminaKart ");
     //invio dati
-    fwrite($socket, $targa . " ");
+    fwrite($socket, $targa . "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
     $res = trim(fgets($socket));
@@ -23,9 +23,7 @@ fclose($socket);
         header('Location: ../registerError.php');
         die();
     } else{
-        $_SESSION['username'] = $username;
-        $_SESSION['rank'] = 1;
-        header('Location: meccanico.php');
+        header('Location: ../meccanico.php');
         die();
     }
 ?>
