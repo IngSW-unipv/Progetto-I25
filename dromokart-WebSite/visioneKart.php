@@ -1,35 +1,70 @@
-<?php
-session_start();
-require 'logic/connection.php';
+<?php include 'default/footerHome.php'; ?>
+<?php include 'default/headerProfilo.php'; ?>
+<?php include 'logic/mostrakart.php'; ?>
 
-$socket = connectionOpen($address, $port);
-fwrite($socket, "mostraKart\n");
-
-$res = '';
-while (!feof($socket)) {
-    $line = fgets($socket);
-    // Se la riga, una volta rimossi spazi e newline, è "and", esci dal ciclo
-    if (trim($line) === "end") {
-        break;
-    }
-    $res .= $line;
-}
-$res = trim($res);
-
-fclose($socket);
-?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Dati ricevuti da Java</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mostra Kart</title>
+  <!-- Importa il font Roboto -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <!-- Collegamento al file CSS esterno -->
+  <link rel="stylesheet" href="css/profilo.css">
+  <style>
+    table { 
+      border-collapse: collapse; 
+      width: 100%; 
+    }
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 8px; 
+      text-align: center; /* Testo centrato */
+    }
+    th { 
+      background-color: #f2f2f2; 
+    }
+  </style>
 </head>
 <body>
-    <h1>Dati ricevuti da Java</h1>
     <div>
         <?php
-        // Utilizza nl2br per visualizzare correttamente le newline in HTML
-        echo nl2br(htmlspecialchars($res));
+        // Suddivide $res in righe
+        $rows = explode("\n", $res);
+        
+        // Controlla se sono presenti righe non vuote
+        if(count($rows) > 0 && !empty(trim($rows[0]))) {
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Targa</th>';
+            echo '<th>Cilindrata</th>';
+            echo '<th>Serbatoione</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            
+            // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
+            foreach($rows as $row) {
+                $row = trim($row);
+                if(empty($row)) continue;
+                $columns = preg_split('/\s+/', $row);
+                // Assicurati che ci siano almeno 3 colonne
+                if(count($columns) >= 3) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
+                    echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
+                    echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
+                    echo '</tr>';
+                }
+            }
+            
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<p>Nessun dato ricevuto.</p>';
+        }
         ?>
     </div>
 </body>

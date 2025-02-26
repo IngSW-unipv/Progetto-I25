@@ -1,16 +1,19 @@
 <?php
-session_start();
 require 'connection.php';
 
 $socket = connectionOpen($address, $port);
+fwrite($socket, "mostraKart\n");
 
-//invio codice login
-fwrite($socket, "mostraKart ");
-
-// Leggi l'intera riga di risposta dal socket e
-// rimuove eventuali spazi vuoti e newline
-$res = trim(fgets($socket));
+$res = '';
+while (!feof($socket)) {
+    $line = fgets($socket);
+    // Se la riga, una volta rimossi spazi e newline, è "end", esci dal ciclo
+    if (trim($line) === "end") {
+        break;
+    }
+    $res .= $line;
+}
+$res = trim($res);
 
 fclose($socket);
-
 ?>
