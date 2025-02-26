@@ -16,12 +16,7 @@ PROPRIETARIO (Alessandro)
 mi rimuove il dipendente
 
 GESTORE DELLA CONCESSIONARIA (Alessandro)
--una volta loggato mi ritrovo in questa pagina
--Tasto per aggiungere la quantità kart (il kart è un modello già presente sul db)
 -tasto per aggiungere la quantità di pezzi di ricambio (i pezzi sono già presenti sul db)
-
-UTENTE (Andrea)
--Nella pagina personale è possibile vedere il proprio kart con la descrizione delle sue caratteristiche ??(implementare php)
 
 ARBITRO (da analizzare meglio) ?? (Alessandro)
 -appena entra l'ARBITRO seleziona la gara, gli verrà restituita una tabella dal database con i tempi di gara
@@ -29,7 +24,7 @@ ARBITRO (da analizzare meglio) ?? (Alessandro)
 update al database facendomi vedere in tempo reale il cambio di classifica (da vedere l'ultima parte)  
 
 MECCANICO (Andrea)
--visione di tutti i kart dell'autodromo (no concessionario)
+-visione di tutti i kart dell'autodromo (fatto ma parzialmente)
 -aggiungere dei kart all'autodromo(solo se presenti nel concessionario)
 -togliere i kart dall'autodromo
 -Per aggiungere la benzina basta compilare un form con scritto ID kart + litri benzina 
