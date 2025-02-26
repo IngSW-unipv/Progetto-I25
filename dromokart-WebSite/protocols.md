@@ -23,4 +23,6 @@ invio da java: 1 o 0
 protocollo per le gare libere:
 invio da php: gs yyyy-mm-gg hh:mm cf
 invio da java: 1 o 0
-			   
+
+
+## tipocomandi.java

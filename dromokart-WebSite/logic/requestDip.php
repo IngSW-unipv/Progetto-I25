@@ -1,6 +1,5 @@
 <?php
-    session_start();
-
+    //logic frontend
     require 'connection.php';
 
     $socket = connectionOpen($address, $port);
