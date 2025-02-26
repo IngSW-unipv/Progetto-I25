@@ -22,7 +22,7 @@
       text-align: center; /* Testo centrato */
     }
     th { 
-      background-color:rgb(47, 255, 0); 
+      background-color: #4CAF50; 
     }
   </style>
 
