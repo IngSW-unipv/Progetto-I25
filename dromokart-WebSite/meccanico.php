@@ -38,7 +38,7 @@ $username = $_SESSION['username'];
       <button onclick="location.href='visioneKart.php'">Visione dei kart</button>
       <button onclick="location.href='aggiungiKart.php'">Aggiungere kart</button>
       <button onclick="location.href='eliminaKartMeccanico.php'">Togliere kart</button>
-      <button onclick="location.href='aggiungaBenzina.php'">aggiungere benzina</button>
+      <button onclick="location.href='AggiungaBenzina.php'">aggiungere benzina</button>
       <button onclick="location.href='Manutenzione.php'">Manutenzione</button>
 
     </div>
