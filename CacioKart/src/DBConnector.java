@@ -124,4 +124,8 @@ public class DBConnector {
 
         }
     }
+
+    public Connection getConnection() {
+        return conn;
+    }
 }
