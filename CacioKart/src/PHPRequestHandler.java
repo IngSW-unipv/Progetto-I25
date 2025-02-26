@@ -25,9 +25,11 @@ public class PHPRequestHandler {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ",2); //Divido il messaggio in due
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
-            info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
+            if(messaggio.length == 2) {
+                info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
+                System.out.println("Messaggio ricevuto: " + messaggio[0] + " " + messaggio[1]);
+            }
             tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
-            System.out.println("Messaggio ricevuto: " + messaggio[0] + " "+ messaggio[1]);
 
             /**Switch per gestire i comandi
              *

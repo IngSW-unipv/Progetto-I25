@@ -40,7 +40,7 @@ public class Socio extends Persona implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(insertError));
 
     }
-
+    /*
     public int prenotation(LocalDate dataGara, LocalTime ora) throws SQLException {
         int nPartecipanti=0;
         db = new DBConnector();
@@ -67,7 +67,7 @@ public class Socio extends Persona implements Iinventario{
                     '" + idP");
         }
         return 0;
-    }
+    }*/
 
     public void comprareKart(){
 

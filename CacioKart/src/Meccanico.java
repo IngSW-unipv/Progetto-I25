@@ -9,7 +9,7 @@ public class Meccanico extends Dipendente implements Iinventario {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT;
-    private StringBuilder listaKart;
+    private StringBuilder listaKart = new StringBuilder();
     private String targa;
     private String cilindrata;
     private String serbatoio;
@@ -36,7 +36,6 @@ public class Meccanico extends Dipendente implements Iinventario {
         SELECT = "SELECT * FROM caciokart.kart";
         kart = db.executeReturnQuery(SELECT);
 
-        //Fare l'if di 0 kart
         if(!kart.isEmpty()) {
             for(Map<String, Object> row : kart) {
                 targa = row.get("targa").toString();
@@ -44,7 +43,8 @@ public class Meccanico extends Dipendente implements Iinventario {
                 serbatoio = row.get("serbatoio").toString();
                 listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append("\n");
             }
-            responder.sendResponse(clientSocket, listaKart+"end");
+            listaKart.append("end");
+            responder.sendResponse(clientSocket, listaKart.toString());
 
         }else{
             responder.sendResponse(clientSocket, "end");
