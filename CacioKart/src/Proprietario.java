@@ -1,9 +1,12 @@
 import java.net.Socket;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Proprietario extends Dipendente {
     private DBConnector db;
     private PHPResponseHandler responder;
+    private String INSERT;
+    private int queryIndicator;
 
     public Proprietario(/*String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio*/) {
         super(/*nome, cognome, dataNascita, cF, mail, password, stipendio*/);
@@ -13,18 +16,22 @@ public class Proprietario extends Dipendente {
 
     };
 
-    public void aggiuntaDipendenti(Socket clientSocket){
+    public void aggiuntaDipendenti(Dipendente nuovoDip,Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        Kart nuovoKart = new Kart(targa, cilindrata, serbatoio);
+        INSERT = "INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) VALUES('" +
+                nuovoDip.getcF() + "', '" +
+                nuovoDip.getNome() + "', '" +
+                nuovoDip.getCognome() + "', '" +
+                nuovoDip.getMail() + "', '" +
+                nuovoDip.getPassword() + "', '" +
+                nuovoDip.getDataNascita() + "', '" +
+                nuovoDip.getRuolo() + "', '" +
+                nuovoDip.getOreL() + "', '" +
+                nuovoDip.getStipendio() +"')";
 
-        INSERT = "INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('" +
-                nuovoKart.getTarga() + "', '" +
-                nuovoKart.getCilindrata() + "', '" +
-                nuovoKart.getSerbatoio() +"')";
-
-        insertError = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(insertError));
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 
     public void rimozioneDipendenti(){

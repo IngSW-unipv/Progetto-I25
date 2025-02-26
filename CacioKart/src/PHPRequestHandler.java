@@ -63,8 +63,11 @@ public class PHPRequestHandler {
                 case ELIMINAZIONE_KART:
                     rimozioneKartCase(info, clientSocket);
                     break;
-                case 'p':
+
+                case REGISTRAZIONE_DIPENDENTE:
+                    aggiungiDipendenteCase(info, clientSocket);
                     break;
+
                 default:
                     break;
             }
@@ -149,5 +152,13 @@ public class PHPRequestHandler {
     private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         m.rimozioneKart(dati, clientSocket);
+    }
+
+    private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
+        Proprietario p = new Proprietario();
+        //dip nome cognome mail passw dataN ruolo oreL stipendio
+        Dipendente d = new Dipendente();
+        p.aggiuntaDipendenti(d,clientSocket);
+
     }
 }

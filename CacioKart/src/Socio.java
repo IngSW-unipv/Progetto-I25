@@ -30,7 +30,7 @@ public class Socio extends Persona implements Iinventario{
     public void registrazione(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = "INSERT INTO socio (cf, nome, cognome, mail, pass, dataN) VALUES('" +
+        INSERT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
                 this.getcF() + "', '" +
                 this.getNome() + "', '" +
                 this.getCognome() +"', '" +
