@@ -44,8 +44,24 @@
       <form action="logic/deleteDip.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="codice_fiscale">Codice Fiscale</label>
-            <input type="text" id="codice_fiscale" name="codice_fiscale" pattern ="^[A-Z0-9]+$" maxlength="16" minlength="16" required>
-         </div>         
+            <select id="codice_fiscale" name="codice_fiscale" required>
+         <?php
+            //require 'logic/requestDip.php';
+            //prova senza conessione
+
+            $dip[0] = "LSD4SPDI43DDS";
+            $dip[1] = "FODSIJ4902WDF";
+            $dip[2] = "OSIDAJFO489SD";
+
+            $i = 3;
+
+            for($j = 0; $j < $i; $j++){
+               echo '<option value="' .$dip[$j] .'">' .$dip[$j] .'</option>';
+            }
+         ?>
+            </select>      
+         </div>
+         <div class="form-group">       
             <button type="submit">Elimina Dipendente</button>
          </div>
       </form>
