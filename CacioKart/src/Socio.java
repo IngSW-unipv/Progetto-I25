@@ -58,10 +58,11 @@ public class Socio extends Persona implements Iinventario{
             dataP=LocalDate.parse(input);
         }while(dataP.isBefore(dataGara));
         SELECT=("select count(*) from prenotazione where dataG=dataGara and fasciaO=ora group by ora");
-        nPartecipanti=
-        if(>=MAX){
+        nPartecipanti=db.executeReturnQuery(INSERT);
+        if(nPartecipanti>=MAX){
             return 0;
         }else{
+
             INSERT= "INSERT INTO prenotazione(idP,dataP,dataG,fasciaO,tipologia,costo,numP
                     '" + idP");
         }
