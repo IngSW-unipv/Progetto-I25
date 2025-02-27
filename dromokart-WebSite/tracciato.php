@@ -26,7 +26,7 @@
 
   <section class="description-section">
   <div class="description-image">
-    <img src="immagini/pista.png" alt="Esperienza di Karting">
+    <img src="immagini/Piste/pista.png" alt="Esperienza di Karting">
   </div>
   <div class="description-text">
     <p>
@@ -43,7 +43,7 @@
 
 <section class="description-section">
   <div class="description-image">
-    <img src="immagini/pista2.png" alt="Esperienza di Karting">
+    <img src="immagini/Piste/pista2.png" alt="Esperienza di Karting">
   </div>
   <div class="description-text">
     <p>

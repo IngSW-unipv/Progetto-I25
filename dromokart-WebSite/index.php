@@ -29,7 +29,7 @@
     <!-- Sezione scrollabile con immagine iniziale -->
     <section class="scrollable-section">
       <div class="scrollable-container">
-        <img src="immagini/COPERTINA1.jpg" alt="Immagine Iniziale">
+        <img src="immagini/Home/COPERTINA1.jpg" alt="Immagine Iniziale">
         <div class="overlay-text">
           Girare nei kart da noi è un'esperienza unica, adatta a tutte le età.
         </div>
@@ -40,7 +40,7 @@
 <!-- Sezione descrizione con immagine COPERTINA2 e testo sotto -->
 <section class="description-section">
   <div class="description-image">
-    <img src="immagini/COPERTINA2.jpg" alt="Esperienza di Karting">
+    <img src="immagini/Home/COPERTINA2.jpg" alt="Esperienza di Karting">
   </div>
   <div class="description-text">
     <p>

@@ -28,7 +28,7 @@
 
     <section class="scrollable-section">
       <div class="scrollable-container">
-        <img src="immagini/concess1.jpg" alt="Immagine Concessionario">
+        <img src="immagini/Home/concess1.jpg" alt="Immagine Concessionario">
       </div>
     </section>
 
