@@ -14,7 +14,8 @@ public enum TipoComandi {
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen"),
-    CREAZIONE_TEAM("aggiungiTeam");
+    CREAZIONE_TEAM("aggiungiTeam"),
+    CREAZIONE_CAMPIONATO("aggiungiCampionato");
 
 
     private final String descrizione;
