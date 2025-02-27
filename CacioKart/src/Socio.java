@@ -45,7 +45,7 @@ public class Socio extends Persona implements Iinventario{
     public int prenotation(LocalDate dataGara, LocalTime ora, Socket clientSocket) throws SQLException {
 
         db = new DBConnector();
-        int idP, nPartecipanti = 0;;
+        int idP, nPartecipanti = 0;
         double costo = 0;
         String input, tipologia = "";
         LocalDate dataP;

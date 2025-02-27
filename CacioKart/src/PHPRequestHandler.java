@@ -49,7 +49,7 @@ public class PHPRequestHandler {
                     break;
 
                 case PRENOTAZIONE:
-                    //prenotationCase(info,clientSocket);
+                    prenotationCase(info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART:
@@ -112,8 +112,9 @@ public class PHPRequestHandler {
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandler
-    /*
+
     private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
+        //In ingresso: 21:00-22:00 2025-03-05
         int res;
         String[] prenotazione = messaggio.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -122,13 +123,15 @@ public class PHPRequestHandler {
         LocalTime orario= LocalTime.parse(prenotazione[1], formatter);
         Socio utente = new Socio(null, null, null, null, null, null);
         utente.setcF(prenotazione[2]);
-        res=utente.prenotation(dataG,orario,clientSocket);
+        // Oggetto di tipo prenotazione?
+        res = utente.prenotation(dataG,orario,clientSocket);
+
         if(res==0) {
             System.out.println("Raggiunta la massima capienza: \n" + messaggio);
         }else{
             System.out.println("prenotazione confermata\n");
         }
-    }*/
+    }
 
     /**Metodo di aggiunta kart
      * Pressoché identico al metodo di registrazione.
