@@ -35,7 +35,7 @@ public class DBConnector {
      */
     private void dbOpenConnection() throws SQLException {
         try {
-            fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/credenzialiDB.txt"));
+            fileReader = new BufferedReader(new FileReader("Progetto-I25/CacioKart/credenzialiDB.txt"));
             USER = fileReader.readLine();
             PASSWORD = fileReader.readLine();
             fileReader.close();
