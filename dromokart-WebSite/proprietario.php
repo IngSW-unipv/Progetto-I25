@@ -31,7 +31,7 @@
       <nav>
         <ul>
           <li><a href="proprietario.php">Home</a></li>
-          <li><a id="logoutBtn">Logout</a></li>
+          <li><a href="default/logout.php" id="logoutBtn">Logout</a></li>
         </ul>
       </nav>
     </div>

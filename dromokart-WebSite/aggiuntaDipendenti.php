@@ -77,7 +77,7 @@
          </div>
             <div class="form-group">
             <label for="oreL">Ore lavorative</label>
-            <input type="text" id="oreL" name="oreL" required>
+            <input type="time" id="oreL" name="oreL" required>
          </div>
          <div class="form-group">
             <label for="stipendio">Stipendio</label>
