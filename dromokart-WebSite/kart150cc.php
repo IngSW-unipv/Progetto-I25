@@ -20,7 +20,7 @@ include 'default/modalHome.php';
   <main>
     <section class="product-details">
       <div class="product-image">
-        <img src="immagini/150cc.png" alt="Kart in vendita" width="600" height="auto">
+        <img src="immagini/Kart/150cc.png" alt="Kart in vendita" width="600" height="auto">
       </div>
       <div class="product-info">
         <h1>Kart 150cc</h1>

@@ -51,7 +51,7 @@
       <div class="kart-item">
         <div class="kart-image">
           <a href="kart50cc.php">
-          <img src="immagini/50cc.png" alt="Kart 50cc">
+          <img src="immagini/Kart/50cc.png" alt="Kart 50cc">
           </a>
         </div> 
         <div class="kart-description">
@@ -66,7 +66,7 @@
       <div class="kart-item">
         <div class="kart-image">
           <a href="kart125cc.php">
-          <img src="immagini/100cc.png" alt="Kart 125cc">
+          <img src="immagini/Kart/100cc.png" alt="Kart 125cc">
           </a>
         </div>
         <div class="kart-description">
@@ -81,7 +81,7 @@
       <div class="kart-item">
         <div class="kart-image">
           <a href="kart150cc.php">
-          <img src="immagini/150cc.png" alt="Kart 150cc">
+          <img src="immagini/Kart/150cc.png" alt="Kart 150cc">
           </a>
         </div>
         <div class="kart-description">

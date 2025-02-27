@@ -37,7 +37,7 @@
 
           for($j = 0; $j < $i; $j++){
             echo '<div class="product">';
-            echo '<a href="/products/' .$part[$j][0] .'.php"><img src="immagini/' .$part[$j][0] .'.png" alt="' .$part[$j][0] .'"></a>';
+            echo '<a href="/products/' .$part[$j][0] .'.php"><img src="immagini/Pezzi' .$part[$j][0] .'.png" alt="' .$part[$j][0] .'"></a>';
             echo '<a href="/products/' .$part[$j][0] .'.php"><h1>' .$part[$j][0] .'</h1></a>';
             echo '<p><h3> prezzo: </h3>'.$part[$j][2] .'€</p>';
             if($part[$j][1] > 0)
