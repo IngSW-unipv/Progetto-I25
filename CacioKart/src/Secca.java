@@ -2,8 +2,8 @@ import java.time.LocalDate;
 
 public class Secca extends Gara{
     private int partecipanti;
-    public Secca(String idGara, String nomeGara, LocalDate dataGara, Circuito [] array) {
-        super(idGara,nomeGara,dataGara,array);
+    public Secca(int idGara,LocalDate dataGara,int partecipanti) {
+        super(idGara,dataGara);
         this.partecipanti = partecipanti;
     }
 

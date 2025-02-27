@@ -1,40 +1,29 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Gara {
-    protected String idGara;
-    protected String nomeGara;
-    protected LocalDate dataGara;
-    protected Circuito[] array; // Array di Circuito
+    protected int idGara;
+    protected LocalTime ora;
 
-    public Gara(String idGara, String nomeGara, LocalDate dataGara, Circuito[] array) {
+    public Gara(int idGara, LocalDate dataGara) {
         this.idGara = idGara;
-        this.nomeGara = nomeGara;
-        this.dataGara = dataGara;
-        this.array = new Circuito[3];
+        this.ora = ora;
     }
 
-    public String getIdGara() {
+    public int getIdGara() {
         return idGara;
     }
 
-    public void setIdGara(String idGara) {
+    public void setIdGara(int idGara) {
         this.idGara = idGara;
     }
 
-    public String getNomeGara() {
-        return nomeGara;
+    public LocalTime getOra() {
+        return ora;
     }
 
-    public void setNomeGara(String nomeGara) {
-        this.nomeGara = nomeGara;
-    }
-
-    public LocalDate getDataGara() {
-        return dataGara;
-    }
-
-    public void setDataGara(LocalDate dataGara) {
-        this.dataGara = dataGara;
+    public void setOra(LocalTime ora) {
+        this.ora = ora;
     }
 
 }

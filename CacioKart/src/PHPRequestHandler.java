@@ -114,23 +114,16 @@ public class PHPRequestHandler {
     //usa DBConnector e PHPResponsehandler
 
     private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
-        //In ingresso: 21:00-22:00 2025-03-05
-        int res;
         String[] prenotazione = messaggio.split(" ");
+        String tipologia=prenotazione[0];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataG = LocalDate.parse(prenotazione[0], formatter);
+        LocalDate dataG = LocalDate.parse(prenotazione[1], formatter);
         formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime orario= LocalTime.parse(prenotazione[1], formatter);
+        LocalTime orarioI= LocalTime.parse(prenotazione[2], formatter);
+        LocalTime orarioF= LocalTime.parse(prenotazione[3], formatter);
         Socio utente = new Socio(null, null, null, null, null, null);
-        utente.setcF(prenotazione[2]);
-        // Oggetto di tipo prenotazione?
-        res = utente.prenotation(dataG,orario,clientSocket);
-
-        if(res==0) {
-            System.out.println("Raggiunta la massima capienza: \n" + messaggio);
-        }else{
-            System.out.println("prenotazione confermata\n");
-        }
+        utente.setcF(prenotazione[4]);
+        utente.richiestaP(tipologia,dataG,orarioI,orarioF,clientSocket);
     }
 
     /**Metodo di aggiunta kart
