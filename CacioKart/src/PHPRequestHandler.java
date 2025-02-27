@@ -11,6 +11,8 @@ public class PHPRequestHandler {
     private String info;
     private String messaggio[];
     private TipoComandi tipo;
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public PHPRequestHandler() {
     }
@@ -84,7 +86,7 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
-    private void loginCase(String dati, Socket clientSocket) {
+    private void loginCase(String dati, Socket clientSocket) throws SQLException {
         String[] loginData = dati.split(" ");
         Persona utente = new Persona(null, null, null, null, null, null);
         utente.setcF(loginData[0]);
@@ -102,8 +104,7 @@ public class PHPRequestHandler {
      */
     private void registerCase(String dati, Socket clientSocket) throws SQLException {
         String[] socio = dati.split(" ");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataNascita = LocalDate.parse(socio[2], formatter);
+        LocalDate dataNascita = LocalDate.parse(socio[2], dateFormatter);
         Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);
         nuovoUtente.registrazione(clientSocket);
     }
@@ -116,11 +117,9 @@ public class PHPRequestHandler {
     private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
         String[] prenotazione = messaggio.split(" ");
         String tipologia=prenotazione[0];
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dataG = LocalDate.parse(prenotazione[1], formatter);
-        formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime orarioI= LocalTime.parse(prenotazione[2], formatter);
-        LocalTime orarioF= LocalTime.parse(prenotazione[3], formatter);
+        LocalDate dataG = LocalDate.parse(prenotazione[1], dateFormatter);
+        LocalTime orarioI= LocalTime.parse(prenotazione[2], timeFormatter);
+        LocalTime orarioF= LocalTime.parse(prenotazione[3], timeFormatter);
         Socio utente = new Socio(null, null, null, null, null, null);
         utente.setcF(prenotazione[4]);
         utente.richiestaP(tipologia,dataG,orarioI,orarioF,clientSocket);
@@ -148,7 +147,7 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void mostraKartCase(Socket clientSocket) throws SQLException {
-        Meccanico m = new Meccanico(null, null, null, null, null, null, 0, null, null);
+        Meccanico m = new Meccanico();
         m.mostraKart(clientSocket);
     }
 
@@ -161,14 +160,27 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
-        Meccanico m = new Meccanico(null, null, null, null, null, null, 0, null, null);
+        Meccanico m = new Meccanico();
         m.rimozioneKart(dati, clientSocket);
     }
 
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
-        Proprietario p = new Proprietario(null, null, null, null, null, null, 0, null, null);
+        /*Creo enum secondo questa logica:
+        Meccanico 1
+        Gestore 2
+        Arbitro 3
+        Organizzatore 4
+        Proprietario 5
+
+        Ho bisogno di 2 enum? Uno per la logjn e uno per l'aggiunta?
+        */
+        String[] dipendente = dati.split(" ");
+        //Array che va da 0 a 8
+        LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
+        LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
+        Proprietario p = new Proprietario();
         //dip nome cognome mail passw dataN ruolo oreL stipendio
-        Dipendente d = new Dipendente(null, null, null, null, null, null, 0, null, null);
+        Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
         p.aggiuntaDipendenti(d,clientSocket);
 
     }

@@ -36,4 +36,5 @@ public class Dipendente extends Persona {
     public void setStipendio(double stipendio) {
         this.stipendio = stipendio;
     }
+
 }

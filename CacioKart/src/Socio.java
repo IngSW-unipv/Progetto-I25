@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 
 public class Socio extends Persona implements Iinventario{
-    private final int MAX=20;
+    private final int MAX = 20;
     private String INSERT;
     private PHPResponseHandler responder;
     private int queryIndicator;

@@ -17,6 +17,7 @@ public class Persona {
     private String ruolo;
     private DBConnector db;
     private PHPResponseHandler responder;
+    private Ruoli ruoloConverter;
 
     public Persona(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         this.nome = nome;
@@ -25,6 +26,69 @@ public class Persona {
         this.cF = cF;
         this.mail = mail;
         this.password = password;
+    }
+
+    /**Metodo per effettuare la login.
+     * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
+     * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
+     *
+     * @param clientSocket
+     */
+    public void login(Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        SELECT = "SELECT * FROM caciokart.socio WHERE socio = '"
+                + this.getcF() + "' AND passw = '"
+                + this.getPassword() + "'";
+
+            result = db.executeReturnQuery(SELECT);
+            if (!result.isEmpty()) {
+                responder.sendResponse(clientSocket, "1 0");
+
+            } else {
+                SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
+                        + this.getcF() + "' AND passw = '"
+                        + this.getPassword() + "'";
+                result = db.executeReturnQuery(SELECT);
+
+                if (result.isEmpty()) {
+                    responder.sendResponse(clientSocket, "0 0");
+
+                } else {
+
+                    ruolo = result.get(0).get("ruolo").toString();
+                    ruoloConverter = Ruoli.requestedRole(ruolo);
+
+                    switch (ruoloConverter) {
+                        case MECCANICO:
+                            responder.sendResponse(clientSocket, "1 1");
+                            break;
+
+                        case GESTORE:
+                            responder.sendResponse(clientSocket, "1 2");
+                            break;
+
+                        case ARBITRO:
+                            responder.sendResponse(clientSocket, "1 3");
+                            break;
+
+                        case ORGANIZZATORE:
+                            responder.sendResponse(clientSocket, "1 4");
+                            break;
+
+                        case PROPRIETARIO:
+                            responder.sendResponse(clientSocket, "1 5");
+                            break;
+
+                        default:
+                            responder.sendResponse(clientSocket, "0 0");
+                            System.out.println("Ruolo non trovato");
+                            break;
+
+                    }
+                }
+            }
+
     }
 
     public String getNome() {
@@ -75,68 +139,5 @@ public class Persona {
         this.password = password;
     }
 
-    /**Metodo per effettuare la login.
-     * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
-     * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
-     *
-     * @param clientSocket
-     */
-    public void login(Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.socio WHERE socio = '"
-                + this.getcF() + "' AND passw = '"
-                + this.getPassword() + "'";
-        try {
-            result = db.executeReturnQuery(SELECT);
-            if (!result.isEmpty()) {
-                responder.sendResponse(clientSocket, "1 0");
 
-            } else {
-                SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
-                        + this.getcF() + "' AND passw = '"
-                        + this.getPassword() + "'";
-                result = db.executeReturnQuery(SELECT);
-
-                if (result.isEmpty()) {
-                    responder.sendResponse(clientSocket, "0 0");
-
-                } else {
-
-                    ruolo = result.get(0).get("ruolo").toString();
-                    switch (ruolo) {
-                        case "meccanico":
-                            responder.sendResponse(clientSocket, "1 1");
-                            break;
-
-                        case "gestore":
-                            responder.sendResponse(clientSocket, "1 2");
-                            break;
-
-                        case "arbitro":
-                            responder.sendResponse(clientSocket, "1 3");
-                            break;
-
-                        case "organizzatore":
-                            responder.sendResponse(clientSocket, "1 4");
-                            break;
-
-                        case "proprietario":
-                            responder.sendResponse(clientSocket, "1 5");
-                            break;
-
-                        default:
-                            responder.sendResponse(clientSocket, "0 0");
-                            System.out.println("Ruolo non trovato");
-                            break;
-
-                    }
-                }
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
