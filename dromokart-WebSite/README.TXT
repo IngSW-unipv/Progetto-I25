@@ -25,9 +25,9 @@ update al database facendomi vedere in tempo reale il cambio di classifica (da v
 
 MECCANICO (Andrea)
 -visione di tutti i kart dell'autodromo (fatto ma parzialmente)
--aggiungere dei kart all'autodromo(solo se presenti nel concessionario)
--togliere i kart dall'autodromo
--Per aggiungere la benzina basta compilare un form con scritto ID kart + litri benzina 
+-aggiungere dei kart all'autodromo(fatto ma parzialmente)
+-togliere i kart dall'autodromo (fatto ma parzialmente)
+-Per aggiungere la benzina basta compilare un form con scritto ID kart + litri benzina(da togliere)
 -flag/pulsante se si preme cambia la data della manutenzione di 6 mesi in avanti
 
 ORGANIZZATORE (Parlare con il gruppo)

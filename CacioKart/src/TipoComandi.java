@@ -13,7 +13,9 @@ public enum TipoComandi {
     ELIMINAZIONE_KART("eliminaKart"),
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
-    RICHIESTA_DIPENDENTE("richiestaDipen");
+    RICHIESTA_DIPENDENTE("richiestaDipen"),
+    CREAZIONE_TEAM("aggiungiTeam");
+
 
     private final String descrizione;
 
