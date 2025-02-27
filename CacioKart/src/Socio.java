@@ -42,90 +42,75 @@ public class Socio extends Persona implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
-
-    /*
     public int prenotation(LocalDate dataGara, LocalTime ora, Socket clientSocket) throws SQLException {
-        int nPartecipanti = 0;
-    db = new DBConnector();
-    Connection conn = db.getConnection(); //Non serve, la connessione è interamente gestita da DBConnector
-    int idP;
-    double costo;
-    String input,tipologia;
-    LocalDate dataP;
-    Scanner scanner = new Scanner(System.in); //Non ho capito a cosa serve
-    responder = new PHPResponseHandler();
 
-    // Ottieni l'ID massimo per la nuova prenotazione
-    String SELECT_ID = "SELECT MAX(idP) FROM prenotazione";
-    idP = db.executeReturnQuery(SELECT_ID) + 1; //Il valore di ritorno deve essere una map di tipo List<Map<String, Object>>
-
-    // Controllo disponibilità partecipanti
-    String SELECT_COUNT = "SELECT COUNT(*) FROM prenotazione WHERE dataG = ? AND fasciaO = ?"; //Questa query non penso vada, magari si
-    try (PreparedStatement pstmt = conn.prepareStatement(SELECT_COUNT)) { //Gestito da DBConn, te pensa a iterare i dati e basta, non preoccuparti della connessione
-        pstmt.setDate(1, java.sql.Date.valueOf(dataGara));
-        pstmt.setTime(2, java.sql.Time.valueOf(ora));
-        try (ResultSet rs = pstmt.executeQuery()) {
-            if (rs.next()) {
-                nPartecipanti = rs.getInt(1);
-            }
-        }
-    }
-
-    if (nPartecipanti >= MAX) {
-        return 0;
-    } else {
-        //verifica il giorno della prenotazione
-        do {
-            System.out.println("Inserisci una data della prenotazione (formato yyyy-MM-dd): ");
-            input = scanner.nextLine(); //Il resto del progetto passa
-            try {
-                dataP = LocalDate.parse(input);
-                if (dataP.isAfter(dataGara)) {
-                    System.out.println("Errore: La data di prenotazione deve essere successiva alla data della gara.\n");
-                }
-            } catch (Exception e) {
-                System.out.println("Formato data non valido. Riprova.\n");
-                dataP = null; // Reset della variabile
-            }
-        } while (dataP == null || dataP.isAfter(dataGara));
-        // Calcola il costo casuale tra 20 e 50 euro, arrotondato a due decimali
+        db = new DBConnector();
+        int idP, nPartecipanti = 0;;
+        double costo = 0;
+        String input, tipologia = "";
+        LocalDate dataP;
+        Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        costo = Math.round((20 + random.nextDouble() * 30) * 100.0) / 100.0;
-        nPartecipanti = 1;
-        // stabilisce la tipologia della gara
-        do {
-            System.out.println("Inserisci la tipologia della gara (secca/libera):");
-            input = scanner.nextLine();
-            try {
-                tipologia = input.toLowerCase();  // Puoi anche usare toLowerCase() per essere insensibile al caso
-                if (tipologia.equals("secca") || tipologia.equals("libera")) {
-                    // Se la tipologia è "secca" o "libera", esci dal ciclo
-                    break;  // Uscita dal ciclo do-while
-                } else {
-                    System.out.println("Tipologia non valida. Devi scegliere 'secca' o 'libera'. Riprova.");
-                }
-            } catch (Exception e) {
-                System.out.println("Errore: Formato non valido. Riprova.");
-            }
-        } while (true);
-        // Esegui l'inserimento in modo sicuro
-        INSERT = "INSERT INTO prenotazione (idP, dataP, dataG, fasciaO, tipologia, costo, numP) VALUES (?, ?, ?, ?, ?, ?, ?)"; //Stesso discorso della query di prima
-        try (PreparedStatement pstmt = conn.prepareStatement(INSERT)) { //Stesso discorso di prima, non ti preoccupare per la logica di connessione db
-            pstmt.setInt(1, idP);
-            pstmt.setDate(2, java.sql.Date.valueOf(dataP)); //Se spedisci al db date in formato stringa le riceve lo stesso
-            pstmt.setDate(3, java.sql.Date.valueOf(dataGara));
-            pstmt.setTime(4, java.sql.Time.valueOf(ora));
-            pstmt.setString(5, tipologia);
-            pstmt.setDouble(6, costo);
-            pstmt.setInt(7, nPartecipanti);
-            queryIndicator = pstmt.executeUpdate();
-        }
+        responder = new PHPResponseHandler();
+        SELECT=SELECT = "SELECT count(*) FROM caciokart.prenotazioni WHERE dataG = '"
+                + dataGara + "' AND fasciaO= '"
+                + ora + "'";
+        input = db.executeReturnQuery(SELECT).toString();
+        nPartecipanti = Integer.parseInt(input);
+        if(nPartecipanti > MAX){
+            System.out.println("Nessun posto disponibile\n!");
+            return 0;
+        }else{
+            SELECT="SELECT MAX(idP) from PRENOTAZIONI";
+            input = db.executeReturnQuery(SELECT).toString();
+            idP = Integer.parseInt(input);
+            idP=idP+1;
 
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            do{
+                System.out.print("inserire la data della prenotazione:(FORMATO(YYYY/MM/GG) ");
+                input=scanner.nextLine();
+                dataP=LocalDate.parse(input);
+                if(dataP.isAfter(dataGara)||dataP==null){
+                    System.out.println("impossibile,reinserire la data della prenotazione\n");
+                }else {
+                    System.out.print("data della prenotazione corretta\n ");
+                }
+            }while(dataP.isAfter(dataGara)||dataP==null);
+
+            do{
+                System.out.print("inserire la tipologia\n ");
+                input=scanner.nextLine();
+                if (input.equalsIgnoreCase("secca")||input.equalsIgnoreCase("libera")) {
+                  System.out.print("tipologia gara accettata\n ");
+                  tipologia=input;
+                }else{
+                    System.out.print("tipologia non accettata,reinserire\n ");
+                }
+            }while(tipologia.equalsIgnoreCase("secca")||tipologia.equalsIgnoreCase("libera"));
+
+            do{
+                System.out.print("il costo per la prenotazione\n ");
+                costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
+                if(costo<30||costo>50){
+                    System.out.println("impossibile\n");
+                }else {
+                    System.out.printf("Prezzo generato: %.2f €%n", costo);
+                }
+            }while(costo<30||costo>50);
+            nPartecipanti=1;
+            INSERT="INSERT INTO prenotazioni (idP, dataP,dataG , fasciaO, tipologia, costo,numP) VALUES('" +
+                    idP + "', '" +
+                    dataP + "', '" +
+                    dataGara +"', '" +
+                    ora +"', '" +
+                    tipologia + "', '" +
+                    costo +"', '" +
+                    nPartecipanti + "')";
+            queryIndicator = db.executeUpdateQuery(INSERT);
+            responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        }
         return 1;
     }
-}*/
-
     public void comprareKart(){
 
     }
