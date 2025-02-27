@@ -28,7 +28,7 @@
 
 </head>
 <body>
-    <div>
+    <div class="table-section">
         <?php
         // Suddivide $res in righe
         $rows = explode("\n", $res);
@@ -41,6 +41,7 @@
             echo '<th>Targa</th>';
             echo '<th>Cilindrata</th>';
             echo '<th>Serbatoio</th>';
+            echo '<th>Eliminazione</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
@@ -56,6 +57,8 @@
                     echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
+                    echo '<td> <form action="logic/eliminazioneKart.php" method="post"> <input type="hidden" id="targa" name="targa" value="' .htmlspecialchars($columns[0]) .'"> ';
+                    echo '<button type="submit">Elimina Kart</button> </form></td>';
                     echo '</tr>';
                 }
             }
@@ -66,27 +69,5 @@
             echo '<p>Nessun dato ricevuto.</p>';
         }
         ?>
-
-
-
-  <!-- Main Content - Form di Registrazione -->
-  <main>
-
-  
-
-    <section class="form-section">
-      <h1>Elimina Kart</h1>
-      <form action="logic/eliminazioneKart.php" method="post" class="registration-form">
-         <div class="form-group">
-            <label for="targa">Targa</label>
-            <input type="text" id="targa" name="targa" maxlength="" required>
-         </div>
-         <div class="form-group">
-            <button type="submit">Elimina Kart</button>
-         </div>
-      </form>
-    </section>
-  </main>
-
 </body>
 </html>
