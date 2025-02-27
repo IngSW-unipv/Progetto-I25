@@ -77,11 +77,11 @@
          </div>
             <div class="form-group">
             <label for="oreL">Ore lavorative</label>
-            <input type="text" id="oreL" name="oreL" maxlength="16" minlength="16" required>
+            <input type="text" id="oreL" name="oreL" required>
          </div>
          <div class="form-group">
             <label for="stipendio">Stipendio</label>
-            <input type="text" id="stipendio" name="stipendio" maxlength="16" minlength="16" required>
+            <input type="text" id="stipendio" name="stipendio" required>
          </div>
          <div class="form-group">
             <button type="submit">Registra</button>
