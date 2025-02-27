@@ -7,7 +7,7 @@ public enum TipoComandi {
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
     CLASSIFICA_GENERALE("classificaGenerale"),
-    PRENOTAZIONE("prenotazione"),
+    PRENOTAZIONE("prenotazioneLibera"),
     AGGIUNTA_KART("aggiungiKart"),
     MOSTRA_KART("mostraKart"),
     ELIMINAZIONE_KART("eliminaKart"),

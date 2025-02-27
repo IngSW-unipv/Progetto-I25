@@ -10,10 +10,10 @@ $date = $_POST['date'];
 
 
     //invio codice gara libera
-    fwrite($socket, "prenotazione ");
+    fwrite($socket, "prenotazioneLibera ");
     //invio dati
     fwrite($socket, $tempo . " ");
-    fwrite($socket, $date . " ");
+    fwrite($socket, $date . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
