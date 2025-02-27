@@ -16,7 +16,7 @@
   <!-- Main Content -->
   <main>
     <h1>Prenota Gara Libera</h1>
-    <form action="prenota_gara.php" method="post" class="reservation-form">
+    <form action="logic/prenotazioneGaraLibera.php" method="post" class="reservation-form">
       <!-- Sezione Orari -->
       <div class="timeslot-section">
         <h2>Seleziona un orario</h2>
