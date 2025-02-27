@@ -115,14 +115,28 @@ public class PHPRequestHandler {
     //usa DBConnector e PHPResponsehandler
 
     private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
-        String[] prenotazione = messaggio.split(" ");
-        String tipologia=prenotazione[0];
+        int lastDashIndex = messaggio.lastIndexOf("-");
+        if (lastDashIndex == -1) {
+            System.out.println("Errore: il messaggio non contiene '-' per la divisione.");
+            return;
+        }
+        // Suddivido il messaggio in due parti correttamente
+        String parte1 = messaggio.substring(0, lastDashIndex).trim();
+        String parte2 = messaggio.substring(lastDashIndex + 1).trim();
+        // Elaboro la prima parte del messaggio
+        String[] prenotazione = parte1.split(" ");
+        String tipologia = prenotazione[0];
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dataG = LocalDate.parse(prenotazione[1], dateFormatter);
-        LocalTime orarioI= LocalTime.parse(prenotazione[2], timeFormatter);
-        LocalTime orarioF= LocalTime.parse(prenotazione[3], timeFormatter);
+        // Estraggo gli orari correttamente
+        String[] orari = prenotazione[2].split("-");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);
+        LocalTime orarioF = LocalTime.parse(orari[1], timeFormatter);
+        String cf = prenotazione[3]; // Codice Fiscale
         Socio utente = new Socio(null, null, null, null, null, null);
-        utente.setcF(prenotazione[4]);
-        utente.richiestaP(tipologia,dataG,orarioI,orarioF,clientSocket);
+        utente.setcF(cf);
+        utente.richiestaP(tipologia, dataG, orarioI, orarioF, clientSocket);
     }
 
     /**Metodo di aggiunta kart
