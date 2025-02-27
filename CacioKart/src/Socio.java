@@ -42,24 +42,25 @@ public class Socio extends Persona implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
+
     public int prenotation(LocalDate dataGara, LocalTime ora, Socket clientSocket) throws SQLException {
         int nPartecipanti = 0;
     db = new DBConnector();
-    Connection conn = db.getConnection();
+    Connection conn = db.getConnection(); //Non serve, la connessione è interamente gestita da DBConnector
     int idP;
     double costo;
     String input,tipologia;
     LocalDate dataP;
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in); //Non ho capito a cosa serve
     responder = new PHPResponseHandler();
 
     // Ottieni l'ID massimo per la nuova prenotazione
     String SELECT_ID = "SELECT MAX(idP) FROM prenotazione";
-    idP = executeReturnQuery(SELECT_ID, conn) + 1;
+    idP = db.executeReturnQuery(SELECT_ID) + 1; //Il valore di ritorno deve essere una map di tipo List<Map<String, Object>>
 
     // Controllo disponibilità partecipanti
-    String SELECT_COUNT = "SELECT COUNT(*) FROM prenotazione WHERE dataG = ? AND fasciaO = ?";
-    try (PreparedStatement pstmt = conn.prepareStatement(SELECT_COUNT)) {
+    String SELECT_COUNT = "SELECT COUNT(*) FROM prenotazione WHERE dataG = ? AND fasciaO = ?"; //Questa query non penso vada, magari si
+    try (PreparedStatement pstmt = conn.prepareStatement(SELECT_COUNT)) { //Gestito da DBConn, te pensa a iterare i dati e basta, non preoccuparti della connessione
         pstmt.setDate(1, java.sql.Date.valueOf(dataGara));
         pstmt.setTime(2, java.sql.Time.valueOf(ora));
         try (ResultSet rs = pstmt.executeQuery()) {
@@ -72,10 +73,10 @@ public class Socio extends Persona implements Iinventario{
     if (nPartecipanti >= MAX) {
         return 0;
     } else {
-        //verifica il girono della prenotazione
+        //verifica il giorno della prenotazione
         do {
             System.out.println("Inserisci una data della prenotazione (formato yyyy-MM-dd): ");
-            input = scanner.nextLine();
+            input = scanner.nextLine(); //Il resto del progetto passa
             try {
                 dataP = LocalDate.parse(input);
                 if (dataP.isAfter(dataGara)) {
@@ -107,10 +108,10 @@ public class Socio extends Persona implements Iinventario{
             }
         } while (true);
         // Esegui l'inserimento in modo sicuro
-        String INSERT = "INSERT INTO prenotazione (idP, dataP, dataG, fasciaO, tipologia, costo, numP) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(INSERT)) {
+        INSERT = "INSERT INTO prenotazione (idP, dataP, dataG, fasciaO, tipologia, costo, numP) VALUES (?, ?, ?, ?, ?, ?, ?)"; //Stesso discorso della query di prima
+        try (PreparedStatement pstmt = conn.prepareStatement(INSERT)) { //Stesso discorso di prima, non ti preoccupare per la logica di connessione db
             pstmt.setInt(1, idP);
-            pstmt.setDate(2, java.sql.Date.valueOf(dataP));
+            pstmt.setDate(2, java.sql.Date.valueOf(dataP)); //Se spedisci al db date in formato stringa le riceve lo stesso
             pstmt.setDate(3, java.sql.Date.valueOf(dataGara));
             pstmt.setTime(4, java.sql.Time.valueOf(ora));
             pstmt.setString(5, tipologia);
@@ -123,20 +124,6 @@ public class Socio extends Persona implements Iinventario{
         return 1;
     }
 }
-
-    public int executeReturnQuery(String query, Connection conn) throws SQLException {
-        int result = 0;
-        try (PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            if (rs.next()) {
-                result = rs.getInt(1);  // Ottieni il primo valore (es. MAX(idP))
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
     public void comprareKart(){
 

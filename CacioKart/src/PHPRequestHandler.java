@@ -144,11 +144,25 @@ public class PHPRequestHandler {
 
     }
 
+    /**Metodo per mostrare i kart
+     * Non richiede parametri oltre al socket per spedire la risposta.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void mostraKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         m.mostraKart(clientSocket);
     }
 
+    /**Metodo per rimuovere i kart
+     * Chiamato dal client dopo aver visto i kart presenti nel db.
+     * Non richiede parametri oltre al socket per spedire la risposta.
+     *
+     * @param dati
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         m.rimozioneKart(dati, clientSocket);
