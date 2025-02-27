@@ -26,9 +26,9 @@ $password = hash('sha256', $password);
     fwrite($socket, $username . " ");
     fwrite($socket, $email . " ");
     fwrite($socket, $password . " ");
+    fwrite($socket, $stipendio . " ");
     fwrite($socket, $rank . " ");
-    fwrite($socket, $oreL . " ");
-    fwrite($socket, $stipendio . "\n");
+    fwrite($socket, $oreL . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
