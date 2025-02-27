@@ -1,0 +1,6 @@
+#ignora tutti i file ".class"
+*.class
+
+#ignora dei file che mi crea eclipse
+.classpath
+.project
