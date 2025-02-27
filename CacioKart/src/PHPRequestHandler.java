@@ -49,7 +49,7 @@ public class PHPRequestHandler {
                     break;
 
                 case PRENOTAZIONE:
-                    prenotationCase(info,clientSocket);
+                    //prenotationCase(info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART:
@@ -86,7 +86,7 @@ public class PHPRequestHandler {
      */
     private void loginCase(String dati, Socket clientSocket) {
         String[] loginData = dati.split(" ");
-        Persona utente = new Persona(/*null, null, null, null, null, null*/);
+        Persona utente = new Persona(null, null, null, null, null, null);
         utente.setcF(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
@@ -112,6 +112,7 @@ public class PHPRequestHandler {
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandler
+    /*
     private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
         int res;
         String[] prenotazione = messaggio.split(" ");
@@ -127,7 +128,7 @@ public class PHPRequestHandler {
         }else{
             System.out.println("prenotazione confermata\n");
         }
-    }
+    }*/
 
     /**Metodo di aggiunta kart
      * Pressoché identico al metodo di registrazione.
@@ -151,7 +152,7 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void mostraKartCase(Socket clientSocket) throws SQLException {
-        Meccanico m = new Meccanico();
+        Meccanico m = new Meccanico(null, null, null, null, null, null, 0, null, null);
         m.mostraKart(clientSocket);
     }
 
@@ -164,14 +165,14 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
-        Meccanico m = new Meccanico();
+        Meccanico m = new Meccanico(null, null, null, null, null, null, 0, null, null);
         m.rimozioneKart(dati, clientSocket);
     }
 
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
-        Proprietario p = new Proprietario();
+        Proprietario p = new Proprietario(null, null, null, null, null, null, 0, null, null);
         //dip nome cognome mail passw dataN ruolo oreL stipendio
-        Dipendente d = new Dipendente();
+        Dipendente d = new Dipendente(null, null, null, null, null, null, 0, null, null);
         p.aggiuntaDipendenti(d,clientSocket);
 
     }

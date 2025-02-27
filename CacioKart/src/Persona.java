@@ -18,13 +18,13 @@ public class Persona {
     private DBConnector db;
     private PHPResponseHandler responder;
 
-    public Persona(/* String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password*/) {
-        /*this.nome = nome;
+    public Persona(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
+        this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
         this.cF = cF;
         this.mail = mail;
-        this.password = password;*/
+        this.password = password;
     }
 
     public String getNome() {

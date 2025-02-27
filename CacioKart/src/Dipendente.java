@@ -6,11 +6,11 @@ public class Dipendente extends Persona {
     private String ruolo;
     private LocalTime oreL;
 
-    public Dipendente(/*double stipendio, String ruolo, LocalTime oreL*/) {
-        /*super();
+    public Dipendente(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio, String ruolo, LocalTime oreL) {
+        super(nome, cognome, dataNascita, cF, mail, password);
         this.stipendio = stipendio;
         this.ruolo = ruolo;
-        this.oreL = oreL;*/
+        this.oreL = oreL;
     }
 
     public LocalTime getOreL() {

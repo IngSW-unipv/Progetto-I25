@@ -1,6 +1,7 @@
 import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +17,8 @@ public class Meccanico extends Dipendente implements Iinventario {
     private String DELETE;
     private int queryIndicator;
 
-    public Meccanico(/*String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio*/) {
-        super(/*nome, cognome, dataNascita, cF, mail, password, stipendio*/);
+    public Meccanico(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password, double stipendio, String ruolo, LocalTime oreL) {
+        super(nome, cognome, dataNascita, cF, mail, password, stipendio, ruolo, oreL);
     }
 
     //aggiunta kart noleggio??

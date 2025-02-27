@@ -17,7 +17,7 @@ public class Socio extends Persona implements Iinventario{
     private DBConnector db;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
-        super(/*nome, cognome, dataNascita, cF, mail, password*/);
+        super(nome, cognome, dataNascita, cF, mail, password);
     }
 
     //metodo classifica gara?
@@ -43,6 +43,7 @@ public class Socio extends Persona implements Iinventario{
 
     }
 
+    /*
     public int prenotation(LocalDate dataGara, LocalTime ora, Socket clientSocket) throws SQLException {
         int nPartecipanti = 0;
     db = new DBConnector();
@@ -123,7 +124,7 @@ public class Socio extends Persona implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
         return 1;
     }
-}
+}*/
 
     public void comprareKart(){
 
