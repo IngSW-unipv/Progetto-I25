@@ -42,8 +42,9 @@ public class Persona {
                 + this.getPassword() + "'";
 
             result = db.executeReturnQuery(SELECT);
+            nome = result.get(0).get("nome").toString();
             if (!result.isEmpty()) {
-                responder.sendResponse(clientSocket, "1 0");
+                responder.sendResponse(clientSocket, "1 0 " + nome);
 
             } else {
                 SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
@@ -58,7 +59,6 @@ public class Persona {
 
                     ruolo = result.get(0).get("ruolo").toString();
                     ruoloConverter = Ruoli.requestedRole(ruolo);
-                    nome = result.get(0).get("nome").toString();
 
                     switch (ruoloConverter) {
                         case MECCANICO:
