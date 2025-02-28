@@ -58,8 +58,8 @@
                     echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
-                    echo '<td> <form action="logic/eliminazioneKart.php" method="post"> <input type="hidden" id="targa" name="targa" value="' .htmlspecialchars($columns[0]) .'"> ';
-                    echo '<button type="submit">Elimina Kart</button> </form></td>';
+                    echo '<td> <form action="logic/acquistaKart.php" method="post"> <input type="hidden" id="targa" name="targa" value="' .htmlspecialchars($columns[0]) .'"> ';
+                    echo '<button type="submit">Acquista Kart</button> </form></td>';
                     echo '</tr>';
                 }
             }

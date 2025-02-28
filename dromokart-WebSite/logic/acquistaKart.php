@@ -6,11 +6,13 @@
 $socket = connectionOpen($address, $port);
 
 $targa = $_POST['targa'];
+$username = $_SESSION['username'];
 
 
     //invio codice gara libera
     fwrite($socket, "acquistaKart ");
     //invio dati
+    fwrite($socket, $username . " ");
     fwrite($socket, $targa . "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 

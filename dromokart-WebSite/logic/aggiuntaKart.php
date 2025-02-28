@@ -7,15 +7,13 @@ $socket = connectionOpen($address, $port);
 
 $targa = $_POST['targa'];
 $cilindrata = $_POST['cilindrata'];
-$serbatoio = $_POST['serbatoio'];
 
 
     //invio codice gara libera
     fwrite($socket, "aggiungiKart ");
     //invio dati
     fwrite($socket, $targa . " ");
-    fwrite($socket, $cilindrata . " ");
-    fwrite($socket, $serbatoio . "\n");
+    fwrite($socket, $cilindrata . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
