@@ -42,7 +42,7 @@ public class DBConnector {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
         } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("L'apertura' della connessione al db non è andata a buon fine: " + e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class DBConnector {
         try {
             conn.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("La chiusura della connessione al db non è andata a buon fine: " + e.getMessage());
         }
     }
 
@@ -92,7 +92,9 @@ public class DBConnector {
             return resultList;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("La lettura non è andato a buon fine: " + e.getMessage());
+            db.dbCloseConnection();
+            return null;
         }
 
     }
