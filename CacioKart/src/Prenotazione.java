@@ -39,14 +39,18 @@ public class Prenotazione {
             nPartecipanti = Integer.parseInt(result.get(0).toString());
         }
 
-        if(nPartecipanti==0){
-            nPartecipanti ++;
-        }else{
-            SELECT = "SELECT MAX(idP) from PRENOTAZIONI";
+        if (nPartecipanti == 0) {
+            nPartecipanti++;
+        } else {
+            String SELECT = "SELECT COALESCE(MAX(idP), 0) FROM PRENOTAZIONI";
             result = db.executeReturnQuery(SELECT);
-            idP = Integer.parseInt(result.get(0).toString());
-            idP=idP+1;
-
+            // Controlla che il risultato non sia null o vuoto
+            if (result != null && !result.isEmpty() && result.get(0) != null) {
+                idP = Integer.parseInt(result.get(0).toString());
+            } else {
+                idP = 0; // Se non ci sono prenotazioni, partiamo da 0
+            }
+            idP = idP + 1; // Incrementa l'ID per il nuovo record
         }
         if(nPartecipanti < MAX){
             do{
