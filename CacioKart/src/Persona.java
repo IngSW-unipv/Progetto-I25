@@ -42,8 +42,9 @@ public class Persona {
                 + this.getPassword() + "'";
 
             result = db.executeReturnQuery(SELECT);
+            nome = result.get(0).get("nome").toString();
             if (!result.isEmpty()) {
-                responder.sendResponse(clientSocket, "1 0");
+                responder.sendResponse(clientSocket, "1 0 " + nome);
 
             } else {
                 SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
@@ -52,7 +53,7 @@ public class Persona {
                 result = db.executeReturnQuery(SELECT);
 
                 if (result.isEmpty()) {
-                    responder.sendResponse(clientSocket, "0 0");
+                    responder.sendResponse(clientSocket, "0 0 0");
 
                 } else {
 
@@ -61,27 +62,27 @@ public class Persona {
 
                     switch (ruoloConverter) {
                         case MECCANICO:
-                            responder.sendResponse(clientSocket, "1 1");
+                            responder.sendResponse(clientSocket, "1 1 " + nome);
                             break;
 
                         case GESTORE:
-                            responder.sendResponse(clientSocket, "1 2");
+                            responder.sendResponse(clientSocket, "1 2 " + nome);
                             break;
 
                         case ARBITRO:
-                            responder.sendResponse(clientSocket, "1 3");
+                            responder.sendResponse(clientSocket, "1 3 " + nome);
                             break;
 
                         case ORGANIZZATORE:
-                            responder.sendResponse(clientSocket, "1 4");
+                            responder.sendResponse(clientSocket, "1 4 " + nome);
                             break;
 
                         case PROPRIETARIO:
-                            responder.sendResponse(clientSocket, "1 5");
+                            responder.sendResponse(clientSocket, "1 5 " + nome);
                             break;
 
                         default:
-                            responder.sendResponse(clientSocket, "0 0");
+                            responder.sendResponse(clientSocket, "0 0 0");
                             System.out.println("Ruolo non trovato");
                             break;
 
