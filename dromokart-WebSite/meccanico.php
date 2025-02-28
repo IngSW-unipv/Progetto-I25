@@ -35,7 +35,6 @@ $name = $_SESSION['name'];
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='visioneKart.php'">Visione dei kart</button>
       <button onclick="location.href='aggiungiKartAutodromo.php'">Aggiungere kart</button>
       <button onclick="location.href='eliminaKartMeccanico.php'">Togliere kart</button>
       <button onclick="location.href='aggiungaBenzina.php'">Aggiungere benzina</button>

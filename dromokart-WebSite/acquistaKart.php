@@ -7,11 +7,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mostra Kart</title>
+  <title>Acquista Kart</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/profilo.css">
+  <link rel="stylesheet" href="css/registration.css">
   <style>
     table { 
       border-collapse: collapse; 
@@ -26,9 +26,10 @@
       background-color: #4CAF50; 
     }
   </style>
+
 </head>
 <body>
-    <div>
+    <div class="table-section">
         <?php
         // Suddivide $res in righe
         $rows = explode("\n", $res);
@@ -41,6 +42,7 @@
             echo '<th>Targa</th>';
             echo '<th>Cilindrata</th>';
             echo '<th>Serbatoio</th>';
+            echo '<th>Acquista</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
@@ -56,6 +58,8 @@
                     echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
+                    echo '<td> <form action="logic/eliminazioneKart.php" method="post"> <input type="hidden" id="targa" name="targa" value="' .htmlspecialchars($columns[0]) .'"> ';
+                    echo '<button type="submit">Elimina Kart</button> </form></td>';
                     echo '</tr>';
                 }
             }
@@ -66,6 +70,5 @@
             echo '<p>Nessun dato ricevuto.</p>';
         }
         ?>
-    </div>
 </body>
 </html>

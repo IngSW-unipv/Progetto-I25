@@ -7,8 +7,7 @@ public enum TipoComandi {
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
     CLASSIFICA_GENERALE("classificaGenerale"),
-    PRENOTAZIONE_LIBERA("prenotazioneLibera"),
-    PRENOTAZIONE_SECCA("prenotazioneSecca"),
+    PRENOTAZIONE("prenotazione"),
     AGGIUNTA_KART("aggiungiKart"),
     MOSTRA_KART("mostraKart"),
     ELIMINAZIONE_KART("eliminaKart"),
@@ -16,7 +15,8 @@ public enum TipoComandi {
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen"),
     CREAZIONE_TEAM("aggiungiTeam"),
-    CREAZIONE_CAMPIONATO("aggiungiCampionato");
+    CREAZIONE_CAMPIONATO("aggiungiCampionato"),
+    ACQUISTA_KART("acquistaKart");
 
 
     private final String descrizione;
