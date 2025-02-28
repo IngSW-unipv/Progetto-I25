@@ -24,6 +24,12 @@ public class Proprietario {
 
     };
 
+    /**Metodo per mostrare i dipendenti.
+     * Identico al metodo presente in Kart per mostrare tutti i kart.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     public void mostraDipendenti(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -45,6 +51,14 @@ public class Proprietario {
         }
     }
 
+    /**Metodo per aggiungere i dipendenti.
+     * Pressoché identico al metodo presente in Kart per aggiungere i kart,
+     * tranne la gestione dei ruoli tramite l'ENUM Ruoli
+     *
+     * @param nuovoDip
+     * @param clientSocket
+     * @throws SQLException
+     */
     public void aggiuntaDipendenti(Dipendente nuovoDip,Socket clientSocket) throws SQLException {
         db = new DBConnector();
         //Gestire i diversi ruoli
@@ -64,6 +78,13 @@ public class Proprietario {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 
+    /**Metodo per rimuovere i dipendenti.
+     * Identico al metodo presente in Kart per rimuovere i kart.
+     *
+     * @param cfDaRimuovere
+     * @param clientSocket
+     * @throws SQLException
+     */
     public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();

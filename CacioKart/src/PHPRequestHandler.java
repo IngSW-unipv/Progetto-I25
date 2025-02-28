@@ -85,7 +85,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**Metodo per gestire la logica di login
+    /**Metodo per gestire la logica di login.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      *
      * @param dati
@@ -99,8 +99,8 @@ public class PHPRequestHandler {
         utente.login(clientSocket);
     }
 
-    /**Metodo per gestire la logica di registrazione
-     * Prendo il messaggio e lo divido nelle singole informazioni richieste
+    /**Metodo per gestire la logica di registrazione.
+     * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
      * il tipo Date presente nel database.
      *
@@ -137,7 +137,7 @@ public class PHPRequestHandler {
         utente.richiestaP(tipologia, dataG, orarioI, orarioF, clientSocket);
     }
 
-    /**Metodo di aggiunta kart
+    /**Metodo di aggiunta kart.
      * Pressoché identico al metodo di registrazione.
      *
      * @param dati
@@ -152,7 +152,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**Metodo per mostrare i kart
+    /**Metodo per mostrare i kart.
      * Non richiede parametri oltre al socket per spedire la risposta.
      *
      * @param clientSocket
@@ -163,7 +163,7 @@ public class PHPRequestHandler {
         m.mostraKart(clientSocket);
     }
 
-    /**Metodo per rimuovere i kart
+    /**Metodo per rimuovere i kart.
      * Chiamato dal client dopo aver visto i kart presenti nel db.
      * Non richiede parametri oltre al socket per spedire la risposta.
      *
@@ -176,6 +176,15 @@ public class PHPRequestHandler {
         m.rimozioneKart(dati, clientSocket);
     }
 
+    /**Metodo per aggiungere dipendenti.
+     * Dopo aver formattato le date tramite i formatter, le passo al costruttore
+     * di Dipendente per utilizzare i metodi di get e set nel metodo
+     * di aggiuntaDipendenti.
+     *
+     * @param dati
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
         /*Creo enum secondo questa logica:
         Meccanico 1
@@ -194,12 +203,25 @@ public class PHPRequestHandler {
         p.aggiuntaDipendenti(d,clientSocket);
     }
 
+    /**Metodo di rimozione dipendenti.
+     * Pressoché identico al metodo di rimozione kart.
+     *
+     * @param dati
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
         p.rimozioneDipendenti(dati,clientSocket);
 
     }
 
+    /**Metodo per mostrare tutti i dipendenti.
+     * Pressoché identico al metodo per mostrare i kart.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void mostraDipendentiCase(Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
         p.mostraDipendenti(clientSocket);
