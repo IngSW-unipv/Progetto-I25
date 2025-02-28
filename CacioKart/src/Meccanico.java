@@ -39,7 +39,7 @@ public class Meccanico implements Iinventario {
         SELECT = "SELECT * FROM caciokart.kart";
         kart = db.executeReturnQuery(SELECT);
 
-        if(kart == null) {
+        if(kart != null) {
             for(Map<String, Object> row : kart) {
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
