@@ -115,7 +115,7 @@ public class DBConnector {
             db.dbOpenConnection();
             stmt = db.conn.createStatement();
             stmt.executeUpdate(query);
-            //System.out.println("Eseguo la query di modifica richiesta: " + query);
+            System.out.println("Eseguo la query di modifica richiesta: " + query);
             db.dbCloseConnection();
             return 1;
 

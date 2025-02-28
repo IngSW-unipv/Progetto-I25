@@ -134,5 +134,15 @@
     cursor: pointer;
     transition: background 0.3s;
   }
-  
+
+  .hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: #e2e2e2;
+    margin-bottom: 40px;
+  } 
+  .hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
   

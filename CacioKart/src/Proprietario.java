@@ -33,10 +33,10 @@ public class Proprietario {
     public void mostraDipendenti(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.kart";
+        SELECT = "SELECT * FROM caciokart.dipendente";
         dipendenti = db.executeReturnQuery(SELECT);
 
-        if(dipendenti == null) {
+        if(dipendenti != null) {
             for(Map<String, Object> row : dipendenti) {
                 cf = row.get("dip").toString();
                 nome = row.get("nome").toString();
@@ -88,7 +88,7 @@ public class Proprietario {
     public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        DELETE = "DELETE FROM caciokart.dipendenti WHERE dip = '" + cfDaRimuovere + "'";
+        DELETE = "DELETE FROM caciokart.dipendente WHERE dip = '" + cfDaRimuovere + "'";
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }

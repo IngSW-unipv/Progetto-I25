@@ -11,7 +11,7 @@ $codice_fiscale = $_POST['codice_fiscale'];
     //invio codice gara libera
     fwrite($socket, "eliminaDipen ");
     //invio dati
-    fwrite($socket, $codice_fiscale . " ");
+    fwrite($socket, $codice_fiscale . "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
     $res = trim(fgets($socket));
@@ -20,10 +20,10 @@ fclose($socket);
 
     //nel caso di successo, viene impostato il rango a 1 e si salva 
     if($res === "0"){
-        header('Location: ../registerError.php');
+        header('Location: ../genericError.php');
         die();
     } else{
-        header('Location: proprietario.php');
+        header('Location: ../proprietario.php');
         die();
     }
 ?>
