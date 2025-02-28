@@ -32,7 +32,6 @@ public class Prenotazione {
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
-
         if(result == null){
             nPartecipanti = 0;
         } else {
@@ -46,7 +45,7 @@ public class Prenotazione {
             result = db.executeReturnQuery(SELECT);
             // Controlla che il risultato non sia null o vuoto
             if (result != null && !result.isEmpty() && result.get(0) != null) {
-                idP = Integer.parseInt(result.get(0).toString());
+                idP = Integer.parseInt(String.valueOf(result.get(0)));
             } else {
                 idP = 0; // Se non ci sono prenotazioni, partiamo da 0
             }
@@ -81,7 +80,12 @@ public class Prenotazione {
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
-        nPartecipanti = Integer.parseInt(result.get(0).toString());
+//      Controllo per evitare errori di null o lista vuota
+        if (result != null && !result.isEmpty() && result.get(0) != null) {
+            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
+        } else {
+            nPartecipanti = 0; // Se il risultato è nullo o vuoto, impostiamo 0
+        }
 
         if(nPartecipanti >= 1 || nPartecipanti < MAX){
             //creazione della gara
@@ -91,8 +95,12 @@ public class Prenotazione {
                 case "secca":
                     SELECT="SELECT MAX(idG) from garaS";
                     result = db.executeReturnQuery(SELECT);
-                    idG = Integer.parseInt(result.get(0).toString());
-                    idG=idG+1;
+                    if(result != null && !result.isEmpty() && result.get(0) != null) {
+                        idG = Integer.parseInt(String.valueOf(result.get(0)));
+                        idG=idG+1;
+                    }else{
+                        idG=1;
+                    }
                     g.setIdGara(idG);
                     g.setOra(oraI);
 
@@ -111,8 +119,12 @@ public class Prenotazione {
                 case "libera":
                     SELECT="SELECT MAX(idG) from garaL";
                     result = db.executeReturnQuery(SELECT);
-                    idG = Integer.parseInt(result.get(0).toString());
-                    idG=idG+1;
+                    if(result != null && !result.isEmpty() && result.get(0) != null) {
+                        idG = Integer.parseInt(String.valueOf(result.get(0)));
+                        idG=idG+1;
+                    }else{
+                        idG=1;
+                    }
                     g.setIdGara(idG);
                     g.setOra(oraI);
 
