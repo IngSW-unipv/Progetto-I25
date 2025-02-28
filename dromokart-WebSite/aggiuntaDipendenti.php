@@ -1,10 +1,5 @@
 <?php
   session_start();
-  /*if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
-    header('Location: index.php');
-    die();
-  }*/
-
   include 'default/footerConce.php';
 ?>
 
@@ -69,19 +64,19 @@
          <div class="form-group">
             <label for="rank">Ruolo</label> 
             <select id="rank" name="rank" required>
-               <option value="1">Meccanico</option>
-               <option value="2">Gestore concessionaria</option>
-               <option value="3">Arbitro</option>
-               <option value="4">Organizzatore</option>
+               <option value="meccanico">Meccanico</option>
+               <option value="gestore">Gestore concessionaria</option>
+               <option value="arbitro">Arbitro</option>
+               <option value="organizzatore">Organizzatore</option>
             </select>
          </div>
             <div class="form-group">
             <label for="oreL">Ore lavorative</label>
-            <input type="time" id="oreL" name="oreL" required>
+            <input type="time" id="oreL" name="oreL">
          </div>
          <div class="form-group">
             <label for="stipendio">Stipendio</label>
-            <input type="text" id="stipendio" name="stipendio" required>
+            <input type="text" id="stipendio" name="stipendio" required maxlength="6">
          </div>
          <div class="form-group">
             <button type="submit">Registra</button>
