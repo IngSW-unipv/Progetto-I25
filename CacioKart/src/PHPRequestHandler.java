@@ -68,7 +68,7 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_DIPENDENTE:
-                    mostraDipendentiCase(info, clientSocket);
+                    mostraDipendentiCase(clientSocket);
                     break;
 
                 case ELIMINA_DIPENDENTE:
@@ -200,8 +200,8 @@ public class PHPRequestHandler {
 
     }
 
-    private void mostraDipendentiCase(String dati, Socket clientSocket) throws SQLException {
+    private void mostraDipendentiCase(Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
-        p.rimozioneDipendenti(dati, clientSocket);
+        p.mostraDipendenti(clientSocket);
     }
 }
