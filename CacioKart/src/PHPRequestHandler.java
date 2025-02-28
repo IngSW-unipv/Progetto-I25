@@ -50,8 +50,10 @@ public class PHPRequestHandler {
 
                     break;
 
-                case PRENOTAZIONE:
-                    prenotationCase(info,clientSocket);
+                    //Diventa prenotazione Libera
+                case PRENOTAZIONE_LIBERA:
+                    String tipologia = "libera";
+                    prenotationCase(tipologia,info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART:
@@ -114,7 +116,7 @@ public class PHPRequestHandler {
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandler
 
-    private void prenotationCase(String messaggio, Socket clientSocket) throws SQLException {
+    private void prenotationCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
         //2025-03-26 11:00-12:00
         //int lastDashIndex = messaggio.lastIndexOf("-");
         String[] dataOrario = messaggio.split(" ");
@@ -128,11 +130,8 @@ public class PHPRequestHandler {
         String[] orari = dataOrario[1].split("-");
         LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);
         LocalTime orarioF = LocalTime.parse(orari[1], timeFormatter);
-
-        // Estraggo gli orari correttamente
-        Socio utente = new Socio(null, null, null, null, null, null);
-        //utente.setcF(cf);
-        //utente.richiestaP(tipologia, dataG, orarioI, orarioF, clientSocket);
+        Socio utente = new Socio(null, null, null, dataOrario[2], null, null);
+        utente.richiestaP(tipologia, dataG, orarioI, orarioF, clientSocket);
     }
 
     /**Metodo di aggiunta kart

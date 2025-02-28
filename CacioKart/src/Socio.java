@@ -43,6 +43,7 @@ public class Socio extends Persona implements Iinventario{
     }
 
     public void richiestaP(String tipologia,LocalDate dataG,LocalTime orarioI,LocalTime orarioF,Socket clientSocket) throws SQLException{
+        p = new Prenotazione();
         p.prenotation(tipologia,dataG,orarioI,orarioF,clientSocket);
     }
 
