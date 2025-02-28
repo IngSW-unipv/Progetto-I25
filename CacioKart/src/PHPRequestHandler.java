@@ -117,7 +117,7 @@ public class PHPRequestHandler {
     //riceve i dati della prenotazione dal sito
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
-    //usa DBConnector e PHPResponsehandler
+    //usa DBConnector e PHPResponsehandle
 
     private void prenotationCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
         //2025-03-26 11:00-12:00
