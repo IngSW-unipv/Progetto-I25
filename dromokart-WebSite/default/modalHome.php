@@ -4,7 +4,7 @@
     <span class="close-modal" id="closeModal">&times;</span>
     <h2>Login</h2>
     <form action="../logic/authenticate.php" method="post">
-      <input type="text" name="username" placeholder="Codice Fiscale" required>
+    <input type="text" name="username" placeholder="Codice Fiscale" required maxlength="16">
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Accedi</button>
     </form>
