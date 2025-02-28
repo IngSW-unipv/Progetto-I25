@@ -5,6 +5,6 @@
 .classpath
 .project
 
-
+/.idea/
 .idea/libraries/mysql_connector_j_9_2_0.xml
 .idea/misc.xml
