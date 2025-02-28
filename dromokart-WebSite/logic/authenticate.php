@@ -28,6 +28,7 @@ $str = explode(' ', $res);
 // Verifica che la risposta sia nel formato atteso (almeno due elementi)
 if (count($str) < 3) {
     echo "Risposta non valida: " . htmlspecialchars($res);
+    header("Location: ../index.php");
     exit();
 }
 

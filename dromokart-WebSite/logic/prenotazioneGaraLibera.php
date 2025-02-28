@@ -7,7 +7,7 @@ $socket = connectionOpen($address, $port);
 
 $date = $_POST['date'];
 $tempo = $_POST['timeslot'];
-$username = $_POST['username'];
+$username = $_SESSION['username'];
 
 
 
