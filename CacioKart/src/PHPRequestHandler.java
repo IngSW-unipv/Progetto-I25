@@ -46,10 +46,6 @@ public class PHPRequestHandler {
                     registerCase(info, clientSocket);
                     break;
 
-                case CLASSIFICA_GENERALE:
-
-                    break;
-
                 case PRENOTAZIONE_LIBERA:
                     String tipologia = "libera";
                     prenotationCase(tipologia,info,clientSocket);
@@ -69,6 +65,11 @@ public class PHPRequestHandler {
 
                 case REGISTRAZIONE_DIPENDENTE:
                     aggiungiDipendenteCase(info, clientSocket);
+                    break;
+
+                case RICHIESTA_DIPENDENTE:
+                    Proprietario p = new Proprietario();
+                    p.mostraDipendenti(clientSocket);
                     break;
 
                 default:
