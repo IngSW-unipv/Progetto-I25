@@ -107,11 +107,13 @@ public class Prenotazione {
                     idG=idG+1;
                     g.setIdGara(idG);
                     g.setOra(oraI);
-                    INSERT="INSERT INTO garaL (idG,ora,idC,idP) VALUES('" +
+
+                    INSERT="INSERT INTO garaL (idGara, ora, idC, idP) VALUES('" +
                             g.getIdGara() + "', '" +
                             g.getOra() + "', '" +
                             null + "', '" +
                             idP + "')";
+
                     queryIndicator = db.executeUpdateQuery(INSERT);
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
                     break;
