@@ -198,10 +198,11 @@ public class PHPRequestHandler {
     private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
         p.rimozioneDipendenti(dati,clientSocket);
+
     }
 
     private void mostraDipendentiCase(String dati, Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
-        p.mostraDipendenti(clientSocket);
+        p.rimozioneDipendenti(dati, clientSocket);
     }
 }
