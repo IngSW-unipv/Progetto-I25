@@ -4,3 +4,7 @@
 #ignora dei file che mi crea eclipse
 .classpath
 .project
+
+
+.idea/libraries/mysql_connector_j_9_2_0.xml
+.idea/misc.xml
