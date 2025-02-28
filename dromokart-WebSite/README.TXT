@@ -1,4 +1,4 @@
-DOBBIAMO
+DOBBIAMO FINIRE AGGIUNTA KART AL SOCIO(GIA FINITA IN PHP)
 
 CHI SIAMO (Andrea)
 -aggiungere un immagine del nostro team ?
@@ -6,16 +6,13 @@ CHI SIAMO (Andrea)
 CLASSIFICA (Andrea)
 -Integrazione con java per prendere i dati della Classifica
 
-CONCESSIONARIA (Alessandro)
-IMPLEMENTARE CHE QUANDO SI CLICCA ACQUISTA KART VIENE MANDATO INPUT DEL KART + USERNAME
-
 PAGINA DEI PRODOTTI (Alessandro)
 -prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
 
 PROPRIETARIO (Alessandro)
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
 -Chiedo una query e mi fa vedere tutti i dipendenti, da li posso premere una "X" e
-mi rimuove il dipendente
+mi rimuove il dipendente(controllare se l'abbiamo finita )
 
 GESTORE DELLA CONCESSIONARIA (Alessandro)
 -tasto per aggiungere la quantità di pezzi di ricambio (i pezzi sono già presenti sul db)
