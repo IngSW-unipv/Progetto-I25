@@ -35,17 +35,20 @@ public class Prenotazione {
 
         if(result == null){
             nPartecipanti = 0;
-            idP=idP+1;
         } else {
             nPartecipanti = Integer.parseInt(result.get(0).toString());
         }
 
-        if(nPartecipanti < MAX){
+        if(nPartecipanti==0){
+            nPartecipanti ++;
+        }else{
             SELECT = "SELECT MAX(idP) from PRENOTAZIONI";
             result = db.executeReturnQuery(SELECT);
             idP = Integer.parseInt(result.get(0).toString());
             idP=idP+1;
 
+        }
+        if(nPartecipanti < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
                 if(costo<30||costo>50){

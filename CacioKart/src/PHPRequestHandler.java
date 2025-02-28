@@ -50,7 +50,6 @@ public class PHPRequestHandler {
 
                     break;
 
-                    //Diventa prenotazione Libera
                 case PRENOTAZIONE_LIBERA:
                     String tipologia = "libera";
                     prenotationCase(tipologia,info,clientSocket);
