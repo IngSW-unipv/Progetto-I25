@@ -37,13 +37,6 @@ include 'default/modalHome.php';
 
         <h3>Prezzo: €4.500</h3>
         
-        <?php if (!empty($_SESSION['username'])): ?>
-          <!-- Visualizza il bottone solo se 'username' non è vuoto -->
-          <a href="kart125cc.php">
-            <button class="custom-button">Acquista</button>
-          </a>
-        <?php endif; ?>
-        
       </div>
     </section>
   </main>
