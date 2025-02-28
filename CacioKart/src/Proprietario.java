@@ -8,6 +8,7 @@ public class Proprietario {
     private PHPResponseHandler responder;
     private String INSERT;
     private String SELECT;
+    private String DELETE;
     private int queryIndicator;
     private List<Map<String, Object>> dipendenti;
     private String cf;
@@ -63,7 +64,11 @@ public class Proprietario {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 
-    public void rimozioneDipendenti(){
-
-    };
+    public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        DELETE = "DELETE FROM caciokart.dipendenti WHERE dip = '" + cfDaRimuovere + "'";
+        queryIndicator = db.executeUpdateQuery(DELETE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+    }
 }

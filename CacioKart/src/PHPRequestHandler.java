@@ -68,8 +68,11 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_DIPENDENTE:
-                    Proprietario p = new Proprietario();
-                    p.mostraDipendenti(clientSocket);
+                    mostraDipendentiCase(info, clientSocket);
+                    break;
+
+                case ELIMINA_DIPENDENTE:
+                    eliminaDipendenteCase(info,clientSocket);
                     break;
 
                 default:
@@ -180,8 +183,6 @@ public class PHPRequestHandler {
         Arbitro 3
         Organizzatore 4
         Proprietario 5
-
-        Ho bisogno di 2 enum? Uno per la logjn e uno per l'aggiunta?
         */
         String[] dipendente = dati.split(" ");
         //Array che va da 0 a 8
@@ -192,5 +193,15 @@ public class PHPRequestHandler {
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
         p.aggiuntaDipendenti(d,clientSocket);
 
+    }
+
+    private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
+        Proprietario p = new Proprietario();
+        p.rimozioneDipendenti(dati,clientSocket);
+    }
+
+    private void mostraDipendentiCase(String dati, Socket clientSocket) throws SQLException {
+        Proprietario p = new Proprietario();
+        p.mostraDipendenti(clientSocket);
     }
 }
