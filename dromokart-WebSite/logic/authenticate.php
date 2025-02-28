@@ -26,7 +26,7 @@ fclose($socket);
 $str = explode(' ', $res);
 
 // Verifica che la risposta sia nel formato atteso (almeno due elementi)
-if (count($str) < 2) {
+if (count($str) < 3) {
     echo "Risposta non valida: " . htmlspecialchars($res);
     exit();
 }
@@ -40,6 +40,7 @@ if ($str[0] === "0") {
 } else {
     $_SESSION['username'] = $username;
     $_SESSION['rank'] = $str[1];
+    $_SESSION['name'] = $str[2];
     switch($str[1]){
         case "0":
             header("Location: ../profilo.php");

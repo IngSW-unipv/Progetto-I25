@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-$username = $_SESSION['username'];
+$name = $_SESSION['name'];
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ $username = $_SESSION['username'];
  
   <!-- Hero Section -->
   <section class="hero">
-    <h2>Benvenuto, <?php echo htmlspecialchars($username); ?>!</h2>
+    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
     <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
   </section>
 
