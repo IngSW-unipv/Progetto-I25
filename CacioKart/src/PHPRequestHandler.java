@@ -142,7 +142,7 @@ public class PHPRequestHandler {
      */
     private void aggiuntaKartCase(String dati, Socket clientSocket) throws SQLException {
         String[] kart = dati.split(" "); //Passare a kart
-        Kart k = new Kart(kart[0],Integer.parseInt(kart[1]),Double.parseDouble(kart[2]));
+        Kart k = new Kart(kart[0],Integer.parseInt(kart[1]),20);
         Concessionaria c = new Concessionaria();
         c.inserimentoKart(k,clientSocket);
 
