@@ -36,6 +36,7 @@ $password = hash('sha256', $password);
     } else{
         $_SESSION['username'] = $username;
         $_SESSION['rank'] = 0;
+        $_SESSION['name'] = $name;
         header('Location: ../profilo.php');
         die();
     }
