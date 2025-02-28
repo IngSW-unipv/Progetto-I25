@@ -36,7 +36,7 @@ public class Meccanico implements Iinventario {
     public void mostraKart(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.dipendente";
+        SELECT = "SELECT * FROM caciokart.kart";
         kart = db.executeReturnQuery(SELECT);
 
         if(kart == null) {
