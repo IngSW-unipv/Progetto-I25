@@ -42,8 +42,9 @@ public class Persona {
                 + this.getPassword() + "'";
 
             result = db.executeReturnQuery(SELECT);
-            nome = result.get(0).get("nome").toString();
+
             if (!result.isEmpty()) {
+                nome = result.get(0).get("nome").toString();
                 responder.sendResponse(clientSocket, "1 0 " + nome);
 
             } else {
@@ -56,7 +57,7 @@ public class Persona {
                     responder.sendResponse(clientSocket, "0 0 0");
 
                 } else {
-
+                    nome = result.get(0).get("nome").toString();
                     ruolo = result.get(0).get("ruolo").toString();
                     ruoloConverter = Ruoli.requestedRole(ruolo);
 

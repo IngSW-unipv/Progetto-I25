@@ -187,7 +187,7 @@ public class PHPRequestHandler {
         LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
         Proprietario p = new Proprietario();
-        //dip nome cognome mail passw dataN ruolo oreL stipendio
+        //dip nome cognome mail passw dataN stipendio ruolo oreL
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
         p.aggiuntaDipendenti(d,clientSocket);
 
