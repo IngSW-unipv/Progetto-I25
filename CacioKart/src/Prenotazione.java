@@ -22,7 +22,7 @@ public class Prenotazione {
 
     public void prenotation(String tipologia,LocalDate dataGara, LocalTime oraI,LocalTime oraF, Socket clientSocket) throws SQLException {
         db = new DBConnector();
-        int idP = 0,idG, nPartecipanti = 0;
+        int idP  = 0,idG  = 0, nPartecipanti = 0;
         double costo = 0;
         g = new Gara(0,null);
         Scanner scanner = new Scanner(System.in);
@@ -33,15 +33,14 @@ public class Prenotazione {
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
 
-        if(result.isEmpty()){
+        if(result == null){
             nPartecipanti = 0;
+            idP=idP+1;
         } else {
             nPartecipanti = Integer.parseInt(result.get(0).toString());
         }
 
-        if(nPartecipanti > MAX){
-            System.out.println("Nessun posto disponibile\n!");
-        }else{
+        if(nPartecipanti < MAX){
             SELECT = "SELECT MAX(idP) from PRENOTAZIONI";
             result = db.executeReturnQuery(SELECT);
             idP = Integer.parseInt(result.get(0).toString());
@@ -67,6 +66,8 @@ public class Prenotazione {
             queryIndicator = db.executeUpdateQuery(INSERT);
             responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
             System.out.println("La prenotazione della gara libera\n");
+        }else{
+            System.out.println("Nessun posto disponibile\n!");
         }
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
         SELECT = "SELECT count(*) FROM caciokart.prenotazioni WHERE dataG = '"

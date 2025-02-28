@@ -10,7 +10,7 @@ $tempo = $_POST['timeslot'];
 $username = $_SESSION['username'];
 
     //invio codice gara libera
-    fwrite($socket, "prenotazione ");
+    fwrite($socket, "prenotazioneLibera ");
     //invio dati
     fwrite($socket, $date . " ");
     fwrite($socket, $tempo . " ");
