@@ -5,10 +5,10 @@
  */
 public enum Ruoli {
     MECCANICO("meccanico"),
-    GESTORE("2"),
-    ARBITRO("3"),
-    ORGANIZZATORE("4"),
-    PROPRIETARIO("5");
+    GESTORE("gestore"),
+    ARBITRO("arbitro"),
+    ORGANIZZATORE("organizzatore"),
+    PROPRIETARIO("proprietario");
 
     private final String descrizione;
 
