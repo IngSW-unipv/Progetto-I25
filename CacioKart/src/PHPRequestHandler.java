@@ -239,6 +239,7 @@ public class PHPRequestHandler {
         query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
                 "(SELECT concessionaria.tipol FROM concessionaria)";
         m.mostraKart(query,clientSocket);
+        //KRT123 06/03/2023
     }
 
     /**Metodo per aggiungere dipendenti.
