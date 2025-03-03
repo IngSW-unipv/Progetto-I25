@@ -32,7 +32,7 @@ public class Prenotazione {
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
-        if(result == null){
+        if(result == null|| result.isEmpty()){
             nPartecipanti = 0;
         } else {
             nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
@@ -89,7 +89,6 @@ public class Prenotazione {
 
         if(nPartecipanti >= 1 || nPartecipanti < MAX){
             //creazione della gara
-
             switch (tipologia){
 
                 case "secca":
@@ -138,6 +137,8 @@ public class Prenotazione {
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
                     break;
             }
+        }else{
+            System.out.println("Gara non disputata\n!");
         }
 
     }
