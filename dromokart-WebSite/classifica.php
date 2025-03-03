@@ -26,7 +26,7 @@
 
   <!-- Contenuto principale -->
   <main>
-    <div class="content">
+    <div class="table-section">
 
    
     <?php
