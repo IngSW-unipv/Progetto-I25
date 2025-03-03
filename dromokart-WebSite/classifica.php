@@ -26,6 +26,53 @@
   <!-- Contenuto principale -->
   <main>
     <div class="content">
+
+   
+    <?php
+        //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
+      if(!isset($_SESSION['user']))
+        require 'logic/requestPlacingGen.php';
+      else
+        require 'logic/requestPlacingUsr.php';
+
+      // Suddivide $res in righe
+      $rows = explode("\n", $res);
+      
+      // Controlla se sono presenti righe non vuote
+      if(count($rows) > 0 && !empty(trim($rows[0]))) {
+          echo '<table>';
+          echo '<thead>';
+          echo '<tr>';
+          echo '<th>ID Gara</th>';
+          echo '<th>CF</th>';
+          echo '<th>Miglior Giro</th>';
+          echo '<th>tempo totale</th>';
+          echo '</tr>';
+          echo '</thead>';
+          echo '<tbody>';
+          
+          // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
+          foreach($rows as $row) {
+            $row = trim($row);
+            if(empty($row)) continue;
+            $columns = preg_split('/\s+/', $row);
+            // Assicurati che ci siano almeno 3 colonne
+            if(count($columns) >= 4) {
+                echo '<tr>';
+                echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
+                echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
+                echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
+                echo '<td>' . htmlspecialchars($columns[3]) . '</td>';
+                echo '</tr>';
+            }
+          }
+          
+          echo '</tbody>';
+          echo '</table>';
+      } else {
+          echo '<p>Nessun dato ricevuto.</p>';
+      }
+    ?>
     </div>
   </main>
 

@@ -19,7 +19,8 @@ public enum TipoComandi {
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
     AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     AGGIUNGI_BENZINA("aggiungiBenzina"),
-    ACQUISTA_KART("acquistaKart");
+    ACQUISTA_KART("acquistaKart"),
+    RICHIESTA_CLASSIFICA_GENERICA("richiestaClass");
 
 
     private final String descrizione;
