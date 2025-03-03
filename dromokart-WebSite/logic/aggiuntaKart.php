@@ -28,7 +28,7 @@ fclose($socket);
         header('Location: ../registerError.php');
         die();
     } else{
-        header('Location: ../meccanico.php');
+        header('Location: ../gestoreConcessionaria.php');
         die();
     }
 ?>
