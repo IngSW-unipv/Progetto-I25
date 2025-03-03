@@ -1,6 +1,6 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
-<?php include 'logic/mostrakart.php'; ?>
+<?php include 'logic/mostrakartRimuovi.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
