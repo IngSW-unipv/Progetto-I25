@@ -22,9 +22,10 @@ public class Prenotazione {
 
     public void prenotation(String tipologia,LocalDate dataGara, LocalTime oraI,LocalTime oraF, Socket clientSocket) throws SQLException {
         db = new DBConnector();
-        int idP  = 0,idG  = 0, nPartecipanti = 0;
+        String idP = "",idG;
+        int nPartecipanti = 0;
         double costo = 0;
-        g = new Gara(0,null);
+        g = new Gara("0",null);
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         responder = new PHPResponseHandler();
@@ -45,11 +46,11 @@ public class Prenotazione {
             result = db.executeReturnQuery(SELECT);
             // Controlla che il risultato non sia null o vuoto
             if (result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                idP = Integer.parseInt(String.valueOf(result.get(0).get("max")));
+                idP =result.get(0).toString();
             } else {
-                idP = 0; // Se non ci sono prenotazioni, partiamo da 0
+                idP="0"; // Se non ci sono prenotazioni, partiamo da 0
             }
-            idP = idP + 1; // Incrementa l'ID per il nuovo record
+            idP =String.valueOf(Integer.parseInt(idP + 1)) ; // Incrementa l'ID per il nuovo record
         }
         if(nPartecipanti < MAX){
             do{
@@ -95,10 +96,10 @@ public class Prenotazione {
                     SELECT="SELECT MAX(idG) as max from garaS";
                     result = db.executeReturnQuery(SELECT);
                     if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                        idG = Integer.parseInt(String.valueOf(result.get(0).get("max")));
-                        idG=idG+1;
+                        idG = String.valueOf(result.get(0).get("max"));
+                        idG=String.valueOf(Integer.parseInt(idG+1));
                     }else{
-                        idG=1;
+                        idG="1";
                     }
                     g.setIdGara(idG);
                     g.setOra(oraI);
@@ -119,10 +120,10 @@ public class Prenotazione {
                     SELECT="SELECT MAX(idG) as max from garaL";
                     result = db.executeReturnQuery(SELECT);
                     if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                        idG = Integer.parseInt(String.valueOf(result.get(0).get("max")));
-                        idG=idG+1;
+                        idG =String.valueOf(result.get(0).get("max"));
+                        idG=String.valueOf(Integer.parseInt(idG+1));
                     }else{
-                        idG=1;
+                        idG="1";
                     }
                     g.setIdGara(idG);
                     g.setOra(oraI);

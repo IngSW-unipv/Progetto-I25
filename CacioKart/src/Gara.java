@@ -2,19 +2,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Gara {
-    protected int idGara;
+    protected String idGara;
     protected LocalTime ora;
 
-    public Gara(int idGara, LocalDate dataGara) {
+    public Gara(String idGara, LocalDate dataGara) {
         this.idGara = idGara;
         this.ora = ora;
     }
 
-    public int getIdGara() {
+    public String getIdGara() {
         return idGara;
     }
 
-    public void setIdGara(int idGara) {
+    public void setIdGara(String idGara) {
         this.idGara = idGara;
     }
 

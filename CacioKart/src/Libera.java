@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Libera extends Gara{
 
-    public Libera(int idGara,LocalDate dataGara) {
+    public Libera(String idGara,LocalDate dataGara) {
         super(idGara,dataGara);
     }
 
