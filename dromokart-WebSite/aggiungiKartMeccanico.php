@@ -11,20 +11,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/registration.css">
-  <style>
-    table { 
-      border-collapse: collapse; 
-      width: 100%; 
-    }
-    th, td { 
-      border: 1px solid #ddd; 
-      padding: 8px; 
-      text-align: center; /* Testo centrato */
-    }
-    th { 
-      background-color: #4CAF50; 
-    }
-  </style>
 
 </head>
 <body>
