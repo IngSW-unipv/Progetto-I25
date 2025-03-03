@@ -30,11 +30,8 @@
 
    
     <?php
-        //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
-      if(!isset($_SESSION['user']))
-        require 'logic/requestPlacingGen.php';
-      else
-        require 'logic/requestPlacingUsr.php';
+      //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
+      require 'logic/requestPlacingsGen.php';
 
       // Suddivide $res in righe
       $rows = explode("\n", $res);
