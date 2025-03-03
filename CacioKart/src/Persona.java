@@ -100,7 +100,7 @@ public class Persona {
         int idGara;
         String cfSocio,targa,bGiro,tempoTot;
         StringBuilder classifica = new StringBuilder();
-        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bgiro, g.tempTot\n" +
+        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bgiro, g.tempTot" +
                 "FROM (" +
                 "    SELECT idGara" +
                 "    FROM classifica" +
@@ -110,7 +110,7 @@ public class Persona {
                 ") AS ultime_gare" +
                 "JOIN classifica g ON ultime_gare.idGara = g.idGara" +
                 "WHERE g.pos = 1" +
-                "ORDER BY g.idGara DESC;";
+                "ORDER BY g.idGara DESC";
         result = db.executeReturnQuery(SELECT);
         if(result!=null){
             for(Map<String, Object> row : result) {
