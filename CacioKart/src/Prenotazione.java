@@ -28,20 +28,20 @@ public class Prenotazione {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT count(*) FROM caciokart.prenotazioni WHERE dataG = '"
+        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
         if(result == null){
             nPartecipanti = 0;
         } else {
-            nPartecipanti = Integer.parseInt(result.get(0).toString());
+            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
         }
 
         if (nPartecipanti == 0) {
             nPartecipanti++;
         } else {
-            String SELECT = "SELECT COALESCE(MAX(idP), 0) FROM PRENOTAZIONI";
+            String SELECT = "SELECT COALESCE(MAX(idP), 0) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             // Controlla che il risultato non sia null o vuoto
             if (result != null && !result.isEmpty() && result.get(0) != null) {
@@ -61,7 +61,7 @@ public class Prenotazione {
                 }
             }while(costo<30||costo>50);
 
-            INSERT = "INSERT INTO prenotazioni (idP, dataG , fasciaO, tipologia, costo, numP) VALUES('" +
+            INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, numP) VALUES('" +
                     idP + "', '" +
                     dataGara +"', '" +
                     oraI +"', '" +
@@ -76,7 +76,7 @@ public class Prenotazione {
             System.out.println("Nessun posto disponibile\n!");
         }
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
-        SELECT = "SELECT count(*) FROM caciokart.prenotazioni WHERE dataG = '"
+        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
