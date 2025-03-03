@@ -10,6 +10,7 @@ public class PHPRequestHandler {
     private String comando;
     private String info;
     private String messaggio[];
+    String tipologia;
     private TipoComandi tipo;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -47,7 +48,7 @@ public class PHPRequestHandler {
                     break;
 
                 case PRENOTAZIONE_LIBERA:
-                    String tipologia = "libera";
+                    tipologia = "libera";
                     prenotationCase(tipologia,info,clientSocket);
                     break;
 
