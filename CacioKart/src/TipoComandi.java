@@ -17,6 +17,7 @@ public enum TipoComandi {
     RICHIESTA_DIPENDENTE("richiestaDipen"),
     CREAZIONE_TEAM("aggiungiTeam"),
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
+    AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     ACQUISTA_KART("acquistaKart");
 
 
