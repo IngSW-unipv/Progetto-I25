@@ -11,6 +11,7 @@ public class Socio extends Persona implements Iinventario{
     private DBConnector db;
     private Prenotazione p;
     private String UPDATE;
+    private String DELETE;
 
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
@@ -49,12 +50,18 @@ public class Socio extends Persona implements Iinventario{
         // Inserisco la targa in quell'utente specifico
         String[] kartUtente = info.split(" ");
         String cf = kartUtente[0];
-        String kart = kartUtente[1];
+        String targa = kartUtente[1];
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE socio SET targa = '" + kart + "' WHERE socio = '" + cf + "' AND socio.targa IS NULL";
-        queryIndicator = db.executeUpdateQuery(UPDATE);
+        /*Fare un IF che controlla se l'utente ha già un kart (per impedire l'acquisto?)
+
+         */
+
+        UPDATE = "UPDATE socio SET targa = '" + targa + "' WHERE socio = '" + cf + "'";
+        db.executeUpdateQuery(UPDATE);
+        DELETE = "DELETE FROM concessionaria WHERE tipol = '" + targa + "'";
+        queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 

@@ -85,18 +85,18 @@ public class PHPRequestHandler {
                     break;
 
                 case ACQUISTA_KART:
-                    //username targa
-                    Socio s = new Socio(null, null, null, null, null, null);
-                    s.compraKart(info, clientSocket);
+                    acquistaKartCase(info, clientSocket);
                     break;
 
                 case AGGIUNGI_BENZINA:
-                    //targa kart
-                    Meccanico m = new Meccanico();
-                    m.aggiuntaBenzina(info,clientSocket);
+                    aggiungiBenzinaCase(info, clientSocket);
                     break;
                 case CLASSIFICA_GENERALE:
                     cG(clientSocket);
+                    break;
+
+                case MANUTENZIONE:
+                    Meccanico m = new Meccanico();
                     break;
 
                 default:
@@ -224,7 +224,9 @@ public class PHPRequestHandler {
     private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         //Query per quando voglio rimuovere i kart dal noleggio
-        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN(SELECT concessionaria.tipol FROM concessionaria);";
+        query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
+                "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
+                "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)";
         m.mostraKart(query,clientSocket);
     }
 
@@ -279,5 +281,14 @@ public class PHPRequestHandler {
         p.mostraDipendenti(clientSocket);
     }
 
+    private void aggiungiBenzinaCase(String info, Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        m.aggiuntaBenzina(info,clientSocket);
+    }
+
+    private void acquistaKartCase(String dati, Socket clientSocket) throws SQLException {
+        Socio s = new Socio(null, null, null, null, null, null);
+        s.compraKart(dati, clientSocket);
+    }
 
 }

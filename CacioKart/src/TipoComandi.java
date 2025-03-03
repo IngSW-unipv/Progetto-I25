@@ -20,9 +20,8 @@ public enum TipoComandi {
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
     AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     AGGIUNGI_BENZINA("aggiungiBenzina"),
-    ACQUISTA_KART("acquistaKart");
-
-
+    ACQUISTA_KART("acquistaKart"),
+    MANUTENZIONE("manutenzione");
 
     private final String descrizione;
 
