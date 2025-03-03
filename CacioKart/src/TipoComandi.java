@@ -6,7 +6,7 @@
 public enum TipoComandi {
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
-    CLASSIFICA_GENERALE("classificaGenerale"),
+    CLASSIFICA_GENERALE("richiestaClass"),
     PRENOTAZIONE_LIBERA("prenotazioneLibera"),
     PRENOTAZIONE_SECCA("prenotazioneSecca"),
     AGGIUNTA_KART("aggiungiKart"),
@@ -19,8 +19,8 @@ public enum TipoComandi {
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
     AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     AGGIUNGI_BENZINA("aggiungiBenzina"),
-    ACQUISTA_KART("acquistaKart"),
-    RICHIESTA_CLASSIFICA_GENERICA("richiestaClass");
+    ACQUISTA_KART("acquistaKart");
+
 
 
     private final String descrizione;

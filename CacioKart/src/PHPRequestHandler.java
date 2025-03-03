@@ -86,6 +86,9 @@ public class PHPRequestHandler {
                     Meccanico m = new Meccanico();
                     m.aggiuntaBenzina(info,clientSocket);
                     break;
+                case CLASSIFICA_GENERALE:
+                    cG(clientSocket);
+                    break;
 
                 default:
                     break;

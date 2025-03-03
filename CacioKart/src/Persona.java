@@ -98,8 +98,7 @@ public class Persona {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         int idGara;
-        String cfSocio,targa;
-        LocalTime bGiro,tempoTot;
+        String cfSocio,targa,bGiro,tempoTot;
         StringBuilder classifica = new StringBuilder();
         SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bgiro, g.tempTot\n" +
                 "FROM (" +
@@ -118,8 +117,8 @@ public class Persona {
                idGara= Integer.parseInt(row.get("idGara").toString());
                cfSocio = row.get("socio").toString();
                targa = row.get("targa").toString();
-               bGiro = LocalTime.parse(row.get("pos").toString());
-               tempoTot = LocalTime.parse(row.get("pos").toString());
+               bGiro = row.get("pos").toString();
+               tempoTot = row.get("pos").toString();
                 classifica.append(idGara).append(" ").append(cfSocio).append(" ").append(targa).append(" ").append(bGiro).append(" ").append(tempoTot).append("\n");
 
             }
