@@ -36,7 +36,7 @@ public class Meccanico implements Iinventario {
     public void mostraKart(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.kart";
+        SELECT = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
         kart = db.executeReturnQuery(SELECT);
 
         if(kart != null) {

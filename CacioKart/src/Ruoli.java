@@ -1,5 +1,5 @@
 /**Classe di tipo Enum per gestire i comandi in arrivo dal client.
- * Ogni possibile comando ha associato ad esso una stringa, che
+ * Ogni possibile comando ha associato a esso una stringa, che
  * sarà il comando effettivo che riceverà dalle pagine PHP.
  *
  */

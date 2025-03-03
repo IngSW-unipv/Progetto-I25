@@ -1,19 +1,17 @@
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 
 public class Socio extends Persona implements Iinventario{
-    private final int MAX = 20;
     private String INSERT;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private DBConnector db;
     private Prenotazione p;
+    private String UPDATE;
+
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -47,8 +45,17 @@ public class Socio extends Persona implements Iinventario{
         p.prenotation(tipologia,dataG,orarioI,orarioF,clientSocket);
     }
 
-    public void comprareKart(){
+    public void compraKart(String info, Socket clientSocket) throws SQLException {
+        // Inserisco la targa in quell'utente specifico
+        String[] kartUtente = info.split(" ");
+        String cf = kartUtente[0];
+        String kart = kartUtente[1];
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
 
+        UPDATE = "UPDATE socio SET targa = '" + kart + "' WHERE socio = '" + cf + "' AND socio.targa IS NULL";
+        queryIndicator = db.executeUpdateQuery(UPDATE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
     //public int

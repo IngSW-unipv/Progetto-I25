@@ -9,7 +9,7 @@ public class PHPRequestHandler {
     private BufferedReader in;
     private String comando;
     private String info;
-    private String messaggio[];
+    private String[] messaggio;
     String tipologia;
     private TipoComandi tipo;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -21,7 +21,6 @@ public class PHPRequestHandler {
     /**La classe riceve stringhe composte in questo modo: *lettera singola* *dati*
      *La lettera indica la richiesta del client da eseguire.
      *
-     * @param clientSocket
      */
     public void handleRequests(Socket clientSocket) throws SQLException {
         try {
@@ -74,6 +73,12 @@ public class PHPRequestHandler {
 
                 case ELIMINA_DIPENDENTE:
                     eliminaDipendenteCase(info,clientSocket);
+                    break;
+
+                case ACQUISTA_KART:
+                    //username targa
+                    Socio s = new Socio(null, null, null, null, null, null);
+                    s.compraKart(info, clientSocket);
                     break;
 
                 default:
