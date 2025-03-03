@@ -14,6 +14,7 @@ public class PHPRequestHandler {
     private TipoComandi tipo;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private String query;
 
     public PHPRequestHandler() {
     }
@@ -51,12 +52,16 @@ public class PHPRequestHandler {
                     prenotationCase(tipologia,info,clientSocket);
                     break;
 
-                case AGGIUNTA_KART:
+                case AGGIUNTA_KART_CONCESSIONARIA:
                     aggiuntaKartCase(info, clientSocket);
                     break;
 
-                case MOSTRA_KART:
-                    mostraKartCase(clientSocket);
+                case MOSTRA_KART_AGGIUNTA:
+                    mostraAggiuntaKartCase(clientSocket);
+                    break;
+
+                case MOSTRA_KART_RIMUOVI:
+                    mostraRimuoviKartCase(clientSocket);
                     break;
 
                 case ELIMINAZIONE_KART:
@@ -183,9 +188,11 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void mostraKartCase(Socket clientSocket) throws SQLException {
+    private void mostraAggiuntaKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        m.mostraKart(clientSocket);
+        //Query per quando voglio aggiungere i kart al noleggio
+        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
+        m.mostraKart(query,clientSocket);
     }
 
     /**Metodo per rimuovere i kart.
@@ -199,6 +206,13 @@ public class PHPRequestHandler {
     private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         m.rimozioneKart(dati, clientSocket);
+    }
+
+    private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        //Query per quando voglio rimuovere i kart dal noleggio
+        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN(SELECT concessionaria.tipol FROM concessionaria);";
+        m.mostraKart(query,clientSocket);
     }
 
     /**Metodo per aggiungere dipendenti.

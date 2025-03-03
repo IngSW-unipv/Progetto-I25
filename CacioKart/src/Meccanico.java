@@ -37,10 +37,18 @@ public class Meccanico implements Iinventario {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 
-    public void mostraKart(Socket clientSocket) throws SQLException {
+    public void mostraKart(String query,Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
+        SELECT = query;
+        //Query per quando voglio aggiungere i kart al noleggio
+        //"SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
+
+        //Query per quando voglio rimuovere i kart dal noleggio
+        //SELECT * FROM caciokart.kart WHERE kart.targa NOT IN(
+        //SELECT concessionaria.tipol FROM concessionaria);
+
+
         kart = db.executeReturnQuery(SELECT);
 
         if(kart != null) {
