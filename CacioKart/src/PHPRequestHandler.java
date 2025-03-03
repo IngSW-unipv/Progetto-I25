@@ -68,6 +68,10 @@ public class PHPRequestHandler {
                     mostraRimuoviKartCase(clientSocket);
                     break;
 
+                case MOSTRA_KART_MANUTENZIONE:
+                    mostraManutenzioneKartCase(clientSocket);
+                    break;
+
                 case ELIMINAZIONE_KART:
                     rimozioneKartCase(info, clientSocket);
                     break;
@@ -97,6 +101,7 @@ public class PHPRequestHandler {
 
                 case MANUTENZIONE:
                     Meccanico m = new Meccanico();
+                    m.aggiornamentoManutenzione(info, clientSocket);
                     break;
 
                 default:
@@ -122,8 +127,6 @@ public class PHPRequestHandler {
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
     }
-
-
 
     // metodo per la classifica Generale
     // mostra gli ultimi 10 vincitori delle ultime 10 gare creando una mini classifica
@@ -227,6 +230,14 @@ public class PHPRequestHandler {
         query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
                 "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
                 "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)";
+        m.mostraKart(query,clientSocket);
+    }
+
+    private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        //Query per quando voglio aggiungere i kart al noleggio
+        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
+                "(SELECT concessionaria.tipol FROM concessionaria)";
         m.mostraKart(query,clientSocket);
     }
 

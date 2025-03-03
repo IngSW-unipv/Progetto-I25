@@ -12,6 +12,7 @@ public enum TipoComandi {
     AGGIUNTA_KART_CONCESSIONARIA("aggiungiKartConcessionario"),
     MOSTRA_KART_AGGIUNTA("mostraKartAggiunta"),
     MOSTRA_KART_RIMUOVI("mostraKartRimuovi"),
+    MOSTRA_KART_MANUTENZIONE("mostraKartManutenzione"),
     ELIMINAZIONE_KART("eliminaKart"),
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
