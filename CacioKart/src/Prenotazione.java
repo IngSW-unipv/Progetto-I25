@@ -28,24 +28,24 @@ public class Prenotazione {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
+        SELECT = "SELECT count(*) as count FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
-        if(result == null){
+        if(result == null|| result.isEmpty()){
             nPartecipanti = 0;
         } else {
-            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
+            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0).get("count")));
         }
 
         if (nPartecipanti == 0) {
             nPartecipanti++;
         } else {
-            String SELECT = "SELECT COALESCE(MAX(idP), 0) FROM PRENOTAZIONE";
+            String SELECT = "SELECT COALESCE(MAX(idP), 0) as max FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             // Controlla che il risultato non sia null o vuoto
-            if (result != null && !result.isEmpty() && result.get(0) != null) {
-                idP = Integer.parseInt(String.valueOf(result.get(0)));
+            if (result != null && !result.isEmpty() && result.get(0).get("max") != null) {
+                idP = Integer.parseInt(String.valueOf(result.get(0).get("max")));
             } else {
                 idP = 0; // Se non ci sono prenotazioni, partiamo da 0
             }
@@ -76,12 +76,12 @@ public class Prenotazione {
             System.out.println("Nessun posto disponibile\n!");
         }
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
-        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
+        SELECT = "SELECT count(*) as count FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
 //      Controllo per evitare errori di null o lista vuota
-        if (result != null && !result.isEmpty() && result.get(0) != null) {
+        if (result != null || !result.isEmpty() || result.get(0).get("count") != null) {
             nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
         } else {
             nPartecipanti = 0; // Se il risultato è nullo o vuoto, impostiamo 0
@@ -89,14 +89,13 @@ public class Prenotazione {
 
         if(nPartecipanti >= 1 || nPartecipanti < MAX){
             //creazione della gara
-
             switch (tipologia){
 
                 case "secca":
-                    SELECT="SELECT MAX(idG) from garaS";
+                    SELECT="SELECT MAX(idG) as max from garaS";
                     result = db.executeReturnQuery(SELECT);
-                    if(result != null && !result.isEmpty() && result.get(0) != null) {
-                        idG = Integer.parseInt(String.valueOf(result.get(0)));
+                    if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
+                        idG = Integer.parseInt(String.valueOf(result.get(0).get("max")));
                         idG=idG+1;
                     }else{
                         idG=1;
@@ -117,10 +116,10 @@ public class Prenotazione {
                     break;
 
                 case "libera":
-                    SELECT="SELECT MAX(idG) from garaL";
+                    SELECT="SELECT MAX(idG) as max from garaL";
                     result = db.executeReturnQuery(SELECT);
-                    if(result != null && !result.isEmpty() && result.get(0) != null) {
-                        idG = Integer.parseInt(String.valueOf(result.get(0)));
+                    if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
+                        idG = Integer.parseInt(String.valueOf(result.get(0).get("max")));
                         idG=idG+1;
                     }else{
                         idG=1;
@@ -138,6 +137,8 @@ public class Prenotazione {
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
                     break;
             }
+        }else{
+            System.out.println("Gara non disputata\n!");
         }
 
     }
