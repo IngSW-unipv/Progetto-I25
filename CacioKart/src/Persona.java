@@ -97,8 +97,7 @@ public class Persona {
     public void classificaG(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        int idGara;
-        String cfSocio,targa,bGiro,tempoTot;
+        String cfSocio,targa,bGiro,tempoTot,idGara;
         StringBuilder classifica = new StringBuilder();
         SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bGiro, g.tempTot " +
                 "FROM ( " +
@@ -112,7 +111,7 @@ public class Persona {
         result = db.executeReturnQuery(SELECT);
         if(result!=null){
             for(Map<String, Object> row : result) {
-               idGara= Integer.parseInt(row.get("idGara").toString());
+               idGara=row.get("idGara").toString();
                cfSocio = row.get("socio").toString();
                targa = row.get("targa").toString();
                bGiro = row.get("pos").toString();
