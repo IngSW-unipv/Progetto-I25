@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class Meccanico implements Iinventario {
+public class Meccanico{
     private List<Map<String, Object>> kart;
     private DBConnector db;
     private PHPResponseHandler responder;
@@ -28,6 +28,15 @@ public class Meccanico implements Iinventario {
 
     };
 
+    public void aggiuntaKart(String targa, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+
+        DELETE = "DELETE FROM caciokart.concessionaria WHERE tipol = '" + targa + "'";
+        queryIndicator = db.executeUpdateQuery(DELETE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+    }
+
     public void aggiuntaBenzina(String info, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -40,16 +49,7 @@ public class Meccanico implements Iinventario {
     public void mostraKart(String query,Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = query;
-        //Query per quando voglio aggiungere i kart al noleggio
-        //"SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
-
-        //Query per quando voglio rimuovere i kart dal noleggio
-        //SELECT * FROM caciokart.kart WHERE kart.targa NOT IN(
-        //SELECT concessionaria.tipol FROM concessionaria);
-
-
-        kart = db.executeReturnQuery(SELECT);
+        kart = db.executeReturnQuery(query);
 
         if(kart != null) {
             for(Map<String, Object> row : kart) {

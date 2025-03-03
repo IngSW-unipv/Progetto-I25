@@ -53,7 +53,11 @@ public class PHPRequestHandler {
                     break;
 
                 case AGGIUNTA_KART_CONCESSIONARIA:
-                    aggiuntaKartCase(info, clientSocket);
+                    aggiuntaKartCaseConcessionaria(info, clientSocket);
+                    break;
+
+                case AGGIUNGI_KART_MECCANICO:
+                    aggiuntaKartCaseMeccanico(info, clientSocket);
                     break;
 
                 case MOSTRA_KART_AGGIUNTA:
@@ -174,11 +178,18 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void aggiuntaKartCase(String dati, Socket clientSocket) throws SQLException {
-        String[] kart = dati.split(" "); //Passare a kart
-        Kart k = new Kart(kart[0],Integer.parseInt(kart[1]),20);
+    private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) throws SQLException {
+        String[] info = dati.split(" "); //Passare a kart
+        Kart k = new Kart(info[0],Integer.parseInt(info[1]),20);
+        int prezzo = Integer.parseInt(info[2]);
         Concessionaria c = new Concessionaria();
-        c.inserimentoKart(k,clientSocket);
+        c.inserimentoKart(k,prezzo,clientSocket);
+
+    }
+
+    private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        m.aggiuntaKart(targa, clientSocket);
 
     }
 
@@ -191,7 +202,9 @@ public class PHPRequestHandler {
     private void mostraAggiuntaKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         //Query per quando voglio aggiungere i kart al noleggio
-        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)";
+        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
+                "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
+                "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)";
         m.mostraKart(query,clientSocket);
     }
 
