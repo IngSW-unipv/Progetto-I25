@@ -100,17 +100,15 @@ public class Persona {
         int idGara;
         String cfSocio,targa,bGiro,tempoTot;
         StringBuilder classifica = new StringBuilder();
-        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bgiro, g.tempTot" +
-                "FROM (" +
-                "    SELECT idGara" +
-                "    FROM classifica" +
-                "    GROUP BY idGara" +
-                "    ORDER BY idGara DESC" +
-                "    LIMIT 10" +
-                ") AS ultime_gare" +
-                "JOIN classifica g ON ultime_gare.idGara = g.idGara" +
-                "WHERE g.pos = 1" +
-                "ORDER BY g.idGara DESC";
+        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bGiro, g.tempTot " +
+                "FROM ( " +
+                "    SELECT  distinct idGara " +
+                "    FROM classifica " +
+                "    LIMIT 10 " +
+                ") AS ultime_gare " +
+                "JOIN classifica g ON ultime_gare.idGara = g.idGara " +
+                "WHERE g.pos = 1 " +
+                "ORDER BY g.tempTot DESC;";
         result = db.executeReturnQuery(SELECT);
         if(result!=null){
             for(Map<String, Object> row : result) {
