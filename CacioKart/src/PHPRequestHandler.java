@@ -111,6 +111,16 @@ public class PHPRequestHandler {
         utente.login(clientSocket);
     }
 
+
+
+    // metodo per la classifica Generale
+    // mostra gli ultimi 10 vincitori delle ultime 10 gare creando una mini classifica
+
+    private void cG(Socket clientSocket) throws SQLException {
+        Persona utente = new Persona(null, null, null, null, null, null);
+        utente.classificaG(clientSocket);
+    }
+
     /**Metodo per gestire la logica di registrazione.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
@@ -238,4 +248,6 @@ public class PHPRequestHandler {
         Proprietario p = new Proprietario();
         p.mostraDipendenti(clientSocket);
     }
+
+
 }

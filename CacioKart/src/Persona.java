@@ -2,6 +2,7 @@ import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,42 @@ public class Persona {
 
     }
 
+    public void classificaG(Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        int idGara;
+        String cfSocio,targa;
+        LocalTime bGiro,tempoTot;
+        StringBuilder classifica = new StringBuilder();
+        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bgiro, g.tempTot\n" +
+                "FROM (" +
+                "    SELECT idGara" +
+                "    FROM classifica" +
+                "    GROUP BY idGara" +
+                "    ORDER BY idGara DESC" +
+                "    LIMIT 10" +
+                ") AS ultime_gare" +
+                "JOIN classifica g ON ultime_gare.idGara = g.idGara" +
+                "WHERE g.pos = 1" +
+                "ORDER BY g.idGara DESC;";
+        result = db.executeReturnQuery(SELECT);
+        if(result!=null){
+            for(Map<String, Object> row : result) {
+               idGara= Integer.parseInt(row.get("idGara").toString());
+               cfSocio = row.get("socio").toString();
+               targa = row.get("targa").toString();
+               bGiro = LocalTime.parse(row.get("pos").toString());
+               tempoTot = LocalTime.parse(row.get("pos").toString());
+                classifica.append(idGara).append(" ").append(cfSocio).append(" ").append(targa).append(" ").append(bGiro).append(" ").append(tempoTot).append("\n");
+
+            }
+            classifica.append("end");
+            responder.sendResponse(clientSocket, classifica.toString());
+        }else{
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
     public String getNome() {
         return nome;
     }
@@ -140,6 +177,7 @@ public class Persona {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 
 }
