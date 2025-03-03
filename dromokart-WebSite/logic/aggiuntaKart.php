@@ -10,7 +10,7 @@ $cilindrata = $_POST['cilindrata'];
 
 
     //invio codice gara libera
-    fwrite($socket, "aggiungiKart ");
+    fwrite($socket, "aggiungiKartConcessionario ");
     //invio dati
     fwrite($socket, $targa . " ");
     fwrite($socket, $cilindrata . "\n");

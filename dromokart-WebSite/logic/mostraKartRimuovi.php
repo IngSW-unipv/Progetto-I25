@@ -2,7 +2,7 @@
 require 'connection.php';
 
 $socket = connectionOpen($address, $port);
-fwrite($socket, "mostraKart\n");
+fwrite($socket, "mostraKartRimuovi\n");
 
 $res = '';
 while (!feof($socket)) {
