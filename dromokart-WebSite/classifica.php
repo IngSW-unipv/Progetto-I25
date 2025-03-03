@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
 
@@ -45,6 +46,7 @@
           echo '<tr>';
           echo '<th>ID Gara</th>';
           echo '<th>CF</th>';
+          echo '<th>Targa</th>';
           echo '<th>Miglior Giro</th>';
           echo '<th>tempo totale</th>';
           echo '</tr>';
@@ -57,12 +59,13 @@
             if(empty($row)) continue;
             $columns = preg_split('/\s+/', $row);
             // Assicurati che ci siano almeno 3 colonne
-            if(count($columns) >= 4) {
+            if(count($columns) >= 5) {
                 echo '<tr>';
                 echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[3]) . '</td>';
+                echo '<td>' . htmlspecialchars($columns[4]) . '</td>';
                 echo '</tr>';
             }
           }
