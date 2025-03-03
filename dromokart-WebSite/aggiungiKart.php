@@ -31,6 +31,11 @@
               <option value="150">150cc</option>
             </select>
          </div>
+         <!-- Nuovo input per il prezzo -->
+         <div class="form-group">
+            <label for="prezzo">Prezzo</label>
+            <input type="text" id="prezzo" name="prezzo" readonly required>
+         </div>
          <div class="form-group">
             <button type="submit">Aggiungi Kart</button>
          </div>
@@ -38,5 +43,21 @@
     </section>
   </main>
   
+  <!-- Script per impostare il prezzo in base alla cilindrata -->
+  <script>
+    document.getElementById("cilindrata").addEventListener("change", function() {
+      const prezzoInput = document.getElementById("prezzo");
+      if (this.value === "50") {
+        prezzoInput.value = "2500";
+      } else if (this.value === "125") {
+        prezzoInput.value = "4500";
+      } else if (this.value === "150") {
+        prezzoInput.value = "6500";
+      } else {
+        prezzoInput.value = ""; // Nessuna cilindrata selezionata
+      }
+    });
+  </script>
+
 </body>
 </html>

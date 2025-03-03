@@ -7,13 +7,15 @@ $socket = connectionOpen($address, $port);
 
 $targa = $_POST['targa'];
 $cilindrata = $_POST['cilindrata'];
+$prezzo = $_POST['prezzo'];
 
 
     //invio codice gara libera
     fwrite($socket, "aggiungiKartConcessionario ");
     //invio dati
     fwrite($socket, $targa . " ");
-    fwrite($socket, $cilindrata . "\n");
+    fwrite($socket, $cilindrata . " ");
+    fwrite($socket, $prezzo . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
