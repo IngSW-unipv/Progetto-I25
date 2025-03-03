@@ -1,4 +1,5 @@
 <?php
+  include 'default/headerProprietario.php';
   include 'default/footerConce.php';
 ?>
 
@@ -14,22 +15,6 @@
   <link rel="stylesheet" href="css/profilo.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="index.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
-        </a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="proprietario.php">Home</a></li>
-          <li><a href="default/logout.php" id="logoutBtn">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   
   <!-- Sezione Hero -->

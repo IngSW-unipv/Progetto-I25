@@ -1,6 +1,6 @@
 <?php
-  session_start();
-  include 'default/footerConce.php';
+   include 'default/headerProprietario.php';
+   include 'default/footerConce.php';
 ?>
 
 
@@ -17,22 +17,6 @@
 </head>
 <body>
   <main>
-   <!-- Header -->
-   <header>
-      <div class="header-container">
-         <div class="logo">
-         <a href="index.php">
-            <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
-         </a>
-         </div>
-         <nav>
-         <ul>
-            <li><a href="proprietario.php">Home</a></li>
-            <li><a href="logout.php" id="logoutBtn">Logout</a></li>
-         </ul>
-         </nav>
-      </div>
-   </header>
     <section class="form-section">
       <h1>Inserisci un dipendente</h1>
       <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->

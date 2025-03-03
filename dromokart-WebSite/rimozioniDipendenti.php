@@ -1,10 +1,5 @@
 <?php
-  session_start();
-  /*if(!isset($_SESSION['username']) || $_SESSION['rank'] != "5"){
-    header('Location: index.php');
-    die();
-  }*/
-
+  include 'default/headerProprietario.php';
   include 'default/footerConce.php';
 ?>
 
@@ -19,38 +14,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/registration.css">
-  <style>
-    table { 
-      border-collapse: collapse; 
-      width: 100%; 
-    }
-    th, td { 
-      border: 1px solid #ddd; 
-      padding: 8px; 
-      text-align: center; /* Testo centrato */
-    }
-    th { 
-      background-color: #4CAF50; 
-    }
-  </style>
 </head>
 <body>
-   <!-- Header -->
-   <header>
-      <div class="header-container">
-         <div class="logo">
-         <a href="index.php">
-            <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
-         </a>
-         </div>
-         <nav>
-         <ul>
-            <li><a href="proprietario.php">Home</a></li>
-            <li><a href="logout.php" id="logoutBtn">Logout</a></li>
-         </ul>
-         </nav>
-      </div>
-   </header>
    <hero>
     <h1>Elimina un dipendente</h1>
    </hero>
