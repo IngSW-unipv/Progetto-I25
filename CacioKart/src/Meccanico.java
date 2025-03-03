@@ -1,7 +1,5 @@
 import java.net.Socket;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +14,7 @@ public class Meccanico implements Iinventario {
     private String serbatoio;
     private String DELETE;
     private int queryIndicator;
+    private String UPDATE;
 
     public Meccanico() {
 
@@ -29,8 +28,13 @@ public class Meccanico implements Iinventario {
 
     };
 
-    public void aggiuntaBenzina(){
+    public void aggiuntaBenzina(String info, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
 
+        UPDATE = "UPDATE kart SET kart.serbatoio = '20' WHERE kart.targa = '" + info + "'";
+        queryIndicator = db.executeUpdateQuery(UPDATE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 
     public void mostraKart(Socket clientSocket) throws SQLException {

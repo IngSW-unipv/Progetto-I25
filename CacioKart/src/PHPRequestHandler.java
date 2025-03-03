@@ -81,6 +81,12 @@ public class PHPRequestHandler {
                     s.compraKart(info, clientSocket);
                     break;
 
+                case AGGIUNGI_BENZINA:
+                    //targa kart
+                    Meccanico m = new Meccanico();
+                    m.aggiuntaBenzina(info,clientSocket);
+                    break;
+
                 default:
                     break;
             }
