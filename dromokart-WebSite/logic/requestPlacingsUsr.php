@@ -5,7 +5,7 @@
     $socket = connectionOpen($address, $port);
 
     fwrite($socket, "richiestaClassUsr ");
-    fwrite($socket, $_SESSION['user'] . "\n");
+    fwrite($socket, $_SESSION['username'] . "\n");
 
     $res = '';
     while (!feof($socket)) {
