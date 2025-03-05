@@ -1,15 +1,15 @@
-<?php    
-    $rows = explode("\n", $res);
+<?php
 
-    function createTable($header){
-        $ncol = count($header);      
+    function createTable(&$header, $res){
+        $rows = explode("\n", $res);
+        $ncol = count($header);
         // Controlla se sono presenti righe non vuote
         if(count($rows) > 0 && !empty(trim($rows[0]))) {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            for($h = 0; $h < $rows; $h++){
-                echo '<th>' .$header[$h] .'</th>';
+            foreach($header as $head){
+                echo '<th>' .$head .'</th>';
             }
             echo '</tr>';
             echo '</thead>';
@@ -23,12 +23,9 @@
                 // Controlla che ci sia il numero di colonne necessario
                 if(count($columns) >= $ncol) {
                     echo '<tr>';
-                    echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[3]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[4]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[5]) . '</td>';
+                    foreach($columns as $col){
+                      echo '<td>' . htmlspecialchars($col) . '</td>';
+                    }
                     echo '</tr>';
                 }
             }
