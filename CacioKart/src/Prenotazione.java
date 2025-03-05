@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.util.Collections.replaceAll;
+
 public class Prenotazione {
     private final int MAX=20;
     private String SELECT;
@@ -36,19 +38,20 @@ public class Prenotazione {
             nPartecipanti = "0";
         } else {
             nPartecipanti = String.valueOf(result.get(0));
+            nPartecipanti.toString().replaceAll("\\D", "");
         }
+
         if (nPartecipanti!="0") {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             if (result != null && !result.isEmpty() && result.get(0) != null) {
                 idP = result.get(0).toString();
+                idP=idP.toString().replaceAll("\\D", "");
             } else {
                 idP = "0"; // Se non ci sono prenotazioni, partiamo da 0
             }
         }
-        System.out.println(idP);
-        idP = String.valueOf(Integer.parseInt(idP + 1)) ;
-        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
+        idP = String.valueOf(Integer.parseInt(idP )+1) ;
         if(Integer.parseInt(nPartecipanti) < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
@@ -81,10 +84,10 @@ public class Prenotazione {
 //      Controllo per evitare errori di null o lista vuota
         if (result != null || !result.isEmpty() || result.get(0)!= null) {
             nPartecipanti =String.valueOf(result.get(0));
+            nPartecipanti=nPartecipanti.toString().replaceAll("\\D", "");
         } else {
             nPartecipanti = "0"; // Se il risultato è nullo o vuoto, impostiamo 0
         }
-        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti)>=1 && Integer.parseInt(nPartecipanti)< MAX){
             //creazione della gara
             switch (tipologia){
@@ -93,7 +96,8 @@ public class Prenotazione {
                     result = db.executeReturnQuery(SELECT);
                     if(result != null || !result.isEmpty() || result.get(0)!= null) {
                         idG = String.valueOf(result.get(0));
-                        idG=String.valueOf(Integer.parseInt(idG+1));
+                        idG=idG.toString().replaceAll("\\D", "");
+                        idG=String.valueOf(Integer.parseInt(idG)+1);
                     }else{
                         idG="1";
                     }
@@ -117,7 +121,8 @@ public class Prenotazione {
                     result = db.executeReturnQuery(SELECT);
                     if(result != null || !result.isEmpty() || result.get(0) != null) {
                         idG =String.valueOf(result.get(0));
-                        idG=String.valueOf(Integer.parseInt(idG+1));
+                        idG=idG.toString().replaceAll("\\D", "");
+                        idG=String.valueOf(Integer.parseInt(idG)+1);
                     }else{
                         idG="1";
                     }
