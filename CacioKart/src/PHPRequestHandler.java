@@ -299,6 +299,12 @@ public class PHPRequestHandler {
         m.rimozioneKart(targa, clientSocket);
     }
 
+    /**Metodo per mostrare i kart disponibili alla rimozione.
+     * Non necessita di dati in ingresso, la query è sempre quella.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         //Query per quando voglio rimuovere i kart dal noleggio
@@ -308,6 +314,13 @@ public class PHPRequestHandler {
         m.mostraKart(query,clientSocket);
     }
 
+    /**Metodo per mostrare i kart appartenenti ai clienti e
+     * disponibili al noleggio per modificarne la manutenzione.
+     * Non necessita di dati in ingresso, la query è sempre quella.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         //Query per quando voglio aggiungere i kart al noleggio
