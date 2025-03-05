@@ -46,7 +46,8 @@ public class Prenotazione {
                 idP = "0"; // Se non ci sono prenotazioni, partiamo da 0
             }
         }
-        idP =String.valueOf(Integer.parseInt(idP + 1)) ;
+        idP = String.valueOf(Integer.parseInt(idP + 1)) ;
+        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti) < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
