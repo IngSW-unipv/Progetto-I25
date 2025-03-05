@@ -113,16 +113,16 @@ public class PHPRequestHandler {
                     break;
 
                 case MANUTENZIONE:
-                    Meccanico m = new Meccanico();
-                    m.aggiornamentoManutenzione(info, clientSocket);
+                    manutenzioneCase(info, clientSocket);
                     break;
 
                 case MOSTRA_PEZZI:
-                    Concessionaria c = new Concessionaria();
-                    c.mostraPezzo(clientSocket);
+                    mostraPezziCase(clientSocket);
                     break;
 
-
+                case MOSTRA_GARA:
+                    mostraGaraCase(info,clientSocket);
+                    break;
 
                 default:
                     break;
@@ -167,7 +167,7 @@ public class PHPRequestHandler {
                 "JOIN caciokart.socio AS s ON c.socio = s.socio " +
                 "ORDER BY c.tempTot DESC " +
                 "LIMIT 10";
-        c.classificaG(query,clientSocket);
+        c.classificaCompleta(query,clientSocket);
     }
 
 
@@ -345,6 +345,22 @@ public class PHPRequestHandler {
     private void acquistaKartCase(String dati, Socket clientSocket) throws SQLException {
         Socio s = new Socio(null, null, null, null, null, null);
         s.compraKart(dati, clientSocket);
+    }
+
+    private void manutenzioneCase(String info, Socket clientSocket) throws SQLException {
+        Meccanico m = new Meccanico();
+        m.aggiornamentoManutenzione(info, clientSocket);
+    }
+
+    private void mostraPezziCase(Socket clientSocket) throws SQLException {
+        Concessionaria c = new Concessionaria();
+        c.mostraPezzo(clientSocket);
+    }
+
+    private void mostraGaraCase(String idGara, Socket clientSocket) throws SQLException {
+        Classifica c = new Classifica();
+        query = "SELECT * FROM caciokart.classifica WHERE idGara = '" + idGara + "'";
+        c.classificaCompleta(query, clientSocket);
     }
 
 }

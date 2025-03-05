@@ -14,7 +14,6 @@ public class Classifica {
     }
 
     public void classificaArbitro(String query, Socket clientSocket) throws SQLException {
-        db = new DBConnector();
         responder = new PHPResponseHandler();
         result = getClassifica(query);
 
@@ -31,7 +30,7 @@ public class Classifica {
         }
     }
 
-    public void classificaG(String query, Socket clientSocket) throws SQLException {
+    public void classificaCompleta(String query, Socket clientSocket) throws SQLException {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
 
