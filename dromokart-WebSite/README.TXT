@@ -4,9 +4,6 @@ CHI SIAMO (Andrea)
 SOCIO
 -COMPRARE I PEZZI
 
-CLASSIFICA (Andrea)
--Integrazione con java per prendere i dati della Classifica(da rivalutare?)
-
 PAGINA DEI PRODOTTI (Alessandro)
 -prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
 

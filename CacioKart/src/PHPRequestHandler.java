@@ -95,8 +95,13 @@ public class PHPRequestHandler {
                 case AGGIUNGI_BENZINA:
                     aggiungiBenzinaCase(info, clientSocket);
                     break;
+
                 case CLASSIFICA_GENERALE:
                     cG(clientSocket);
+                    break;
+
+                case CLASSIFICA_UTENTE:
+                    classificaUtente(info,clientSocket);
                     break;
 
                 case MANUTENZIONE:
@@ -134,6 +139,12 @@ public class PHPRequestHandler {
     private void cG(Socket clientSocket) throws SQLException {
         Persona utente = new Persona(null, null, null, null, null, null);
         utente.classificaG(clientSocket);
+    }
+
+
+    private void classificaUtente(String cfPilota,Socket clientSocket) throws SQLException {
+        Persona utente = new Persona(null, null, null, null, null, null);
+        utente.classificaUtente(cfPilota,clientSocket);
     }
 
     /**Metodo per gestire la logica di registrazione.
