@@ -24,31 +24,47 @@
         <div class="main-container">
           <div class="products-container">
         <?php
-          //require 'logic/requestParts.php';
-          //queste di sotto sono delle prove
-          $part[0][0] = "Motore 125cc";
-          $part[0][1] = 3;
-          $part[0][2] = 2000;
-          $part[1][0] = "Carburatore 28";
-          $part[1][1] = 7;
-          $part[1][2] = 170;
-
-          $i = 2;          
-
-          for($j = 0; $j < $i; $j++){
-            echo '<div class="product">';
-            echo '<a href="/products/' .$part[$j][0] .'.php"><img src="immagini/Pezzi/' .$part[$j][0] .'.png" alt="' .$part[$j][0] .'"></a>';
-            echo '<a href="/products/' .$part[$j][0] .'.php"><h1>' .$part[$j][0] .'</h1></a>';
-            echo '<p><h3> prezzo: </h3>'.$part[$j][2] .'€</p>';
-            if($part[$j][1] > 0)
-            echo '<p>Quantità: ';
-            if($part[$j][1] > 0){
-              echo $part[$j][1] .'</p>';
-            } else{
-              echo 'esaurito</p>';
-            }
-            
-            echo'</div>';
+          require 'logic/requestParts.php';
+          
+          //i parametri sono: id, nome del pezzo, quantita`, prezzo       
+          $parts =  explode("\n", $res);
+          $ncol = 4;
+          // Controlla se sono presenti righe non vuote
+          if(count($parts) > 0 && !empty(trim($parts[0]))) {
+              echo '<table>';
+              echo '<thead>';
+              echo '<tr>';
+              foreach($header as $head){
+                  echo '<th>' .$head .'</th>';
+              }
+              echo '</tr>';
+              echo '</thead>';
+              echo '<tbody>';
+              
+              // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
+              foreach($parts as $part) {
+                  $part = trim($part);
+                  if(empty($part)) continue;
+                  $columns = preg_split('/\s+/', $part);
+                  // Controlla che ci sia il numero di colonne necessario
+                  if(count($columns) >= $ncol) {
+                    echo '<div class="product">';
+                    $namePart = str_replace('_',' ',$columns[1]);
+                    echo /*'<a href="/products/' .$columns[1] .'.php">*/'<img src="immagini/Pezzi/' .$namePart .'.png" alt="' .$namePart .'">'; //</a>';
+                    echo /*'<a href="/products/' .$columns[1] .'.php">*/ '<h1>' .$namePart .'</h1>';//</a>';
+                    echo '<p><h3> prezzo: </h3>'.$columns[3] .'€</p>';
+                    if($columns[2] > 0)
+                    echo '<p>Quantità: ';
+                    if($columns[2] > 0){
+                      echo $columns[2] .'</p>';
+                    } else{
+                      echo 'esaurito</p>';
+                    }
+                    echo'</div>';
+                  }
+              }
+          } else {
+              echo '<p>Nessun dato ricevuto.</p>';
           }
         ?>
         </div>

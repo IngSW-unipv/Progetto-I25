@@ -5,17 +5,18 @@
 
     fwrite($socket, "mostraPezzi\n");
 
-    $i = 0;
 
-    //i parametri sono: nome del pezzo, quantita`, prezzo
-    while(($res = fgets($socket))  != "end"){
-        $str = explode($res, ' ');
-        $part[$i][0] = $str[0];
-        $part[$i][1] = $str[1];
-        $part[$i][2] = $str[2];
-        $part[$i][3] = $str[3];
-        $i++;
+    while (!feof($socket)) {
+        $line = fgets($socket);
+        // Se la riga, una volta rimossi spazi e newline, è "end", esci dal ciclo
+        if (trim($line) === "end") {
+            break;
+        }
+        $res .= $line;
     }
+    $res = trim($res);
+
+    return $res;
 
     fclose($socket);
 ?>
