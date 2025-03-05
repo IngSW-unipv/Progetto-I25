@@ -7,7 +7,7 @@ function connectionOpen($address, $port) {
     $socket = fsockopen("tcp://$address", $port, $errno, $errstr, 30);
     if (!$socket) {
         // Se la connessione fallisce, reindirizza ad una pagina di errore
-        header('Location: ../ConnectionError.html');
+        header('Location: ../erroreGenerale.php');
         exit();
     }
     return $socket;
