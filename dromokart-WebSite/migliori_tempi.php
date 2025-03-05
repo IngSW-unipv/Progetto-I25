@@ -9,7 +9,8 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/migliori_tempi.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/registration.css">
 
 </head>
 <body>

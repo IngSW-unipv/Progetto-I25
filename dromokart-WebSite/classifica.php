@@ -26,12 +26,13 @@
 
   <!-- Contenuto principale -->
   <main>
-    <div class="table-section">
-
-   
+    <div class="table-section">   
     <?php
       //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
-      require 'logic/requestPlacingsGen.php';
+      //require 'logic/requestPlacingsGen.php';
+      require 'logic/requestData.php';
+      $res = request("richiestaClass\n", $socket);
+
       require 'logic/tableCreation.php';
 
       $titolo = array("ID Gara", "NomePilota", "CognomePilota", "Targa", "Miglior Giro", "Tempo totale");
