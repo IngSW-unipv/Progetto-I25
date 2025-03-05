@@ -9,7 +9,7 @@ public class PHPRequestHandler {
     private BufferedReader in;
     private String comando;
     private String info;
-    private String[] messaggio = new String[2];
+    private String[] messaggio;
     private String tipologia;
     private TipoComandi tipo;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

@@ -39,7 +39,8 @@ public class WebConnector {
             }
         }
         catch(IOException e){
-                throw new RuntimeException(e);
+            System.out.println("Impossibile aprire il socket: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
