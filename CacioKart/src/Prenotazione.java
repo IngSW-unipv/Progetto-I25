@@ -44,11 +44,11 @@ public class Prenotazione {
             result = db.executeReturnQuery(SELECT);
             if (result != null && !result.isEmpty() && result.get(0) != null) {
                 idP = result.get(0).toString().replaceAll("\\D", "");
+                idP = String.valueOf(Integer.parseInt(idP )+1) ;
             } else {
-                idP = "0"; // Se non ci sono prenotazioni, partiamo da 0
+                idP = "1"; // Se non ci sono prenotazioni, partiamo da 1
             }
         }
-        idP = String.valueOf(Integer.parseInt(idP )+1) ;
         if(nPartecipanti.compareTo("1")>0 && nPartecipanti.compareTo(MAX)<0){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
