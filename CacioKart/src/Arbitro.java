@@ -18,23 +18,4 @@ public class Arbitro {
 
     }
 
-    //metodo per inviare a schermo tutti i possibili idGara
-    public void mostraGare(Socket clientSocket) throws SQLException {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        SELECT =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
-        gare = db.executeReturnQuery(SELECT);
-
-        if(gare != null) {
-            for(Map<String, Object> row : gare) {
-                idGara = row.get("idGara").toString();
-                listaPezzi.append(idGara).append("\n");
-            }
-            listaPezzi.append("end");
-            responder.sendResponse(clientSocket, listaPezzi.toString());
-
-        }else{
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
 }

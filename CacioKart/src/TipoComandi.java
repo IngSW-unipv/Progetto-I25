@@ -8,6 +8,7 @@ public enum TipoComandi {
     LOGIN("login"),
     CLASSIFICA_GENERALE("richiestaClass"),
     CLASSIFICA_UTENTE("richiestaClassUsr"),
+    CLASSIFICA_ARBITRO("richiestaClassAr"),
     PRENOTAZIONE_LIBERA("prenotazioneLibera"),
     PRENOTAZIONE_SECCA("prenotazioneSecca"),
     AGGIUNTA_KART_CONCESSIONARIA("aggiungiKartConcessionario"),
@@ -25,9 +26,7 @@ public enum TipoComandi {
     MOSTRA_PEZZI("mostraPezzi"),
     ACQUISTA_PEZZI("acquistaPezzi"),
     ACQUISTA_KART("acquistaKart"),
-    MANUTENZIONE("manutenzione"),
-    MOSTRA_CLASSIFICA("mostraClassifica"),
-    MOSTRA_CLASSIFICA_SOCIO("mostraGareSocio");
+    MANUTENZIONE("manutenzione");
 
     private final String descrizione;
 

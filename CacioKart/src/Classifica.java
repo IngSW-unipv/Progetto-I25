@@ -4,34 +4,78 @@ import java.util.List;
 import java.util.Map;
 
 public class Classifica {
+    private DBConnector db;
+    private PHPResponseHandler responder;
+    private StringBuilder classifica;
+    private List<Map<String, Object>> result;
+    private String nomep, cognomep, targa, bGiro, tempoTot, idGara;
 
     public Classifica() {
     }
 
-    public void classificaUtente(String query, Socket clientSocket) throws SQLException {
+    public void classificaArbitro(String query, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
+        result = getClassifica(query);
 
-        // Dichiarazione variabili per i dati estratti
-        String nomep, cognomep, targa, bGiro, tempoTot, idGara;
+        if(result != null) {
+            for(Map<String, Object> row : result) {
+                idGara = row.get("idGara").toString();
+                classifica.append(idGara).append("\n");
+            }
+            classifica.append("end");
+            responder.sendResponse(clientSocket, classifica.toString());
 
-        // Query corretta: metti gli apici attorno al valore e aggiungi "AS nomePilota" / "AS cognomePilota"
-        String SELECT =
-                "SELECT c.idGara, " +
-                        "       c.targa, " +
-                        "       c.bGiro, " +
-                        "       c.tempTot " +
-                        "FROM caciokart.classifica AS c " +
-                        "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                        // Importante: apici e spazio!
-                        "WHERE s.nome = '" + cfPilota + "' " +
-                        "ORDER BY c.tempTot DESC " +
-                        "LIMIT 10";
+        }else{
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public void classificaG(String query, Socket clientSocket) throws SQLException {
+        // Inizializza il responder.
+        responder = new PHPResponseHandler();
+
+        // Esecuzione della query
+        result = getClassifica(query);
+
+        classifica = new StringBuilder();
+
+        if (result != null) {
+            // Iterazione sui risultati
+            for (Map<String, Object> row : result) {
+                idGara = row.get("idGara").toString();
+                nomep = row.get("nome").toString();
+                cognomep = row.get("cognome").toString();
+                targa = row.get("targa").toString();
+                bGiro = row.get("bGiro").toString();
+                tempoTot = row.get("tempTot").toString();
+
+                // Componiamo la riga di output
+                classifica.append(idGara).append(" ")
+                        .append(nomep).append(" ")
+                        .append(cognomep).append(" ")
+                        .append(targa).append(" ")
+                        .append(bGiro).append(" ")
+                        .append(tempoTot).append("\n");
+            }
+
+            // Aggiungiamo un marcatore di fine
+            classifica.append("end");
+
+            // Invio della risposta al client
+            responder.sendResponse(clientSocket, classifica.toString());
+        } else {
+            // Se la query non ha restituito risultati
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public void classificaUtente(String query, Socket clientSocket) throws SQLException {
+        responder = new PHPResponseHandler();
 
         // Esegui la query
-        List<Map<String, Object>> result = db.executeReturnQuery(SELECT);
-
-        StringBuilder classifica = new StringBuilder();
+        result = getClassifica(query);
+        classifica = new StringBuilder();
 
         if (result != null) {
             for (Map<String, Object> row : result) {
@@ -50,5 +94,11 @@ public class Classifica {
         } else {
             responder.sendResponse(clientSocket, "end");
         }
+    }
+
+    public List<Map<String, Object>> getClassifica(String SELECT) throws SQLException {
+        db = new DBConnector();
+        return db.executeReturnQuery(SELECT);
+
     }
 }

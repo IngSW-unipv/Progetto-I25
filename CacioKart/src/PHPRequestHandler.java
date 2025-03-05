@@ -108,6 +108,10 @@ public class PHPRequestHandler {
                     classificaUtente(info,clientSocket);
                     break;
 
+                case CLASSIFICA_ARBITRO:
+                    classificaArbitro(clientSocket);
+                    break;
+
                 case MANUTENZIONE:
                     Meccanico m = new Meccanico();
                     m.aggiornamentoManutenzione(info, clientSocket);
@@ -118,8 +122,7 @@ public class PHPRequestHandler {
                     c.mostraPezzo(clientSocket);
                     break;
 
-                case MOSTRA_CLASSIFICA:
-                    break;
+
 
                 default:
                     break;
@@ -146,18 +149,41 @@ public class PHPRequestHandler {
         utente.login(clientSocket);
     }
 
+    private void classificaArbitro(Socket clientSocket) throws SQLException {
+        Classifica c = new Classifica();
+        query =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
+        c.classificaArbitro(query, clientSocket);
+    }
+
     // metodo per la classifica Generale
     // mostra gli ultimi 10 vincitori delle ultime 10 gare creando una mini classifica
 
     private void classificaGenerale(Socket clientSocket) throws SQLException {
-        Persona utente = new Persona(null, null, null, null, null, null);
-        utente.classificaG(clientSocket);
+        Classifica c = new Classifica();
+        query = "SELECT c.idGara, s.nome, s.cognome, c.targa, c.bGiro, c.tempTot " +
+                "FROM caciokart.classifica AS c " +
+                "JOIN (SELECT idGara, MIN(tempTot) AS tempo_migliore FROM caciokart.classifica GROUP BY idGara) AS agg " +
+                "ON c.idGara = agg.idGara AND c.tempTot = agg.tempo_migliore " +
+                "JOIN caciokart.socio AS s ON c.socio = s.socio " +
+                "ORDER BY c.tempTot DESC " +
+                "LIMIT 10";
+        c.classificaG(query,clientSocket);
     }
 
 
     private void classificaUtente(String cfPilota,Socket clientSocket) throws SQLException {
-        Persona utente = new Persona(null, null, null, null, null, null);
-        utente.classificaUtente(cfPilota,clientSocket);
+        Classifica c = new Classifica();
+        query = "SELECT c.idGara, " +
+                "       c.targa, " +
+                "       c.bGiro, " +
+                "       c.tempTot " +
+                "FROM caciokart.classifica AS c " +
+                "JOIN caciokart.socio AS s ON c.socio = s.socio " +
+                // Importante: apici e spazio!
+                "WHERE s.nome = '" + cfPilota + "' " +
+                "ORDER BY c.tempTot DESC " +
+                "LIMIT 10";
+        c.classificaUtente(query,clientSocket);
     }
 
     /**Metodo per gestire la logica di registrazione.
