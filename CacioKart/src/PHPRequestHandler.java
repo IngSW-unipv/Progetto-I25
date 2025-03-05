@@ -251,6 +251,7 @@ public class PHPRequestHandler {
                 "(SELECT concessionaria.tipol FROM concessionaria)";
         m.mostraKart(query,clientSocket);
         //KRT123 06/03/2023
+        //DA FARE
     }
 
     /**Metodo per aggiungere dipendenti.

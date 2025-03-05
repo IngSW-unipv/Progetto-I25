@@ -25,36 +25,22 @@ public class WebConnector {
      *
      */
     public void createServer() throws SQLException {
-        while(true) {
-            try {
-                System.out.println("Creazione server...");
-                serverSocket = new ServerSocket(porta);
-                System.out.println("Server in ascolto sulla porta " + porta);
-                clientSocket = serverSocket.accept(); // Attende connessioni
-                System.out.println("Client connesso!\n");
-                requestHandler.handleRequests(getClientSocket());
-                socketCloser();
+        try {
+            System.out.println("Creazione server...");
+            serverSocket = new ServerSocket(porta);
+            System.out.println("Server in ascolto sulla porta " + porta);
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            while (true) {
+                clientSocket = serverSocket.accept(); // Attende connessioni
+                System.out.println("Client connesso!");
+                requestHandler.handleRequests(clientSocket);
+                clientSocket.close();
+
             }
         }
-    }
-
-    /**Metodo privato per chiudere i socket.
-     * Non necessario, ma presente per facilità di lettura.
-     *
-     */
-    private void socketCloser(){
-        try {
-            clientSocket.close();
-            serverSocket.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        catch(IOException e){
+                throw new RuntimeException(e);
         }
     }
 
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
 }
