@@ -40,12 +40,13 @@ public class Prenotazione {
         if (nPartecipanti!="0") {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
-            if (result != null && !result.isEmpty() && result.get(0).get("max") != null) {
+            if (result != null && !result.isEmpty() && result.get(0) != null) {
                 idP = result.get(0).toString();
             } else {
                 idP = "0"; // Se non ci sono prenotazioni, partiamo da 0
             }
         }
+        System.out.println(idP);
         idP = String.valueOf(Integer.parseInt(idP + 1)) ;
         nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti) < MAX){
