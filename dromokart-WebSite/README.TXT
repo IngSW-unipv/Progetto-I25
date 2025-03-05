@@ -4,9 +4,6 @@ CHI SIAMO (Andrea)
 SOCIO
 -COMPRARE I PEZZI
 
-PAGINA DEI PRODOTTI (Alessandro)
--prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
-
 PROPRIETARIO (Alessandro)
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
 

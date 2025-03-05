@@ -1,5 +1,6 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
+<?php require 'logic/controlloLogin.php'; ?>
 <?php require 'logic/requestParts.php'; ?>
 
 <!DOCTYPE html>

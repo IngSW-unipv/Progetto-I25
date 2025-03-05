@@ -1,18 +1,7 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
-
-<?php
-
-// Controlla se l'utente è loggato
-if (!isset($_SESSION['username'])) {
-    // Se non è loggato, reindirizza al login
-    header("Location: index.php");
-    exit;
-}
-
-$name = $_SESSION['name'];
-?>
-
+<?php require 'logic/controlloLogin.php'; ?>
+<?php require 'logic/controlloLogin.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>

@@ -1,6 +1,7 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
 <?php include 'logic/mostraKartRimuovi.php'; ?>
+<?php require 'logic/controlloLogin.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>

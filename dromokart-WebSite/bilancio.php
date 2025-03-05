@@ -1,6 +1,7 @@
 <?php
   include 'default/footerConce.php';
 ?>
+<?php require 'logic/controlloLogin.php'; ?>
 
 <!DOCTYPE html>
 <html lang="it">

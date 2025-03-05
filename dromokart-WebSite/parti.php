@@ -3,6 +3,7 @@
   include 'default/footerConce.php';
   include 'default/modalHome.php';
 ?>
+<?php require 'logic/controlloLogin.php'; ?>
 
 <!DOCTYPE html>
 <html lang="it">
