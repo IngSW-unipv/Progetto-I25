@@ -5,7 +5,7 @@
 
     $socket = connectionOpen($address, $port);
 
-    fwrite($socket, "requestPart ");
+    fwrite($socket, "mostraPezzi\n");
 
     $i = 0;
 

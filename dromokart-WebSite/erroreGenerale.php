@@ -20,7 +20,7 @@
   <main>
     <!-- Sezione Hero -->
     <section class="hero">
-      <h1>Errore durante la comunicazione con java  <a href = "index.php">TORNA ALLA HOMEPAGE</a></h1>
+      <h1>Errore durante la comunicazione con java   <a href = "index.php">TORNA ALLA HOMEPAGE</a></h1>
     </section>
 
 
