@@ -16,6 +16,7 @@ public class Concessionaria implements Iinventario{
     private int queryResult;
     private List<Map<String, Object>> maxIDProdotto;
     private int idProdotto;
+    private String ultimoProdotto;
 
     public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
         //this.pezzi = pezzi;
@@ -54,8 +55,15 @@ public class Concessionaria implements Iinventario{
         //System.out.println(maxIDProdotto.get(0));
 
         //Logica per rimuovere tutti i caratteri tranne i numeri
-        idProdotto = Integer.parseInt(maxIDProdotto.get(0).toString().replaceAll("\\D","")) + 1;
+        ultimoProdotto = maxIDProdotto.get(0).toString().replaceAll("\\D", "");
 
+        if(ultimoProdotto == ""){
+            idProdotto = 1;
+
+        }else {
+            idProdotto = Integer.parseInt(ultimoProdotto) + 1;
+
+        }
         //e impostare concessionario tipol
         INSERT = "INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) VALUES('" +
                 idProdotto + "', '" +

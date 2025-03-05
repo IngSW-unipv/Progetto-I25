@@ -9,11 +9,11 @@ public class PHPRequestHandler {
     private BufferedReader in;
     private String comando;
     private String info;
-    private String[] messaggio;
-    String tipologia;
+    private String[] messaggio = new String[2];
+    private String tipologia;
     private TipoComandi tipo;
-    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private String query;
 
     public PHPRequestHandler() {
@@ -31,7 +31,10 @@ public class PHPRequestHandler {
             if(messaggio.length == 2) {
                 info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
                 System.out.println("Messaggio ricevuto: " + messaggio[0] + " " + messaggio[1]);
+            }else{
+                System.out.println("Messaggio ricevuto: " + messaggio[0]);
             }
+
             tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
 
             /**Switch per gestire i comandi
