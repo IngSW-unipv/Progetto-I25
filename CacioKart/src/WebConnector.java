@@ -28,7 +28,7 @@ public class WebConnector {
         try {
             System.out.println("Creazione server...");
             serverSocket = new ServerSocket(porta);
-            System.out.println("Server in ascolto sulla porta " + porta);
+            System.out.println("Server in ascolto sulla porta " + porta + "\n");
 
             while (true) {
                 clientSocket = serverSocket.accept(); // Attende connessioni
