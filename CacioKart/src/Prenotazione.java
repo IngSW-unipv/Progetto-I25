@@ -83,6 +83,7 @@ public class Prenotazione {
         } else {
             nPartecipanti = "0"; // Se il risultato è nullo o vuoto, impostiamo 0
         }
+        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti)>=1 && Integer.parseInt(nPartecipanti)< MAX){
             //creazione della gara
             switch (tipologia){
