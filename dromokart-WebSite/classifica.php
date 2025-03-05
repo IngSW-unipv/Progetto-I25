@@ -32,8 +32,12 @@
     <?php
       //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
       require 'logic/requestPlacingsGen.php';
+      require 'logic/tableCreation.php';
 
-      // Suddivide $res in righe
+      $title = array("ID Gara", "Nome", "Cognome", "Targa", "Miglior Giro", "Tempo totale");
+      createTable();
+
+      /*// Suddivide $res in righe
       $rows = explode("\n", $res);
       
       // Controlla se sono presenti righe non vuote
@@ -42,7 +46,8 @@
           echo '<thead>';
           echo '<tr>';
           echo '<th>ID Gara</th>';
-          echo '<th>CF</th>';
+          echo '<th>Nome</th>';
+          echo '<th>Cognome</th>';
           echo '<th>Targa</th>';
           echo '<th>Miglior Giro</th>';
           echo '<th>tempo totale</th>';
@@ -55,14 +60,15 @@
             $row = trim($row);
             if(empty($row)) continue;
             $columns = preg_split('/\s+/', $row);
-            // Assicurati che ci siano almeno 3 colonne
-            if(count($columns) >= 5) {
+            // Assicurati che ci siano almeno 6 colonne
+            if(count($columns) >= 6) {
                 echo '<tr>';
                 echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[3]) . '</td>';
                 echo '<td>' . htmlspecialchars($columns[4]) . '</td>';
+                echo '<td>' . htmlspecialchars($columns[5]) . '</td>';
                 echo '</tr>';
             }
           }
@@ -71,7 +77,7 @@
           echo '</table>';
       } else {
           echo '<p>Nessun dato ricevuto.</p>';
-      }
+      }*/
     ?>
     </div>
   </main>
