@@ -120,6 +120,10 @@ public class PHPRequestHandler {
                     mostraPezziCase(clientSocket);
                     break;
 
+                /*case ACQUISTA_PEZZI:
+                    acquistaPezzi(info,clientSocket);
+                    break;*/
+
                 case MOSTRA_GARA:
                     mostraGaraCase(info,clientSocket);
                     break;

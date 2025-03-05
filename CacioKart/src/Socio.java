@@ -70,6 +70,17 @@ public class Socio extends Persona implements Iinventario{
     //public int
 
     //Override metodi Iinventario
+    /* DA COMPLETARE MA L'IDEA è QUESTA
+    public void acquistaPezzi(String info, Socket clientSocket) throws SQLException {
+        String idProdotto;
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+
+        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE id = idProdotto";
+        db.executeUpdateQuery(UPDATE);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+    }
+*/
 
 
 }
