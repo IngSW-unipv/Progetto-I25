@@ -101,7 +101,7 @@ public class PHPRequestHandler {
                     break;
 
                 case CLASSIFICA_GENERALE:
-                    cG(clientSocket);
+                    classificaGenerale(clientSocket);
                     break;
 
                 case CLASSIFICA_UTENTE:
@@ -111,6 +111,14 @@ public class PHPRequestHandler {
                 case MANUTENZIONE:
                     Meccanico m = new Meccanico();
                     m.aggiornamentoManutenzione(info, clientSocket);
+                    break;
+
+                case MOSTRA_PEZZI:
+                    Concessionaria c = new Concessionaria();
+                    c.mostraPezzo(clientSocket);
+                    break;
+
+                case MOSTRA_CLASSIFICA:
                     break;
 
                 default:
@@ -141,7 +149,7 @@ public class PHPRequestHandler {
     // metodo per la classifica Generale
     // mostra gli ultimi 10 vincitori delle ultime 10 gare creando una mini classifica
 
-    private void cG(Socket clientSocket) throws SQLException {
+    private void classificaGenerale(Socket clientSocket) throws SQLException {
         Persona utente = new Persona(null, null, null, null, null, null);
         utente.classificaG(clientSocket);
     }

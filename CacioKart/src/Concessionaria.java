@@ -10,13 +10,15 @@ public class Concessionaria implements Iinventario{
     private PHPResponseHandler responder;
     private String INSERT;
     private String SELECT;
-    private String targa;
-    private int cilindrata;
-    private double serbatoio;
+    private String idProdotto;
+    private String tipol;
+    private String quantita;
+    private String prezzo;
     private int queryResult;
     private List<Map<String, Object>> maxIDProdotto;
-    private int idProdotto;
     private String ultimoProdotto;
+    private List<Map<String, Object>> pezzi;
+    private StringBuilder listaPezzi = new StringBuilder();
 
     public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
         //this.pezzi = pezzi;
@@ -58,10 +60,10 @@ public class Concessionaria implements Iinventario{
         ultimoProdotto = maxIDProdotto.get(0).toString().replaceAll("\\D", "");
 
         if(ultimoProdotto == ""){
-            idProdotto = 1;
+            idProdotto = "1";
 
         }else {
-            idProdotto = Integer.parseInt(ultimoProdotto) + 1;
+            idProdotto = String.valueOf((Integer.parseInt(ultimoProdotto) + 1));
 
         }
         //e impostare concessionario tipol
@@ -75,6 +77,29 @@ public class Concessionaria implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(queryResult));
 
     };
+
+    //mostra tutti i pezzi della concessionaria tranne quelli che iniziano per KRT
+    public void mostraPezzo(Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        SELECT =  "SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'";
+        pezzi = db.executeReturnQuery(SELECT);
+
+        if(pezzi != null) {
+            for(Map<String, Object> row : pezzi) {
+                idProdotto = row.get("idProdotto").toString();
+                tipol = row.get("tipol").toString();
+                quantita = row.get("quantita").toString();
+                prezzo = row.get("prezzo").toString();
+                listaPezzi.append(idProdotto).append(" ").append(tipol).append(" ").append(quantita).append(" ").append(prezzo).append("\n");
+            }
+            listaPezzi.append("end");
+            responder.sendResponse(clientSocket, listaPezzi.toString());
+
+        }else{
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
 
     public void inserimentoPezzo(){
 

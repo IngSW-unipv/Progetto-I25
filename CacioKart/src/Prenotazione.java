@@ -49,7 +49,7 @@ public class Prenotazione {
                 idP = "1"; // Se non ci sono prenotazioni, partiamo da 1
             }
         }
-        if(nPartecipanti.compareTo("1")>0 && nPartecipanti.compareTo(MAX)<0){
+        if(nPartecipanti.compareTo("1")>0 || nPartecipanti.compareTo(MAX)<0){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
                 if(costo<30||costo>50){
