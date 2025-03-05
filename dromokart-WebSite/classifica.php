@@ -34,7 +34,7 @@
       require 'logic/requestPlacingsGen.php';
       require 'logic/tableCreation.php';
 
-      $titolo = array("ID Gara", "NomePilota", /*"CognomePilota",*/ "Targa", "Miglior Giro", "Tempo totale");
+      $titolo = array("ID Gara", "NomePilota", "CognomePilota", "Targa", "Miglior Giro", "Tempo totale");
       createTable($titolo, $res); 
       
     ?>

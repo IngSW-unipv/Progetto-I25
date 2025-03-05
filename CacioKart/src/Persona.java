@@ -95,36 +95,58 @@ public class Persona {
     }
 
     public void classificaG(Socket clientSocket) throws SQLException {
+        // Inizializza il connettore al DB e il responder (i tuoi oggetti).
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        String cfSocio,targa,bGiro,tempoTot,idGara;
-        StringBuilder classifica = new StringBuilder();
-        SELECT="SELECT g.idGara, g.socio, g.targa, g.pos, g.bGiro, g.tempTot " +
-                "FROM ( " +
-                "    SELECT  distinct idGara " +
-                "    FROM classifica " +
-                "    LIMIT 10 " +
-                ") AS ultime_gare " +
-                "JOIN classifica g ON ultime_gare.idGara = g.idGara " +
-                "WHERE g.pos = 1 " +
-                "ORDER BY g.tempTot DESC;";
-        result = db.executeReturnQuery(SELECT);
-        if(result!=null){
-            for(Map<String, Object> row : result) {
-               idGara=row.get("idGara").toString();
-               cfSocio = row.get("socio").toString();
-               targa = row.get("targa").toString();
-               bGiro = row.get("pos").toString();
-               tempoTot = row.get("pos").toString();
-                classifica.append(idGara).append(" ").append(cfSocio).append(" ").append(targa).append(" ").append(bGiro).append(" ").append(tempoTot).append("\n");
 
+        // Dichiarazione variabili per i dati estratti
+        String nomep, cognomep, targa, bGiro, tempoTot, idGara;
+
+        // Costruiamo la query correttamente con gli spazi necessari
+        String SELECT =
+                "SELECT c.idGara, s.nome, s.cognome, c.targa, c.bGiro, c.tempTot " +
+                        "FROM caciokart.classifica AS c " +
+                        "JOIN (SELECT idGara, MIN(tempTot) AS tempo_migliore FROM caciokart.classifica GROUP BY idGara) AS agg " +
+                        "ON c.idGara = agg.idGara AND c.tempTot = agg.tempo_migliore " +
+                        "JOIN caciokart.socio AS s ON c.socio = s.socio " +
+                        "ORDER BY c.tempTot DESC " +
+                        "LIMIT 10";
+
+        // Esecuzione della query
+        List<Map<String, Object>> result = db.executeReturnQuery(SELECT);
+
+        StringBuilder classifica = new StringBuilder();
+
+        if (result != null) {
+            // Iterazione sui risultati
+            for (Map<String, Object> row : result) {
+                idGara = row.get("idGara").toString();
+                nomep = row.get("nome").toString();
+                cognomep = row.get("cognome").toString();
+                targa = row.get("targa").toString();
+                bGiro = row.get("bGiro").toString();
+                tempoTot = row.get("tempTot").toString();
+
+                // Componiamo la riga di output come preferisci
+                classifica.append(idGara).append(" ")
+                        .append(nomep).append(" ")
+                        .append(cognomep).append(" ")
+                        .append(targa).append(" ")
+                        .append(bGiro).append(" ")
+                        .append(tempoTot).append("\n");
             }
+
+            // Aggiungiamo un marcatore di fine, se serve
             classifica.append("end");
+
+            // Invio della risposta al client
             responder.sendResponse(clientSocket, classifica.toString());
-        }else{
+        } else {
+            // Se la query non ha restituito risultati
             responder.sendResponse(clientSocket, "end");
         }
     }
+
 
     public String getNome() {
         return nome;

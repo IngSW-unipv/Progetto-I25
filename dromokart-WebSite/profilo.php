@@ -38,6 +38,7 @@ $name = $_SESSION['name'];
       <button onclick="location.href='migliori_tempi.php'">Migliori Tempi</button>
       <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
       <button onclick="location.href='acquistaKart.php'">Compra Kart</button>
+      <button onclick="location.href='acquistaPezzi.php'">Compra Pezzi di ricambio</button>
     </div>
   </main>
 </body>

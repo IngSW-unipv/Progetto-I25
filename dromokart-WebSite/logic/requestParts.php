@@ -5,7 +5,7 @@
 
     $socket = connectionOpen($address, $port);
 
-    fwrite($socket, "rp ");
+    fwrite($socket, "requestPart ");
 
     $i = 0;
 
@@ -15,6 +15,7 @@
         $part[$i][0] = str[0];
         $part[$i][1] = str[1];
         $part[$i][2] = str[2];
+        $part[$i][3] = str[3];
         $i++;
     }
 

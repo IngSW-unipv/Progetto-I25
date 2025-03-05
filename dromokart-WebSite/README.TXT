@@ -1,18 +1,17 @@
-DOBBIAMO FINIRE AGGIUNTA KART AL SOCIO(GIA FINITA IN PHP)
-
 CHI SIAMO (Andrea)
 -aggiungere un immagine del nostro team ?
 
+SOCIO
+-COMPRARE I PEZZI
+
 CLASSIFICA (Andrea)
--Integrazione con java per prendere i dati della Classifica
+-Integrazione con java per prendere i dati della Classifica(da rivalutare?)
 
 PAGINA DEI PRODOTTI (Alessandro)
 -prodotti devono essere gestiti da un database, per le immagini dobbiamo capire ??
 
 PROPRIETARIO (Alessandro)
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
--Chiedo una query e mi fa vedere tutti i dipendenti, da li posso premere una "X" e
-mi rimuove il dipendente(controllare se l'abbiamo finita )
 
 GESTORE DELLA CONCESSIONARIA (Alessandro)
 -tasto per aggiungere la quantità di pezzi di ricambio (i pezzi sono già presenti sul db)
@@ -23,10 +22,6 @@ ARBITRO (da analizzare meglio) ?? (Alessandro)
 update al database facendomi vedere in tempo reale il cambio di classifica (da vedere l'ultima parte)  
 
 MECCANICO (Andrea)
--visione di tutti i kart dell'autodromo (fatto ma parzialmente)
--aggiungere dei kart all'autodromo(fatto ma parzialmente)
--togliere i kart dall'autodromo (fatto ma parzialmente)
--Per aggiungere la benzina basta compilare un form con scritto ID kart + litri benzina(da togliere)
 -flag/pulsante se si preme cambia la data della manutenzione di 6 mesi in avanti
 
 ORGANIZZATORE (Parlare con il gruppo)

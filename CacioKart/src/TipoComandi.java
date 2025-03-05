@@ -22,6 +22,8 @@ public enum TipoComandi {
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
     AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     AGGIUNGI_BENZINA("aggiungiBenzina"),
+    RICHIESTA_PEZZI("requestPart"),
+    ACQUISTA_PEZZI("acquirePart"),
     ACQUISTA_KART("acquistaKart"),
     MANUTENZIONE("manutenzione");
 
