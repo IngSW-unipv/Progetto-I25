@@ -31,7 +31,7 @@
       //id gara, socio, targa, miglior giro, tempo totale (mm,ss,dd)
       //require 'logic/requestPlacingsGen.php';
       require 'logic/requestData.php';
-      $res = request("richiestaClass\n", $socket);
+      $res = request("richiestaClass", $socket);
 
       require 'logic/tableCreation.php';
 

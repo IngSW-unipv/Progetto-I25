@@ -20,34 +20,10 @@
     <h1>Elimina un dipendente</h1>
    </hero>
     <section class="table-section">
-      <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio --
-      <form action="logic/deleteDip.php" method="post" class="registration-form">
-         <div class="form-group">
-            <label for="codice_fiscale">Codice Fiscale</label>
-            <select id="codice_fiscale" name="codice_fiscale" required> 
-            ...   
-            ...
-            </select>      
-         </div>
-         <div class="form-group">       
-            <button type="submit">Elimina Dipendente</button>
-         </div>
-      </form>
-            -->
+      <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->
          <?php
-            require 'logic/requestDip.php';
-
-            /*$dip[0] = "LSD4SPDI43DDS";
-            $dip[1] = "FODSIJ4902WDF";
-            $dip[2] = "OSIDAJFO489SD";
-
-            $i = 3;
-
-            for($j = 0; $j < $i; $j++){
-               echo '<option value="' .$dip[$j] .'">' .$dip[$j] .'</option>';
-            }*/
-
-            
+            require 'logic/requestData.php';
+            $res = request("richiestaDipen", $socket);
             // Suddivide $res in righe
             $rows = explode("\n", $res);
             

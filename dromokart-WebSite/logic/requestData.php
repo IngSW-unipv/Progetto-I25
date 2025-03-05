@@ -4,7 +4,7 @@
 
     $socket = connectionOpen($address, $port);
     function request($msg, $socket){
-    fwrite($socket, $msg);
+    fwrite($socket, $msg ."\n");
 
     $res = '';
     while (!feof($socket)) {
