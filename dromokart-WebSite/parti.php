@@ -30,17 +30,7 @@
           $parts =  explode("\n", $res);
           $ncol = 4;
           // Controlla se sono presenti righe non vuote
-          if(count($parts) > 0 && !empty(trim($parts[0]))) {
-              echo '<table>';
-              echo '<thead>';
-              echo '<tr>';
-              foreach($header as $head){
-                  echo '<th>' .$head .'</th>';
-              }
-              echo '</tr>';
-              echo '</thead>';
-              echo '<tbody>';
-              
+          if(count($parts) > 0 && !empty(trim($parts[0]))) {              
               // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
               foreach($parts as $part) {
                   $part = trim($part);
