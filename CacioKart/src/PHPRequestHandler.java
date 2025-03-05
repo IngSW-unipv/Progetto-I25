@@ -19,17 +19,18 @@ public class PHPRequestHandler {
     public PHPRequestHandler() {
     }
 
-    /**La classe riceve stringhe composte in questo modo: *lettera singola* *dati*
-     *La lettera indica la richiesta del client da eseguire.
-     *
+    /**La classe riceve stringhe composte in questo modo: *parola singola* *dati*
+     *La prima parola indica la richiesta del client da eseguire.
+     *La seconda parte del messaggio cambia in base alla richiesta da eseguire,
+     * potrebbe contenere 0 o più informazioni a seconda dei dati necessari.
      */
     public void handleRequests(Socket clientSocket) throws SQLException {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
-            messaggio = in.readLine().split(" ",2); //Divido il messaggio in due
+            messaggio = in.readLine().split(" ",2); //Divido il messaggio in due: il comando e i dati
 
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
-            if(messaggio.length == 2) {
+            if(messaggio.length == 2) { //Controllo se il messaggio contiene più di una parola
                 info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
                 System.out.println("Messaggio ricevuto: " + messaggio[0] + " " + messaggio[1]);
             }else{
@@ -147,21 +148,34 @@ public class PHPRequestHandler {
      */
     private void loginCase(String dati, Socket clientSocket) throws SQLException {
         String[] loginData = dati.split(" ");
-        Persona utente = new Persona(null, null, null, null, null, null);
+        Persona utente = new Persona();
         utente.setcF(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
     }
 
+    /**Metodo per gestire la logica delle classifiche per l'arbitro.
+     * L'arbitro è interessato a vedere tutte le classifiche delle
+     * gare effettuate, senza duplicati.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void classificaArbitro(Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
         query =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
         c.classificaArbitro(query, clientSocket);
     }
 
-    // metodo per la classifica Generale
-    // mostra gli ultimi 10 vincitori delle ultime 10 gare creando una mini classifica
-
+    /**Metodo per gestire la logica della classifica generale
+     * visibile nella prima pagina del sito.
+     * Seleziono dal db tutte le informazioni di una singola classifica
+     * mettendola in Join con i soci per ottenere le informazioni di un singolo
+     * socio.
+     *
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void classificaGenerale(Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
         query = "SELECT c.idGara, s.nome, s.cognome, c.targa, c.bGiro, c.tempTot " +
@@ -174,7 +188,14 @@ public class PHPRequestHandler {
         c.classificaCompleta(query,clientSocket);
     }
 
-
+    /**Metodo per gestire la classifica visibile da un singolo utente.
+     * In ingresso il cf dell'utente ci permette di fare una query
+     * di tutte le classifiche che appartengono solo a lui.
+     *
+     * @param cfPilota
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void classificaUtente(String cfPilota,Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
         query = "SELECT c.idGara, " +
@@ -183,7 +204,6 @@ public class PHPRequestHandler {
                 "       c.tempTot " +
                 "FROM caciokart.classifica AS c " +
                 "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                // Importante: apici e spazio!
                 "WHERE s.nome = '" + cfPilota + "' " +
                 "ORDER BY c.tempTot DESC " +
                 "LIMIT 10";
@@ -237,13 +257,22 @@ public class PHPRequestHandler {
 
     }
 
+    /**Metodo per aggiungere i kart dalla vendita del concessionario
+     * al noleggio del kartdromo a cura del meccanico.
+     * La targa in ingresso ci permette di selezionare un kart specifico da rimuovere
+     * dalla tabella concessionario.
+     *
+     * @param targa
+     * @param clientSocket
+     * @throws SQLException
+     */
     private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
         m.aggiuntaKart(targa, clientSocket);
 
     }
 
-    /**Metodo per mostrare i kart.
+    /**Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
      * Non richiede parametri oltre al socket per spedire la risposta.
      *
      * @param clientSocket
@@ -251,24 +280,23 @@ public class PHPRequestHandler {
      */
     private void mostraAggiuntaKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        //Query per quando voglio aggiungere i kart al noleggio
         query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
                 "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
                 "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)";
         m.mostraKart(query,clientSocket);
     }
 
-    /**Metodo per rimuovere i kart.
-     * Chiamato dal client dopo aver visto i kart presenti nel db.
-     * Non richiede parametri oltre al socket per spedire la risposta.
+    /**Metodo per rimuovere i kart dal kartodromo.
+     * Il client manda una targa da rimuovere dal db, il metodo
+     * la utilizza per la query e risponde al client.
      *
-     * @param dati
+     * @param targa
      * @param clientSocket
      * @throws SQLException
      */
-    private void rimozioneKartCase(String dati, Socket clientSocket) throws SQLException {
+    private void rimozioneKartCase(String targa, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        m.rimozioneKart(dati, clientSocket);
+        m.rimozioneKart(targa, clientSocket);
     }
 
     private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {

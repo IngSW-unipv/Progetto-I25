@@ -29,6 +29,13 @@ public class Persona {
         this.password = password;
     }
 
+    /**Costruttore alternativo per chiamare i metodi
+     *
+     */
+    public Persona(){
+
+    }
+
     /**Metodo per effettuare la login.
      * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
      * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
