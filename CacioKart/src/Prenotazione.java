@@ -52,6 +52,7 @@ public class Prenotazione {
             }
         }
         idP = String.valueOf(Integer.parseInt(idP )+1) ;
+        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti) < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
@@ -88,6 +89,7 @@ public class Prenotazione {
         } else {
             nPartecipanti = "0"; // Se il risultato è nullo o vuoto, impostiamo 0
         }
+        nPartecipanti = nPartecipanti.toString().replaceAll("\\D", "");
         if(Integer.parseInt(nPartecipanti)>=1 && Integer.parseInt(nPartecipanti)< MAX){
             //creazione della gara
             switch (tipologia){
