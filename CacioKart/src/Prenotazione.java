@@ -25,8 +25,7 @@ public class Prenotazione {
         responder=new PHPResponseHandler();
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        String idP = null,idG=null;
-        int nPartecipanti = 0;
+        String idP = null,idG=null, nPartecipanti= null;
         double costo = 0;
         g = new Gara("0",null);
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
@@ -34,11 +33,11 @@ public class Prenotazione {
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
         if(result == null|| result.isEmpty()){
-            nPartecipanti = 0;
+            nPartecipanti = "0";
         } else {
-            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
+            nPartecipanti = String.valueOf(result.get(0));
         }
-        if (nPartecipanti != 0) {
+        if (nPartecipanti!="0") {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             if (result != null && !result.isEmpty() && result.get(0).get("max") != null) {
@@ -48,7 +47,7 @@ public class Prenotazione {
             }
         }
         idP =String.valueOf(Integer.parseInt(idP + 1)) ;
-        if(nPartecipanti < MAX){
+        if(Integer.parseInt(nPartecipanti) < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
                 if(costo<30||costo>50){
@@ -79,11 +78,11 @@ public class Prenotazione {
         result = db.executeReturnQuery(SELECT);
 //      Controllo per evitare errori di null o lista vuota
         if (result != null || !result.isEmpty() || result.get(0)!= null) {
-            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
+            nPartecipanti =String.valueOf(result.get(0));
         } else {
-            nPartecipanti = 0; // Se il risultato è nullo o vuoto, impostiamo 0
+            nPartecipanti = "0"; // Se il risultato è nullo o vuoto, impostiamo 0
         }
-        if(nPartecipanti >= 1 && nPartecipanti < MAX){
+        if(Integer.parseInt(nPartecipanti)>=1 && Integer.parseInt(nPartecipanti)< MAX){
             //creazione della gara
             switch (tipologia){
                 case "secca":
