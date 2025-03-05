@@ -10,7 +10,7 @@ import java.util.Scanner;
 import static java.util.Collections.replaceAll;
 
 public class Prenotazione {
-    private final int MAX=20;
+    private final String MAX="20";
     private String SELECT;
     private String INSERT;
     LocalDate dataG;
@@ -39,7 +39,7 @@ public class Prenotazione {
         } else {
             nPartecipanti =result.get(0).toString().replace("\"", "");
         }
-        if (nPartecipanti!="0") {
+        if (!nPartecipanti.equals("0")) {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             if (result != null && !result.isEmpty() && result.get(0) != null) {
@@ -49,7 +49,7 @@ public class Prenotazione {
             }
         }
         idP = String.valueOf(Integer.parseInt(idP )+1) ;
-        if(Integer.parseInt(nPartecipanti) < MAX){
+        if(nPartecipanti.compareTo("1")>0 && nPartecipanti.compareTo(MAX)<0){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
                 if(costo<30||costo>50){
@@ -84,7 +84,7 @@ public class Prenotazione {
         } else {
             nPartecipanti = "0"; // Se il risultato è nullo o vuoto, impostiamo 0
         }
-        if(Integer.parseInt(nPartecipanti)>=1 && Integer.parseInt(nPartecipanti)< MAX){
+        if(nPartecipanti.compareTo("1")>0 && nPartecipanti.compareTo(MAX)<0){
             //creazione della gara
             switch (tipologia){
                 case "secca":
