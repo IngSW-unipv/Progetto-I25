@@ -173,15 +173,8 @@ public class PHPRequestHandler {
     //usa DBConnector e PHPResponsehandle
 
     private void prenotationCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
-        //2025-03-26 11:00-12:00
-        //int lastDashIndex = messaggio.lastIndexOf("-");
-        String[] dataOrario = messaggio.split(" ");
-        /*
-        if (lastDashIndex == -1) {
-            System.out.println("Errore: il messaggio non contiene '-' per la divisione.");
-            return;
-        }*/
 
+        String[] dataOrario = messaggio.split(" ");
         LocalDate dataG = LocalDate.parse(dataOrario[0], dateFormatter);
         String[] orari = dataOrario[1].split("-");
         LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);

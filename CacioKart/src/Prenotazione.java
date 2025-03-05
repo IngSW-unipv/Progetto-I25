@@ -20,38 +20,34 @@ public class Prenotazione {
     private List<Map<String, Object>> result;
     private Gara g;
 
-    public void prenotation(String tipologia,LocalDate dataGara, LocalTime oraI,LocalTime oraF, Socket clientSocket) throws SQLException {
-        db = new DBConnector();
-        String idP = "",idG;
+    public void prenotation(String cf,String tipologia,LocalDate dataGara, LocalTime oraI,LocalTime oraF, Socket clientSocket) throws SQLException {
+        db=new DBConnector();
+        responder=new PHPResponseHandler();
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        String idP = null,idG=null;
         int nPartecipanti = 0;
         double costo = 0;
         g = new Gara("0",null);
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
-        responder = new PHPResponseHandler();
-        SELECT = "SELECT count(*) as count FROM caciokart.prenotazione WHERE dataG = '"
+        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
         if(result == null|| result.isEmpty()){
             nPartecipanti = 0;
         } else {
-            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0).get("count")));
+            nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
         }
-
-        if (nPartecipanti == 0) {
-            nPartecipanti++;
-        } else {
-            String SELECT = "SELECT COALESCE(MAX(idP), 0) as max FROM PRENOTAZIONE";
+        if (nPartecipanti != 0) {
+            String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
-            // Controlla che il risultato non sia null o vuoto
             if (result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                idP =result.get(0).toString();
+                idP = result.get(0).toString();
             } else {
-                idP="0"; // Se non ci sono prenotazioni, partiamo da 0
+                idP = "0"; // Se non ci sono prenotazioni, partiamo da 0
             }
-            idP =String.valueOf(Integer.parseInt(idP + 1)) ; // Incrementa l'ID per il nuovo record
         }
+        idP =String.valueOf(Integer.parseInt(idP + 1)) ;
         if(nPartecipanti < MAX){
             do{
                 costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
@@ -62,41 +58,39 @@ public class Prenotazione {
                 }
             }while(costo<30||costo>50);
 
-            INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, numP) VALUES('" +
+            INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, numP,socio) VALUES('" +
                     idP + "', '" +
                     dataGara +"', '" +
                     oraI +"', '" +
                     tipologia + "', '" +
-                    costo +"', '" +
-                    1 + "')";
-
+                    costo + "', '" +
+                    1 + "', '" +
+                    cf + "')";
             queryIndicator = db.executeUpdateQuery(INSERT);
-            responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-            System.out.println("La prenotazione della gara libera\n");
+            responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
+            System.out.println("prenotazione avvenuta con successo\n");
         }else{
             System.out.println("Nessun posto disponibile\n!");
         }
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
-        SELECT = "SELECT count(*) as count FROM caciokart.prenotazione WHERE dataG = '"
+        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + oraI + "'";
         result = db.executeReturnQuery(SELECT);
 //      Controllo per evitare errori di null o lista vuota
-        if (result != null || !result.isEmpty() || result.get(0).get("count") != null) {
+        if (result != null || !result.isEmpty() || result.get(0)!= null) {
             nPartecipanti = Integer.parseInt(String.valueOf(result.get(0)));
         } else {
             nPartecipanti = 0; // Se il risultato è nullo o vuoto, impostiamo 0
         }
-
-        if(nPartecipanti >= 1 || nPartecipanti < MAX){
+        if(nPartecipanti >= 1 && nPartecipanti < MAX){
             //creazione della gara
             switch (tipologia){
-
                 case "secca":
-                    SELECT="SELECT MAX(idG) as max from garaS";
+                    SELECT="SELECT MAX(idG) from garaS";
                     result = db.executeReturnQuery(SELECT);
-                    if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                        idG = String.valueOf(result.get(0).get("max"));
+                    if(result != null || !result.isEmpty() || result.get(0)!= null) {
+                        idG = String.valueOf(result.get(0));
                         idG=String.valueOf(Integer.parseInt(idG+1));
                     }else{
                         idG="1";
@@ -117,10 +111,10 @@ public class Prenotazione {
                     break;
 
                 case "libera":
-                    SELECT="SELECT MAX(idG) as max from garaL";
+                    SELECT="SELECT MAX(idG) from garaL";
                     result = db.executeReturnQuery(SELECT);
-                    if(result != null && !result.isEmpty() && result.get(0).get("max") != null) {
-                        idG =String.valueOf(result.get(0).get("max"));
+                    if(result != null || !result.isEmpty() || result.get(0) != null) {
+                        idG =String.valueOf(result.get(0));
                         idG=String.valueOf(Integer.parseInt(idG+1));
                     }else{
                         idG="1";
@@ -137,6 +131,7 @@ public class Prenotazione {
                     queryIndicator = db.executeUpdateQuery(INSERT);
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
                     break;
+
             }
         }else{
             System.out.println("Gara non disputata\n!");

@@ -2,6 +2,8 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
+import java.util.Scanner;
 
 
 public class Socio extends Persona implements Iinventario{
@@ -43,7 +45,7 @@ public class Socio extends Persona implements Iinventario{
 
     public void richiestaP(String tipologia,LocalDate dataG,LocalTime orarioI,LocalTime orarioF,Socket clientSocket) throws SQLException{
         p = new Prenotazione();
-        p.prenotation(tipologia,dataG,orarioI,orarioF,clientSocket);
+        p.prenotation(getcF(),tipologia,dataG,orarioI,orarioF,clientSocket);
     }
 
     public void compraKart(String info, Socket clientSocket) throws SQLException {
