@@ -20,6 +20,10 @@ public class Socio extends Persona implements Iinventario{
         super(nome, cognome, dataNascita, cF, mail, password);
     }
 
+    public Socio(){
+
+    }
+
     //metodo classifica gara?
 
     /**Metodo per registrare un utente nel db
@@ -67,20 +71,16 @@ public class Socio extends Persona implements Iinventario{
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    //public int
-
-    //Override metodi Iinventario
-    /* DA COMPLETARE MA L'IDEA è QUESTA
+    // DA COMPLETARE MA L'IDEA è QUESTA
     public void acquistaPezzi(String info, Socket clientSocket) throws SQLException {
-        String idProdotto;
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE id = idProdotto";
-        db.executeUpdateQuery(UPDATE);
+        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE tipol ='" +  info + "'";
+        queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
-*/
+
 
 
 }
