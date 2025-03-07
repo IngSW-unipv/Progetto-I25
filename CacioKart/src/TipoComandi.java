@@ -27,7 +27,8 @@ public enum TipoComandi {
     ACQUISTA_PEZZI("acquistaPezzi"),
     ACQUISTA_KART("acquistaKart"),
     MANUTENZIONE("manutenzione"),
-    MOSTRA_GARA("mostraGara");
+    MOSTRA_GARA("mostraGara"),
+    AGGIUNGI_PENALITA("aggiungiPenalita");
 
     private final String descrizione;
 

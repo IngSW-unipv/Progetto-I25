@@ -130,6 +130,10 @@ public class PHPRequestHandler {
                     mostraGaraCase(info,clientSocket);
                     break;
 
+                case AGGIUNGI_PENALITA:
+                    aggiungiPenalitaCase(info, clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -310,7 +314,6 @@ public class PHPRequestHandler {
      */
     private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        //Query per quando voglio rimuovere i kart dal noleggio
         query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
                 "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
                 "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)";
@@ -342,19 +345,10 @@ public class PHPRequestHandler {
      * @throws SQLException
      */
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
-        /*Creo enum secondo questa logica:
-        Meccanico 1
-        Gestore 2
-        Arbitro 3
-        Organizzatore 4
-        Proprietario 5
-        */
         String[] dipendente = dati.split(" ");
-        //Array che va da 0 a 8
         LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
         Proprietario p = new Proprietario();
-        //dip nome cognome mail passw dataN stipendio ruolo oreL
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
         p.aggiuntaDipendenti(d,clientSocket);
     }
@@ -369,7 +363,6 @@ public class PHPRequestHandler {
     private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
         p.rimozioneDipendenti(dati,clientSocket);
-
     }
 
     /**Metodo per mostrare tutti i dipendenti.
@@ -407,6 +400,18 @@ public class PHPRequestHandler {
         Classifica c = new Classifica();
         query = "SELECT * FROM caciokart.classifica WHERE idGara = '" + idGara + "'";
         c.classificaPenalità(query, clientSocket);
+    }
+
+    private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) throws SQLException {
+        //socio idgara tempo
+        String[] info = messaggio.split(" ");
+        String cf = info[0];
+        String idGara = info[1];
+        LocalTime tempo = LocalTime.parse(info[2], timeFormatter);
+        //Metodo in arbitro per inserire le penalità
+        Arbitro a = new Arbitro();
+        a.inserimentoPenalita(cf, idGara, tempo);
+
     }
 
 }
