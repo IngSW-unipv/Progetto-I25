@@ -27,8 +27,6 @@ fclose($socket);
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        $_SESSION['username'] = $username;
-        $_SESSION['rank'] = 0;
         header('Location: profilo.php');
         die();
     }

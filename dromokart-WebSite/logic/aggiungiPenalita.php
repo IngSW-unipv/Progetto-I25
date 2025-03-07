@@ -4,13 +4,17 @@
 
 $socket = connectionOpen($address, $port);
 
-$targa = $_POST['targa'];
+$columns[0] = $_POST['idGara'];
+$columns[1] = $_POST['Socio'];
+$time = $_POST['time'];
 
 
     //invio codice gara libera
-    fwrite($socket, "aggiungiBenzina ");
+    fwrite($socket, "aggiungiPenalita ");
     //invio dati
-    fwrite($socket, $targa . "\n");
+    fwrite($socket, $columns[0] . " ");
+    fwrite($socket, $$columns[1] . " ");
+    fwrite($socket, $time . "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
     $res = trim(fgets($socket));
@@ -22,7 +26,7 @@ fclose($socket);
         header('Location: ../registerError.php');
         die();
     } else{
-        header('Location: ../meccanico.php');
+        header('Location: ../arbitro.php');
         die();
     }
 ?>
