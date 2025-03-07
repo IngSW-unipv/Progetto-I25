@@ -239,7 +239,7 @@ public class PHPRequestHandler {
         LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);
         LocalTime orarioF = LocalTime.parse(orari[1], timeFormatter);
         Socio utente = new Socio(null, null, null, dataOrario[2], null, null);
-        utente.richiestaP(tipologia, dataG, orarioI, orarioF, clientSocket);
+        utente.richiestaP(tipologia, dataG, orarioI,clientSocket);
     }
 
     /**Metodo di aggiunta kart.
