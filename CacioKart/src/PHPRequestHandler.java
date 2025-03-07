@@ -388,7 +388,21 @@ public class PHPRequestHandler {
 
     private void manutenzioneCase(String info, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        m.aggiornamentoManutenzione(info, clientSocket);
+        String[] mex = info.split(" ");
+        String targa = mex[0];
+        String text = mex[1];
+        double prezzo= Double.parseDouble(mex[2]);
+        query="SELECT " +
+                "    e.idM, " +
+                "    e.targa, " +
+                "    m.tipoInt, " +
+                "    m.costo, " +
+                "    MAX(m.dataM) AS dataManutenzione" +
+                "FROM caciokart.manutenzione m" +
+                "LEFT JOIN caciokart.eseguita e ON m.idM = e.idM" +
+                "WHERE m.dataM IS NULL OR DATEDIFF(CURDATE(), m.dataM) > 180" +
+                "GROUP BY e.targa, e.idM";
+        m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
     }
 
     private void mostraPezziCase(Socket clientSocket) throws SQLException {
