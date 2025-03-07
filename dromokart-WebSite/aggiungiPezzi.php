@@ -62,6 +62,28 @@
       background-color: darkgreen;
     }
 
+    input[type="number"] {
+        width: 80px;
+        padding: 10px;
+        font-size: 18px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        outline: none;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: inner-spin-button;
+        margin: 0;
+    }
+
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,12 +91,48 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
+  <form method="post" action="logic/insertParts.php">
+  <div class="">
+  <div class="main-container">
+  <div class="products-container">
+    <?php
+      require 'logic/requestData.php';
+      $res = request('mostraPezzi', $socket);
+      //i parametri sono: id, nome del pezzo, quantita`, prezzo 
 
+      $parts =  explode("\n", $res);
+      $nval = 4;
+
+      if(count($parts) > 0 && !empty(trim($parts[0]))) {
+        foreach($parts as $part) {
+          $part = trim($part);
+          if(empty($part)) continue;
+          $columns = preg_split('/\s+/', $part);
+          // Controlla che ci sia il numero di colonne necessario
+          if(count($columns) >= $nval) {
+            $namePart = str_replace('_',' ',$columns[1]);
+            echo '<div class="product">';
+            echo /*'<a href="/products/' .$columns[1] .'.php">*/'<img src="immagini/Pezzi/' .$namePart .'.png" alt="' .$namePart .'">'; //</a>';
+            echo /*'<a href="/products/' .$columns[1] .'.php">*/ '<h1>' .$namePart .'</h1>';//</a>';
+            echo '<input type="number" name="' .$columns[0] .'" id="' .$columns[0] .'" value=0 min=0 required>';
+            echo '</div>';
+          }
+        }
+      } else {
+        echo '<p>Nessun dato ricevuto.</p>';
+      }
+    ?>
+    <div class="form-group">
+      <button type="submit">Aggiorna</button>
+    </div>
+    </form>
+<!--
 <div class="container">
-    <!-- Primo prodotto -->
+    <-- Primo prodotto --
     <div class="product-card">
       <img src="/immagini/motore.png" alt="Motore">
       <p>Motore 150cc</p>
@@ -85,100 +143,9 @@
       </div>
     </div>
     
-    <!-- Secondo prodotto -->
-    <div class="product-card">
-      <img src="immagine2.jpg" alt="Prodotto 2">
-      <p>Descrizione prodotto 2</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Terzo prodotto -->
-    <div class="product-card">
-      <img src="immagine3.jpg" alt="Prodotto 3">
-      <p>Descrizione prodotto 3</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Quarto prodotto -->
-    <div class="product-card">
-      <img src="immagine4.jpg" alt="Prodotto 4">
-      <p>Descrizione prodotto 4</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Quinto prodotto -->
-    <div class="product-card">
-      <img src="immagine5.jpg" alt="Prodotto 5">
-      <p>Descrizione prodotto 5</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Sesto prodotto -->
-    <div class="product-card">
-      <img src="immagine6.jpg" alt="Prodotto 6">
-      <p>Descrizione prodotto 6</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Settimo prodotto -->
-    <div class="product-card">
-      <img src="immagine7.jpg" alt="Prodotto 7">
-      <p>Descrizione prodotto 7</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Ottavo prodotto -->
-    <div class="product-card">
-      <img src="immagine8.jpg" alt="Prodotto 8">
-      <p>Descrizione prodotto 8</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-    
-    <!-- Nono prodotto -->
-    <div class="product-card">
-      <img src="immagine9.jpg" alt="Prodotto 9">
-      <p>Descrizione prodotto 9</p>
-      <div class="quantity-controls">
-        <button onclick="updateQuantity(this, -1)">-</button>
-        <span class="quantity">0</span>
-        <button onclick="updateQuantity(this, 1)">+</button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Bottone Aggiorna che richiama aggiuntaPezzi.php -->
-  <div class="update-button">
-    <button onclick="window.location.href='aggiuntaPezzi.php'">Aggiorna</button>
-  </div>
-
+    -->
+ 
+<!--
   <script>
     // Funzione per aggiornare la quantità
     function updateQuantity(button, delta) {
@@ -191,7 +158,7 @@
       quantitySpan.textContent = newQuantity;
     }
   </script>
-
+    -->
 
 </body>
 </html>
