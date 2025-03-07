@@ -25,6 +25,7 @@ public enum TipoComandi {
     AGGIUNGI_BENZINA("aggiungiBenzina"),
     MOSTRA_PEZZI("mostraPezzi"),
     ACQUISTA_PEZZI("acquistaPezzi"),
+    AGGIUNGI_PEZZI("aggiungiPezzi"),
     ACQUISTA_KART("acquistaKart"),
     MANUTENZIONE("manutenzione"),
     MOSTRA_GARA("mostraGara"),
