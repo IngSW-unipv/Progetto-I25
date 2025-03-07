@@ -59,7 +59,7 @@ require_once 'logic/selezioneGara.php';
                 echo '<tr>';
 
                 // Stampiamo i primi 7 campi in tabella
-                // (idGara, nome, cognome, targa, bGiro, tempoTot, penalità)
+                // (idGara, socio, targa, bGiro, tempoTot, penalità)
                 // Adatta l'indice in base al formato che arriva dal server Java
                 echo '  <td>' . htmlspecialchars($columns[0]) . '</td>'; 
                 echo '  <td>' . htmlspecialchars($columns[1]) . '</td>';
@@ -76,7 +76,9 @@ require_once 'logic/selezioneGara.php';
                 // che poi fa la logica necessaria (aggiornare il DB, il server Java, ecc.)
                 echo '  <td>';
                 echo '    <form action="logic/aggiungiPenalita.php" method="post">';
-                echo '      <input type="time" name="'. htmlspecialchars($columns[0]) .'" value="0">';
+                echo '      <input type="time" name="time" value="0">';
+                echo '      <input type="hidden" name="idGara" value="'. htmlspecialchars($columns[0]) .'">';
+                echo '      <input type="hidden" name="Socio" value="'. htmlspecialchars($columns[1]) .'">';
                 echo ' </td>';
                 echo '  <td>';
                 // Se serve anche un campo "penalità" da inserire:
