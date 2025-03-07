@@ -54,7 +54,7 @@ public class PHPRequestHandler {
 
                 case PRENOTAZIONE_LIBERA:
                     tipologia = "libera";
-                    prenotationCase(tipologia,info,clientSocket);
+                    prenotazioneCase(tipologia,info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART_CONCESSIONARIA:
@@ -231,15 +231,17 @@ public class PHPRequestHandler {
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandle
 
-    private void prenotationCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
+    private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
 
+        //data fasciaOraria username
         String[] info = messaggio.split(" ");
         LocalDate dataG = LocalDate.parse(info[0], dateFormatter);
         String[] orari = info[1].split("-");
-        String cf = info[2];
         LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);
-        Socio utente = new Socio(null, null, null, cf, null, null);
-        utente.richiestaP(tipologia, dataG, orarioI,clientSocket);
+        String cf = info[2];
+
+        Prenotazione p = new Prenotazione();
+        p.prenotazione(cf,tipologia, dataG, orarioI,clientSocket);
     }
 
     /**Metodo di aggiunta kart.

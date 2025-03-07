@@ -17,48 +17,66 @@ public class Prenotazione {
     private Gara g;
     private String idPrenotazione;
     private String idGara;
-    private int nPartecipanti;
     private double costo;
+    private String prenotazioniConcorrenti;
 
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         Random random = new Random();
-        nPartecipanti = 0;
-        costo = 0;
 
-        g = new Gara("0",null); //Da rivedere
+        //idP dataG fasciaO tipologia costo numP socio
+        //Per mettere una nuova prenotazione devo trovare l'id massimo e capire se ci sono già 20 prenotazioni
+
+        g = new Gara("0",null); //Non serve
 
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO = '"
                 + fasciaOraria + "'";
-
         result = db.executeReturnQuery(SELECT);
+        prenotazioniConcorrenti = result.get(0).toString().replaceAll("\\D", "");
 
+        if(prenotazioniConcorrenti.equals("20")){
+            System.out.println("Nessun posto disponibile\n!");
+            responder.sendResponse(clientSocket, "0");
+            return;
+        }
+
+        /*
         // Serve a capire se esiste già almeno una prenotazione
         if(result == null || result.isEmpty()){
             nPartecipanti = 0;
         } else {
             nPartecipanti = Integer.parseInt(result.get(0).toString().replace("\"", ""));
-        }
+        }*/
 
         // Stabilisco l'id della prenotazione basandomi su se esiste o meno già almeno una prenotazione
-        // Controllare i partecipanti non serve
-        if (nPartecipanti != 0) {
-            String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
-            result = db.executeReturnQuery(SELECT);
+        SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
+        result = db.executeReturnQuery(SELECT);
+        idPrenotazione = result.toString().replaceAll("\\D", "");
 
-            if (result != null && !result.isEmpty() && result.get(0) != null) {
-                idPrenotazione = result.get(0).toString().replaceAll("\\D", "");
-                idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione )+1);
+        if (!idPrenotazione.equals("0")/*result != null && !result.isEmpty() && result.get(0) != null*/) {
+            idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione) + 1);
 
-            } else {
-                idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
-            }
+        } else {
+            idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
         }
 
+        costo = 15;
+        INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, socio) VALUES('" +
+                idPrenotazione + "', '" +
+                dataGara +"', '" +
+                fasciaOraria +"', '" +
+                tipologia + "', '" +
+                costo + "', '" +
+                cf + "')";
+
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
+        System.out.println("Prenotazione avvenuta con successo\n");
 
         //Controllo strano
+        /*
         if(nPartecipanti >= 1 && nPartecipanti < MAX){
 
             //Generare un prezzo casuale
@@ -78,7 +96,7 @@ public class Prenotazione {
             System.out.println("Prenotazione avvenuta con successo\n");
         }else{
             System.out.println("Nessun posto disponibile\n!");
-        }
+        }*/
 
         /*
         //Query non necessaria, ho già il numero di utenti presenti in quella fascia in quel giorno
@@ -98,7 +116,7 @@ public class Prenotazione {
 
 
         // Una volta stabiliti i partecipanti
-
+        /*
         if(nPartecipanti > 1 && nPartecipanti < MAX){
             //creazione della gara
             switch (tipologia){
@@ -152,7 +170,7 @@ public class Prenotazione {
             }
         }else{
             System.out.println("Gara non disputata\n!");
-        }
+        }*/
 
     }
 
