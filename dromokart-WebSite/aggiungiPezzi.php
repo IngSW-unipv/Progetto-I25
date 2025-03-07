@@ -4,52 +4,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
+<!--
 <style>
-   /* Stili per la griglia dei prodotti */
-   .container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .product-card {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: center;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .product-card img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    .quantity-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    .quantity-controls button {
-      padding: 5px 10px;
-      margin: 0 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .quantity {
-      font-size: 16px;
-      min-width: 30px;
-      text-align: center;
-    }
-    /* Stili per il bottone Aggiorna */
-    .update-button {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .update-button button {
+   
+    .product button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
@@ -58,7 +16,7 @@
       border: none;
       border-radius: 5px;
     }
-    .update-button button:hover {
+    .product button:hover {
       background-color: darkgreen;
     }
 
@@ -84,7 +42,7 @@
         margin: 0;
     }
 
-  </style>
+  </style>-->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aggiungi Pezzi</title>
