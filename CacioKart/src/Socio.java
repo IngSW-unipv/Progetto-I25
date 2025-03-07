@@ -76,7 +76,7 @@ public class Socio extends Persona implements Iinventario{
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE tipol ='" +  info + "'";
+        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" +  info + "'";
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
