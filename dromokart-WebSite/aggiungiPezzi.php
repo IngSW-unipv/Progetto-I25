@@ -95,8 +95,6 @@
   <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
-  <form method="post" action="logic/insertParts.php">
-  <div class="">
   <div class="main-container">
   <div class="products-container">
     <?php
@@ -117,19 +115,26 @@
             $namePart = str_replace('_',' ',$columns[1]);
             echo '<div class="product">';
             echo /*'<a href="/products/' .$columns[1] .'.php">*/'<img src="immagini/Pezzi/' .$namePart .'.png" alt="' .$namePart .'">'; //</a>';
-            echo /*'<a href="/products/' .$columns[1] .'.php">*/ '<h1>' .$namePart .'</h1>';//</a>';
-            echo '<input type="number" name="' .$columns[0] .'" id="' .$columns[0] .'" value=0 min=0 required>';
-            echo '</div>';
+            echo /*'<a href="/products/' .$columns[1] .'.php">*/ '<h1>' .$namePart .'</h1>';//</a>';            
+            echo '<form method="post" action="logic/insertParts.php">';
+            echo '<input type="number" name="quantity" id="quantity" value=0 min=0 required>';
+            echo '<input type="hidden" name="part" id="part" value="' .$columns[0] .'" required>';            
+            echo '<button type="submit">Inserisci</button>';
+            echo '</form>';
+            echo '<p>Quantità: ';
+            
+            if($columns[2] > 0){
+              echo $columns[2] .'</p>';
+            } else{
+              echo 'esaurito</p>';
+            }
+            echo'</div>';
           }
         }
       } else {
         echo '<p>Nessun dato ricevuto.</p>';
       }
     ?>
-    <div class="form-group">
-      <button type="submit">Aggiorna</button>
-    </div>
-    </form>
 <!--
 <div class="container">
     <-- Primo prodotto --

@@ -3,9 +3,9 @@
 
     require 'connection.php';
 
-$socket = connectionOpen($address, $port);
+    $socket = connectionOpen($address, $port);
 
-$targa = $_POST['targa'];
+    $targa = $_POST['targa'];
 
 
     //invio codice gara libera
@@ -16,7 +16,7 @@ $targa = $_POST['targa'];
 
     $res = trim(fgets($socket));
 
-fclose($socket);
+    fclose($socket);
 
     //nel caso di successo, viene impostato il rango a 1 e si salva 
     if($res === "0"){
