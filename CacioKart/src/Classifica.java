@@ -16,6 +16,7 @@ public class Classifica {
     public void classificaArbitro(String query, Socket clientSocket) throws SQLException {
         responder = new PHPResponseHandler();
         result = getClassifica(query);
+        classifica = new StringBuilder();
 
         if(result != null) {
             for(Map<String, Object> row : result) {
