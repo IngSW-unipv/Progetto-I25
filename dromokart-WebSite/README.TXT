@@ -1,9 +1,6 @@
 CHI SIAMO (Andrea)
 -aggiungere un immagine del nostro team ?
 
-SOCIO
--COMPRARE I PEZZI
-
 PROPRIETARIO (Alessandro)
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
 
@@ -11,7 +8,9 @@ GESTORE DELLA CONCESSIONARIA (Alessandro)
 -tasto per aggiungere la quantità di pezzi di ricambio (i pezzi sono già presenti sul db)
 
 ARBITRO (da analizzare meglio) ?? (Alessandro)
--appena entra l'ARBITRO seleziona la gara, gli verrà restituita una tabella dal database con i tempi di gara
+-appena entra l'ARBITRO seleziona la gara,
+-dopo che seleziona la gara vede la classifica della gara
+-seleziona il pilota e deve compilare un form
 - c'è un form da compilare (tutti i dati) e nel momento che si preme invio, verrà fatto un 
 update al database facendomi vedere in tempo reale il cambio di classifica (da vedere l'ultima parte)  
 

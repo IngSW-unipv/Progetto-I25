@@ -5,11 +5,11 @@
 
 $socket = connectionOpen($address, $port);
 
-$columns[0] = $_POST['pezzo'];
+$columns[0] = $_POST['idGara'];
 
 
     //invio codice gara libera
-    fwrite($socket, "acquistaPezzi ");
+    fwrite($socket, "mostraGara ");
     //invio dati
     fwrite($socket, $columns[0]. "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
@@ -23,7 +23,7 @@ fclose($socket);
         header('Location: ../registerError.php');
         die();
     } else{
-        header('Location: ../acquistoAvvenutoCorrettamente.php');
+        header('Location: ../aggiuntaPenalita.php');
         die();
     }
 ?>

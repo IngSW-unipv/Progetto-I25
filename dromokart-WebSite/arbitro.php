@@ -3,7 +3,6 @@
 <?php require 'logic/controlloLogin.php'; ?>
 <?php require 'logic/richiestaGare.php'; ?>
 
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -24,40 +23,53 @@
   </section>
 
   <div class="table-section">
-        <?php
-        // Suddivide $res in righe
-        $rows = explode("\n", $res);
+    <?php
+    // Suddivide $res in righe
+    $rows = explode("\n", $res);
+    
+    // Controlla se sono presenti righe non vuote
+    if(count($rows) > 0 && !empty(trim($rows[0]))) {
+        echo '<table>';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>IdGara</th>';
+        echo '<th>Seleziona</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
         
-        // Controlla se sono presenti righe non vuote
-        if(count($rows) > 0 && !empty(trim($rows[0]))) {
-            echo '<table>';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th>idGara</th>';
-            echo '<th>Qualifica</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
-            
-            // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
-            foreach($rows as $row) {
-                $row = trim($row);
-                if(empty($row)) continue;
-                $columns = preg_split('/\s+/', $row);
-                // Assicurati che ci siano almeno 3 colonne
-                if(count($columns) >= 1) {
-                    echo '<tr>';
-                    echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
-                }
+        // Per ogni riga, suddivide i campi
+        foreach($rows as $row) {
+            $row = trim($row);
+            if(empty($row)) continue;
+
+            // Suddividi le colonne in base agli spazi
+            $columns = preg_split('/\s+/', $row);
+
+            // Assicurati che esista almeno un valore
+            if(count($columns) >= 1) {
+                $idGara = htmlspecialchars($columns[0]);
+                
+                echo '<tr>';
+                // Colonna IdGara
+                echo '<td>' . $idGara . '</td>';
+                // Colonna con bottone "Seleziona"
+                echo '<td>';
+                echo '  <form action="logic/selezioneGara.php" method="post">';
+                echo '    <input type="hidden" name="idGara" value="' . $idGara . '">';
+                echo '    <button type="submit">Seleziona</button>';
+                echo '  </form>';
+                echo '</td>';
+                echo '</tr>';
             }
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo '<p>Nessun dato ricevuto.</p>';
         }
-        ?>
-
-
-  </main>
+        
+        echo '</tbody>';
+        echo '</table>';
+    } else {
+        echo '<p>Nessun dato ricevuto.</p>';
+    }
+    ?>
+  </div>
 </body>
 </html>
