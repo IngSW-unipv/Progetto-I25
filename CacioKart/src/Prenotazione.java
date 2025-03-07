@@ -35,30 +35,35 @@ public class Prenotazione {
 
         result = db.executeReturnQuery(SELECT);
 
-        if(result == null|| result.isEmpty()){
+        // Serve a capire se esiste già almeno una prenotazione
+        if(result == null || result.isEmpty()){
             nPartecipanti = 0;
         } else {
-            nPartecipanti =Integer.parseInt(result.get(0).toString().replace("\"", ""));
+            nPartecipanti = Integer.parseInt(result.get(0).toString().replace("\"", ""));
         }
-        if (nPartecipanti!=0) {
+
+        // Stabilisco l'id della prenotazione basandomi su se esiste o meno già almeno una prenotazione
+        // Controllare i partecipanti non serve
+        if (nPartecipanti != 0) {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
+
             if (result != null && !result.isEmpty() && result.get(0) != null) {
                 idPrenotazione = result.get(0).toString().replaceAll("\\D", "");
-                idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione )+1) ;
+                idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione )+1);
+
             } else {
                 idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
             }
         }
-        if(nPartecipanti>1 && nPartecipanti<MAX){
-            do{
-                costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
-                if(costo<30||costo>50){
-                    System.out.println("Impossibile generare il prezzo\n");
-                }else {
-                    System.out.printf("Prezzo generato: %.2f €%n", costo);
-                }
-            }while(costo<30||costo>50);
+
+
+        //Controllo strano
+        if(nPartecipanti >= 1 && nPartecipanti < MAX){
+
+            //Generare un prezzo casuale
+            costo = 30 + (random.nextDouble() * (50 - 30)); // Genera un numero tra 30 e 50
+            //System.out.printf("Prezzo generato: %.2f €%n", costo);
 
             INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, numP,socio) VALUES('" +
                     idPrenotazione + "', '" +
@@ -70,24 +75,34 @@ public class Prenotazione {
                     cf + "')";
             queryIndicator = db.executeUpdateQuery(INSERT);
             responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
-            System.out.println("prenotazione avvenuta con successo\n");
+            System.out.println("Prenotazione avvenuta con successo\n");
         }else{
             System.out.println("Nessun posto disponibile\n!");
         }
+
+        /*
+        //Query non necessaria, ho già il numero di utenti presenti in quella fascia in quel giorno
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
                 + fasciaOraria + "'";
         result = db.executeReturnQuery(SELECT);
-//      Controllo per evitare errori di null o lista vuota
+
+        // Controllo per evitare errori di null o lista vuota
         if (result != null || !result.isEmpty() || result.get(0)!= null) {
             nPartecipanti =Integer.parseInt(result.get(0).toString().replaceAll("\\D", ""));
+
         } else {
             nPartecipanti = 0; // Se il risultato è nullo o vuoto, impostiamo 0
-        }
-        if(nPartecipanti>1 && nPartecipanti<MAX){
+        }*/
+
+
+        // Una volta stabiliti i partecipanti
+
+        if(nPartecipanti > 1 && nPartecipanti < MAX){
             //creazione della gara
             switch (tipologia){
+
                 case "secca":
                     SELECT="SELECT MAX(idG) from garaS";
                     result = db.executeReturnQuery(SELECT);
@@ -95,7 +110,7 @@ public class Prenotazione {
                         idGara = result.get(0).toString().replaceAll("\\D", "");
                         idGara=String.valueOf(Integer.parseInt(idGara)+1);
                     }else{
-                        idGara="1";
+                        idGara = "1";
                     }
                     g.setIdGara(idGara);
                     g.setOra(fasciaOraria);

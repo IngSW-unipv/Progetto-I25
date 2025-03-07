@@ -24,7 +24,7 @@ public class Meccanico{
     //interfaccia rimozione kart
     //Override metodi Iinventario
 
-    public void aggiornamentoManutenzione(String dati, Socket clientSocket){
+    public void aggiornamentoManutenzione(String targa, Socket clientSocket){
         //targa
     };
 
