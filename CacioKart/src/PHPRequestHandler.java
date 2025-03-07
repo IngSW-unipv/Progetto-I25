@@ -324,12 +324,10 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        //Query per quando voglio aggiungere i kart al noleggio
-        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
-                "(SELECT concessionaria.tipol FROM concessionaria)";
+        LocalDate oggi = LocalDate.now();
+        query = "SELECT * FROM caciokart.mauntenzione m join eseguita e on m.idM=e.idM" +
+                "where m.dataM is null or DATEDIFF(" + oggi.toString() + "' , m.dataM) > 6";
         m.mostraKart(query,clientSocket);
-        //KRT123 06/03/2023
-        //DA FARE
     }
 
     /**Metodo per aggiungere dipendenti.
