@@ -1,5 +1,6 @@
 import java.net.Socket;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +25,46 @@ public class Meccanico{
     //interfaccia rimozione kart
     //Override metodi Iinventario
 
-    public void aggiornamentoManutenzione(String targa, Socket clientSocket){
-        //targa
-    };
+    public void aggiornamentoManutenzione(String query,String targa,String text,double prezzo, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        boolean trovata = false;
+        String elenco;
+        String idM;
+        kart = db.executeReturnQuery(query);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        for (Map<String, Object> row : kart) {
+            elenco = row.get("targa").toString();
+            if (row.containsKey("targa") && row.get("targa") != null) {
+                if (elenco.equals(targa)) {
+                    trovata = true;
+
+                }
+            }
+        }
+        if (trovata) {
+            SELECT = "SELECT MAX(idM) FROM PRENOTAZIONE";
+            kart = db.executeReturnQuery(SELECT);
+            idM = kart.toString().replaceAll("\\D", "");
+            idM = String.valueOf(Integer.parseInt(idM) + 1);
+            SELECT = "INSERT INTO mauntenzione (idM, tipoInt , costo, dataM) VALUES('" +
+                    idM + "', '" +
+                    text +"', '" +
+                    prezzo +"', '" +
+                    LocalDate.now() + "', '" +
+                     "')";
+            queryIndicator = db.executeUpdateQuery(SELECT);
+            responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
+            SELECT = "INSERT INTO eseguita (idM, targa ) VALUES('" +
+                    idM + "', '" +
+                    targa +"', '" +
+                    "')";
+            System.out.println("manutenziobe avvenuta con successo\n");
+        }else{
+            System.out.println("manutenzio non avvenuta\n");
+        }
+
+    }
 
     public void aggiuntaKart(String targa, Socket clientSocket) throws SQLException {
         db = new DBConnector();
