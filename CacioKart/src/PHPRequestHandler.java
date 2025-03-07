@@ -233,12 +233,12 @@ public class PHPRequestHandler {
 
     private void prenotationCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
 
-        String[] dataOrario = messaggio.split(" ");
-        LocalDate dataG = LocalDate.parse(dataOrario[0], dateFormatter);
-        String[] orari = dataOrario[1].split("-");
+        String[] info = messaggio.split(" ");
+        LocalDate dataG = LocalDate.parse(info[0], dateFormatter);
+        String[] orari = info[1].split("-");
+        String cf = info[2];
         LocalTime orarioI = LocalTime.parse(orari[0], timeFormatter);
-        LocalTime orarioF = LocalTime.parse(orari[1], timeFormatter);
-        Socio utente = new Socio(null, null, null, dataOrario[2], null, null);
+        Socio utente = new Socio(null, null, null, cf, null, null);
         utente.richiestaP(tipologia, dataG, orarioI,clientSocket);
     }
 
@@ -389,7 +389,7 @@ public class PHPRequestHandler {
     }
 
     private void acquistaKartCase(String dati, Socket clientSocket) throws SQLException {
-        Socio s = new Socio(null, null, null, null, null, null);
+        Socio s = new Socio();
         s.compraKart(dati, clientSocket);
     }
 
@@ -406,7 +406,7 @@ public class PHPRequestHandler {
     private void mostraGaraCase(String idGara, Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
         query = "SELECT * FROM caciokart.classifica WHERE idGara = '" + idGara + "'";
-        c.classificaCompleta(query, clientSocket);
+        c.classificaPenalità(query, clientSocket);
     }
 
 }

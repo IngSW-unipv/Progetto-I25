@@ -6,33 +6,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static java.util.Collections.replaceAll;
-
 public class Prenotazione {
     private final int MAX=20;
     private String SELECT;
     private String INSERT;
-    LocalDate dataG;
-    LocalTime orarioI;
-    LocalTime orarioF;
     private DBConnector db;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private List<Map<String, Object>> result;
     private Gara g;
+    private String idPrenotazione;
+    private String idGara;
+    private int nPartecipanti;
+    private double costo;
 
-    public void prenotation(String cf,String tipologia,LocalDate dataGara, LocalTime oraI, Socket clientSocket) throws SQLException {
-        db=new DBConnector();
-        responder=new PHPResponseHandler();
+    public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
         Random random = new Random();
-        String idP = null,idG=null;
-        int nPartecipanti=0;
-        double costo = 0;
-        g = new Gara("0",null);
+        nPartecipanti = 0;
+        costo = 0;
+
+        g = new Gara("0",null); //Da rivedere
+
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
-                + dataGara + "' AND fasciaO= '"
-                + oraI + "'";
+                + dataGara + "' AND fasciaO = '"
+                + fasciaOraria + "'";
+
         result = db.executeReturnQuery(SELECT);
+
         if(result == null|| result.isEmpty()){
             nPartecipanti = 0;
         } else {
@@ -42,10 +44,10 @@ public class Prenotazione {
             String SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
             result = db.executeReturnQuery(SELECT);
             if (result != null && !result.isEmpty() && result.get(0) != null) {
-                idP = result.get(0).toString().replaceAll("\\D", "");
-                idP = String.valueOf(Integer.parseInt(idP )+1) ;
+                idPrenotazione = result.get(0).toString().replaceAll("\\D", "");
+                idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione )+1) ;
             } else {
-                idP = "1"; // Se non ci sono prenotazioni, partiamo da 1
+                idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
             }
         }
         if(nPartecipanti>1 && nPartecipanti<MAX){
@@ -59,9 +61,9 @@ public class Prenotazione {
             }while(costo<30||costo>50);
 
             INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, numP,socio) VALUES('" +
-                    idP + "', '" +
+                    idPrenotazione + "', '" +
                     dataGara +"', '" +
-                    oraI +"', '" +
+                    fasciaOraria +"', '" +
                     tipologia + "', '" +
                     costo + "', '" +
                     1 + "', '" +
@@ -75,7 +77,7 @@ public class Prenotazione {
         //conteggio degli utenti che vogliono fare la gara in quel giorno in quella ora
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO= '"
-                + oraI + "'";
+                + fasciaOraria + "'";
         result = db.executeReturnQuery(SELECT);
 //      Controllo per evitare errori di null o lista vuota
         if (result != null || !result.isEmpty() || result.get(0)!= null) {
@@ -90,13 +92,13 @@ public class Prenotazione {
                     SELECT="SELECT MAX(idG) from garaS";
                     result = db.executeReturnQuery(SELECT);
                     if(result != null || !result.isEmpty() || result.get(0)!= null) {
-                        idG = result.get(0).toString().replaceAll("\\D", "");
-                        idG=String.valueOf(Integer.parseInt(idG)+1);
+                        idGara = result.get(0).toString().replaceAll("\\D", "");
+                        idGara=String.valueOf(Integer.parseInt(idGara)+1);
                     }else{
-                        idG="1";
+                        idGara="1";
                     }
-                    g.setIdGara(idG);
-                    g.setOra(oraI);
+                    g.setIdGara(idGara);
+                    g.setOra(fasciaOraria);
 
                     INSERT = "INSERT INTO garaS (idGara, ora, nPart, btempo, idC, idP) VALUES('" +
                             g.getIdGara() + "', '" +
@@ -104,7 +106,7 @@ public class Prenotazione {
                             nPartecipanti + "', '" +
                             null + "', '" +
                             null + "', '" +
-                            idP + "')";
+                            idPrenotazione + "')";
 
                     queryIndicator = db.executeUpdateQuery(INSERT);
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
@@ -114,19 +116,19 @@ public class Prenotazione {
                     SELECT="SELECT MAX(idG) from garaL";
                     result = db.executeReturnQuery(SELECT);
                     if(result != null || !result.isEmpty() || result.get(0) != null) {
-                        idG =result.get(0).toString().replaceAll("\\D", "");
-                        idG=String.valueOf(Integer.parseInt(idG)+1);
+                        idGara =result.get(0).toString().replaceAll("\\D", "");
+                        idGara=String.valueOf(Integer.parseInt(idGara)+1);
                     }else{
-                        idG="1";
+                        idGara="1";
                     }
-                    g.setIdGara(idG);
-                    g.setOra(oraI);
+                    g.setIdGara(idGara);
+                    g.setOra(fasciaOraria);
 
                     INSERT="INSERT INTO garaL (idGara, ora, idC, idP) VALUES('" +
                             g.getIdGara() + "', '" +
                             g.getOra() + "', '" +
                             null + "', '" +
-                            idP + "')";
+                            idPrenotazione + "')";
 
                     queryIndicator = db.executeUpdateQuery(INSERT);
                     responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
