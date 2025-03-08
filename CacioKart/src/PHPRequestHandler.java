@@ -421,10 +421,10 @@ public class PHPRequestHandler {
         String[] info = messaggio.split(" ");
         String cf = info[0];
         String idGara = info[1];
-        LocalTime tempo = LocalTime.parse(info[2], timeFormatter);
+        LocalTime penalità = LocalTime.parse(info[2], timeFormatter);
         //Metodo in arbitro per inserire le penalità
         Arbitro a = new Arbitro();
-        a.inserimentoPenalita(cf, idGara, tempo);
+        a.inserimentoPenalita(cf, idGara, penalità, clientSocket);
 
     }
 
