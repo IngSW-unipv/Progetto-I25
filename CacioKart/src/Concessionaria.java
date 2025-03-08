@@ -105,7 +105,7 @@ public class Concessionaria implements Iinventario{
     public void inserimentoPezzo(String idPezzo, String quantita, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = "UPDATE caciokart.concessionaria SET quantita = quantita + '" + quantita + "' WHERE tipol = '" + idPezzo + "'";
+        INSERT = "UPDATE caciokart.concessionaria SET quantita = quantita + " + quantita + " WHERE idProdotto = '" + idPezzo + "'";
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
