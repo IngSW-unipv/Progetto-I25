@@ -18,12 +18,11 @@ $codice_fiscale = $_POST['codice_fiscale'];
 
 fclose($socket);
 
-    //nel caso di successo, viene impostato il rango a 1 e si salva 
     if($res === "0"){
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: ../proprietario.php');
+        header('Location: transazioneCorretta.php');
         die();
     }
 ?>

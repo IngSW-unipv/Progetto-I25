@@ -25,7 +25,7 @@ fclose($socket);
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: ../profilo.php');
+        header('Location: acquistoAvvenutoCorrettamente.php');
         die();
     }
 ?>

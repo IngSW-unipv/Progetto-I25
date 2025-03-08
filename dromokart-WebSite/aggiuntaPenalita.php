@@ -58,31 +58,19 @@ require_once 'logic/selezioneGara.php';
             if (count($columns) >= 5) {
                 echo '<tr>';
 
-                // Stampiamo i primi 7 campi in tabella
-                // (idGara, socio, targa, bGiro, tempoTot, penalità)
-                // Adatta l'indice in base al formato che arriva dal server Java
                 echo '  <td>' . htmlspecialchars($columns[0]) . '</td>'; 
                 echo '  <td>' . htmlspecialchars($columns[1]) . '</td>';
                 echo '  <td>' . htmlspecialchars($columns[2]) . '</td>';
                 echo '  <td>' . htmlspecialchars($columns[3]) . '</td>';
                 echo '  <td>' . htmlspecialchars($columns[4]) . '</td>';
-
-                // Se ci fosse un ottavo campo, puoi stamparlo
-                // echo '  <td>' . htmlspecialchars($columns[7]) . '</td>';
-
-                // Pulsante "Aggiungi Penalità"
-                // Qui decidi come vuoi gestire l'aggiunta di penalità.
-                // Ad esempio, potresti inviare un form ad un'altra pagina "logic/aggiungiPenalita.php"
-                // che poi fa la logica necessaria (aggiornare il DB, il server Java, ecc.)
                 echo '  <td>';
                 echo '    <form action="logic/aggiungiPenalita.php" method="post">';
                 echo '      <input type="time" name="time" value="0">';
                 echo '      <input type="hidden" name="idGara" value="'. htmlspecialchars($columns[0]) .'">';
                 echo '      <input type="hidden" name="Socio" value="'. htmlspecialchars($columns[1]) .'">';
+                echo '      <input type="hidden" name="tempoTot" value="'. htmlspecialchars($columns[4]) .'">';
                 echo ' </td>';
                 echo '  <td>';
-                // Se serve anche un campo "penalità" da inserire:
-                // echo '      <input type="number" name="valorePenalita" placeholder="Penalità" min="0">';
                 echo '      <button type="submit">Aggiungi penalità</button>';
                 echo '    </form>';
                 echo '  </td>';

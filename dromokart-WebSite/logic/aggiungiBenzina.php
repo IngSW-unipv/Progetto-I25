@@ -17,12 +17,11 @@ $targa = $_POST['targa'];
 
 fclose($socket);
 
-    //nel caso di successo, viene impostato il rango a 1 e si salva 
     if($res === "0"){
-        header('Location: ../registerError.php');
+        header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: ../meccanico.php');
+        header('Location: transazioneCorretta.php');
         die();
     }
 ?>

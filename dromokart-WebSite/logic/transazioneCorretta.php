@@ -18,7 +18,7 @@
   <script>
     setTimeout(function() {
       window.history.back(); // Torna alla pagina precedente
-    }, 1200); 
+    }, 1200);
   </script>
 </head>
 <body>
@@ -27,7 +27,7 @@
   <main>
     <!-- Sezione Hero -->
     <section class="hero">
-      <h1>Congratulazioni! Hai effettuato correttamente l'acquisto.</h1>
+      <h1>Transazione Avvenuta correttamente</h1>
       <p>Verrai reindirizzato automaticamente...</p>
     </section>
   </main>
