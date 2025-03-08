@@ -19,8 +19,10 @@ public enum TipoComandi {
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen"),
+
     CREAZIONE_TEAM("aggiungiTeam"),
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
+
     AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
     AGGIUNGI_BENZINA("aggiungiBenzina"),
     MOSTRA_PEZZI("mostraPezzi"),

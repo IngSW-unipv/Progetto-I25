@@ -79,7 +79,7 @@ public class Meccanico{
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE kart SET kart.serbatoio = '20' WHERE kart.targa = '" + info + "'";
+        UPDATE = "UPDATE caciokart.kart SET kart.serbatoio = '20' WHERE kart.targa = '" + info + "'";
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
