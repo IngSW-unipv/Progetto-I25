@@ -19,6 +19,7 @@ public class Concessionaria implements Iinventario{
     private String ultimoProdotto;
     private List<Map<String, Object>> pezzi;
     private StringBuilder listaPezzi = new StringBuilder();
+    private int queryIndicator;
 
     public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
         //this.pezzi = pezzi;
@@ -101,7 +102,11 @@ public class Concessionaria implements Iinventario{
         }
     }
 
-    public void inserimentoPezzo(){
-
+    public void inserimentoPezzo(String idPezzo, String quantita, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        INSERT = "UPDATE caciokart.concessionaria SET quantita = '" + quantita + "' WHERE tipol = '" + idPezzo + "'";
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     };
 }

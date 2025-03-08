@@ -134,6 +134,10 @@ public class PHPRequestHandler {
                     aggiungiPenalitaCase(info, clientSocket);
                     break;
 
+                case AGGIUNGI_PEZZI:
+                    aggiungiPezziCase(info, clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -426,6 +430,15 @@ public class PHPRequestHandler {
         Arbitro a = new Arbitro();
         a.inserimentoPenalita(cf, idGara, penalità, clientSocket);
 
+    }
+
+    private void aggiungiPezziCase(String messaggio, Socket clientSocket) throws SQLException {
+        //idPezzo quantità
+        String[] info = messaggio.split(" ");
+        String idPezzo = info[0];
+        String quantità = info[1];
+        Concessionaria c = new Concessionaria();
+        c.inserimentoPezzo(idPezzo, quantità, clientSocket);
     }
 
 }
