@@ -6,7 +6,6 @@
 
     $socio = $_POST['Socio'];
     $idGara = $_POST['idGara'];
-    $tempoTot = $_POST['tempoTot'];
     $time = $_POST['time'];
 
 
@@ -15,7 +14,6 @@
     //invio dati
     fwrite($socket, $socio . " ");
     fwrite($socket, $idGara . " ");
-    fwrite($socket, $tempoTot . " ");
     fwrite($socket, $time . "\n");
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
