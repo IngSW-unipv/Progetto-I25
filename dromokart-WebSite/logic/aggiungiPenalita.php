@@ -25,7 +25,7 @@
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: transazioneCorretta.php');
+        header('Location: ../arbitro.php');
         die();
     }
 ?>
