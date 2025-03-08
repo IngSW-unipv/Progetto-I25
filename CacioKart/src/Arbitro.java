@@ -7,8 +7,6 @@ public class Arbitro {
     private PHPResponseHandler responder;
     private String UPDATE;
     private int queryIndicator;
-    private LocalTime nuovoTempo;
-    private int minutiTotali;
 
     public Arbitro() {
 
