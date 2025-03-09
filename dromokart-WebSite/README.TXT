@@ -1,19 +1,23 @@
-CHI SIAMO (Andrea)
+CHI SIAMO
 -aggiungere un immagine del nostro team ?
 
-PROPRIETARIO (Alessandro)
+PROPRIETARIO
 -Tasto per visione di bilancio, chiedo al database di farmi vedere una tabella con entrate e uscite
 
-MECCANICO (Andrea)
+MECCANICO
 -flag/pulsante se si preme cambia la data della manutenzione di 6 mesi in avanti
 
-ORGANIZZATORE (Parlare con il gruppo)
--abbiamo una pulsante che si chiama "CREA TEAM" questo pulsante mi manda ad un FORM che
-mi fa vedere la lista di tutti i piloti ed è possibile inserire IL CF dei due piloti, il colore e il nome 
-del TEAM e categoria ??
--Abbiamo un pulsante per creare la prenotazione della gara secca, in questo caso si apre un form
-dove bisogna inserire la categoria, quanti partecipano, se è o no un campionato, l'orario e altri 
-attributi che al momento non ricordo ??
--Pulsante creazione gara dove posso attingere solo alle gare dove ho creato la prenotazione, inserisco manualmente
-tutti i partecipanti ??
--Pagina per la creazione di campionato inserendo più gare secche ??
+ORGANIZZATORE
+
+-Pagina Crea Team, abbiamo una vista dove ci mostra l'elenco di tutti i soci che NON fanno
+parte di un Team.(select)
+Devo aggiungere due soci e inserire nome(del team) e colore.(insert)
+
+-Pagina per la prenotazione di Gara Secca, sarà identica a gara libera(insert)
+
+-Pagina dove mi mostra tutte le gare secche che non sono piu recenti della data odierna(select)
+Una volta che clicco la gara mi mostra tutti i team e posso inserirli(insert)
+
+-Pagina Aggiunta gare a Campionato, prima mi mostra tutti i campionati.(select)
+Una volta selezionato il campionato mi mostra tutte le gare non associate ad un campionato(select),
+premendo il bottone aggiungo quella gara al campionato tramite un insert.(insert)

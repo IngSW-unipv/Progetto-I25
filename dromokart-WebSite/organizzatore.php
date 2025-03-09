@@ -27,7 +27,8 @@
       <button onclick="location.href='creazioneTeam.php'">Crea Team</button>
       <button onclick="location.href='creaPrenotazioneGara.php'">Prenotazione Gara Secca</button>
       <button onclick="location.href='creazioneGaraSecca.php'">Creazione Gara Secca</button>
-      <button onclick="location.href='creazioneCampionato.php'">Creazione Campionato</button>
+      <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
+      <button onclick="location.href='creazioneCampionato.php'">Inserimento Campionato</button>
     </div>
   </main>
 </body>
