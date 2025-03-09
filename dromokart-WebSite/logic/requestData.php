@@ -15,10 +15,10 @@
         }
         $res .= $line;
     }
+    fclose($socket);
+
     $res = trim($res);
 
     return $res;
-
-    fclose($socket);
     }
 ?>

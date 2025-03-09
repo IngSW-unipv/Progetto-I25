@@ -1,14 +1,26 @@
 <?php
     session_start();
 
-    require 'connection.php';
+    //require 'connection.php';
 
-$socket = connectionOpen($address, $port);
+    //$socket = connectionOpen($address, $port);
 
-$Nome = $_POST['Nome'];
-$Colore = $_POST['Colore'];
+    $Nome = $_POST['Nome'];
+    $Colore = $_POST['Colore'];
+    $nsoci = $_POST['nsoci'];
 
+    $usr = '';
 
+    for($k =0; $k < $nsoci; $k++){
+        $str = "codice_fiscale" .$k;
+        if(isset($_POST[$str])){
+            $usr .= " " .$_POST[$str];
+        }
+    }
+
+    echo 'nome: ' .$Nome .'  Colore:' .$Colore .'  membri:' .$usr; 
+
+    /*
     //invio codice gara libera
     fwrite($socket, "aggiungiTeam ");
     //invio dati
@@ -19,7 +31,7 @@ $Colore = $_POST['Colore'];
 
     $res = trim(fgets($socket));
 
-fclose($socket);
+    fclose($socket);
 
     if($res === "0"){
         header('Location: ../erroreGenerale.php');
@@ -27,5 +39,5 @@ fclose($socket);
     } else{
         header('Location: transazioneCorretta.php');
         die();
-    }
+    }*/
 ?>

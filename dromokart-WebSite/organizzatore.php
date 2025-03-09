@@ -24,7 +24,7 @@
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='test.php'">Crea Team</button>
+      <button onclick="location.href='creazioneTeam.php'">Crea Team</button>
       <button onclick="location.href='prenotazioneGaraSecca.php'">Prenotazione Gara Secca</button>
       <button onclick="location.href='creazioneGaraSecca.php'">Inserimento Gara Secca</button>
       <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>

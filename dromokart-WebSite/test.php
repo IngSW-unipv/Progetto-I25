@@ -1,5 +1,5 @@
 <?php
-  include 'default/headerProprietario.php';
+  include 'default/headerProfilo.php';
   include 'default/footerConce.php';
 
 ?>
