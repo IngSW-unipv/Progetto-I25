@@ -13,10 +13,10 @@ ORGANIZZATORE
 parte di un Team.(select)
 Devo aggiungere due soci e inserire nome(del team) e colore.(insert)
 
--Pagina per la prenotazione di Gara Secca, sarà identica a gara libera(insert)
+-Pagina per la prenotazione di Gara Secca, sarà identica a gara libera(insert) (fatto php)
 
--Pagina dove mi mostra tutte le gare secche che non sono piu recenti della data odierna(select)
-Una volta che clicco la gara mi mostra tutti i team e posso inserirli(insert)
+-Pagina dove mi mostra tutte le gare secche che non sono piu recenti della data odierna(select) (fatto php)
+Una volta che clicco la gara mi mostra tutti i team e posso inserirli(select)(insert) (fatto php)
 
 -Pagina Aggiunta gare a Campionato, prima mi mostra tutti i campionati.(select)
 Una volta selezionato il campionato mi mostra tutte le gare non associate ad un campionato(select),

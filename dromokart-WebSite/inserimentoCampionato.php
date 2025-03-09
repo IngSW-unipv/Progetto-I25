@@ -2,7 +2,7 @@
 include 'default/headerProfilo.php';     // Header personalizzato per la sezione
 include 'default/footerHome.php';        // Footer del sito
 require 'logic/controlloLogin.php';      // Verifica se l'utente è loggato
-require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con i dati delle gare
+require 'logic/richiestaCampionato.php';       // Riempie la variabile $res con i dati delle gare
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creazione Gara Secca</title>
+  <title>Visione Campionati</title>
   <!-- Fogli di stile -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/profilo.css">
@@ -28,7 +28,7 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
         echo '<table>';
         echo '  <thead>';
         echo '    <tr>';
-        echo '      <th>IdGara</th>';
+        echo '      <th>IdCampionato</th>';
         echo '      <th>Seleziona</th>';
         echo '    </tr>';
         echo '  </thead>';
@@ -41,21 +41,21 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
             // Se la riga è vuota, salto
             if(empty($row)) continue;
 
-            // Suddivido la riga (in questo caso potrebbe contenere solo l'idGara)
+            // Suddivido la riga (in questo caso potrebbe contenere solo l'idCampionato)
             $columns = preg_split('/\s+/', $row);
             
-            // Estraggo idGara (se la riga ha almeno 1 colonna)
+            // Estraggo idCampionato (se la riga ha almeno 1 colonna)
             if(isset($columns[0])) {
-                $idGara = htmlspecialchars($columns[0]);
+                $idCampionato = htmlspecialchars($columns[0]);
                 
                 echo '<tr>';
                 // Colonna con l'idGara
-                echo '  <td>' . $idGara . '</td>';
+                echo '  <td>' . $idCampionato . '</td>';
                 // Colonna con bottone "Seleziona"
                 echo '  <td>';
-                echo '    <form action="garaSecca.php" method="post">';
-                echo '      <!-- Passo l\'idGara come input nascosto -->';
-                echo '      <input type="hidden" name="idGara" value="' . $idGara . '">';
+                echo '    <form action="gareAssociateCampionato.php" method="post">';
+                echo '      <!-- Passo l\'idCampionato come input nascosto -->';
+                echo '      <input type="hidden" name="idCampionato" value="' . $idCampionato . '">';
                 echo '      <button type="submit">Seleziona</button>';
                 echo '    </form>';
                 echo '  </td>';

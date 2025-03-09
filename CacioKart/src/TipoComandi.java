@@ -4,34 +4,66 @@
  *
  */
 public enum TipoComandi {
+
+    //UTENTE
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
-    CLASSIFICA_GENERALE("richiestaClass"),
     CLASSIFICA_UTENTE("richiestaClassUsr"),
-    CLASSIFICA_ARBITRO("richiestaClassAr"),
     PRENOTAZIONE_LIBERA("prenotazioneLibera"),
-    PRENOTAZIONE_SECCA("prenotazioneSecca"),
-    AGGIUNTA_KART_CONCESSIONARIA("aggiungiKartConcessionario"),
+    ACQUISTA_KART("acquistaKart"),
     MOSTRA_KART_AGGIUNTA("mostraKartAggiunta"),
+    CLASSIFICA_GENERALE("richiestaClass"),
+    ACQUISTA_PEZZI("acquistaPezzi"),
+
+    //MECCANICO
+
     MOSTRA_KART_RIMUOVI("mostraKartRimuovi"),
     MOSTRA_KART_MANUTENZIONE("mostraKartManutenzione"),
     ELIMINAZIONE_KART("eliminaKart"),
-    REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
-    ELIMINA_DIPENDENTE("eliminaDipen"),
-    RICHIESTA_DIPENDENTE("richiestaDipen"),
+    AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
+    AGGIUNGI_BENZINA("aggiungiBenzina"),
+    MANUTENZIONE("manutenzione"),
 
+    //CONCESSIONARIA
+
+    AGGIUNTA_KART_CONCESSIONARIA("aggiungiKartConcessionario"),
+    AGGIUNGI_PEZZI("aggiungiPezzi"),
+    MOSTRA_PEZZI("mostraPezzi"),
+
+    //ARBITRO
+
+    CLASSIFICA_ARBITRO("richiestaClassAr"),
+    MOSTRA_GARA("mostraGara"),
+    AGGIUNGI_PENALITA("aggiungiPenalita"),
+
+    //ORGANIZZATORE
+
+    PRENOTAZIONE_SECCA("prenotazioneSecca"),
+    RICHIESTA_TEAM("mostraTeam"),
+    INSERIMENTO_TEAM_GARA("inserimentoTeamGara"),
+    RICHIESTA_GARA_SECCA("richiestaGaraSecca"),
+    MOSTRA_SOCI("mostraSoci"),
+    RICHIESTA_CAMPIONATO("richiestaCampionato"),
+    SELEZIONE_GARE_CAMPIONATO("selezioneGareCampionato"),
+    AGGIUNGI_GARE_CAMPIONATO("aggiungiGareCampionato"),
     CREAZIONE_TEAM("aggiungiTeam"),
     CREAZIONE_CAMPIONATO("aggiungiCampionato"),
 
-    AGGIUNGI_KART_MECCANICO("aggiungiKartMeccanico"),
-    AGGIUNGI_BENZINA("aggiungiBenzina"),
-    MOSTRA_PEZZI("mostraPezzi"),
-    ACQUISTA_PEZZI("acquistaPezzi"),
-    AGGIUNGI_PEZZI("aggiungiPezzi"),
-    ACQUISTA_KART("acquistaKart"),
-    MANUTENZIONE("manutenzione"),
-    MOSTRA_GARA("mostraGara"),
-    AGGIUNGI_PENALITA("aggiungiPenalita");
+    //PROPRIETARIO
+
+    REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
+    ELIMINA_DIPENDENTE("eliminaDipen"),
+    RICHIESTA_DIPENDENTE("richiestaDipen");
+
+
+
+
+
+
+
+
+
+
 
     private final String descrizione;
 
