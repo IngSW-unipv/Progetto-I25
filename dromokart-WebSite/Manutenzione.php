@@ -25,7 +25,7 @@
       echo '<thead>';
       echo '<tr>';
       echo '<th>Targa</th>';
-      echo '<th>Manutenzione</th>';
+      echo '<th>Ultima Manutenzione</th>';
       echo '<th>Aggiungi</th>';
       echo '</tr>';
       echo '</thead>';
@@ -48,9 +48,9 @@
 
           // Se il valore del serbatoio è 20, disabilitiamo il pulsante
           if ($columns[1] == 0) {
-              echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;">Riempi Serbatoio</button>';
+              echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;">Effettua manutenzione</button>';
           } else {
-              echo '<button type="submit">Riempi Serbatoio</button>';
+              echo '<button type="submit">Effettua manutenzione</button>';
           }          
 
           echo '</form>';
