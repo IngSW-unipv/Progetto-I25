@@ -422,7 +422,7 @@ public class PHPRequestHandler {
         String[] mex = info.split(" ");
         String targa = mex[0];
         String text = mex[1];
-        double prezzo= Double.parseDouble(mex[2]);
+        double prezzo = Double.parseDouble(mex[2]);
         LocalDate today = LocalDate.now();
          query = "SELECT " +
                 "    e.idM, " +

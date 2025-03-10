@@ -17,6 +17,7 @@ public class Meccanico{
     private String DELETE;
     private int queryIndicator;
     private String UPDATE;
+    private String ultimaManutenzione;
 
     public Meccanico() {
 
@@ -115,10 +116,8 @@ public class Meccanico{
         if(kart != null) {
             for(Map<String, Object> row : kart) {
                 targa = row.get("targa").toString();
-                cilindrata = row.get("cilindrata").toString();
-                serbatoio = row.get("serbatoio").toString();
-                data= row.get("giorniDallaManutenzione").toString();
-                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
+                ultimaManutenzione = row.get("giorniDallaManutenzione").toString();
+                listaKart.append(targa).append(" ").append(ultimaManutenzione).append("\n");
             }
             listaKart.append("end");
             responder.sendResponse(clientSocket, listaKart.toString());
