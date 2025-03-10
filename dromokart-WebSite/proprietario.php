@@ -17,11 +17,8 @@
 </head>
 <body>
 
-  
-  <!-- Sezione Hero -->
-  <section class="hero">
-    <h1>Benvenuto, Antonino!</h1>
-    <p>Clicca uno dei pulsanti qui sotto per aggiungere un dipendente, rimuoverlo o visionare il bilancio</p>
+<section class="hero">
+    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
   </section>
 
   <div class="profile-buttons">

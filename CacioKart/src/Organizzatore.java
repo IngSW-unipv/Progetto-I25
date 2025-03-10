@@ -89,7 +89,7 @@ public class Organizzatore {
 
         if(result != null) {
             for(Map<String, Object> row : result) {
-                idCampionato = row.get("idGara").toString();
+                idCampionato = row.get("idCampionato").toString();
                 campionato.append(idCampionato).append("\n");
             }
             campionato.append("end");
