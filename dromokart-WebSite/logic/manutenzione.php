@@ -6,8 +6,8 @@
     $socket = connectionOpen($address, $port);
 
     $targa = $_POST['targa'];
+    $Descrizione = $_POST['Descrizione'];
     $prezzo = $_POST['prezzo'];
-    fwrite($socket, $Descrizione . " ");
 
     //invio targa kart
     fwrite($socket, "manutenzione ");
