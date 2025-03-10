@@ -101,7 +101,7 @@ public class Meccanico{
         }
     }
 
-    public void mostraKartmanutenzione(String query, Socket clientSocket) throws SQLException {
+    public void mostraKartManutenzione(String query, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);

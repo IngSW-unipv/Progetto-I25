@@ -363,7 +363,7 @@ public class PHPRequestHandler {
                 "JOIN eseguita e ON m.idM = e.idM " +
                 "RIGHT JOIN kart k ON k.targa = e.targa;";;
 
-        m.mostraKartmanutenzione(query,clientSocket);
+        m.mostraKartManutenzione(query,clientSocket);
     }
 
     /**Metodo per aggiungere dipendenti.
