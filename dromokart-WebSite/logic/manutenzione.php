@@ -13,8 +13,8 @@
     fwrite($socket, "manutenzione ");
     //invio dati
     fwrite($socket, $targa . " ");
-    fwrite($socket, $Descrizione . " ");
-    fwrite($socket, $prezzo . "\n");
+    fwrite($socket, $prezzo . " ")
+    fwrite($socket, $Descrizione . "\n");;
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
