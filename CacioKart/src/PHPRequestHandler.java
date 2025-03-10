@@ -340,9 +340,7 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        LocalDate oggi = LocalDate.now();
-        query = "SELECT * FROM caciokart.mauntenzione m join eseguita e on m.idM=e.idM" +
-                "where m.dataM is null or DATEDIFF(" + oggi.toString() + "' , m.dataM) > 6";
+        query = "SELECT * FROM caciokart.manutenzione m join eseguita e on m.idM=e.idM right join kart k k.targa=e.targa ";
         m.mostraKart(query,clientSocket);
     }
 
