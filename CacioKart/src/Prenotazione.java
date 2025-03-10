@@ -7,18 +7,13 @@ import java.util.Map;
 import java.util.Random;
 
 public class Prenotazione {
-    private final int MAX=20;
-    private String SELECT;
-    private String INSERT;
+    private String SELECT, INSERT;
     private DBConnector db;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private List<Map<String, Object>> result;
-    private Gara g;
-    private String idPrenotazione;
-    private String idGara;
+    private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
-    private String prenotazioniConcorrenti;
 
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) throws SQLException {
         db = new DBConnector();
@@ -36,7 +31,7 @@ public class Prenotazione {
         result = db.executeReturnQuery(SELECT);
         prenotazioniConcorrenti = result.get(0).toString().replaceAll("\\D", "");
 
-        if(prenotazioniConcorrenti.equals("20")){
+        if (prenotazioniConcorrenti.equals("20")) {
             System.out.println("Nessun posto disponibile\n!");
             responder.sendResponse(clientSocket, "0");
             return;
@@ -65,14 +60,14 @@ public class Prenotazione {
         costo = 15;
         INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, socio) VALUES('" +
                 idPrenotazione + "', '" +
-                dataGara +"', '" +
-                fasciaOraria +"', '" +
+                dataGara + "', '" +
+                fasciaOraria + "', '" +
                 tipologia + "', '" +
                 costo + "', '" +
                 cf + "')";
 
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
         System.out.println("Prenotazione avvenuta con successo\n");
 
         //Controllo strano

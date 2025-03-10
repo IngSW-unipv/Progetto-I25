@@ -1,21 +1,14 @@
 import java.net.Socket;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
 public class Persona {
-    private String nome;
-    private String cognome;
+    private String nome, cognome, cf, mail, password, ruolo;
     private LocalDate dataNascita;
-    private String cF;
-    private String mail;
-    private String password;
     private String SELECT;
     private List<Map<String, Object>> result;
-    private String ruolo;
     private DBConnector db;
     private PHPResponseHandler responder;
     private Ruoli ruoloConverter;
@@ -24,19 +17,20 @@ public class Persona {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
-        this.cF = cF;
+        this.cf = cF;
         this.mail = mail;
         this.password = password;
     }
 
-    /**Costruttore alternativo per chiamare i metodi
-     *
+    /**
+     * Costruttore alternativo per chiamare i metodi
      */
-    public Persona(){
+    public Persona() {
 
     }
 
-    /**Metodo per effettuare la login.
+    /**
+     * Metodo per effettuare la login.
      * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
      * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
      *
@@ -46,58 +40,58 @@ public class Persona {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM caciokart.socio WHERE socio = '"
-                + this.getcF() + "' AND passw = '"
+                + this.getCf() + "' AND passw = '"
                 + this.getPassword() + "'";
 
+        result = db.executeReturnQuery(SELECT);
+
+        if (!result.isEmpty()) {
+            nome = result.get(0).get("nome").toString();
+            responder.sendResponse(clientSocket, "1 0 " + nome);
+
+        } else {
+            SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
+                    + this.getCf() + "' AND passw = '"
+                    + this.getPassword() + "'";
             result = db.executeReturnQuery(SELECT);
 
-            if (!result.isEmpty()) {
-                nome = result.get(0).get("nome").toString();
-                responder.sendResponse(clientSocket, "1 0 " + nome);
+            if (result.isEmpty()) {
+                responder.sendResponse(clientSocket, "0 0 0");
 
             } else {
-                SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
-                        + this.getcF() + "' AND passw = '"
-                        + this.getPassword() + "'";
-                result = db.executeReturnQuery(SELECT);
+                nome = result.get(0).get("nome").toString();
+                ruolo = result.get(0).get("ruolo").toString();
+                ruoloConverter = Ruoli.requestedRole(ruolo);
 
-                if (result.isEmpty()) {
-                    responder.sendResponse(clientSocket, "0 0 0");
+                switch (ruoloConverter) {
+                    case MECCANICO:
+                        responder.sendResponse(clientSocket, "1 1 " + nome);
+                        break;
 
-                } else {
-                    nome = result.get(0).get("nome").toString();
-                    ruolo = result.get(0).get("ruolo").toString();
-                    ruoloConverter = Ruoli.requestedRole(ruolo);
+                    case GESTORE:
+                        responder.sendResponse(clientSocket, "1 2 " + nome);
+                        break;
 
-                    switch (ruoloConverter) {
-                        case MECCANICO:
-                            responder.sendResponse(clientSocket, "1 1 " + nome);
-                            break;
+                    case ARBITRO:
+                        responder.sendResponse(clientSocket, "1 3 " + nome);
+                        break;
 
-                        case GESTORE:
-                            responder.sendResponse(clientSocket, "1 2 " + nome);
-                            break;
+                    case ORGANIZZATORE:
+                        responder.sendResponse(clientSocket, "1 4 " + nome);
+                        break;
 
-                        case ARBITRO:
-                            responder.sendResponse(clientSocket, "1 3 " + nome);
-                            break;
+                    case PROPRIETARIO:
+                        responder.sendResponse(clientSocket, "1 5 " + nome);
+                        break;
 
-                        case ORGANIZZATORE:
-                            responder.sendResponse(clientSocket, "1 4 " + nome);
-                            break;
+                    default:
+                        responder.sendResponse(clientSocket, "0 0 0");
+                        System.out.println("Ruolo non trovato");
+                        break;
 
-                        case PROPRIETARIO:
-                            responder.sendResponse(clientSocket, "1 5 " + nome);
-                            break;
-
-                        default:
-                            responder.sendResponse(clientSocket, "0 0 0");
-                            System.out.println("Ruolo non trovato");
-                            break;
-
-                    }
                 }
             }
+        }
 
     }
 
@@ -125,12 +119,12 @@ public class Persona {
         this.dataNascita = dataNascita;
     }
 
-    public String getcF() {
-        return cF;
+    public String getCf() {
+        return cf;
     }
 
-    public void setcF(String cF) {
-        this.cF = cF;
+    public void setCf(String cf) {
+        this.cf = cf;
     }
 
     public String getMail() {
@@ -148,7 +142,6 @@ public class Persona {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 
 }

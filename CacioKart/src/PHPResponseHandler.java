@@ -8,14 +8,15 @@ public class PHPResponseHandler {
     public PHPResponseHandler() {
     }
 
-    /**Metodo per inviare risposte al client.
+    /**
+     * Metodo per inviare risposte al client.
      * Il chiamante deve passare il socket di comunicazione con il client e
      * il messaggio da spedire.
      *
      * @param clientSocket
      * @param messaggio
      */
-    public void sendResponse(Socket clientSocket, String messaggio){
+    public void sendResponse(Socket clientSocket, String messaggio) {
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println(messaggio);

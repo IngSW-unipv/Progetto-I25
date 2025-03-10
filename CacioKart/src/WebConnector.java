@@ -9,20 +9,20 @@ public class WebConnector {
     private Socket clientSocket;
     private ServerSocket serverSocket;
 
-    /**Costruttore della classe.
+    /**
+     * Costruttore della classe.
      * Alla costruzione della classe per gestire l'apertura della connessione,
      * viene anche creato un oggetto per gestire le possibili richieste.
-     *
      */
     public WebConnector() {
         requestHandler = new PHPRequestHandler();
     }
 
-    /**Metodo utilizzato dal main per creare il server.
+    /**
+     * Metodo utilizzato dal main per creare il server.
      * Il metodo crea un socket per le connessioni e va in listen per qualsiasi client si voglia connettere.
      * Una volta che riceve una connessione, va nella classe per gestirle e dopo aver risolto,
      * chiude il socket e ne riapre un altro.
-     *
      */
     public void createServer() throws SQLException {
         try {
@@ -37,8 +37,7 @@ public class WebConnector {
                 clientSocket.close();
 
             }
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             System.out.println("Impossibile aprire il socket: " + e.getMessage());
             throw new RuntimeException(e);
         }

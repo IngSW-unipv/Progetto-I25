@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class Concessionaria implements Iinventario{
+public class Concessionaria implements Iinventario {
     //List<Kart> kart;
     //List<Pezzo> pezzi;
     private DBConnector db;
@@ -20,9 +20,11 @@ public class Concessionaria implements Iinventario{
 
     //Override metodi Iinventario
 
-    public void venditaKart(){
+    public void venditaKart() {
 
-    };
+    }
+
+    ;
 
     /**
      * Metodo per inserire i kart nella concessionaria.
@@ -42,7 +44,7 @@ public class Concessionaria implements Iinventario{
         INSERT = "INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('" +
                 nuovoKart.getTarga() + "', '" +
                 nuovoKart.getCilindrata() + "', '" +
-                nuovoKart.getSerbatoio() +"')";
+                nuovoKart.getSerbatoio() + "')";
         db.executeUpdateQuery(INSERT);
 
         SELECT = "SELECT MAX(idProdotto) FROM concessionaria";
@@ -52,10 +54,10 @@ public class Concessionaria implements Iinventario{
         //Logica per rimuovere tutti i caratteri tranne i numeri
         ultimoProdotto = maxIDProdotto.get(0).toString().replaceAll("\\D", "");
 
-        if(ultimoProdotto == ""){
+        if (ultimoProdotto == "") {
             idProdotto = "1";
 
-        }else {
+        } else {
             idProdotto = String.valueOf((Integer.parseInt(ultimoProdotto) + 1));
 
         }
@@ -64,22 +66,24 @@ public class Concessionaria implements Iinventario{
                 idProdotto + "', '" +
                 nuovoKart.getTarga() + "', '" +
                 1 + "', '" +
-                prezzo +"')";
+                prezzo + "')";
 
         queryResult = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryResult));
 
-    };
+    }
+
+    ;
 
     //mostra tutti i pezzi della concessionaria tranne quelli che iniziano per KRT
     public void mostraPezzo(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT =  "SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'";
+        SELECT = "SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'";
         pezzi = db.executeReturnQuery(SELECT);
 
-        if(pezzi != null) {
-            for(Map<String, Object> row : pezzi) {
+        if (pezzi != null) {
+            for (Map<String, Object> row : pezzi) {
                 idProdotto = row.get("idProdotto").toString();
                 tipol = row.get("tipol").toString();
                 quantita = row.get("quantita").toString();
@@ -89,7 +93,7 @@ public class Concessionaria implements Iinventario{
             listaPezzi.append("end");
             responder.sendResponse(clientSocket, listaPezzi.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }

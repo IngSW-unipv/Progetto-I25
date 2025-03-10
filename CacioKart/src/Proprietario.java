@@ -6,25 +6,24 @@ import java.util.Map;
 public class Proprietario {
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String INSERT;
-    private String SELECT;
-    private String DELETE;
+    private String INSERT, SELECT, DELETE;
     private int queryIndicator;
     private List<Map<String, Object>> dipendenti;
-    private String cf;
-    private String nome;
-    private String cognome;
+    private String cf, nome, cognome;
     private StringBuilder listaDipen = new StringBuilder();
 
     public Proprietario() {
 
     }
 
-    public void visioneBilancio(){
+    public void visioneBilancio() {
 
-    };
+    }
 
-    /**Metodo per mostrare i dipendenti.
+    ;
+
+    /**
+     * Metodo per mostrare i dipendenti.
      * Identico al metodo presente in Kart per mostrare tutti i kart.
      *
      * @param clientSocket
@@ -36,8 +35,8 @@ public class Proprietario {
         SELECT = "SELECT * FROM caciokart.dipendente";
         dipendenti = db.executeReturnQuery(SELECT);
 
-        if(dipendenti != null) {
-            for(Map<String, Object> row : dipendenti) {
+        if (dipendenti != null) {
+            for (Map<String, Object> row : dipendenti) {
                 cf = row.get("dip").toString();
                 nome = row.get("nome").toString();
                 cognome = row.get("cognome").toString();
@@ -46,12 +45,13 @@ public class Proprietario {
             listaDipen.append("end");
             responder.sendResponse(clientSocket, listaDipen.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
 
-    /**Metodo per aggiungere i dipendenti.
+    /**
+     * Metodo per aggiungere i dipendenti.
      * Pressoché identico al metodo presente in Kart per aggiungere i kart,
      * tranne la gestione dei ruoli tramite l'ENUM Ruoli
      *
@@ -59,12 +59,12 @@ public class Proprietario {
      * @param clientSocket
      * @throws SQLException
      */
-    public void aggiuntaDipendenti(Dipendente nuovoDip,Socket clientSocket) throws SQLException {
+    public void aggiuntaDipendenti(Dipendente nuovoDip, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         //Gestire i diversi ruoli
         responder = new PHPResponseHandler();
         INSERT = "INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) VALUES('" +
-                nuovoDip.getcF() + "', '" +
+                nuovoDip.getCf() + "', '" +
                 nuovoDip.getNome() + "', '" +
                 nuovoDip.getCognome() + "', '" +
                 nuovoDip.getMail() + "', '" +
@@ -72,13 +72,16 @@ public class Proprietario {
                 nuovoDip.getDataNascita() + "', '" +
                 nuovoDip.getRuolo() + "', '" +
                 nuovoDip.getOreL() + "', '" +
-                nuovoDip.getStipendio() +"')";
+                nuovoDip.getStipendio() + "')";
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-    };
+    }
 
-    /**Metodo per rimuovere i dipendenti.
+    ;
+
+    /**
+     * Metodo per rimuovere i dipendenti.
      * Identico al metodo presente in Kart per rimuovere i kart.
      *
      * @param cfDaRimuovere

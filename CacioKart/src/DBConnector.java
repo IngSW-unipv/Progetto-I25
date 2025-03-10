@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
+/**
+ * Classe per istanziare connessioni con il database, eseguire query e restituire risultati
  */
 public class DBConnector {
     private BufferedReader fileReader;
@@ -28,7 +29,8 @@ public class DBConnector {
     public DBConnector() {
     }
 
-    /** Metodo per aprire la connessione al database.
+    /**
+     * Metodo per aprire la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
      * eseguire le varie query
      *
@@ -47,7 +49,8 @@ public class DBConnector {
         }
     }
 
-    /** Metodo per chiudere la connessione al database.
+    /**
+     * Metodo per chiudere la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
      * eseguire le varie query
      *
@@ -61,7 +64,8 @@ public class DBConnector {
         }
     }
 
-    /** Metodo per eseguire query di lettura dati.
+    /**
+     * Metodo per eseguire query di lettura dati.
      * Il metodo riceve in ingresso la query richiesta e
      * ha come valore di ritorno una Map contenente i dati trovati
      * dalla query.
@@ -80,9 +84,9 @@ public class DBConnector {
             rsmd = rs.getMetaData();
             columnCount = rsmd.getColumnCount();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Map<String, Object> row = new HashMap<>();
-                for(int i = 1; i <= columnCount; i++) {
+                for (int i = 1; i <= columnCount; i++) {
                     columnName = rsmd.getColumnName(i);
                     columnValue = rs.getString(i);
                     row.put(columnName, columnValue);
@@ -100,7 +104,8 @@ public class DBConnector {
 
     }
 
-    /** Metodo per eseguire query di scritture dati.
+    /**
+     * Metodo per eseguire query di scritture dati.
      * Tramite la stringa in ingresso, il metodo esegue query
      * che modificano i dati presenti nel database, cancellando
      * o aggiungendone di nuovi.

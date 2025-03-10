@@ -1,7 +1,7 @@
-/**Classe di tipo Enum per gestire i comandi in arrivo dal client.
+/**
+ * Classe di tipo Enum per gestire i comandi in arrivo dal client.
  * Ogni possibile comando ha associato a esso una stringa, che
  * sarà il comando effettivo che riceverà dalle pagine PHP.
- *
  */
 public enum Ruoli {
     MECCANICO("meccanico"),
@@ -22,7 +22,8 @@ public enum Ruoli {
         return descrizione;
     }
 
-    /**Metodo per riconoscere la stringa in entrata e
+    /**
+     * Metodo per riconoscere la stringa in entrata e
      * convertirla in un ENUM per facilità di gestione.
      *
      * @param ruoloRichiesto

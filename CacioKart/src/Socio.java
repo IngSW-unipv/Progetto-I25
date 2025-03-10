@@ -1,30 +1,26 @@
 import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 
-public class Socio extends Persona implements Iinventario{
-    private String INSERT;
+public class Socio extends Persona implements Iinventario {
+    private String INSERT, UPDATE, DELETE;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private DBConnector db;
-    private Prenotazione p;
-    private String UPDATE;
-    private String DELETE;
-
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
     }
 
-    public Socio(){
+    public Socio() {
 
     }
 
     //metodo classifica gara?
 
-    /**Metodo per registrare un utente nel db
+    /**
+     * Metodo per registrare un utente nel db
      * La query viene eseguita tramite il metodo sendResponse della classe DBConnector
      *
      * @param clientSocket
@@ -33,12 +29,12 @@ public class Socio extends Persona implements Iinventario{
         db = new DBConnector();
         responder = new PHPResponseHandler();
         INSERT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
-                this.getcF() + "', '" +
+                this.getCf() + "', '" +
                 this.getNome() + "', '" +
-                this.getCognome() +"', '" +
-                this.getMail() +"', '" +
-                this.getPassword() +"', '" +
-                this.getDataNascita() +"')";
+                this.getCognome() + "', '" +
+                this.getMail() + "', '" +
+                this.getPassword() + "', '" +
+                this.getDataNascita() + "')";
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
@@ -69,11 +65,10 @@ public class Socio extends Persona implements Iinventario{
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" +  info + "'";
+        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" + info + "'";
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
-
 
 
 }

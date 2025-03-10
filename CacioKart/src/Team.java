@@ -9,8 +9,8 @@ public class Team {
         this.soci = new Socio[2];
         Socio Socio1 = new Socio();
         Socio Socio2 = new Socio();
-        Socio1.setcF(cf1);
-        Socio2.setcF(cf2);
+        Socio1.setCf(cf1);
+        Socio2.setCf(cf2);
         this.soci[0] = Socio1;
         this.soci[1] = Socio2;
     }

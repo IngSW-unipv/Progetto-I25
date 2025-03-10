@@ -70,8 +70,6 @@ public class Meccanico {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    ;
-
     public void mostraKart(String query, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();

@@ -1,7 +1,6 @@
 public class Pezzo {
-    private String nome;
+    private String nome, descrizione;
     private int quantita;
-    private String descrizione;
 
     public Pezzo(String nome, int quantita, String descrizione) {
         this.nome = nome;
@@ -33,5 +32,5 @@ public class Pezzo {
         this.descrizione = descrizione;
     }
 
-    
+
 }

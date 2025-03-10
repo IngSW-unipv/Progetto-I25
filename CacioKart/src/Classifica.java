@@ -18,15 +18,15 @@ public class Classifica {
         result = getClassifica(query);
         classifica = new StringBuilder();
 
-        if(result != null) {
-            for(Map<String, Object> row : result) {
+        if (result != null) {
+            for (Map<String, Object> row : result) {
                 idGara = row.get("idGara").toString();
                 classifica.append(idGara).append("\n");
             }
             classifica.append("end");
             responder.sendResponse(clientSocket, classifica.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
@@ -79,10 +79,10 @@ public class Classifica {
 
         if (result != null) {
             for (Map<String, Object> row : result) {
-                idGara    = row.get("idGara").toString();
-                targa     = row.get("targa").toString();
-                bGiro     = row.get("bGiro").toString();
-                tempoTot  = row.get("tempTot").toString();
+                idGara = row.get("idGara").toString();
+                targa = row.get("targa").toString();
+                bGiro = row.get("bGiro").toString();
+                tempoTot = row.get("tempTot").toString();
 
                 classifica.append(idGara).append(" ")
                         .append(targa).append(" ")

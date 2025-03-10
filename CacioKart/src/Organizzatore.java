@@ -6,25 +6,22 @@ import java.util.Map;
 public class Organizzatore {
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String SELECT;
-    private List<Map<String, Object>> soci;
-    private String cf;
-    private String nome;
-    private String cognome;
+    private List<Map<String, Object>> soci, result;
+    private String cf, nome, cognome, SELECT, idCampionato;
     private StringBuilder listaUtenti;
     private String[] INSERT;
     private int queryIndicator;
-    private String idCampionato;
     private StringBuilder campionato;
-    private List<Map<String, Object>> result;
 
     public Organizzatore() {
 
     }
 
-    public void creaGara(){
+    public void creaGara() {
 
-    };
+    }
+
+    ;
 
     public void creaTeam(Team t, Socket clientSocket) throws SQLException {
         db = new DBConnector();
@@ -35,9 +32,9 @@ public class Organizzatore {
         System.out.println("Nome dei soci: " + t.getSoci());
 
         INSERT = new String[3];
-        INSERT[0] = "INSERT INTO caciokart.team (nome, colore) VALUES ('" + t.getNome() + "', '" + t.getColore() +"')";
-        INSERT[1] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[0].getcF() +"', '" + t.getNome() + "')";
-        INSERT[2] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[1].getcF() + "', '" + t.getNome() +"'); ";
+        INSERT[0] = "INSERT INTO caciokart.team (nome, colore) VALUES ('" + t.getNome() + "', '" + t.getColore() + "')";
+        INSERT[1] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[0].getCf() + "', '" + t.getNome() + "')";
+        INSERT[2] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[1].getCf() + "', '" + t.getNome() + "'); ";
 
         for (String team : INSERT) {
             queryIndicator = db.executeUpdateQuery(team);
@@ -51,12 +48,12 @@ public class Organizzatore {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    public void creaCampionato(){
+    public void creaCampionato() {
 
     }
 
     //solo gara campionato??
-    public void inserimentoGara(){
+    public void inserimentoGara() {
 
     }
 
@@ -67,8 +64,8 @@ public class Organizzatore {
         soci = db.executeReturnQuery(SELECT);
         listaUtenti = new StringBuilder();
 
-        if(soci != null) {
-            for(Map<String, Object> row : soci) {
+        if (soci != null) {
+            for (Map<String, Object> row : soci) {
                 cf = row.get("socio").toString();
                 nome = row.get("nome").toString();
                 cognome = row.get("cognome").toString();
@@ -77,7 +74,7 @@ public class Organizzatore {
             listaUtenti.append("end");
             responder.sendResponse(clientSocket, listaUtenti.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
@@ -87,15 +84,15 @@ public class Organizzatore {
         result = getCampionato(query);
         campionato = new StringBuilder();
 
-        if(result != null) {
-            for(Map<String, Object> row : result) {
+        if (result != null) {
+            for (Map<String, Object> row : result) {
                 idCampionato = row.get("idCampionato").toString();
                 campionato.append(idCampionato).append("\n");
             }
             campionato.append("end");
             responder.sendResponse(clientSocket, campionato.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
