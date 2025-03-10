@@ -360,7 +360,7 @@ public class PHPRequestHandler {
                 "            ELSE CAST(DATEDIFF(CURRENT_DATE, m.dataM) AS CHAR) " +
                 "        END, 'MAI_FATTA') AS giorniDallaManutenzione " +
                 "FROM caciokart.manutenzione m " +
-                "RIGHT JOIN kart k ON k.targa = e.targa;";;
+                "RIGHT JOIN kart k ON k.targa = m.targa;";;
 
         m.mostraKartManutenzione(query,clientSocket);
     }
