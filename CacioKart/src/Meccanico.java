@@ -4,21 +4,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-public class Meccanico{
+public class Meccanico {
     private List<Map<String, Object>> kart;
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String SELECT;
+    private String SELECT, DELETE, UPDATE, INSERT;
     private StringBuilder listaKart;
+
+    //DEVE DIVENTARE UN KART
     private String targa;
     private String cilindrata;
     private String serbatoio;
-    private String data;
-    private String DELETE;
+
     private int queryIndicator;
-    private String UPDATE;
     private String ultimaManutenzione;
-    private String[] SELECTITERATOR;
 
     public Meccanico() {
 
@@ -28,36 +27,27 @@ public class Meccanico{
     //interfaccia rimozione kart
     //Override metodi Iinventario
 
-    public void aggiornamentoManutenzione(String query,String targa,String text,double prezzo, Socket clientSocket) throws SQLException {
+    public void aggiornamentoManutenzione(String targa, String text, double prezzo, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         String idM;
-        kart = db.executeReturnQuery(query);
-
-        /*
-        for (Map<String, Object> row : kart) {
-            elenco = row.get("targa").toString();
-            if (row.containsKey("targa") && row.get("targa") != null) {
-                if (elenco.equals(targa)) {
-                    trovata = true;
-
-                }
-            }
-        }*/
+        //kart = db.executeReturnQuery(SELECT);
 
         SELECT = "SELECT COALESCE(MAX(idM), '0') FROM manutenzione";
         idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
+        //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
         idM = String.valueOf(Integer.parseInt(idM) + 1);
 
-        SELECT = "INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES('" +
-                idM + "', '" +
-                text + "', '" +
-                prezzo + "', '" +
-                LocalDate.now() + "', '" +
-                targa + "', '" +
-                "')";;
+        System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
 
-        queryIndicator = db.executeUpdateQuery(SELECT);
+        INSERT = "INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES ('" +
+                idM + "', '" +
+                text + "', " +
+                prezzo + ", '" +
+                LocalDate.now() + "', '" +
+                targa + "')";
+
+        queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
@@ -78,7 +68,9 @@ public class Meccanico{
         UPDATE = "UPDATE caciokart.kart SET kart.serbatoio = '20' WHERE kart.targa = '" + info + "'";
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-    };
+    }
+
+    ;
 
     public void mostraKart(String query, Socket clientSocket) throws SQLException {
         db = new DBConnector();
@@ -86,8 +78,8 @@ public class Meccanico{
         kart = db.executeReturnQuery(query);
         listaKart = new StringBuilder();
 
-        if(kart != null) {
-            for(Map<String, Object> row : kart) {
+        if (kart != null) {
+            for (Map<String, Object> row : kart) {
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
                 serbatoio = row.get("serbatoio").toString();
@@ -96,7 +88,7 @@ public class Meccanico{
             listaKart.append("end");
             responder.sendResponse(clientSocket, listaKart.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
@@ -107,8 +99,8 @@ public class Meccanico{
         kart = db.executeReturnQuery(query);
         listaKart = new StringBuilder();
 
-        if(kart != null) {
-            for(Map<String, Object> row : kart) {
+        if (kart != null) {
+            for (Map<String, Object> row : kart) {
                 targa = row.get("targa").toString();
                 ultimaManutenzione = row.get("giorniDallaManutenzione").toString();
                 listaKart.append(targa).append(" ").append(ultimaManutenzione).append("\n");
@@ -116,7 +108,7 @@ public class Meccanico{
             listaKart.append("end");
             responder.sendResponse(clientSocket, listaKart.toString());
 
-        }else{
+        } else {
             responder.sendResponse(clientSocket, "end");
         }
     }

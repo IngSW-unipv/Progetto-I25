@@ -427,7 +427,7 @@ public class PHPRequestHandler {
         String text = mex[2];
         double prezzo = Double.parseDouble(mex[1]);
         LocalDate today = LocalDate.now();
-         query = "SELECT " +
+        /* query = "SELECT " +
                 "    m.idM, " +
                 "    e.targa, " +
                 "    m.tipoInt, " +
@@ -436,8 +436,8 @@ public class PHPRequestHandler {
                 "FROM caciokart.manutenzione m " +
                 "RIGHT JOIN caciokart.kart e ON m.targa = e.targa " +
                 "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
-                "GROUP BY m.idM, e.targa, m.tipoInt, m.costo;";
-        m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
+                "GROUP BY m.idM, e.targa, m.tipoInt, m.costo;";*/
+        m.aggiornamentoManutenzione(targa,text,prezzo, clientSocket);
     }
 
     private void mostraPezziCase(Socket clientSocket) throws SQLException {

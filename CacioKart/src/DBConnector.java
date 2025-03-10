@@ -10,19 +10,20 @@ import java.util.Map;
 /** Classe per istanziare connessioni con il database, eseguire query e restituire risultati
  */
 public class DBConnector {
+    private BufferedReader fileReader;
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
-    private static String USER/* = "root"*/;
-    private static String PASSWORD/* = ""*/;
+    private static String USER, PASSWORD;
     private Connection conn;
+
     private List<Map<String, Object>> resultList = new ArrayList<>();
     private ResultSet rs;
+    private ResultSetMetaData rsmd;
+
     private Statement stmt;
     private DBConnector db;
-    private ResultSetMetaData rsmd;
+
     private int columnCount;
-    private BufferedReader fileReader;
-    private String columnName;
-    private Object columnValue;
+    private String columnName, columnValue;
 
     public DBConnector() {
     }
@@ -83,7 +84,7 @@ public class DBConnector {
                 Map<String, Object> row = new HashMap<>();
                 for(int i = 1; i <= columnCount; i++) {
                     columnName = rsmd.getColumnName(i);
-                    columnValue = rs.getObject(i);
+                    columnValue = rs.getString(i);
                     row.put(columnName, columnValue);
                 }
                 resultList.add(row);

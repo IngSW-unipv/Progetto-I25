@@ -8,18 +8,10 @@ public class Concessionaria implements Iinventario{
     //List<Pezzo> pezzi;
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String INSERT;
-    private String SELECT;
-    private String idProdotto;
-    private String tipol;
-    private String quantita;
-    private String prezzo;
-    private int queryResult;
-    private List<Map<String, Object>> maxIDProdotto;
-    private String ultimoProdotto;
-    private List<Map<String, Object>> pezzi;
+    private String INSERT, SELECT, idProdotto, tipol, quantita, prezzo, ultimoProdotto;
+    private int queryResult, queryIndicator;
+    private List<Map<String, Object>> maxIDProdotto, pezzi;
     private StringBuilder listaPezzi = new StringBuilder();
-    private int queryIndicator;
 
     public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
         //this.pezzi = pezzi;
