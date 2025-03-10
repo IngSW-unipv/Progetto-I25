@@ -352,7 +352,7 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        query = "SELECT * FROM caciokart.manutenzione m join eseguita e on m.idM=e.idM right join kart on k k.targa=e.targa ";
+        query = "SELECT * FROM caciokart.manutenzione m join eseguita e on m.idM=e.idM right join kart k on k.targa=e.targa";
         m.mostraKart(query,clientSocket);
     }
 

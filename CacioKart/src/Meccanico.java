@@ -96,7 +96,27 @@ public class Meccanico{
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
                 serbatoio = row.get("serbatoio").toString();
-                data=row.get("dataM").toString();
+                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
+            }
+            listaKart.append("end");
+            responder.sendResponse(clientSocket, listaKart.toString());
+
+        }else{
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public void mostraKartmanutenzione(String query, Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        kart = db.executeReturnQuery(query);
+        listaKart = new StringBuilder();
+
+        if(kart != null) {
+            for(Map<String, Object> row : kart) {
+                targa = row.get("targa").toString();
+                cilindrata = row.get("cilindrata").toString();
+                serbatoio = row.get("serbatoio").toString();
                 listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
             }
             listaKart.append("end");
