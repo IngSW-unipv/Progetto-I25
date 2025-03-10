@@ -424,7 +424,7 @@ public class PHPRequestHandler {
         double prezzo = Double.parseDouble(mex[1]);
         LocalDate today = LocalDate.now();
          query = "SELECT " +
-                "    e.idM, " +
+                "    m.idM, " +
                 "    e.targa, " +
                 "    m.tipoInt, " +
                 "    m.costo, " +
@@ -432,7 +432,7 @@ public class PHPRequestHandler {
                 "FROM caciokart.manutenzione m " +
                 "RIGHT JOIN caciokart.kart e ON m.targa = e.targa " +
                 "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
-                "GROUP BY e.idM, e.targa, m.tipoInt, m.costo;";
+                "GROUP BY m.idM, e.targa, m.tipoInt, m.costo;";
         m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
     }
 
