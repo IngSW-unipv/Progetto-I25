@@ -354,10 +354,14 @@ public class PHPRequestHandler {
         Meccanico m = new Meccanico();
         query = "SELECT " +
                 "    k.*, " +
-                "    COALESCE(DATEDIFF(CURRENT_DATE, m.dataM), 0) AS giorniDallaManutenzione " +
+                "    COALESCE(" +
+                "        CASE " +
+                "            WHEN m.dataM IS NULL THEN 'MAI FATTA' " +
+                "            ELSE CAST(DATEDIFF(CURRENT_DATE, m.dataM) AS CHAR) " +
+                "        END, 'MAI FATTA') AS giorniDallaManutenzione " +
                 "FROM caciokart.manutenzione m " +
                 "JOIN eseguita e ON m.idM = e.idM " +
-                "RIGHT JOIN kart k ON k.targa = e.targa;";
+                "RIGHT JOIN kart k ON k.targa = e.targa;";;
 
         m.mostraKartmanutenzione(query,clientSocket);
     }
