@@ -39,10 +39,10 @@ public enum TipoComandi {
     //ORGANIZZATORE
 
     PRENOTAZIONE_SECCA("prenotazioneSecca"),
-    RICHIESTA_TEAM("mostraTeam"),
+    MOSTRA_TEAM("mostraTeam"),
     INSERIMENTO_TEAM_GARA("inserimentoTeamGara"),
     RICHIESTA_GARA_SECCA("richiestaGaraSecca"),
-    MOSTRA_SOCI("mostraSoci"),
+    MOSTRA_SOCI_CAMPIONATO("mostraSociCampionato"),
     RICHIESTA_CAMPIONATO("richiestaCampionato"),
     SELEZIONE_GARE_CAMPIONATO("selezioneGareCampionato"),
     AGGIUNGI_GARE_CAMPIONATO("aggiungiGareCampionato"),
@@ -54,15 +54,6 @@ public enum TipoComandi {
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen");
-
-
-
-
-
-
-
-
-
 
 
     private final String descrizione;

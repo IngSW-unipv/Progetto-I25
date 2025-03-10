@@ -9,7 +9,7 @@ public class Meccanico{
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT;
-    private StringBuilder listaKart = new StringBuilder();
+    private StringBuilder listaKart;
     private String targa;
     private String cilindrata;
     private String serbatoio;
@@ -56,7 +56,7 @@ public class Meccanico{
                      "')";
             queryIndicator = db.executeUpdateQuery(SELECT);
             responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
-            SELECT = "INSERT INTO eseguita (idM, targa ) VALUES('" +
+            SELECT = "INSERT INTO eseguita (idM, targa) VALUES('" +
                     idM + "', '" +
                     targa +"', '" +
                     "')";
@@ -89,6 +89,7 @@ public class Meccanico{
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
+        listaKart = new StringBuilder();
 
         if(kart != null) {
             for(Map<String, Object> row : kart) {

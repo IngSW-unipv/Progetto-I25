@@ -129,8 +129,7 @@ public class PHPRequestHandler {
                     break;
 
                 case ACQUISTA_PEZZI:
-                    Socio s = new Socio();
-                    s.acquistaPezzi(info,clientSocket);
+                    acquistaPezziCase(info, clientSocket);
                     break;
 
                 case MOSTRA_GARA:
@@ -143,6 +142,19 @@ public class PHPRequestHandler {
 
                 case AGGIUNGI_PEZZI:
                     aggiungiPezziCase(info, clientSocket);
+                    break;
+
+                case MOSTRA_SOCI_CAMPIONATO:
+                    mostraSociCampionatoCase(clientSocket);
+                    break;
+
+                case CREAZIONE_TEAM:
+                    Organizzatore o = new Organizzatore();
+                    //nome colore cf1 cf2
+                    String[] team = info.split(" ");
+                    //Usare oggetto di tipo team
+                    Team t = new Team(team[0], team[1], team[2], team[3]);
+                    o.creaTeam(t, clientSocket);
                     break;
 
                 default:
@@ -445,6 +457,16 @@ public class PHPRequestHandler {
         String quantità = info[1];
         Concessionaria c = new Concessionaria();
         c.inserimentoPezzo(idPezzo, quantità, clientSocket);
+    }
+
+    private void mostraSociCampionatoCase(Socket clientSocket) throws SQLException {
+        Organizzatore o = new Organizzatore();
+        o.mostraSociInserimento(clientSocket);
+    }
+
+    private void acquistaPezziCase(String info, Socket clientSocket) throws SQLException {
+        Socio s = new Socio();
+        s.acquistaPezzi(info,clientSocket);
     }
 
 }
