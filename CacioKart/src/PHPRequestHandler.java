@@ -29,6 +29,8 @@ public class PHPRequestHandler {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ",2); //Divido il messaggio in due: il comando e i dati
 
+            //comando informazioni
+
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
             if(messaggio.length == 2) { //Controllo se il messaggio contiene più di una parola
                 info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
@@ -54,6 +56,11 @@ public class PHPRequestHandler {
 
                 case PRENOTAZIONE_LIBERA:
                     tipologia = "libera";
+                    prenotazioneCase(tipologia,info,clientSocket);
+                    break;
+
+                case PRENOTAZIONE_SECCA:
+                    tipologia = "secca";
                     prenotazioneCase(tipologia,info,clientSocket);
                     break;
 

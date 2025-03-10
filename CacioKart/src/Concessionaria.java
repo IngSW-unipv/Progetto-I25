@@ -108,5 +108,5 @@ public class Concessionaria implements Iinventario{
         INSERT = "UPDATE caciokart.concessionaria SET quantita = quantita + " + quantita + " WHERE idProdotto = '" + idPezzo + "'";
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-    };
+    }
 }

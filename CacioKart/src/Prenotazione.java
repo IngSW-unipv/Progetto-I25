@@ -23,12 +23,12 @@ public class Prenotazione {
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        Random random = new Random();
+        //Random random = new Random();
 
         //idP dataG fasciaO tipologia costo numP socio
         //Per mettere una nuova prenotazione devo trovare l'id massimo e capire se ci sono già 20 prenotazioni
 
-        g = new Gara("0",null); //Non serve
+        //g = new Gara("0",null); //Non serve
 
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO = '"
