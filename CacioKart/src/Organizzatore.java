@@ -14,8 +14,8 @@ public class Organizzatore {
     private StringBuilder listaUtenti;
     private String[] INSERT;
     private int queryIndicator;
-    private String idGara;
-    private StringBuilder gara;
+    private String idCampionato;
+    private StringBuilder campionato;
     private List<Map<String, Object>> result;
 
     public Organizzatore() {
@@ -82,25 +82,25 @@ public class Organizzatore {
         }
     }
 
-    public void mostraGara(String query, Socket clientSocket) throws SQLException {
+    public void mostraCamp(String query, Socket clientSocket) throws SQLException {
         responder = new PHPResponseHandler();
-        result = getGara(query);
-        gara = new StringBuilder();
+        result = getCampionato(query);
+        campionato = new StringBuilder();
 
         if(result != null) {
             for(Map<String, Object> row : result) {
-                idGara = row.get("idGara").toString();
-                gara.append(idGara).append("\n");
+                idCampionato = row.get("idGara").toString();
+                campionato.append(idCampionato).append("\n");
             }
-            gara.append("end");
-            responder.sendResponse(clientSocket, gara.toString());
+            campionato.append("end");
+            responder.sendResponse(clientSocket, campionato.toString());
 
         }else{
             responder.sendResponse(clientSocket, "end");
         }
     }
 
-    public List<Map<String, Object>> getGara(String SELECT) throws SQLException {
+    public List<Map<String, Object>> getCampionato(String SELECT) throws SQLException {
         db = new DBConnector();
         return db.executeReturnQuery(SELECT);
 

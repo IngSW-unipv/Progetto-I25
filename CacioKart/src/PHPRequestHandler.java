@@ -157,6 +157,10 @@ public class PHPRequestHandler {
                     o.creaTeam(t, clientSocket);
                     break;
 
+                case RICHIESTA_CAMPIONATO:
+                    mostraCampionato(clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -475,6 +479,11 @@ public class PHPRequestHandler {
     private void acquistaPezziCase(String info, Socket clientSocket) throws SQLException {
         Socio s = new Socio();
         s.acquistaPezzi(info,clientSocket);
+    }
+    private void mostraCampionato(Socket clientSocket) throws SQLException {
+        Organizzatore o = new Organizzatore();
+        query =  "SELECT idCampionato FROM caciokart.campionato";
+        o.mostraCamp(query, clientSocket);
     }
 
 }
