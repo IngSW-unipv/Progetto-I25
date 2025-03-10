@@ -13,6 +13,7 @@ public class Meccanico{
     private String targa;
     private String cilindrata;
     private String serbatoio;
+    private String data;
     private String DELETE;
     private int queryIndicator;
     private String UPDATE;
@@ -94,7 +95,8 @@ public class Meccanico{
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
                 serbatoio = row.get("serbatoio").toString();
-                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append("\n");
+                data=row.get("dataM").toString();
+                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
             }
             listaKart.append("end");
             responder.sendResponse(clientSocket, listaKart.toString());
