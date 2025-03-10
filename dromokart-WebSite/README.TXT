@@ -9,10 +9,6 @@ MECCANICO
 
 ORGANIZZATORE
 
--Pagina Crea Team, abbiamo una vista dove ci mostra l'elenco di tutti i soci che NON fanno
-parte di un Team.(select)
-Devo aggiungere due soci e inserire nome(del team) e colore.(insert)
-
 -Pagina per la prenotazione di Gara Secca, sarà identica a gara libera(insert) (fatto php)
 
 -Pagina dove mi mostra tutte le gare secche che non sono piu recenti della data odierna(select) (fatto php)
