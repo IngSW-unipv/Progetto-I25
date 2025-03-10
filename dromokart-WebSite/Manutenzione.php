@@ -21,52 +21,49 @@
     
     // Controlla se sono presenti righe non vuote
     if(count($rows) > 0 && !empty(trim($rows[0]))) {
-        echo '<table>';
-        echo '<thead>';
-        echo '<tr>';
-        echo '<th>Targa</th>';
-        echo '<th>Cilindrata</th>';
-        echo '<th>Serbatoio</th>';
-        echo '<th>Aggiungi</th>';
-        echo '</tr>';
-        echo '</thead>';
-        echo '<tbody>';
-        
-        // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
-        foreach($rows as $row) {
-            $row = trim($row);
-            if(empty($row)) continue;
-            $columns = preg_split('/\s+/', $row);
-            // Assicuriamoci che ci siano almeno 3 colonne
-            if(count($columns) >= 3) {
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
-                echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
-                echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
-                
-                echo '<td>';
-                echo '<form action="logic/aggiungiBenzina.php" method="post">';
-                echo '<input type="hidden" id="targa" name="targa" value="' . htmlspecialchars($columns[0]) . '">';
+      echo '<table>';
+      echo '<thead>';
+      echo '<tr>';
+      echo '<th>Targa</th>';
+      echo '<th>Manutenzione</th>';
+      echo '<th>Aggiungi</th>';
+      echo '</tr>';
+      echo '</thead>';
+      echo '<tbody>';
+      
+      // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
+      foreach($rows as $row) {
+        $row = trim($row);
+        if(empty($row)) continue;
+        $columns = preg_split('/\s+/', $row);
+        // Assicuriamoci che ci siano almeno 2 colonne
+        if(count($columns) >= 2) {
+          echo '<tr>';
+          echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
+          echo '<td>' . str_replace('_',' ',$columns[1]) . '</td>';
+          
+          echo '<td>';
+          echo '<form action="logic/aggiungiBenzina.php" method="post">';
+          echo '<input type="hidden" id="targa" name="targa" value="' . htmlspecialchars($columns[0]) . '">';
 
-                // Se il valore del serbatoio è 20, disabilitiamo il pulsante
-                if ($columns[2] == 20) {
-                    echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;">Riempi Serbatoio</button>';
-                } else {
-                    echo '<button type="submit">Riempi Serbatoio</button>';
-                }
-                
+          // Se il valore del serbatoio è 20, disabilitiamo il pulsante
+          if ($columns[1] == 0) {
+              echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;">Riempi Serbatoio</button>';
+          } else {
+              echo '<button type="submit">Riempi Serbatoio</button>';
+          }          
 
-                echo '</form>';
-                echo '</td>';
+          echo '</form>';
+          echo '</td>';
 
-                echo '</tr>';
-            }
+          echo '</tr>';
         }
-        
-        echo '</tbody>';
-        echo '</table>';
+      }
+      
+      echo '</tbody>';
+      echo '</table>';
     } else {
-        echo '<p>Nessun dato ricevuto.</p>';
+      echo '<p>Nessun dato ricevuto.</p>';
     }
     ?>
   </div>

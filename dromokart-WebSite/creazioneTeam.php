@@ -91,7 +91,7 @@
         echo '<div class="form-section">';
         echo '<div class="form-group">';
         echo '<label for="nome_team">NOME TEAM</label><br>';
-        echo '<input type="text" id="nome_team" name="Nome" required /><br><br>';
+        echo '<input type="text" id="nome_team" name="Nome" required pattern="[A-Za-z0-9]+" /><br><br>';
         echo '</div>';
       
         echo '<div class="form-group">';
