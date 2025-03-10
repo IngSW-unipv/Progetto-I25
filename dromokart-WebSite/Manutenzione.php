@@ -43,10 +43,9 @@
           echo '<td>' . str_replace('_',' ',$columns[1]) . '</td>';
           
           echo '<td>';
-          echo '<form action="logic/effettuaManutenzione.php" method="post">';
+          echo '<form action="descrizioneManutenzione.php" method="post">';
           echo '<input type="hidden" id="targa" name="targa" value="' . htmlspecialchars($columns[0]) . '">';
 
-          // Se il valore del serbatoio è 20, disabilitiamo il pulsante
           if ($columns[1] == 0) {
               echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;">Effettua manutenzione</button>';
           } else {

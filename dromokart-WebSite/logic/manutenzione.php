@@ -6,11 +6,15 @@
     $socket = connectionOpen($address, $port);
 
     $targa = $_POST['targa'];
+    $Descrizione = $_POST['Descrizione'];
+    $prezzo = $_POST['prezzo'];
 
     //invio targa kart
     fwrite($socket, "manutenzione ");
     //invio dati
-    fwrite($socket, $targa . "\n");
+    fwrite($socket, $targa . " ");
+    fwrite($socket, $Descrizione . " ");
+    fwrite($socket, $prezzo . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
