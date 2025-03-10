@@ -14,6 +14,9 @@ public class Organizzatore {
     private StringBuilder listaUtenti;
     private String[] INSERT;
     private int queryIndicator;
+    private String idGara;
+    private StringBuilder gara;
+    private List<Map<String, Object>> result;
 
     public Organizzatore() {
 
@@ -78,6 +81,29 @@ public class Organizzatore {
             responder.sendResponse(clientSocket, "end");
         }
     }
-}
 
+    public void mostraGara(String query, Socket clientSocket) throws SQLException {
+        responder = new PHPResponseHandler();
+        result = getGara(query);
+        gara = new StringBuilder();
+
+        if(result != null) {
+            for(Map<String, Object> row : result) {
+                idGara = row.get("idGara").toString();
+                gara.append(idGara).append("\n");
+            }
+            gara.append("end");
+            responder.sendResponse(clientSocket, gara.toString());
+
+        }else{
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public List<Map<String, Object>> getGara(String SELECT) throws SQLException {
+        db = new DBConnector();
+        return db.executeReturnQuery(SELECT);
+
+    }
+}
 
