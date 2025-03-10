@@ -403,15 +403,16 @@ public class PHPRequestHandler {
         String targa = mex[0];
         String text = mex[1];
         double prezzo= Double.parseDouble(mex[2]);
-        query="SELECT " +
+        LocalDate today = LocalDate.now();
+         query = "SELECT " +
                 "    e.idM, " +
                 "    e.targa, " +
                 "    m.tipoInt, " +
                 "    m.costo, " +
-                "    MAX(m.dataM) AS dataManutenzione" +
-                "FROM caciokart.manutenzione m" +
-                "LEFT JOIN caciokart.eseguita e ON m.idM = e.idM" +
-                "WHERE m.dataM IS NULL OR DATEDIFF(CURDATE(), m.dataM) > 180" +
+                "    MAX(m.dataM) AS dataManutenzione " +
+                "FROM caciokart.manutenzione m " +
+                "LEFT JOIN caciokart.eseguita e ON m.idM = e.idM " +
+                "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
                 "GROUP BY e.idM, e.targa, m.tipoInt, m.costo;";
         m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
     }
