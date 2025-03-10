@@ -96,7 +96,7 @@ public class Meccanico{
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
                 serbatoio = row.get("serbatoio").toString();
-                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
+                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append("\n");
             }
             listaKart.append("end");
             responder.sendResponse(clientSocket, listaKart.toString());
@@ -117,6 +117,7 @@ public class Meccanico{
                 targa = row.get("targa").toString();
                 cilindrata = row.get("cilindrata").toString();
                 serbatoio = row.get("serbatoio").toString();
+                data= row.get("giorniDallaManutenzione").toString();
                 listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append(data).append("\n");
             }
             listaKart.append("end");

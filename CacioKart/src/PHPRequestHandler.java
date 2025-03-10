@@ -352,8 +352,14 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        query = "SELECT * FROM caciokart.manutenzione m join eseguita e on m.idM=e.idM right join kart k on k.targa=e.targa";
-        m.mostraKart(query,clientSocket);
+        query = "SELECT " +
+                "    k.*, " +
+                "    COALESCE(DATEDIFF(CURRENT_DATE, m.dataM), 0) AS giorniDallaManutenzione " +
+                "FROM caciokart.manutenzione m " +
+                "JOIN eseguita e ON m.idM = e.idM " +
+                "RIGHT JOIN kart k ON k.targa = e.targa;";
+
+        m.mostraKartmanutenzione(query,clientSocket);
     }
 
     /**Metodo per aggiungere dipendenti.
