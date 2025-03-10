@@ -412,7 +412,7 @@ public class PHPRequestHandler {
                 "FROM caciokart.manutenzione m" +
                 "LEFT JOIN caciokart.eseguita e ON m.idM = e.idM" +
                 "WHERE m.dataM IS NULL OR DATEDIFF(CURDATE(), m.dataM) > 180" +
-                "GROUP BY e.targa, e.idM";
+                "GROUP BY e.idM, e.targa, m.tipoInt, m.costo;";
         m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
     }
 
