@@ -360,7 +360,6 @@ public class PHPRequestHandler {
                 "            ELSE CAST(DATEDIFF(CURRENT_DATE, m.dataM) AS CHAR) " +
                 "        END, 'MAI_FATTA') AS giorniDallaManutenzione " +
                 "FROM caciokart.manutenzione m " +
-                "JOIN eseguita e ON m.idM = e.idM " +
                 "RIGHT JOIN kart k ON k.targa = e.targa;";;
 
         m.mostraKartManutenzione(query,clientSocket);
@@ -431,7 +430,7 @@ public class PHPRequestHandler {
                 "    m.costo, " +
                 "    MAX(m.dataM) AS dataManutenzione " +
                 "FROM caciokart.manutenzione m " +
-                "LEFT JOIN caciokart.eseguita e ON m.idM = e.idM " +
+                "RIGHT JOIN caciokart.kart e ON m.targa = e.targa " +
                 "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
                 "GROUP BY e.idM, e.targa, m.tipoInt, m.costo;";
         m.aggiornamentoManutenzione(query,targa,text,prezzo, clientSocket);
@@ -457,7 +456,6 @@ public class PHPRequestHandler {
         //Metodo in arbitro per inserire le penalità
         Arbitro a = new Arbitro();
         a.inserimentoPenalita(cf, idGara, penalità, clientSocket);
-
     }
 
     private void aggiungiPezziCase(String messaggio, Socket clientSocket) throws SQLException {
