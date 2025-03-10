@@ -18,6 +18,7 @@ public class Meccanico{
     private int queryIndicator;
     private String UPDATE;
     private String ultimaManutenzione;
+    private String[] SELECTITERATOR;
 
     public Meccanico() {
 
@@ -30,11 +31,10 @@ public class Meccanico{
     public void aggiornamentoManutenzione(String query,String targa,String text,double prezzo, Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        boolean trovata = false;
-        String elenco;
         String idM;
         kart = db.executeReturnQuery(query);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+
+        /*
         for (Map<String, Object> row : kart) {
             elenco = row.get("targa").toString();
             if (row.containsKey("targa") && row.get("targa") != null) {
@@ -43,28 +43,22 @@ public class Meccanico{
 
                 }
             }
-        }
-        if (trovata) {
-            SELECT = "SELECT MAX(idM) FROM PRENOTAZIONE";
-            kart = db.executeReturnQuery(SELECT);
-            idM = kart.toString().replaceAll("\\D", "");
-            idM = String.valueOf(Integer.parseInt(idM) + 1);
-            SELECT = "INSERT INTO mauntenzione (idM, tipoInt , costo, dataM) VALUES('" +
-                    idM + "', '" +
-                    text +"', '" +
-                    prezzo +"', '" +
-                    LocalDate.now() + "', '" +
-                     "')";
-            queryIndicator = db.executeUpdateQuery(SELECT);
-            responder.sendResponse(clientSocket,Integer.toString(queryIndicator));
-            SELECT = "INSERT INTO eseguita (idM, targa) VALUES('" +
-                    idM + "', '" +
-                    targa +"', '" +
-                    "')";
-            System.out.println("manutenziobe avvenuta con successo\n");
-        }else{
-            System.out.println("manutenzio non avvenuta\n");
-        }
+        }*/
+
+        SELECT = "SELECT COALESCE(MAX(idM), '0') FROM manutenzione";
+        idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
+        idM = String.valueOf(Integer.parseInt(idM) + 1);
+
+        SELECT = "INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES('" +
+                idM + "', '" +
+                text + "', '" +
+                prezzo + "', '" +
+                LocalDate.now() + "', '" +
+                targa + "', '" +
+                "')";;
+
+        queryIndicator = db.executeUpdateQuery(SELECT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
 

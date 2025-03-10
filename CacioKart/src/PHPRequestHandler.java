@@ -419,10 +419,10 @@ public class PHPRequestHandler {
 
     private void manutenzioneCase(String info, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        String[] mex = info.split(" ");
+        String[] mex = info.split(" ", 3);
         String targa = mex[0];
-        String text = mex[1];
-        double prezzo = Double.parseDouble(mex[2]);
+        String text = mex[2];
+        double prezzo = Double.parseDouble(mex[1]);
         LocalDate today = LocalDate.now();
          query = "SELECT " +
                 "    e.idM, " +

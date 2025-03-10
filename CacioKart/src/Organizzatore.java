@@ -46,16 +46,16 @@ public class Organizzatore {
         }
 
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-    };
+    }
 
     public void creaCampionato(){
 
-    };
+    }
 
     //solo gara campionato??
     public void inserimentoGara(){
 
-    };
+    }
 
     public void mostraSociInserimento(Socket clientSocket) throws SQLException {
         db = new DBConnector();
