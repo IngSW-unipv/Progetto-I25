@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    //require 'connection.php';
+    require 'connection.php';
 
-    //$socket = connectionOpen($address, $port);
+    $socket = connectionOpen($address, $port);
 
     $Nome = $_POST['Nome'];
     //il formato di colore e`: #ffffff

@@ -44,7 +44,7 @@
       require 'logic/requestData.php';
 
       // Richiesta dei dipendenti
-      $res = request("richiestaDipen", $socket);
+      $res = request("richiestaSocioCampionato", $socket);
 
       // Suddivide $res in righe
       $rows = explode("\n", $res);
