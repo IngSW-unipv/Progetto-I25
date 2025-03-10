@@ -356,9 +356,9 @@ public class PHPRequestHandler {
                 "    k.*, " +
                 "    COALESCE(" +
                 "        CASE " +
-                "            WHEN m.dataM IS NULL THEN 'MAI FATTA' " +
+                "            WHEN m.dataM IS NULL THEN 'MAI_FATTA' " +
                 "            ELSE CAST(DATEDIFF(CURRENT_DATE, m.dataM) AS CHAR) " +
-                "        END, 'MAI FATTA') AS giorniDallaManutenzione " +
+                "        END, 'MAI_FATTA') AS giorniDallaManutenzione " +
                 "FROM caciokart.manutenzione m " +
                 "JOIN eseguita e ON m.idM = e.idM " +
                 "RIGHT JOIN kart k ON k.targa = e.targa;";;
