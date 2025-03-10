@@ -6,6 +6,7 @@
     //$socket = connectionOpen($address, $port);
 
     $Nome = $_POST['Nome'];
+    //il formato di colore e`: #ffffff
     $Colore = $_POST['Colore'];
     $nsoci = $_POST['nsoci'];
 
@@ -18,14 +19,14 @@
         }
     }
 
-    echo 'nome: ' .$Nome .'  Colore:' .$Colore .'  membri:' .$usr; 
+    //echo 'nome: ' .$Nome .'  Colore:' .$Colore .'  membri:' .$usr; 
 
-    /*
     //invio codice gara libera
     fwrite($socket, "aggiungiTeam ");
     //invio dati
     fwrite($socket, $Nome . " ");
-    fwrite($socket, $Colore . "\n");
+    fwrite($socket, $Colore);
+    fwrite($socket, $usr . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
@@ -39,5 +40,5 @@
     } else{
         header('Location: transazioneCorretta.php');
         die();
-    }*/
+    }
 ?>

@@ -3,11 +3,11 @@
 
     require 'connection.php';
 
-$socket = connectionOpen($address, $port);
+    $socket = connectionOpen($address, $port);
 
-$date = $_POST['date'];
-$tempo = $_POST['timeslot'];
-$username = $_SESSION['username'];
+    $date = $_POST['date'];
+    $tempo = $_POST['timeslot'];
+    $username = $_SESSION['username'];
 
     //invio codice gara libera
     fwrite($socket, "prenotazioneLibera ");
@@ -20,7 +20,7 @@ $username = $_SESSION['username'];
 
     $res = trim(fgets($socket));
 
-fclose($socket);
+    fclose($socket);
 
     if($res === "0"){
         header('Location: ../erroreGenerale.php');
