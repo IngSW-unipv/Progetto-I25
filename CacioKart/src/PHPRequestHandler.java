@@ -160,6 +160,10 @@ public class PHPRequestHandler {
                     mostraCampionato(clientSocket);
                     break;
 
+                case SELEZIONE_GARE_CAMPIONATO:
+                    selezionaGaraCampionato(clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -500,4 +504,8 @@ public class PHPRequestHandler {
         o.mostraCamp(query, clientSocket);
     }
 
+    private void selezionaGaraCampionato(Socket clientSocket) throws SQLException {
+        Organizzatore o = new Organizzatore();
+        o.mostraGareInserimento(clientSocket);
+    }
 }

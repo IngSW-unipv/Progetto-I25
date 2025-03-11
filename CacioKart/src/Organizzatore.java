@@ -6,22 +6,29 @@ import java.util.Map;
 public class Organizzatore {
     private DBConnector db;
     private PHPResponseHandler responder;
-    private List<Map<String, Object>> soci, result;
-    private String cf, nome, cognome, SELECT, idCampionato;
+    private String SELECT;
+    private List<Map<String, Object>> soci;
+    private String cf;
+    private String nome;
+    private String cognome;
     private StringBuilder listaUtenti;
     private String[] INSERT;
     private int queryIndicator;
     private StringBuilder campionato;
+    private String idCampionato;
+    private List<Map<String, Object>> result;
+    private List<Map<String, Object>> gare;
+    private String idGara;
+    private String ora;
+    private StringBuilder listaGare;
 
     public Organizzatore() {
 
     }
 
-    public void creaGara() {
+    public void creaGara(){
 
-    }
-
-    ;
+    };
 
     public void creaTeam(Team t, Socket clientSocket) throws SQLException {
         db = new DBConnector();
@@ -101,6 +108,29 @@ public class Organizzatore {
         db = new DBConnector();
         return db.executeReturnQuery(SELECT);
 
+    }
+
+    public void mostraGareInserimento(Socket clientSocket) throws SQLException {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara )";
+
+        gare = db.executeReturnQuery(SELECT);
+        listaGare = new StringBuilder();
+
+        if (soci == null) {
+            responder.sendResponse(clientSocket, "end");
+        }
+        else {
+            for( Map<String, Object> row : gare) {
+                idGara = row.get("idGara").toString();
+                ora = row.get("ora").toString();
+                listaGare.append(idGara).append(" ").append(ora).append("\n");
+            }
+            listaGare.append("end");
+
+            responder.sendResponse(clientSocket, listaGare.toString());
+        }
     }
 }
 
