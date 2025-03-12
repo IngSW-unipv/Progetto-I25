@@ -29,7 +29,7 @@ public class Proprietario {
      * @param clientSocket
      * @throws SQLException
      */
-    public void mostraDipendenti(Socket clientSocket) throws SQLException {
+    public void mostraDipendenti(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM caciokart.dipendente";
@@ -59,7 +59,7 @@ public class Proprietario {
      * @param clientSocket
      * @throws SQLException
      */
-    public void aggiuntaDipendenti(Dipendente nuovoDip, Socket clientSocket) throws SQLException {
+    public void aggiuntaDipendenti(Dipendente nuovoDip, Socket clientSocket) {
         db = new DBConnector();
         //Gestire i diversi ruoli
         responder = new PHPResponseHandler();
@@ -88,7 +88,7 @@ public class Proprietario {
      * @param clientSocket
      * @throws SQLException
      */
-    public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) throws SQLException {
+    public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         DELETE = "DELETE FROM caciokart.dipendente WHERE dip = '" + cfDaRimuovere + "'";

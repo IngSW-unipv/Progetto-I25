@@ -13,7 +13,7 @@ public class Classifica {
     public Classifica() {
     }
 
-    public void classificaArbitro(String query, Socket clientSocket) throws SQLException {
+    public void classificaArbitro(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
         result = getClassifica(query);
         classifica = new StringBuilder();
@@ -31,7 +31,7 @@ public class Classifica {
         }
     }
 
-    public void classificaCompleta(String query, Socket clientSocket) throws SQLException {
+    public void classificaCompleta(String query, Socket clientSocket) {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
 
@@ -70,7 +70,7 @@ public class Classifica {
         }
     }
 
-    public void classificaUtente(String query, Socket clientSocket) throws SQLException {
+    public void classificaUtente(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
 
         // Esegui la query
@@ -96,7 +96,7 @@ public class Classifica {
         }
     }
 
-    public void classificaPenalità(String query, Socket clientSocket) throws SQLException {
+    public void classificaPenalità(String query, Socket clientSocket) {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
 
@@ -133,7 +133,7 @@ public class Classifica {
         }
     }
 
-    public List<Map<String, Object>> getClassifica(String SELECT) throws SQLException {
+    public List<Map<String, Object>> getClassifica(String SELECT) {
         db = new DBConnector();
         return db.executeReturnQuery(SELECT);
 

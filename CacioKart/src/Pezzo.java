@@ -1,19 +1,23 @@
 public class Pezzo {
-    private String nome, descrizione;
+    private String idProdotto, descrizione;
     private int quantita;
 
-    public Pezzo(String nome, int quantita, String descrizione) {
-        this.nome = nome;
+    public Pezzo(String idProdotto, int quantita, String descrizione) {
+        this.idProdotto = idProdotto;
         this.quantita = quantita;
         this.descrizione = descrizione;
     }
 
-    public String getNome() {
-        return nome;
+    public Pezzo(){
+
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getIdProdotto() {
+        return idProdotto;
+    }
+
+    public void setIdProdotto(String idProdotto) {
+        this.idProdotto = idProdotto;
     }
 
     public int getQuantita() {

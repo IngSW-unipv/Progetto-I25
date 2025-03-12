@@ -12,7 +12,7 @@ public class Arbitro {
 
     }
 
-    public void inserimentoPenalita(String cf, String idGara, LocalTime penalità, Socket clientSocket) throws SQLException {
+    public void inserimentoPenalita(String cf, String idGara, LocalTime penalità, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         UPDATE = "UPDATE caciokart.classifica SET tempTot = ADDTIME(tempTot, '" + penalità + "') WHERE idGara = '" + idGara + "' AND socio  = '" + cf + "'";

@@ -36,7 +36,7 @@ public class Persona {
      *
      * @param clientSocket
      */
-    public void login(Socket clientSocket) throws SQLException {
+    public void login(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM caciokart.socio WHERE socio = '"

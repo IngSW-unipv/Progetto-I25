@@ -3,7 +3,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class Concessionaria implements Iinventario {
+public class Concessionaria {
     //List<Kart> kart;
     //List<Pezzo> pezzi;
     private DBConnector db;
@@ -37,7 +37,7 @@ public class Concessionaria implements Iinventario {
      * @param prezzo
      * @param clientSocket
      */
-    public void inserimentoKart(Kart nuovoKart, int prezzo, Socket clientSocket) throws SQLException {
+    public void inserimentoKart(Kart nuovoKart, int prezzo, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         //devo aggiungere il kart in kart
@@ -76,7 +76,7 @@ public class Concessionaria implements Iinventario {
     ;
 
     //mostra tutti i pezzi della concessionaria tranne quelli che iniziano per KRT
-    public void mostraPezzo(Socket clientSocket) throws SQLException {
+    public void mostraPezzo(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'";
@@ -98,7 +98,7 @@ public class Concessionaria implements Iinventario {
         }
     }
 
-    public void inserimentoPezzo(String idPezzo, String quantita, Socket clientSocket) throws SQLException {
+    public void inserimentoPezzo(String idPezzo, String quantita, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         INSERT = "UPDATE caciokart.concessionaria SET quantita = quantita + " + quantita + " WHERE idProdotto = '" + idPezzo + "'";

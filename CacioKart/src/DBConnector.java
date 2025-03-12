@@ -36,7 +36,7 @@ public class DBConnector {
      *
      * @throws SQLException
      */
-    private void dbOpenConnection() throws SQLException {
+    private void dbOpenConnection() {
         try {
             fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/credenzialiDB.txt"));
             USER = fileReader.readLine();
@@ -56,7 +56,7 @@ public class DBConnector {
      *
      * @throws SQLException
      */
-    private void dbCloseConnection() throws SQLException {
+    private void dbCloseConnection() {
         try {
             conn.close();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class DBConnector {
      * @return
      * @throws SQLException
      */
-    public List<Map<String, Object>> executeReturnQuery(String query) throws SQLException {
+    public List<Map<String, Object>> executeReturnQuery(String query) {
         try {
             db = new DBConnector();
             db.dbOpenConnection();
@@ -115,7 +115,7 @@ public class DBConnector {
      * @param query
      * @throws SQLException
      */
-    public int executeUpdateQuery(String query) throws SQLException {
+    public int executeUpdateQuery(String query) {
         try {
             db = new DBConnector();
             db.dbOpenConnection();

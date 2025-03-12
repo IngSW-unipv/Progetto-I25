@@ -27,7 +27,7 @@ public class Meccanico {
     //interfaccia rimozione kart
     //Override metodi Iinventario
 
-    public void aggiornamentoManutenzione(String targa, String text, double prezzo, Socket clientSocket) throws SQLException {
+    public void aggiornamentoManutenzione(String targa, String text, double prezzo, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         String idM;
@@ -52,7 +52,7 @@ public class Meccanico {
 
     }
 
-    public void aggiuntaKart(String targa, Socket clientSocket) throws SQLException {
+    public void aggiuntaKart(String targa, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
@@ -61,7 +61,7 @@ public class Meccanico {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    public void aggiuntaBenzina(String info, Socket clientSocket) throws SQLException {
+    public void aggiuntaBenzina(String info, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
@@ -70,7 +70,7 @@ public class Meccanico {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    public void mostraKart(String query, Socket clientSocket) throws SQLException {
+    public void mostraKart(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
@@ -91,7 +91,7 @@ public class Meccanico {
         }
     }
 
-    public void mostraKartManutenzione(String query, Socket clientSocket) throws SQLException {
+    public void mostraKartManutenzione(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
@@ -111,7 +111,7 @@ public class Meccanico {
         }
     }
 
-    public void rimozioneKart(String targaDaRimuovere, Socket clientSocket) throws SQLException {
+    public void rimozioneKart(String targaDaRimuovere, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         DELETE = "DELETE FROM caciokart.kart WHERE targa = '" + targaDaRimuovere + "'";

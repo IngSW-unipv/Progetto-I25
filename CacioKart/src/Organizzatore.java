@@ -30,7 +30,7 @@ public class Organizzatore {
 
     };
 
-    public void creaTeam(Team t, Socket clientSocket) throws SQLException {
+    public void creaTeam(Team t, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
@@ -64,7 +64,7 @@ public class Organizzatore {
 
     }
 
-    public void mostraSociInserimento(Socket clientSocket) throws SQLException {
+    public void mostraSociInserimento(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT socio, nome, cognome FROM caciokart.socio WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)";
@@ -86,7 +86,7 @@ public class Organizzatore {
         }
     }
 
-    public void mostraCamp(String query, Socket clientSocket) throws SQLException {
+    public void mostraCamp(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
         result = getCampionato(query);
         campionato = new StringBuilder();
@@ -104,13 +104,13 @@ public class Organizzatore {
         }
     }
 
-    public List<Map<String, Object>> getCampionato(String SELECT) throws SQLException {
+    public List<Map<String, Object>> getCampionato(String SELECT) {
         db = new DBConnector();
         return db.executeReturnQuery(SELECT);
 
     }
 
-    public void mostraGareInserimento(Socket clientSocket) throws SQLException {
+    public void mostraGareInserimento(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara )";

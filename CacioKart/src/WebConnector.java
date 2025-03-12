@@ -24,7 +24,7 @@ public class WebConnector {
      * Una volta che riceve una connessione, va nella classe per gestirle e dopo aver risolto,
      * chiude il socket e ne riapre un altro.
      */
-    public void createServer() throws SQLException {
+    public void createServer() {
         try {
             System.out.println("Creazione server...");
             serverSocket = new ServerSocket(porta);

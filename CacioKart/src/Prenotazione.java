@@ -15,7 +15,7 @@ public class Prenotazione {
     private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
 
-    public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) throws SQLException {
+    public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         //Random random = new Random();

@@ -10,6 +10,7 @@ public class Socio extends Persona implements Iinventario {
     private PHPResponseHandler responder;
     private int queryIndicator;
     private DBConnector db;
+    private String[] querys;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -27,7 +28,7 @@ public class Socio extends Persona implements Iinventario {
      *
      * @param clientSocket
      */
-    public void registrazione(Socket clientSocket) throws SQLException {
+    public void registrazione(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
@@ -43,7 +44,7 @@ public class Socio extends Persona implements Iinventario {
 
     }
 
-    public void compraKart(String info, Socket clientSocket) throws SQLException {
+    public void compraKart(String info, Socket clientSocket) {
         // Inserisco la targa in quell'utente specifico
         String[] kartUtente = info.split(" ");
         String cf = kartUtente[0];
@@ -68,13 +69,25 @@ public class Socio extends Persona implements Iinventario {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    // DA COMPLETARE MA L'IDEA è QUESTA
-    public void acquistaPezzi(String info, Socket clientSocket) throws SQLException {
+
+    public void acquistaPezzi(Pezzo p, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" + info + "'";
-        queryIndicator = db.executeUpdateQuery(UPDATE);
+        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" + p.getIdProdotto() + "'";
+        INSERT = "INSERT INTO acquista (socio, idProdotto) VALUES('" + this.getCf() + "', '" + p.getIdProdotto() + "')";
+        querys = new String[2];
+        querys[0] = UPDATE;
+        querys[1] = INSERT;
+
+        for (String prodotto : querys) {
+            queryIndicator = db.executeUpdateQuery(prodotto);
+
+            if (queryIndicator == 0) {
+                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                return;
+            }
+        }
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 

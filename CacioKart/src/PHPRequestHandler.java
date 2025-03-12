@@ -24,7 +24,7 @@ public class PHPRequestHandler {
      *La seconda parte del messaggio cambia in base alla richiesta da eseguire,
      * potrebbe contenere 0 o più informazioni a seconda dei dati necessari.
      */
-    public void handleRequests(Socket clientSocket) throws SQLException {
+    public void handleRequests(Socket clientSocket) {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ",2); //Divido il messaggio in due: il comando e i dati
@@ -178,7 +178,7 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
-    private void loginCase(String dati, Socket clientSocket) throws SQLException {
+    private void loginCase(String dati, Socket clientSocket) {
         String[] loginData = dati.split(" ");
         Persona utente = new Persona();
         utente.setCf(loginData[0]);
@@ -193,7 +193,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void classificaArbitro(Socket clientSocket) throws SQLException {
+    private void classificaArbitro(Socket clientSocket) {
         Classifica c = new Classifica();
         query =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
         c.classificaArbitro(query, clientSocket);
@@ -208,7 +208,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void classificaGenerale(Socket clientSocket) throws SQLException {
+    private void classificaGenerale(Socket clientSocket) {
         Classifica c = new Classifica();
         query = "SELECT c.idGara, s.nome, s.cognome, c.targa, c.bGiro, c.tempTot " +
                 "FROM caciokart.classifica AS c " +
@@ -228,7 +228,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void classificaUtente(String cfPilota,Socket clientSocket) throws SQLException {
+    private void classificaUtente(String cfPilota,Socket clientSocket) {
         Classifica c = new Classifica();
         query = "SELECT c.idGara, " +
                 "       c.targa, " +
@@ -250,7 +250,7 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
-    private void registerCase(String dati, Socket clientSocket) throws SQLException {
+    private void registerCase(String dati, Socket clientSocket) {
         String[] socio = dati.split(" ");
         LocalDate dataNascita = LocalDate.parse(socio[2], dateFormatter);
         Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);
@@ -262,7 +262,7 @@ public class PHPRequestHandler {
     //risponde al sito tramite phpresponsehandler
     //usa DBConnector e PHPResponsehandle
 
-    private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) throws SQLException {
+    private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) {
 
         //data fasciaOraria username
         String[] info = messaggio.split(" ");
@@ -282,7 +282,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) throws SQLException {
+    private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) {
         String[] info = dati.split(" "); //Passare a kart
         Kart k = new Kart(info[0],Integer.parseInt(info[1]),20);
         int prezzo = Integer.parseInt(info[2]);
@@ -300,7 +300,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) throws SQLException {
+    private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
         m.aggiuntaKart(targa, clientSocket);
 
@@ -312,7 +312,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void mostraAggiuntaKartCase(Socket clientSocket) throws SQLException {
+    private void mostraAggiuntaKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
         query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
                 "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
@@ -328,7 +328,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void rimozioneKartCase(String targa, Socket clientSocket) throws SQLException {
+    private void rimozioneKartCase(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
         m.rimozioneKart(targa, clientSocket);
     }
@@ -339,7 +339,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void mostraRimuoviKartCase(Socket clientSocket) throws SQLException {
+    private void mostraRimuoviKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
         query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
                 "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
@@ -354,7 +354,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
+    private void mostraManutenzioneKartCase(Socket clientSocket)  {
         Meccanico m = new Meccanico();
         query =  "SELECT " +
                 "    k.*, " +
@@ -381,7 +381,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void aggiungiDipendenteCase(String dati, Socket clientSocket) throws SQLException {
+    private void aggiungiDipendenteCase(String dati, Socket clientSocket) {
         String[] dipendente = dati.split(" ");
         LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
@@ -397,7 +397,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
+    private void eliminaDipendenteCase(String dati, Socket clientSocket) {
         Proprietario p = new Proprietario();
         p.rimozioneDipendenti(dati,clientSocket);
     }
@@ -408,22 +408,22 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void mostraDipendentiCase(Socket clientSocket) throws SQLException {
+    private void mostraDipendentiCase(Socket clientSocket) {
         Proprietario p = new Proprietario();
         p.mostraDipendenti(clientSocket);
     }
 
-    private void aggiungiBenzinaCase(String info, Socket clientSocket) throws SQLException {
+    private void aggiungiBenzinaCase(String info, Socket clientSocket) {
         Meccanico m = new Meccanico();
         m.aggiuntaBenzina(info,clientSocket);
     }
 
-    private void acquistaKartCase(String dati, Socket clientSocket) throws SQLException {
+    private void acquistaKartCase(String dati, Socket clientSocket) {
         Socio s = new Socio();
         s.compraKart(dati, clientSocket);
     }
 
-    private void manutenzioneCase(String info, Socket clientSocket) throws SQLException {
+    private void manutenzioneCase(String info, Socket clientSocket) {
         Meccanico m = new Meccanico();
         String[] mex = info.split(" ", 3);
         String targa = mex[0];
@@ -443,18 +443,18 @@ public class PHPRequestHandler {
         m.aggiornamentoManutenzione(targa,text,prezzo, clientSocket);
     }
 
-    private void mostraPezziCase(Socket clientSocket) throws SQLException {
+    private void mostraPezziCase(Socket clientSocket) {
         Concessionaria c = new Concessionaria();
         c.mostraPezzo(clientSocket);
     }
 
-    private void mostraGaraCase(String idGara, Socket clientSocket) throws SQLException {
+    private void mostraGaraCase(String idGara, Socket clientSocket) {
         Classifica c = new Classifica();
         query = "SELECT * FROM caciokart.classifica WHERE idGara = '" + idGara + "'";
         c.classificaPenalità(query, clientSocket);
     }
 
-    private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) throws SQLException {
+    private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) {
         //socio idgara tempo
         String[] info = messaggio.split(" ");
         String cf = info[0];
@@ -465,7 +465,7 @@ public class PHPRequestHandler {
         a.inserimentoPenalita(cf, idGara, penalità, clientSocket);
     }
 
-    private void aggiungiPezziCase(String messaggio, Socket clientSocket) throws SQLException {
+    private void aggiungiPezziCase(String messaggio, Socket clientSocket) {
         //idPezzo quantità
         String[] info = messaggio.split(" ");
         String idPezzo = info[0];
@@ -474,16 +474,25 @@ public class PHPRequestHandler {
         c.inserimentoPezzo(idPezzo, quantità, clientSocket);
     }
 
-    private void mostraSociCampionatoCase(Socket clientSocket) throws SQLException {
+    private void mostraSociCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         o.mostraSociInserimento(clientSocket);
     }
 
-    private void acquistaPezziCase(String info, Socket clientSocket) throws SQLException {
+    private void acquistaPezziCase(String messaggio, Socket clientSocket) {
+        //cf pezzo
+        String[] info = messaggio.split(" ");
+
         Socio s = new Socio();
-        s.acquistaPezzi(info,clientSocket);
+        s.setCf(info[0]);
+
+        Pezzo p = new Pezzo();
+        p.setIdProdotto(info[1]);
+
+        s.acquistaPezzi(p,clientSocket);
     }
-    private void mostraCampionato(Socket clientSocket) throws SQLException {
+
+    private void mostraCampionato(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         query =  "SELECT idCampionato FROM caciokart.campionato";
         o.mostraCamp(query, clientSocket);
