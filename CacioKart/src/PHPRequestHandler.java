@@ -181,7 +181,7 @@ public class PHPRequestHandler {
     private void loginCase(String dati, Socket clientSocket) throws SQLException {
         String[] loginData = dati.split(" ");
         Persona utente = new Persona();
-        utente.setcF(loginData[0]);
+        utente.setCf(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
     }

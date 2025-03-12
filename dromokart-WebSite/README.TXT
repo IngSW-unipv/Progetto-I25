@@ -3,9 +3,6 @@ Acquista kart e acquista pezzi devono popolare anche la tabella acquista.
 COSE NON FUNZIONANTI
 -inserimento KART non funziona la lettura del IDMAX
 
-AGGIUNTA team
--sistemare che non si può premere il bottone se non è stato flaggato due soci
-
 CHI SIAMO
 -aggiungere un immagine del nostro team ?
 
