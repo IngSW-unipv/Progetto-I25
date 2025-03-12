@@ -1,5 +1,4 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,7 @@ public class Organizzatore {
     private String nome;
     private String cognome;
     private StringBuilder listaUtenti;
-    private String[] INSERT;
+    private String[] INSERT_ITERATOR;
     private int queryIndicator;
     private StringBuilder campionato;
     private String idCampionato;
@@ -21,6 +20,7 @@ public class Organizzatore {
     private String idGara;
     private String ora;
     private StringBuilder listaGare;
+    private String INSERT;
 
     public Organizzatore() {
 
@@ -38,12 +38,12 @@ public class Organizzatore {
         System.out.println("Colore del team: " + t.getColore());
         System.out.println("Nome dei soci: " + t.getSoci());
 
-        INSERT = new String[3];
-        INSERT[0] = "INSERT INTO caciokart.team (nome, colore) VALUES ('" + t.getNome() + "', '" + t.getColore() + "')";
-        INSERT[1] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[0].getCf() + "', '" + t.getNome() + "')";
-        INSERT[2] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[1].getCf() + "', '" + t.getNome() + "'); ";
+        INSERT_ITERATOR = new String[3];
+        INSERT_ITERATOR[0] = "INSERT INTO caciokart.team (nome, colore) VALUES ('" + t.getNome() + "', '" + t.getColore() + "')";
+        INSERT_ITERATOR[1] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[0].getCf() + "', '" + t.getNome() + "')";
+        INSERT_ITERATOR[2] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[1].getCf() + "', '" + t.getNome() + "'); ";
 
-        for (String team : INSERT) {
+        for (String team : INSERT_ITERATOR) {
             queryIndicator = db.executeUpdateQuery(team);
 
             if (queryIndicator == 0) {
@@ -126,6 +126,18 @@ public class Organizzatore {
 
             responder.sendResponse(clientSocket, listaGare.toString());
         }
+    }
+
+    public void aggiungiGaraPartecipa(String idGara, String idCamp, Socket clientSocket) {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+
+        INSERT = "INSERT INTO partecipa (idGara, idCampionato) VALUES ('" +
+                idGara + "', '" +
+                idCampionato + "')";
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+
     }
 }
 

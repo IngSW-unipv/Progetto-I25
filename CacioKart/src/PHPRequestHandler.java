@@ -158,6 +158,10 @@ public class PHPRequestHandler {
                     selezionaGaraCampionato(clientSocket);
                     break;
 
+                case AGGIUNGI_GARE_CAMPIONATO:
+                   aggiungiGaraCampionato(info, clientSocket);
+                   break;
+
                 default:
                     break;
             }
@@ -518,6 +522,16 @@ public class PHPRequestHandler {
         //Usare oggetto di tipo team
         Team t = new Team(team[0], team[1], team[2], team[3]);
         o.creaTeam(t, clientSocket);
+    }
+
+    private void aggiungiGaraCampionato(String messaggio, Socket clientSocket) {
+
+        String[] info = messaggio.split(" ");
+        String idGara = info[0];
+        String idCamp = info[1];
+
+        Organizzatore o = new Organizzatore();
+        o.aggiungiGaraPartecipa(idGara, idCamp, clientSocket);
     }
 
 }
