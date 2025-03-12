@@ -18,6 +18,7 @@ public class Prenotazione {
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
+        LocalDate dataO=LocalDate.now();
         INSERT = new String[2];
         //Random random = new Random();
 
@@ -66,9 +67,10 @@ public class Prenotazione {
                 tipologia + "', '" +
                 costo + "', '" + "')";
 
-        INSERT[2]="INSERT INTO prenota (idP, socio) VALUES ('" +
+        INSERT[2]="INSERT INTO prenota (idP, socio,data) VALUES ('" +
                 idPrenotazione + "', '" +
-                cf + "', '" + "')";
+                cf + "', '" +
+                dataO + "', '" + "')";
 
         for (String gara : INSERT) {
             queryIndicator = db.executeUpdateQuery(gara);
