@@ -58,11 +58,11 @@ require_once 'logic/selezioneGareCampionato.php';
                 echo '  <td>';
                 echo '    <form action="logic/aggiungiGaraCampionato.php" method="post">';
                 echo '      <input type="hidden" name="idGara" value="'. htmlspecialchars($columns[0]) .'">';
-                echo ' </td>';
-                echo '  <td>';
+
                 echo '      <button type="submit">Aggiungi gara</button>';
+                echo ' </td>';
+                
                 echo '    </form>';
-                echo '  </td>';
 
                 echo '</tr>';
             }
