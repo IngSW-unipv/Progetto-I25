@@ -39,11 +39,12 @@
                 $row = trim($row);
                 if(empty($row)) continue;
                 $columns = preg_split('/\s+/', $row);
-                // Assicurati che ci siano almeno 3 colonne
+                // Assicurati che ci siano almeno 4 colonne
                 if(count($columns) >= 4) {
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
-                    echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
+                    echo '<td>' . str_replace('_', ' ',htmlspecialchars($columns[1])) . '</td>';
+                    echo '<td>' . htmlspecialchars($columns[3]) . '</td>';  
                     if($columns[2] == "0"){
                         echo '<td>Prodotto esaurito</td>';
                         echo '<button type="submit" disabled style="background-color: #ccc; cursor: not-allowed;>Acquista Pezzo</button> </form></td>';
@@ -51,8 +52,7 @@
                         echo '<td>' . htmlspecialchars($columns[2]) . '</td>';
                         echo '<td> <form action="logic/acquirePart.php" method="post"> <input type="hidden" id="pezzo" name="pezzo" value="' .htmlspecialchars($columns[0]) .'"> ';
                         echo '<button type="submit">Acquista Pezzo</button> </form></td>';
-                    }
-                    echo '<td>' . htmlspecialchars($columns[3]) . '</td>';                    
+                    }                                      
                     echo '</tr>';
                 }
             }
