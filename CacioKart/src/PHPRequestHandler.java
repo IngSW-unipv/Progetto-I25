@@ -263,13 +263,26 @@ public class PHPRequestHandler {
     //usa DBConnector e PHPResponsehandle
 
     private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) {
-
-        //data fasciaOraria username
         String[] info = messaggio.split(" ");
-        LocalDate dataG = LocalDate.parse(info[0], dateFormatter);
-        String[] orari = info[1].split("-");
-        LocalTime orarioI = LocalTime.parse(orari[1], timeFormatter);
-        String cf = info[2];
+        LocalDate dataG = null;
+        String cf=null;
+        LocalTime orarioI=null;
+        String[] orari=new String[2];
+        //data fasciaOraria username
+        switch (tipologia) {
+            case "LIBERA":
+                dataG = LocalDate.parse(info[0], dateFormatter);
+                orari = info[1].split("-");
+                orarioI = LocalTime.parse(orari[1], timeFormatter);
+                cf = info[2];
+                break;
+            case "SECCA":
+                dataG = LocalDate.parse(info[0], dateFormatter);
+                orari = info[1].split("-");
+                orarioI = LocalTime.parse(orari[1], timeFormatter);
+                break;
+        }
+
 
         Prenotazione p = new Prenotazione();
         p.prenotazione(cf,tipologia, dataG, orarioI,clientSocket);
