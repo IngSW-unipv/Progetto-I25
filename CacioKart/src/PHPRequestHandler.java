@@ -266,10 +266,12 @@ public class PHPRequestHandler {
 
         //data fasciaOraria username
         String[] info = messaggio.split(" ");
-        LocalDate dataG = LocalDate.parse(info[0], dateFormatter);
+        LocalDate dataG;
+        LocalTime orarioI;
+        String cf = null;
+        dataG = LocalDate.parse(info[0], dateFormatter);
         String[] orari = info[1].split("-");
-        LocalTime orarioI = LocalTime.parse(orari[1], timeFormatter);
-        String cf=null;
+        orarioI = LocalTime.parse(orari[1], timeFormatter);
         switch (tipologia) {
             case "libera":
                 cf = info[2];
