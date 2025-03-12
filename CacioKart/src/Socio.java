@@ -1,10 +1,12 @@
 import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 
 public class Socio extends Persona implements Iinventario {
-    private String INSERT, UPDATE, DELETE;
+    private String SELECT, UPDATE, INSERT;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private DBConnector db;
@@ -28,7 +30,7 @@ public class Socio extends Persona implements Iinventario {
     public void registrazione(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
+        SELECT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
                 this.getCf() + "', '" +
                 this.getNome() + "', '" +
                 this.getCognome() + "', '" +
@@ -36,7 +38,7 @@ public class Socio extends Persona implements Iinventario {
                 this.getPassword() + "', '" +
                 this.getDataNascita() + "')";
 
-        queryIndicator = db.executeUpdateQuery(INSERT);
+        queryIndicator = db.executeUpdateQuery(SELECT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
@@ -49,14 +51,20 @@ public class Socio extends Persona implements Iinventario {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        /*Fare un IF che controlla se l'utente ha già un kart (per impedire l'acquisto?)
-
-         */
-
+        //Fare un IF che controlla se l'utente ha già un kart (per impedire l'acquisto?)
         UPDATE = "UPDATE socio SET targa = '" + targa + "' WHERE socio = '" + cf + "'";
-        db.executeUpdateQuery(UPDATE);
-        DELETE = "DELETE FROM concessionaria WHERE tipol = '" + targa + "'";
-        queryIndicator = db.executeUpdateQuery(DELETE);
+        SELECT = "SELECT idProdotto FROM concessionaria WHERE tipol = '" + targa + "'";
+
+        queryIndicator = db.executeUpdateQuery(UPDATE);
+        if (queryIndicator == 0) {
+            responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            return;
+        }
+
+        List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
+        System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
+        INSERT = "INSERT INTO acquista (socio, idProdotto) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "')";
+        queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
