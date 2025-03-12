@@ -122,7 +122,7 @@ public class Organizzatore {
             responder.sendResponse(clientSocket, "end");
         }
         else {
-            for( Map<String, Object> row : gare) {
+            for(Map<String, Object> row : gare) {
                 idGara = row.get("idGara").toString();
                 ora = row.get("ora").toString();
                 listaGare.append(idGara).append(" ").append(ora).append("\n");
