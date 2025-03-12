@@ -1,6 +1,3 @@
-Errore in classica personale
--io gli passo il CF mentre lui confronta con il Nome socio.
-
 Acquista kart e acquista pezzi devono popolare anche la tabella acquista.
 
 COSE NON FUNZIONANTI
