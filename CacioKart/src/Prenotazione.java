@@ -73,19 +73,15 @@ public class Prenotazione {
 
                 break;
             case "secca":
-                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
-                        idPrenotazione + "', '" +
-                        dataGara + "', '" +
-                        fasciaOraria + "', '" +
-                        tipologia + "', '" +
-                        costo + "')";
-                for (String gara : INSERT) {
-                    queryIndicator = db.executeUpdateQuery(gara);
-                    if (queryIndicator == 0) {
-                        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-                        return;
-                    }
+                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('"
+                        + idPrenotazione + "', '" + dataGara + "', '" + fasciaOraria + "', '"
+                        + tipologia + "', '" + costo + "')";
+                queryIndicator = db.executeUpdateQuery(INSERT[0]);
+                if (queryIndicator == 0) {
+                    responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                    return;
                 }
+                break;
 
 
         /*
