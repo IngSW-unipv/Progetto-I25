@@ -55,7 +55,6 @@ public enum TipoComandi {
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen");
 
-
     private final String descrizione;
 
     // Costruttore privato

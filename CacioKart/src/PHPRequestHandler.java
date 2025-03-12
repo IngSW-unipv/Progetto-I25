@@ -7,10 +7,8 @@ import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
     private BufferedReader in;
-    private String comando;
-    private String info;
+    private String comando, info, tipologia;
     private String[] messaggio;
-    private String tipologia;
     private TipoComandi tipo;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -149,12 +147,7 @@ public class PHPRequestHandler {
                     break;
 
                 case CREAZIONE_TEAM:
-                    Organizzatore o = new Organizzatore();
-                    //nome colore cf1 cf2
-                    String[] team = info.split(" ");
-                    //Usare oggetto di tipo team
-                    Team t = new Team(team[0], team[1], team[2], team[3]);
-                    o.creaTeam(t, clientSocket);
+                    creazioneTeamCase(info, clientSocket);
                     break;
 
                 case RICHIESTA_CAMPIONATO:
@@ -175,6 +168,9 @@ public class PHPRequestHandler {
         }
 
     }
+
+    //SPLITTARE DATI QUA
+    //FARE LE QUERY NELLE CLASSI SINGOLE
 
     /**Metodo per gestire la logica di login.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
@@ -504,6 +500,15 @@ public class PHPRequestHandler {
     private void selezionaGaraCampionato(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         o.mostraGareInserimento(clientSocket);
+    }
+
+    private void creazioneTeamCase(String messaggio,Socket clientSocket) {
+        Organizzatore o = new Organizzatore();
+        //nome colore cf1 cf2
+        String[] team = messaggio.split(" ");
+        //Usare oggetto di tipo team
+        Team t = new Team(team[0], team[1], team[2], team[3]);
+        o.creaTeam(t, clientSocket);
     }
 
 }

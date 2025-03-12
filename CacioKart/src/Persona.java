@@ -39,9 +39,7 @@ public class Persona {
     public void login(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.socio WHERE socio = '"
-                + this.getCf() + "' AND passw = '"
-                + this.getPassword() + "'";
+        SELECT = Query.LOGIN_SOCIO.getQuery(this.getCf(), this.getPassword());
 
         result = db.executeReturnQuery(SELECT);
 
@@ -50,9 +48,7 @@ public class Persona {
             responder.sendResponse(clientSocket, "1 0 " + nome);
 
         } else {
-            SELECT = "SELECT * FROM caciokart.dipendente WHERE dip = '"
-                    + this.getCf() + "' AND passw = '"
-                    + this.getPassword() + "'";
+            SELECT = Query.LOGIN_DIPENDENTE.getQuery(this.getCf(), this.getPassword());
             result = db.executeReturnQuery(SELECT);
 
             if (result.isEmpty()) {
