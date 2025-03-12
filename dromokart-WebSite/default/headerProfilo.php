@@ -48,7 +48,6 @@ switch ( $_SESSION['rank']) {
       </div>
       <nav>
         <ul>
-          <li><a href="index.php">Home</a></li>
           <li><a href="<?php echo $link; ?>"><?php echo $btnText; ?></a></li>
           <!-- Il link Logout ora reindirizza alla homepage -->
           <li><a href="default/logout.php">Logout</a></li>
