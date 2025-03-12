@@ -113,7 +113,7 @@ public class Organizzatore {
         gare = db.executeReturnQuery(SELECT);
         listaGare = new StringBuilder();
 
-        if (soci == null) {
+        if (gare == null) {
             responder.sendResponse(clientSocket, "end");
         }
         else {
