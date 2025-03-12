@@ -88,7 +88,8 @@ public class Organizzatore {
 
     public void mostraCamp(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
-        result = getCampionato(query);
+        db = new DBConnector();
+        result = db.executeReturnQuery(query);
         campionato = new StringBuilder();
 
         if (result != null) {
@@ -104,13 +105,13 @@ public class Organizzatore {
         }
     }
 
-    public List<Map<String, Object>> getCampionato(String SELECT) {
+    public List<Map<String, Object>> getCampionato(String SELECT) throws SQLException {
         db = new DBConnector();
         return db.executeReturnQuery(SELECT);
 
     }
 
-    public void mostraGareInserimento(Socket clientSocket) {
+    public void mostraGareInserimento(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara )";
