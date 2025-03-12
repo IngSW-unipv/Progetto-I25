@@ -50,7 +50,7 @@ public class Prenotazione {
 
         costo = 15;
         switch (tipologia) {
-            case "LIBERA":
+            case "libera":
                 INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                         idPrenotazione + "', '" +
                         dataGara + "', '" +
@@ -72,7 +72,7 @@ public class Prenotazione {
                 }
 
                 break;
-            case "SECCA":
+            case "secca":
                 INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                         idPrenotazione + "', '" +
                         dataGara + "', '" +

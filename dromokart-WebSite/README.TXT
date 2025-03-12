@@ -1,7 +1,4 @@
-Acquista kart e acquista pezzi devono popolare anche la tabella acquista.
-
-COSE NON FUNZIONANTI
--inserimento KART non funziona la lettura del IDMAX
+acquista pezzi devono popolare anche la tabella acquista.
 
 CHI SIAMO
 -aggiungere un immagine del nostro team ?
@@ -16,6 +13,5 @@ ORGANIZZATORE
 -Pagina dove mi mostra tutte le gare secche che non sono piu recenti della data odierna(select) (fatto php)
 Una volta che clicco la gara mi mostra tutti i team e posso inserirli(select)(insert) (fatto php)
 
-Una volta selezionato il campionato mi mostra tutte le gare non associate ad un campionato(select), (fatto php)
-premendo il bottone aggiungo quella gara al campionato tramite un insert.(insert) (fatto php)
+-premendo il bottone aggiungo quella gara al campionato tramite un insert.(insert) (fatto php)
  

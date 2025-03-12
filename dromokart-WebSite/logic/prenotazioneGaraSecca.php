@@ -12,6 +12,7 @@
     //invio codice gara Secca
     fwrite($socket, "prenotazioneSecca ");
     //invio dati
+    
     fwrite($socket, $date . " ");
     fwrite($socket, $tempo . "\n");
 
