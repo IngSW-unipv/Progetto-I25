@@ -65,12 +65,12 @@ public class Prenotazione {
                 dataGara + "', '" +
                 fasciaOraria + "', '" +
                 tipologia + "', '" +
-                costo + "', '" + "')";
+                costo + "')";
 
         INSERT[2]="INSERT INTO prenota (idP, socio,data) VALUES ('" +
                 idPrenotazione + "', '" +
                 cf + "', '" +
-                dataO + "', '" + "')";
+                dataO + "')";
 
         for (String gara : INSERT) {
             queryIndicator = db.executeUpdateQuery(gara);

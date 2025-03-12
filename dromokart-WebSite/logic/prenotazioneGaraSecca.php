@@ -13,8 +13,7 @@
     fwrite($socket, "prenotazioneSecca ");
     //invio dati
     fwrite($socket, $date . " ");
-    fwrite($socket, $tempo . " ");
-    fwrite($socket, $cf . "\n");
+    fwrite($socket, $tempo . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
