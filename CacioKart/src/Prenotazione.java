@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class Prenotazione {
-    private String SELECT, INSERT;
+    private String SELECT, INSERT[];
     private DBConnector db;
     private PHPResponseHandler responder;
     private int queryIndicator;
@@ -18,6 +18,7 @@ public class Prenotazione {
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
+        INSERT = new String[2];
         //Random random = new Random();
 
         //idP dataG fasciaO tipologia costo numP socio
@@ -58,17 +59,28 @@ public class Prenotazione {
         }
 
         costo = 15;
-        INSERT = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo, socio) VALUES('" +
+        INSERT[1] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                 idPrenotazione + "', '" +
                 dataGara + "', '" +
                 fasciaOraria + "', '" +
                 tipologia + "', '" +
-                costo + "', '" +
-                cf + "')";
+                costo + "', '" + "')";
 
-        queryIndicator = db.executeUpdateQuery(INSERT);
+        INSERT[2]="INSERT INTO prenota (idP, socio) VALUES ('" +
+                idPrenotazione + "', '" +
+                cf + "', '" + "')";
+
+        for (String gara : INSERT) {
+            queryIndicator = db.executeUpdateQuery(gara);
+            if (queryIndicator == 0) {
+                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                return;
+            }
+        }
+
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-        System.out.println("Prenotazione avvenuta con successo\n");
+    }
+
 
         //Controllo strano
         /*
@@ -166,8 +178,7 @@ public class Prenotazione {
         }else{
             System.out.println("Gara non disputata\n!");
         }*/
-
-    }
-
-
 }
+
+
+
