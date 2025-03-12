@@ -243,7 +243,7 @@ public class PHPRequestHandler {
                 "       c.tempTot " +
                 "FROM caciokart.classifica AS c " +
                 "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                "WHERE s.nome = '" + cfPilota + "' " +
+                "WHERE c.socio = '" + cfPilota + "' " +
                 "ORDER BY c.tempTot DESC " +
                 "LIMIT 10";
         c.classificaUtente(query, clientSocket);
