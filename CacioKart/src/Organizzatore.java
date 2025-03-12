@@ -105,12 +105,6 @@ public class Organizzatore {
         }
     }
 
-    public List<Map<String, Object>> getCampionato(String SELECT) throws SQLException {
-        db = new DBConnector();
-        return db.executeReturnQuery(SELECT);
-
-    }
-
     public void mostraGareInserimento(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
