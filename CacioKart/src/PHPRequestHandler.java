@@ -161,6 +161,10 @@ public class PHPRequestHandler {
                     mostraCampionato(clientSocket);
                     break;
 
+                case SELEZIONE_GARE_CAMPIONATO:
+                    selezionaGaraCampionato(clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -495,6 +499,11 @@ public class PHPRequestHandler {
         Organizzatore o = new Organizzatore();
         query =  "SELECT idCampionato FROM caciokart.campionato";
         o.mostraCamp(query, clientSocket);
+    }
+
+    private void selezionaGaraCampionato(Socket clientSocket) {
+        Organizzatore o = new Organizzatore();
+        o.mostraGareInserimento(clientSocket);
     }
 
 }
