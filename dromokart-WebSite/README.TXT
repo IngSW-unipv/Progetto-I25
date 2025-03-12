@@ -1,12 +1,13 @@
+Errore in classica personale
+-io gli passo il CF mentre lui confronta con il Nome socio.
+
+Acquista kart e acquista pezzi devono popolare anche la tabella acquista.
+
 COSE NON FUNZIONANTI
 -inserimento KART non funziona la lettura del IDMAX
 
 AGGIUNTA team
 -sistemare che non si può premere il bottone se non è stato flaggato due soci
-
-GARA libera
--Non funziona INSERT della gara libera (Forse colpa mia)
-
 
 CHI SIAMO
 -aggiungere un immagine del nostro team ?

@@ -26,7 +26,7 @@
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: ../meccanico.php');
+        header('Location: ../Manutenzione.php');
         die();
     }
 ?>
