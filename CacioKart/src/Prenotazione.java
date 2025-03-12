@@ -18,7 +18,7 @@ public class Prenotazione {
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        LocalDate dataO=LocalDate.now();
+        LocalDate dataO = LocalDate.now();
         INSERT = new String[2];
         //Random random = new Random();
 
@@ -26,7 +26,6 @@ public class Prenotazione {
         //Per mettere una nuova prenotazione devo trovare l'id massimo e capire se ci sono già 20 prenotazioni
 
         //g = new Gara("0",null); //Non serve
-
         SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
                 + dataGara + "' AND fasciaO = '"
                 + fasciaOraria + "'";
@@ -38,16 +37,6 @@ public class Prenotazione {
             responder.sendResponse(clientSocket, "0");
             return;
         }
-
-        /*
-        // Serve a capire se esiste già almeno una prenotazione
-        if(result == null || result.isEmpty()){
-            nPartecipanti = 0;
-        } else {
-            nPartecipanti = Integer.parseInt(result.get(0).toString().replace("\"", ""));
-        }*/
-
-        // Stabilisco l'id della prenotazione basandomi su se esiste o meno già almeno una prenotazione
         SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
         result = db.executeReturnQuery(SELECT);
         idPrenotazione = result.toString().replaceAll("\\D", "");
@@ -60,28 +49,58 @@ public class Prenotazione {
         }
 
         costo = 15;
-        INSERT[1] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
-                idPrenotazione + "', '" +
-                dataGara + "', '" +
-                fasciaOraria + "', '" +
-                tipologia + "', '" +
-                costo + "')";
+        switch (tipologia) {
+            case "LIBERA":
+                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                        idPrenotazione + "', '" +
+                        dataGara + "', '" +
+                        fasciaOraria + "', '" +
+                        tipologia + "', '" +
+                        costo + "')";
 
-        INSERT[2]="INSERT INTO prenota (idP, socio,data) VALUES ('" +
-                idPrenotazione + "', '" +
-                cf + "', '" +
-                dataO + "')";
+                INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                        idPrenotazione + "', '" +
+                        cf + "', '" +
+                        dataO + "')";
 
-        for (String gara : INSERT) {
-            queryIndicator = db.executeUpdateQuery(gara);
-            if (queryIndicator == 0) {
+                for (String gara : INSERT) {
+                    queryIndicator = db.executeUpdateQuery(gara);
+                    if (queryIndicator == 0) {
+                        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                        return;
+                    }
+                }
+
+                break;
+            case "SECCA":
+                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                        idPrenotazione + "', '" +
+                        dataGara + "', '" +
+                        fasciaOraria + "', '" +
+                        tipologia + "', '" +
+                        costo + "')";
+                for (String gara : INSERT) {
+                    queryIndicator = db.executeUpdateQuery(gara);
+                    if (queryIndicator == 0) {
+                        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                        return;
+                    }
+                }
+
+
+        /*
+        // Serve a capire se esiste già almeno una prenotazione
+        if(result == null || result.isEmpty()){
+            nPartecipanti = 0;
+        } else {
+            nPartecipanti = Integer.parseInt(result.get(0).toString().replace("\"", ""));
+        }*/
+
+                // Stabilisco l'id della prenotazione basandomi su se esiste o meno già almeno una prenotazione
+
+
                 responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-                return;
-            }
         }
-
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
-    }
 
 
         //Controllo strano
@@ -180,6 +199,7 @@ public class Prenotazione {
         }else{
             System.out.println("Gara non disputata\n!");
         }*/
+    }
 }
 
 
