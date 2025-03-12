@@ -25,10 +25,9 @@
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>idProdotto</th>';
-            echo '<th>prodotto</th>';
-            echo '<th>Quantità</th>';
+            echo '<th>Prodotto</th>';
             echo '<th>Prezzo</th>';
+            echo '<th>Quantità</th>';
             echo '<th>Acquista</th>';
             echo '</tr>';
             echo '</thead>';
@@ -42,7 +41,6 @@
                 // Assicurati che ci siano almeno 4 colonne
                 if(count($columns) >= 4) {
                     echo '<tr>';
-                    echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
                     echo '<td>' . str_replace('_', ' ',htmlspecialchars($columns[1])) . '</td>';
                     echo '<td>' . htmlspecialchars($columns[3]) . '</td>';  
                     if($columns[2] == "0"){
