@@ -108,7 +108,7 @@ public class Organizzatore {
     public void mostraGareInserimento(Socket clientSocket) throws SQLException {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara )";
+        SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara );";
 
         gare = db.executeReturnQuery(SELECT);
         listaGare = new StringBuilder();
