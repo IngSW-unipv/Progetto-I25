@@ -56,16 +56,16 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        DELETE = "DELETE FROM caciokart.concessionaria WHERE tipol = '" + targa + "'";
+        DELETE = Query.INSERIMENTO_KART_MECCANICO.getQuery(targa);
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    public void aggiuntaBenzina(String info, Socket clientSocket) {
+    public void aggiuntaBenzina(Kart k, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE caciokart.kart SET kart.serbatoio = '20' WHERE kart.targa = '" + info + "'";
+        UPDATE = Query.AGGIUNTA_BENZINA_MECCANICO.getQuery(k.getTarga());
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
@@ -111,10 +111,10 @@ public class Meccanico {
         }
     }
 
-    public void rimozioneKart(String targaDaRimuovere, Socket clientSocket) {
+    public void rimozioneKart(Kart k, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        DELETE = "DELETE FROM caciokart.kart WHERE targa = '" + targaDaRimuovere + "'";
+        DELETE = Query.RIMUOVI_KART_MECCANICO.getQuery(k.getTarga());
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }

@@ -8,14 +8,15 @@ public class Classifica {
     private PHPResponseHandler responder;
     private StringBuilder classifica;
     private List<Map<String, Object>> result;
-    private String nomep, cognomep, targa, bGiro, tempoTot, idGara, cf;
+    private String nomep, cognomep, targa, bGiro, tempoTot, idGara, cf, SELECT;
 
     public Classifica() {
     }
 
-    public void classificaArbitro(String query, Socket clientSocket) {
+    public void classificaArbitro( Socket clientSocket) {
         responder = new PHPResponseHandler();
-        result = getClassifica(query);
+        SELECT = Query.CLASSIFICA_ARBITRO.getQuery();
+        result = getClassifica(SELECT);
         classifica = new StringBuilder();
 
         if (result != null) {
@@ -31,12 +32,12 @@ public class Classifica {
         }
     }
 
-    public void classificaCompleta(String query, Socket clientSocket) {
+    public void classificaCompleta(Socket clientSocket) {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
-
+        SELECT = Query.CLASSIFICA_GENERALE.getQuery();
         // Esecuzione della query
-        result = getClassifica(query);
+        result = getClassifica(SELECT);
 
         classifica = new StringBuilder();
 
@@ -70,11 +71,11 @@ public class Classifica {
         }
     }
 
-    public void classificaUtente(String query, Socket clientSocket) {
+    public void classificaUtente(Socio s, Socket clientSocket) {
         responder = new PHPResponseHandler();
-
         // Esegui la query
-        result = getClassifica(query);
+        SELECT = Query.CLASSIFICA_UTENTE.getQuery(s.getCf());
+        result = getClassifica(SELECT);
         classifica = new StringBuilder();
 
         if (result != null) {

@@ -49,7 +49,7 @@ public class PHPRequestHandler {
                     break;
 
                 case REGISTRAZIONE:
-                    registerCase(info, clientSocket);
+                    registrazioneSocioCase(info, clientSocket);
                     break;
 
                 case PRENOTAZIONE_LIBERA:
@@ -199,8 +199,7 @@ public class PHPRequestHandler {
      */
     private void classificaArbitro(Socket clientSocket) {
         Classifica c = new Classifica();
-        query =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
-        c.classificaArbitro(query, clientSocket);
+        c.classificaArbitro(clientSocket);
     }
 
     /**Metodo per gestire la logica della classifica generale
@@ -214,14 +213,7 @@ public class PHPRequestHandler {
      */
     private void classificaGenerale(Socket clientSocket) {
         Classifica c = new Classifica();
-        query = "SELECT c.idGara, s.nome, s.cognome, c.targa, c.bGiro, c.tempTot " +
-                "FROM caciokart.classifica AS c " +
-                "JOIN (SELECT idGara, MIN(tempTot) AS tempo_migliore FROM caciokart.classifica GROUP BY idGara) AS agg " +
-                "ON c.idGara = agg.idGara AND c.tempTot = agg.tempo_migliore " +
-                "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                "ORDER BY c.tempTot DESC " +
-                "LIMIT 10";
-        c.classificaCompleta(query,clientSocket);
+        c.classificaCompleta(clientSocket);
     }
 
     /**Metodo per gestire la classifica visibile da un singolo utente.
@@ -234,16 +226,9 @@ public class PHPRequestHandler {
      */
     private void classificaUtente(String cfPilota,Socket clientSocket) {
         Classifica c = new Classifica();
-        query = "SELECT c.idGara, " +
-                "       c.targa, " +
-                "       c.bGiro, " +
-                "       c.tempTot " +
-                "FROM caciokart.classifica AS c " +
-                "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                "WHERE s.nome = '" + cfPilota + "' " +
-                "ORDER BY c.tempTot DESC " +
-                "LIMIT 10";
-        c.classificaUtente(query,clientSocket);
+        Socio s = new Socio();
+        s.setCf(cfPilota);
+        c.classificaUtente(s,clientSocket);
     }
 
     /**Metodo per gestire la logica di registrazione.
@@ -254,7 +239,7 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
-    private void registerCase(String dati, Socket clientSocket) {
+    private void registrazioneSocioCase(String dati, Socket clientSocket) {
         String[] socio = dati.split(" ");
         LocalDate dataNascita = LocalDate.parse(socio[2], dateFormatter);
         Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);
@@ -327,9 +312,7 @@ public class PHPRequestHandler {
      */
     private void mostraAggiuntaKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
-        query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
-                "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
-                "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)";
+        query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery();
         m.mostraKart(query,clientSocket);
     }
 
@@ -343,7 +326,9 @@ public class PHPRequestHandler {
      */
     private void rimozioneKartCase(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
-        m.rimozioneKart(targa, clientSocket);
+        Kart k = new Kart();
+        k.setTarga(targa);
+        m.rimozioneKart(k, clientSocket);
     }
 
     /**Metodo per mostrare i kart disponibili alla rimozione.
@@ -354,9 +339,7 @@ public class PHPRequestHandler {
      */
     private void mostraRimuoviKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
-        query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
-                "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
-                "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)";
+        query = Query.MOSTRA_RIMUOVI_KART_MECCANICO.getQuery();
         m.mostraKart(query,clientSocket);
     }
 
@@ -369,18 +352,7 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket)  {
         Meccanico m = new Meccanico();
-        query =  "SELECT " +
-                "    k.*, " +
-                "    COALESCE( " +
-                "        CASE " +
-                "            WHEN MAX(m.dataM) IS NULL THEN 'MAI_FATTA' " +
-                "            ELSE CAST(DATEDIFF(CURRENT_DATE, MAX(m.dataM)) AS CHAR) " +
-                "        END, 'MAI_FATTA' " +
-                "    ) AS giorniDallaManutenzione, " +
-                "    MAX(m.dataM) AS ultimaManutenzione " +
-                "FROM caciokart.kart k " +
-                "LEFT JOIN caciokart.manutenzione m ON k.targa = m.targa " +
-                "GROUP BY k.targa;";
+        query = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
         m.mostraKartManutenzione(query,clientSocket);
     }
 
@@ -399,7 +371,7 @@ public class PHPRequestHandler {
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
         Proprietario p = new Proprietario();
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
-        p.aggiuntaDipendenti(d,clientSocket);
+        p.aggiuntaDipendente(d,clientSocket);
     }
 
     /**Metodo di rimozione dipendenti.
@@ -411,7 +383,9 @@ public class PHPRequestHandler {
      */
     private void eliminaDipendenteCase(String dati, Socket clientSocket) {
         Proprietario p = new Proprietario();
-        p.rimozioneDipendenti(dati,clientSocket);
+        Dipendente d = new Dipendente();
+        d.setCf(dati);
+        p.rimozioneDipendenti(d,clientSocket);
     }
 
     /**Metodo per mostrare tutti i dipendenti.
@@ -425,11 +399,15 @@ public class PHPRequestHandler {
         p.mostraDipendenti(clientSocket);
     }
 
-    private void aggiungiBenzinaCase(String info, Socket clientSocket) {
+    private void aggiungiBenzinaCase(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
-        m.aggiuntaBenzina(info,clientSocket);
+        Kart k = new Kart();
+        k.setTarga(targa);
+        m.aggiuntaBenzina(k,clientSocket);
     }
 
+
+    //DA QUA IN POI
     private void acquistaKartCase(String dati, Socket clientSocket) {
         Socio s = new Socio();
         s.compraKart(dati, clientSocket);

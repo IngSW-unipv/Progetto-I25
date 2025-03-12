@@ -32,7 +32,7 @@ public class Proprietario {
     public void mostraDipendenti(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM caciokart.dipendente";
+        SELECT = Query.MOSTRA_DIPENDENTI_PROPRIETARIO.getQuery();
         dipendenti = db.executeReturnQuery(SELECT);
 
         if (dipendenti != null) {
@@ -59,20 +59,20 @@ public class Proprietario {
      * @param clientSocket
      * @throws SQLException
      */
-    public void aggiuntaDipendenti(Dipendente nuovoDip, Socket clientSocket) {
+    public void aggiuntaDipendente(Dipendente nuovoDip, Socket clientSocket) {
         db = new DBConnector();
         //Gestire i diversi ruoli
         responder = new PHPResponseHandler();
-        INSERT = "INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) VALUES('" +
-                nuovoDip.getCf() + "', '" +
-                nuovoDip.getNome() + "', '" +
-                nuovoDip.getCognome() + "', '" +
-                nuovoDip.getMail() + "', '" +
-                nuovoDip.getPassword() + "', '" +
-                nuovoDip.getDataNascita() + "', '" +
-                nuovoDip.getRuolo() + "', '" +
-                nuovoDip.getOreL() + "', '" +
-                nuovoDip.getStipendio() + "')";
+        INSERT = Query.AGGIUNTA_DIPENDENTE_PROPRIETARIO.getQuery(
+                nuovoDip.getCf(),
+                nuovoDip.getNome(),
+                nuovoDip.getCognome(),
+                nuovoDip.getMail(),
+                nuovoDip.getPassword(),
+                nuovoDip.getDataNascita(),
+                nuovoDip.getRuolo(),
+                nuovoDip.getOreL(),
+                nuovoDip.getStipendio());
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
@@ -84,14 +84,14 @@ public class Proprietario {
      * Metodo per rimuovere i dipendenti.
      * Identico al metodo presente in Kart per rimuovere i kart.
      *
-     * @param cfDaRimuovere
+     * @param d
      * @param clientSocket
      * @throws SQLException
      */
-    public void rimozioneDipendenti(String cfDaRimuovere, Socket clientSocket) {
+    public void rimozioneDipendenti(Dipendente d, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        DELETE = "DELETE FROM caciokart.dipendente WHERE dip = '" + cfDaRimuovere + "'";
+        DELETE = Query.RIMOZIONE_DIPENDENTE_PROPRIETARIO.getQuery(d.getCf());
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }

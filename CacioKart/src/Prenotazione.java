@@ -19,16 +19,15 @@ public class Prenotazione {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         LocalDate dataO = LocalDate.now();
-        INSERT = new String[2];
+
         //Random random = new Random();
 
         //idP dataG fasciaO tipologia costo numP socio
         //Per mettere una nuova prenotazione devo trovare l'id massimo e capire se ci sono già 20 prenotazioni
 
         //g = new Gara("0",null); //Non serve
-        SELECT = "SELECT count(*) FROM caciokart.prenotazione WHERE dataG = '"
-                + dataGara + "' AND fasciaO = '"
-                + fasciaOraria + "'";
+
+        SELECT = Query.PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI.getQuery(dataGara, fasciaOraria);
         result = db.executeReturnQuery(SELECT);
         prenotazioniConcorrenti = result.get(0).toString().replaceAll("\\D", "");
 
@@ -37,7 +36,7 @@ public class Prenotazione {
             responder.sendResponse(clientSocket, "0");
             return;
         }
-        SELECT = "SELECT MAX(idP) FROM PRENOTAZIONE";
+        SELECT = Query.PRENOTAZIONE_MAX_ID.getQuery();
         result = db.executeReturnQuery(SELECT);
         idPrenotazione = result.toString().replaceAll("\\D", "");
 
@@ -49,7 +48,9 @@ public class Prenotazione {
         }
 
         costo = 15;
+        INSERT = new String[2];
         switch (tipologia) {
+
             case "libera":
                 INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                         idPrenotazione + "', '" +
@@ -94,8 +95,9 @@ public class Prenotazione {
 
                 // Stabilisco l'id della prenotazione basandomi su se esiste o meno già almeno una prenotazione
 
-
-                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            default:
+                responder.sendResponse(clientSocket, "0");
+                break;
         }
 
 

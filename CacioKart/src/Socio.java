@@ -31,13 +31,7 @@ public class Socio extends Persona implements Iinventario {
     public void registrazione(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "INSERT INTO socio (socio, nome, cognome, mail, passw, dataN) VALUES('" +
-                this.getCf() + "', '" +
-                this.getNome() + "', '" +
-                this.getCognome() + "', '" +
-                this.getMail() + "', '" +
-                this.getPassword() + "', '" +
-                this.getDataNascita() + "')";
+        SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
 
         queryIndicator = db.executeUpdateQuery(SELECT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));

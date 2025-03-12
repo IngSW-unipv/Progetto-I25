@@ -1,5 +1,4 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -41,13 +40,10 @@ public class Concessionaria {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         //devo aggiungere il kart in kart
-        INSERT = "INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('" +
-                nuovoKart.getTarga() + "', '" +
-                nuovoKart.getCilindrata() + "', '" +
-                nuovoKart.getSerbatoio() + "')";
+        INSERT = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART.getQuery(nuovoKart.getTarga(), nuovoKart.getCilindrata(), nuovoKart.getSerbatoio());
         db.executeUpdateQuery(INSERT);
 
-        SELECT = "SELECT MAX(idProdotto) FROM concessionaria";
+        SELECT = Query.INSERIMENTO_KART_CONCESSIONARIA_MAX_ID.getQuery();
         maxIDProdotto = db.executeReturnQuery(SELECT);
         //System.out.println(maxIDProdotto.get(0));
 
@@ -61,13 +57,8 @@ public class Concessionaria {
             idProdotto = String.valueOf((Integer.parseInt(ultimoProdotto) + 1));
 
         }
-        //e impostare concessionario tipol
-        INSERT = "INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) VALUES('" +
-                idProdotto + "', '" +
-                nuovoKart.getTarga() + "', '" +
-                1 + "', '" +
-                prezzo + "')";
 
+        INSERT = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA.getQuery(idProdotto, nuovoKart.getTarga(), 1, prezzo);
         queryResult = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryResult));
 

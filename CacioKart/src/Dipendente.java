@@ -13,6 +13,10 @@ public class Dipendente extends Persona {
         this.oreL = oreL;
     }
 
+    public Dipendente(){
+
+    }
+
     public LocalTime getOreL() {
         return oreL;
     }

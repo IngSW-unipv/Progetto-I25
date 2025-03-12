@@ -9,6 +9,10 @@ public class Kart {
         this.serbatoio = serbatoio;
     }
 
+    public Kart(){
+
+    }
+
     public String getTarga() {
         return targa;
     }
