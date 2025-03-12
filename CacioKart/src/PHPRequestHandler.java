@@ -7,8 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 public class PHPRequestHandler {
     private BufferedReader in;
-    private String comando, info, tipologia;
+    private String comando;
+    private String info;
     private String[] messaggio;
+    private String tipologia;
     private TipoComandi tipo;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -17,24 +19,23 @@ public class PHPRequestHandler {
     public PHPRequestHandler() {
     }
 
-    /**
-     * La classe riceve stringhe composte in questo modo: *parola singola* *dati*
-     * La prima parola indica la richiesta del client da eseguire.
-     * La seconda parte del messaggio cambia in base alla richiesta da eseguire,
+    /**La classe riceve stringhe composte in questo modo: *parola singola* *dati*
+     *La prima parola indica la richiesta del client da eseguire.
+     *La seconda parte del messaggio cambia in base alla richiesta da eseguire,
      * potrebbe contenere 0 o più informazioni a seconda dei dati necessari.
      */
     public void handleRequests(Socket clientSocket) throws SQLException {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
-            messaggio = in.readLine().split(" ", 2); //Divido il messaggio in due: il comando e i dati
+            messaggio = in.readLine().split(" ",2); //Divido il messaggio in due: il comando e i dati
 
             //comando informazioni
 
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
-            if (messaggio.length == 2) { //Controllo se il messaggio contiene più di una parola
+            if(messaggio.length == 2) { //Controllo se il messaggio contiene più di una parola
                 info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
                 System.out.println("Messaggio ricevuto: " + messaggio[0] + " " + messaggio[1]);
-            } else {
+            }else{
                 System.out.println("Messaggio ricevuto: " + messaggio[0]);
             }
 
@@ -55,12 +56,12 @@ public class PHPRequestHandler {
 
                 case PRENOTAZIONE_LIBERA:
                     tipologia = "libera";
-                    prenotazioneCase(tipologia, info, clientSocket);
+                    prenotazioneCase(tipologia,info,clientSocket);
                     break;
 
                 case PRENOTAZIONE_SECCA:
                     tipologia = "secca";
-                    prenotazioneCase(tipologia, info, clientSocket);
+                    prenotazioneCase(tipologia,info,clientSocket);
                     break;
 
                 case AGGIUNTA_KART_CONCESSIONARIA:
@@ -96,7 +97,7 @@ public class PHPRequestHandler {
                     break;
 
                 case ELIMINA_DIPENDENTE:
-                    eliminaDipendenteCase(info, clientSocket);
+                    eliminaDipendenteCase(info,clientSocket);
                     break;
 
                 case ACQUISTA_KART:
@@ -112,7 +113,7 @@ public class PHPRequestHandler {
                     break;
 
                 case CLASSIFICA_UTENTE:
-                    classificaUtente(info, clientSocket);
+                    classificaUtente(info,clientSocket);
                     break;
 
                 case CLASSIFICA_ARBITRO:
@@ -132,7 +133,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_GARA:
-                    mostraGaraCase(info, clientSocket);
+                    mostraGaraCase(info,clientSocket);
                     break;
 
                 case AGGIUNGI_PENALITA:
@@ -160,10 +161,6 @@ public class PHPRequestHandler {
                     mostraCampionato(clientSocket);
                     break;
 
-                case SELEZIONE_GARE_CAMPIONATO:
-                    selezionaGaraCampionato(clientSocket);
-                    break;
-
                 default:
                     break;
             }
@@ -175,8 +172,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo per gestire la logica di login.
+    /**Metodo per gestire la logica di login.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      *
      * @param dati
@@ -185,13 +181,12 @@ public class PHPRequestHandler {
     private void loginCase(String dati, Socket clientSocket) throws SQLException {
         String[] loginData = dati.split(" ");
         Persona utente = new Persona();
-        utente.setCf(loginData[0]);
+        utente.setcF(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica delle classifiche per l'arbitro.
+    /**Metodo per gestire la logica delle classifiche per l'arbitro.
      * L'arbitro è interessato a vedere tutte le classifiche delle
      * gare effettuate, senza duplicati.
      *
@@ -200,12 +195,11 @@ public class PHPRequestHandler {
      */
     private void classificaArbitro(Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
-        query = "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
+        query =  "SELECT DISTINCT idGara FROM caciokart.classifica ORDER BY idGara";
         c.classificaArbitro(query, clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica della classifica generale
+    /**Metodo per gestire la logica della classifica generale
      * visibile nella prima pagina del sito.
      * Seleziono dal db tutte le informazioni di una singola classifica
      * mettendola in Join con i soci per ottenere le informazioni di un singolo
@@ -223,11 +217,10 @@ public class PHPRequestHandler {
                 "JOIN caciokart.socio AS s ON c.socio = s.socio " +
                 "ORDER BY c.tempTot DESC " +
                 "LIMIT 10";
-        c.classificaCompleta(query, clientSocket);
+        c.classificaCompleta(query,clientSocket);
     }
 
-    /**
-     * Metodo per gestire la classifica visibile da un singolo utente.
+    /**Metodo per gestire la classifica visibile da un singolo utente.
      * In ingresso il cf dell'utente ci permette di fare una query
      * di tutte le classifiche che appartengono solo a lui.
      *
@@ -235,7 +228,7 @@ public class PHPRequestHandler {
      * @param clientSocket
      * @throws SQLException
      */
-    private void classificaUtente(String cfPilota, Socket clientSocket) throws SQLException {
+    private void classificaUtente(String cfPilota,Socket clientSocket) throws SQLException {
         Classifica c = new Classifica();
         query = "SELECT c.idGara, " +
                 "       c.targa, " +
@@ -243,14 +236,13 @@ public class PHPRequestHandler {
                 "       c.tempTot " +
                 "FROM caciokart.classifica AS c " +
                 "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-                "WHERE c.socio = '" + cfPilota + "' " +
+                "WHERE s.nome = '" + cfPilota + "' " +
                 "ORDER BY c.tempTot DESC " +
                 "LIMIT 10";
-        c.classificaUtente(query, clientSocket);
+        c.classificaUtente(query,clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica di registrazione.
+    /**Metodo per gestire la logica di registrazione.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
      * il tipo Date presente nel database.
@@ -280,11 +272,10 @@ public class PHPRequestHandler {
         String cf = info[2];
 
         Prenotazione p = new Prenotazione();
-        p.prenotazione(cf, tipologia, dataG, orarioI, clientSocket);
+        p.prenotazione(cf,tipologia, dataG, orarioI,clientSocket);
     }
 
-    /**
-     * Metodo di aggiunta kart.
+    /**Metodo di aggiunta kart.
      * Pressoché identico al metodo di registrazione.
      *
      * @param dati
@@ -293,15 +284,14 @@ public class PHPRequestHandler {
      */
     private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) throws SQLException {
         String[] info = dati.split(" "); //Passare a kart
-        Kart k = new Kart(info[0], Integer.parseInt(info[1]), 20);
+        Kart k = new Kart(info[0],Integer.parseInt(info[1]),20);
         int prezzo = Integer.parseInt(info[2]);
         Concessionaria c = new Concessionaria();
-        c.inserimentoKart(k, prezzo, clientSocket);
+        c.inserimentoKart(k,prezzo,clientSocket);
 
     }
 
-    /**
-     * Metodo per aggiungere i kart dalla vendita del concessionario
+    /**Metodo per aggiungere i kart dalla vendita del concessionario
      * al noleggio del kartdromo a cura del meccanico.
      * La targa in ingresso ci permette di selezionare un kart specifico da rimuovere
      * dalla tabella concessionario.
@@ -316,8 +306,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
+    /**Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
      * Non richiede parametri oltre al socket per spedire la risposta.
      *
      * @param clientSocket
@@ -328,11 +317,10 @@ public class PHPRequestHandler {
         query = "SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
                 "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
                 "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)";
-        m.mostraKart(query, clientSocket);
+        m.mostraKart(query,clientSocket);
     }
 
-    /**
-     * Metodo per rimuovere i kart dal kartodromo.
+    /**Metodo per rimuovere i kart dal kartodromo.
      * Il client manda una targa da rimuovere dal db, il metodo
      * la utilizza per la query e risponde al client.
      *
@@ -345,8 +333,7 @@ public class PHPRequestHandler {
         m.rimozioneKart(targa, clientSocket);
     }
 
-    /**
-     * Metodo per mostrare i kart disponibili alla rimozione.
+    /**Metodo per mostrare i kart disponibili alla rimozione.
      * Non necessita di dati in ingresso, la query è sempre quella.
      *
      * @param clientSocket
@@ -357,11 +344,10 @@ public class PHPRequestHandler {
         query = "SELECT * FROM caciokart.kart WHERE targa NOT IN (" +
                 "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
                 "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)";
-        m.mostraKart(query, clientSocket);
+        m.mostraKart(query,clientSocket);
     }
 
-    /**
-     * Metodo per mostrare i kart appartenenti ai clienti e
+    /**Metodo per mostrare i kart appartenenti ai clienti e
      * disponibili al noleggio per modificarne la manutenzione.
      * Non necessita di dati in ingresso, la query è sempre quella.
      *
@@ -370,21 +356,23 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        query = "SELECT " +
+        query =  "SELECT " +
                 "    k.*, " +
-                "    COALESCE(" +
+                "    COALESCE( " +
                 "        CASE " +
-                "            WHEN m.dataM IS NULL THEN 'MAI_FATTA' " +
-                "            ELSE CAST(DATEDIFF(CURRENT_DATE, m.dataM) AS CHAR) " +
-                "        END, 'MAI_FATTA') AS giorniDallaManutenzione " +
-                "FROM caciokart.manutenzione m " +
-                "RIGHT JOIN kart k ON k.targa = m.targa;";
+                "            WHEN MAX(m.dataM) IS NULL THEN 'MAI_FATTA' " +
+                "            ELSE CAST(DATEDIFF(CURRENT_DATE, MAX(m.dataM)) AS CHAR) " +
+                "        END, 'MAI_FATTA' " +
+                "    ) AS giorniDallaManutenzione, " +
+                "    MAX(m.dataM) AS ultimaManutenzione " +
+                "FROM caciokart.kart k " +
+                "LEFT JOIN caciokart.manutenzione m ON k.targa = m.targa " +
+                "GROUP BY k.targa;";
 
-        m.mostraKartManutenzione(query, clientSocket);
+        m.mostraKartManutenzione(query,clientSocket);
     }
 
-    /**
-     * Metodo per aggiungere dipendenti.
+    /**Metodo per aggiungere dipendenti.
      * Dopo aver formattato le date tramite i formatter, le passo al costruttore
      * di Dipendente per utilizzare i metodi di get e set nel metodo
      * di aggiuntaDipendenti.
@@ -399,11 +387,10 @@ public class PHPRequestHandler {
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
         Proprietario p = new Proprietario();
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
-        p.aggiuntaDipendenti(d, clientSocket);
+        p.aggiuntaDipendenti(d,clientSocket);
     }
 
-    /**
-     * Metodo di rimozione dipendenti.
+    /**Metodo di rimozione dipendenti.
      * Pressoché identico al metodo di rimozione kart.
      *
      * @param dati
@@ -412,11 +399,10 @@ public class PHPRequestHandler {
      */
     private void eliminaDipendenteCase(String dati, Socket clientSocket) throws SQLException {
         Proprietario p = new Proprietario();
-        p.rimozioneDipendenti(dati, clientSocket);
+        p.rimozioneDipendenti(dati,clientSocket);
     }
 
-    /**
-     * Metodo per mostrare tutti i dipendenti.
+    /**Metodo per mostrare tutti i dipendenti.
      * Pressoché identico al metodo per mostrare i kart.
      *
      * @param clientSocket
@@ -429,7 +415,7 @@ public class PHPRequestHandler {
 
     private void aggiungiBenzinaCase(String info, Socket clientSocket) throws SQLException {
         Meccanico m = new Meccanico();
-        m.aggiuntaBenzina(info, clientSocket);
+        m.aggiuntaBenzina(info,clientSocket);
     }
 
     private void acquistaKartCase(String dati, Socket clientSocket) throws SQLException {
@@ -454,7 +440,7 @@ public class PHPRequestHandler {
                 "RIGHT JOIN caciokart.kart e ON m.targa = e.targa " +
                 "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
                 "GROUP BY m.idM, e.targa, m.tipoInt, m.costo;";*/
-        m.aggiornamentoManutenzione(targa, text, prezzo, clientSocket);
+        m.aggiornamentoManutenzione(targa,text,prezzo, clientSocket);
     }
 
     private void mostraPezziCase(Socket clientSocket) throws SQLException {
@@ -495,17 +481,12 @@ public class PHPRequestHandler {
 
     private void acquistaPezziCase(String info, Socket clientSocket) throws SQLException {
         Socio s = new Socio();
-        s.acquistaPezzi(info, clientSocket);
+        s.acquistaPezzi(info,clientSocket);
     }
-
     private void mostraCampionato(Socket clientSocket) throws SQLException {
         Organizzatore o = new Organizzatore();
-        query = "SELECT idCampionato FROM caciokart.campionato";
+        query =  "SELECT idCampionato FROM caciokart.campionato";
         o.mostraCamp(query, clientSocket);
     }
 
-    private void selezionaGaraCampionato(Socket clientSocket) throws SQLException {
-        Organizzatore o = new Organizzatore();
-        o.mostraGareInserimento(clientSocket);
-    }
 }
