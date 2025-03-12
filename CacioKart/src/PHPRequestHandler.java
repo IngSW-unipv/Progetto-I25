@@ -368,7 +368,6 @@ public class PHPRequestHandler {
                 "FROM caciokart.kart k " +
                 "LEFT JOIN caciokart.manutenzione m ON k.targa = m.targa " +
                 "GROUP BY k.targa;";
-
         m.mostraKartManutenzione(query,clientSocket);
     }
 
