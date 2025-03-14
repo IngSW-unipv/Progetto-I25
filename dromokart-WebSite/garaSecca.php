@@ -1,4 +1,5 @@
 <?php
+// aggiuntaPenalita.php
 
 // Include eventuali header o footer, se necessari
 include 'default/headerProfilo.php';  // Se hai un header personalizzato
@@ -17,61 +18,64 @@ require_once 'logic/mostraSoci.php';
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina Aggiunta Soci Gara</title>
-  <!-- Importa il font Roboto -->
+  <title>Aggiungi soci</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-  <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
-   <hero>
-    <h1>Aggiunta Team Gara</h1>
-   </hero>
-    <section class="table-section">
-      <!-- lista attributi: nome,colore -->
-         <?php
-            require 'logic/requestData.php';
-            $res = request("richiestaTeam", $socket);
-            // Suddivide $res in righe
-            $rows = explode("\n", $res);
-            
-            // Controlla se sono presenti righe non vuote
-            if(count($rows) > 0 && !empty(trim($rows[0]))) {
-               echo '<table>';
-               echo '<thead>';
-               echo '<tr>';
-               echo '<th>Nome</th>';
-               echo '<th>Colore</th>';
-               echo '<th>Aggiunta Team</th>';
-               echo '</tr>';
-               echo '</thead>';
-               echo '<tbody>';
-               
-               // Per ogni riga, suddivide i campi utilizzando preg_split per gestire eventuali spazi multipli
-               foreach($rows as $row) {
-                  $row = trim($row);
-                  if(empty($row)) continue;
-                  $columns = preg_split('/\s+/', $row);
-                  // Assicurati che ci siano almeno 2 colonne
-                  if(count($columns) >= 2) {
-                     echo '<tr>';
-                     echo '<td>' . htmlspecialchars($columns[0]) . '</td>';
-                     echo '<td>' . htmlspecialchars($columns[1]) . '</td>';
-                     echo '<td> <form action="logic/aggiungiSociGaraSecca.php" method="post"> <input type="hidden" id="nome" name="nome" value="' .htmlspecialchars($columns[0]) .'"> ';
-                     echo '<button type="submit">Rimuovi dipendente</button> </form></td>';
-                     echo '</tr>';
-                  }
-               }
-               
-               echo '</tbody>';
-               echo '</table>';
-            } else {
-               echo '<p>Nessun dato ricevuto.</p>';
-            }
-         ?>
-         </section>
-    </section>
+  <h2>Dettagli della Prenotazione: <?php echo htmlspecialchars($IdPrenotazione); ?></h2>
 
+  <div class="table-section">
+    <?php
+    // 4) Analizzo la risposta $res
+    // Suddivido in righe usando "explode"
+    $rows = explode("\n", trim($res));
+
+    // Verifico se ho almeno una riga non vuota
+    if (count($rows) > 0 && !empty(trim($rows[0]))) {
+        echo '<table>';
+        echo '  <thead>';
+        echo '    <tr>';
+        echo '      <th>CF</th>';
+        echo '      <th>Nome</th>';
+        echo '      <th>Cognome</th>';
+        echo '      <th>Aggiungi Pilota</th>';
+        echo '    </tr>';
+        echo '  </thead>';
+        echo '  <tbody>';
+
+        foreach ($rows as $row) {
+            $row = trim($row);
+            if (empty($row)) continue;
+
+            // Ogni riga contiene i campi separati da spazi
+            $columns = preg_split('/\s+/', $row);
+
+            if (count($columns) >= 3) {
+                echo '<tr>';
+
+                echo '  <td>' . htmlspecialchars($columns[0]) . '</td>'; 
+                echo '  <td>' . htmlspecialchars($columns[1]) . '</td>';
+                echo '  <td>' . htmlspecialchars($columns[2]) . '</td>';
+                echo '  <td>';
+                echo '    <form action="logic/aggiungiGaraCampionato.php" method="post">';
+                echo '      <input type="hidden" name="CF" value="'. htmlspecialchars($columns[0]) .'">';
+
+                echo '      <button type="submit">Aggiungi Pilota</button>';
+                echo ' </td>';
+
+                echo '    </form>';
+
+                echo '</tr>';
+            }
+        }
+
+        echo '  </tbody>';
+        echo '</table>';
+    } else {
+        echo '<p>Nessun dato valido ricevuto dal server per questa gara.</p>';
+    }
+    ?>
+  </div>
 </body>
 </html>
