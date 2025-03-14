@@ -40,7 +40,7 @@ public enum TipoComandi {
 
     PRENOTAZIONE_SECCA("prenotazioneSecca"),
     MOSTRA_SOCI("mostraSoci"),
-    INSERIMENTO_TEAM_GARA("inserimentoSociGara"),
+    INSERIMENTO_SOCI_GARA("inserimentoSociGara"),
     RICHIESTA_GARA_SECCA("richiestaGaraSecca"),
     MOSTRA_SOCI_CAMPIONATO("mostraSociCampionato"),
     RICHIESTA_CAMPIONATO("richiestaCampionato"),
