@@ -58,7 +58,7 @@ public class Socio extends Persona implements Iinventario {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "','" + LocalDate.now() +")";
+        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "','" + LocalDate.now() +"')";
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
