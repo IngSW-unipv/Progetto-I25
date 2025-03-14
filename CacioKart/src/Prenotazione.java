@@ -34,7 +34,7 @@ public class Prenotazione {
         result = db.executeReturnQuery(SELECT);
         idPrenotazione = result.toString().replaceAll("\\D", "");
 
-        if (!idPrenotazione.equals("0")/*result != null && !result.isEmpty() && result.get(0) != null*/) {
+        if (!idPrenotazione.equals("0")) {
             idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione) + 1);
 
         } else {
