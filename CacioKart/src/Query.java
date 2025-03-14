@@ -133,7 +133,7 @@ public enum Query {
     AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("INSERT INTO partecipa (idGara, idCampionato) " +
             "VALUES ('%s', '%s')"),
 
-    MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > urdate()"),
+    MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > curdate()"),
 
     SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio");
 

@@ -10,8 +10,8 @@ public class PHPRequestHandler {
     private String comando, info, tipologia;
     private String[] messaggio;
     private TipoComandi tipo;
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private String query;
 
     public PHPRequestHandler() {
