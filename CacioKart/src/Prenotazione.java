@@ -50,19 +50,36 @@ public class Prenotazione {
         costo = 15;
         INSERT = new String[2];
         switch (tipologia) {
-
             case "libera":
-                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
-                        idPrenotazione + "', '" +
-                        dataGara + "', '" +
-                        fasciaOraria + "', '" +
-                        tipologia + "', '" +
-                        costo + "')";
+                SELECT="SELECT dip FROM caciokart.dipendente";
+                result=db.executeReturnQuery(SELECT);
+                if (result.contains(cf)){
+                    cf=null;
+                    INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                            idPrenotazione + "', '" +
+                            dataGara + "', '" +
+                            fasciaOraria + "', '" +
+                            tipologia + "', '" +
+                            costo + "')";
+                    INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                            idPrenotazione + "', '" +
+                            cf + "', '" +
+                            dataO + "')";
 
-                INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
-                        idPrenotazione + "', '" +
-                        cf + "', '" +
-                        dataO + "')";
+                }else{
+                    INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                            idPrenotazione + "', '" +
+                            dataGara + "', '" +
+                            fasciaOraria + "', '" +
+                            tipologia + "', '" +
+                            costo + "')";
+
+                    INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                            idPrenotazione + "', '" +
+                            cf + "', '" +
+                            dataO + "')";
+                }
+
 
                 for (String gara : INSERT) {
                     queryIndicator = db.executeUpdateQuery(gara);
