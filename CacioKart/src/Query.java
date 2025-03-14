@@ -81,6 +81,14 @@ public enum Query {
 
     AGGIUNTA_BENZINA_MECCANICO("UPDATE caciokart.kart " +
             "SET kart.serbatoio = '20' WHERE kart.targa = '%s'"),
+
+    ACQUISTO_KART_UTENTE_TABELLA_SOCIO("UPDATE socio SET targa = '%s' " +
+            "WHERE socio = '%s'"),
+
+    ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO("SELECT idProdotto FROM concessionaria " +
+            "WHERE tipol = '%s'"),
+
+    ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) VALUES('%s', '%s', '%s')"),
     ;
 
     private final String query;

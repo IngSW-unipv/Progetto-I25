@@ -46,9 +46,8 @@ public class Socio extends Persona implements Iinventario {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        //Fare un IF che controlla se l'utente ha già un kart (per impedire l'acquisto?)
-        UPDATE = "UPDATE socio SET targa = '" + targa + "' WHERE socio = '" + cf + "'";
-        SELECT = "SELECT idProdotto FROM concessionaria WHERE tipol = '" + targa + "'";
+        UPDATE = Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(targa, cf);
+        SELECT = Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(targa);
 
         queryIndicator = db.executeUpdateQuery(UPDATE);
         if (queryIndicator == 0) {
@@ -58,7 +57,7 @@ public class Socio extends Persona implements Iinventario {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "','" + LocalDate.now() +"')";
+        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
