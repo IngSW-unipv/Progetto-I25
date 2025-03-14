@@ -60,6 +60,8 @@ require_once 'logic/mostraSoci.php';
                 echo '  <td>';
                 echo '    <form action="logic/aggiungiSociGaraSecca.php" method="post">';
                 echo '      <input type="hidden" name="CF" value="'. htmlspecialchars($columns[0]) .'">';
+                echo '      <input type="hidden" name="IdPrenotazione" value="'. htmlspecialchars($IdPrenotazione) .'">';
+                
 
                 echo '      <button type="submit">Aggiungi Pilota</button>';
                 echo ' </td>';
