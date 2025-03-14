@@ -135,8 +135,7 @@ public enum Query {
 
     MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > urdate()"),
 
-    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio")
-    ;
+    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio");
 
     private final String query;
 

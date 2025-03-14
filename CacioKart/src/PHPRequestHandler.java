@@ -270,11 +270,16 @@ public class PHPRequestHandler {
         String[] orari = info[1].split("-");
         orarioI = LocalTime.parse(orari[1], timeFormatter);
         switch (tipologia) {
+
             case "libera":
                 cf = info[2];
                 break;
+
             case "secca":
-                cf=null;
+                cf = null;
+                break;
+
+            default:
                 break;
         }
         Prenotazione p = new Prenotazione();
