@@ -167,7 +167,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_SOCI:
-
+                    selezionaSocio(clientSocket);
                     break;
 
                 default:
