@@ -166,6 +166,10 @@ public class PHPRequestHandler {
                     mostraPrenotazione(clientSocket);
                     break;
 
+                case MOSTRA_SOCI:
+
+                    break;
+
                 default:
                     break;
             }
@@ -470,7 +474,8 @@ public class PHPRequestHandler {
 
     private void mostraSociCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        o.mostraSociInserimento(clientSocket);
+        query = "SELECT socio, nome, cognome FROM caciokart.socio WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)";
+        o.mostraSociInserimento(query, clientSocket);
     }
 
     private void acquistaPezziCase(String messaggio, Socket clientSocket) {
@@ -520,5 +525,11 @@ public class PHPRequestHandler {
         Organizzatore o = new Organizzatore();
         query = "SELECT  idP FROM prenotazione WHERE dataG>curdate();";
         o.mostraPren(query, clientSocket);
+    }
+
+    private void selezionaSocio(Socket clientSocket) {
+        Organizzatore o = new Organizzatore();
+        query = "SELECT socio, nome, cognome FROM socio";
+        o.mostraSociInserimento(query, clientSocket);
     }
 }

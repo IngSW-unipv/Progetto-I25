@@ -66,7 +66,7 @@ public class Organizzatore {
 
     }
 
-    public void mostraSociInserimento(Socket clientSocket) {
+    public void mostraSociInserimento(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = "SELECT socio, nome, cognome FROM caciokart.socio WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)";
@@ -160,7 +160,5 @@ public class Organizzatore {
             responder.sendResponse(clientSocket, "end");
         }
     }
-
-
 }
 
