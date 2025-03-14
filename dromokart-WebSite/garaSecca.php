@@ -6,10 +6,10 @@ include 'default/footerHome.php';     // Se hai un footer
 require 'logic/controlloLogin.php';   // Controllo login (opzionale)
 
 // 1) Ricevi l'idGara passato dal form
-$idGara = isset($_POST['idGara']) ? $_POST['idGara'] : '';
+$IdPrenotazione = isset($_POST['IdPrenotazione']) ? $_POST['IdPrenotazione'] : '';
 
 // 2) Includi il file con la funzione che richiama il server Java
-require_once 'logic/mostraTeam.php';
+require_once 'logic/mostraSoci.php';
 
 ?>
 
@@ -18,7 +18,7 @@ require_once 'logic/mostraTeam.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina Aggiunta Team Gara</title>
+  <title>Pagina Aggiunta Soci Gara</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->

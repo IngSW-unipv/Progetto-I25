@@ -2,7 +2,7 @@
 require 'connection.php';
 
 $socket = connectionOpen($address, $port);
-fwrite($socket, "mostraTeam\n");
+fwrite($socket, "mostraSoci\n");
 
 $res = '';
 while (!feof($socket)) {

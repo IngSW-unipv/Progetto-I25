@@ -10,7 +10,7 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creazione Gara Secca</title>
+  <title>Riempimento Prenotazione</title>
   <!-- Fogli di stile -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/profilo.css">
@@ -28,7 +28,7 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
         echo '<table>';
         echo '  <thead>';
         echo '    <tr>';
-        echo '      <th>IdGara</th>';
+        echo '      <th>IdPrenotazione</th>';
         echo '      <th>Seleziona</th>';
         echo '    </tr>';
         echo '  </thead>';
@@ -41,21 +41,21 @@ require 'logic/richiestaGareSecche.php';       // Riempie la variabile $res con 
             // Se la riga è vuota, salto
             if(empty($row)) continue;
 
-            // Suddivido la riga (in questo caso potrebbe contenere solo l'idGara)
+            // Suddivido la riga (in questo caso potrebbe contenere solo l'IdPrenotazione)
             $columns = preg_split('/\s+/', $row);
             
-            // Estraggo idGara (se la riga ha almeno 1 colonna)
+            // Estraggo IdPrenotazione (se la riga ha almeno 1 colonna)
             if(isset($columns[0])) {
-                $idGara = htmlspecialchars($columns[0]);
+                $IdPrenotazione = htmlspecialchars($columns[0]);
                 
                 echo '<tr>';
-                // Colonna con l'idGara
-                echo '  <td>' . $idGara . '</td>';
+                // Colonna con l'IdPrenotazione
+                echo '  <td>' . $IdPrenotazione . '</td>';
                 // Colonna con bottone "Seleziona"
                 echo '  <td>';
                 echo '    <form action="garaSecca.php" method="post">';
-                echo '      <!-- Passo l\'idGara come input nascosto -->';
-                echo '      <input type="hidden" name="idGara" value="' . $idGara . '">';
+                echo '      <!-- Passo l\'IdPrenotazione come input nascosto -->';
+                echo '      <input type="hidden" name="IdPrenotazione" value="' . $IdPrenotazione . '">';
                 echo '      <button type="submit">Seleziona</button>';
                 echo '    </form>';
                 echo '  </td>';
