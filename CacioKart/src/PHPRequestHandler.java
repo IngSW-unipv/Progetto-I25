@@ -269,6 +269,7 @@ public class PHPRequestHandler {
         dataG = LocalDate.parse(info[0], dateFormatter);
         String[] orari = info[1].split("-");
         orarioI = LocalTime.parse(orari[1], timeFormatter);
+
         switch (tipologia) {
 
             case "libera":
@@ -282,6 +283,7 @@ public class PHPRequestHandler {
             default:
                 break;
         }
+
         Prenotazione p = new Prenotazione();
         p.prenotazione(cf,tipologia, dataG, orarioI,clientSocket);
     }
