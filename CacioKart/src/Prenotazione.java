@@ -1,10 +1,8 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class Prenotazione {
     private String SELECT, INSERT[];

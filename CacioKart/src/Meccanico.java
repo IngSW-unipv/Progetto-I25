@@ -1,5 +1,4 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +21,6 @@ public class Meccanico {
     public Meccanico() {
 
     }
-
-    //aggiunta kart noleggio??
-    //interfaccia rimozione kart
-    //Override metodi Iinventario
 
     public void aggiornamentoManutenzione(String targa, String text, double prezzo, Socket clientSocket) {
         db = new DBConnector();

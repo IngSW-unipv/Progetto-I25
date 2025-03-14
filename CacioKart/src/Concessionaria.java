@@ -3,8 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Concessionaria {
-    //List<Kart> kart;
-    //List<Pezzo> pezzi;
+
     private DBConnector db;
     private PHPResponseHandler responder;
     private String INSERT, SELECT, idProdotto, tipol, quantita, prezzo, ultimoProdotto;
@@ -12,18 +11,9 @@ public class Concessionaria {
     private List<Map<String, Object>> maxIDProdotto, pezzi;
     private StringBuilder listaPezzi = new StringBuilder();
 
-    public Concessionaria(/*List<Pezzo> pezzi, List<Kart> kart*/) {
-        //this.pezzi = pezzi;
-        //this.kart = kart;
-    }
-
-    //Override metodi Iinventario
-
-    public void venditaKart() {
+    public Concessionaria() {
 
     }
-
-    ;
 
     /**
      * Metodo per inserire i kart nella concessionaria.

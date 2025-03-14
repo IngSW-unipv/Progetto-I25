@@ -1,11 +1,10 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 
-public class Socio extends Persona implements Iinventario {
+public class Socio extends Persona {
     private String SELECT, UPDATE, INSERT;
     private PHPResponseHandler responder;
     private int queryIndicator;
@@ -19,8 +18,6 @@ public class Socio extends Persona implements Iinventario {
     public Socio() {
 
     }
-
-    //metodo classifica gara?
 
     /**
      * Metodo per registrare un utente nel db
