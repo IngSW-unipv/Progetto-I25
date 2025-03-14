@@ -58,7 +58,7 @@ require_once 'logic/mostraSoci.php';
                 echo '  <td>' . htmlspecialchars($columns[1]) . '</td>';
                 echo '  <td>' . htmlspecialchars($columns[2]) . '</td>';
                 echo '  <td>';
-                echo '    <form action="logic/aggiungiGaraCampionato.php" method="post">';
+                echo '    <form action="logic/aggiungiSociGaraSecca.php" method="post">';
                 echo '      <input type="hidden" name="CF" value="'. htmlspecialchars($columns[0]) .'">';
 
                 echo '      <button type="submit">Aggiungi Pilota</button>';

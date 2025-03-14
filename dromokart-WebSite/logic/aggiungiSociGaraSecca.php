@@ -5,15 +5,15 @@
 
 $socket = connectionOpen($address, $port);
 
-$nome = $_POST['nome'];
-$idGara = $_POST['idGara'];
+$CF = $_POST['CF'];
+$IdPrenotazione = $_POST['IdPrenotazione'];
 
 
     //invio codice gara libera
-    fwrite($socket, "inserimentoTeamGara ");
+    fwrite($socket, "inserimentoSociGara ");
     //invio dati
-    fwrite($socket, $nome . " ");
-    fwrite($socket, $idGara . "\n");
+    fwrite($socket, $CF . " ");
+    fwrite($socket, $IdPrenotazione . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 
