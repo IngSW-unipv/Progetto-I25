@@ -3,10 +3,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebConnector {
-    int porta = 50000;
-    private PHPRequestHandler requestHandler;
-    private Socket clientSocket;
-    private ServerSocket serverSocket;
+    private final int porta = 50000;
+    private final PHPRequestHandler requestHandler;
 
     /**
      * Costruttore della classe.
@@ -24,6 +22,9 @@ public class WebConnector {
      * chiude il socket e ne riapre un altro.
      */
     public void createServer() {
+        Socket clientSocket;
+        ServerSocket serverSocket;
+
         try {
             System.out.println("Creazione server...");
             serverSocket = new ServerSocket(porta);
@@ -36,6 +37,7 @@ public class WebConnector {
                 clientSocket.close();
 
             }
+
         } catch (IOException e) {
             System.out.println("Impossibile aprire il socket: " + e.getMessage());
             throw new RuntimeException(e);

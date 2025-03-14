@@ -1,5 +1,4 @@
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,32 +7,25 @@ public class Proprietario {
     private PHPResponseHandler responder;
     private String INSERT, SELECT, DELETE;
     private int queryIndicator;
-    private List<Map<String, Object>> dipendenti;
-    private String cf, nome, cognome;
-    private StringBuilder listaDipen = new StringBuilder();
 
     public Proprietario() {
 
     }
 
-    public void visioneBilancio() {
-
-    }
-
-    ;
-
     /**
      * Metodo per mostrare i dipendenti.
      * Identico al metodo presente in Kart per mostrare tutti i kart.
      *
-     * @param clientSocket
-     * @throws SQLException
+     * @param clientSocket Socket per inviare la risposta
      */
     public void mostraDipendenti(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_DIPENDENTI_PROPRIETARIO.getQuery();
-        dipendenti = db.executeReturnQuery(SELECT);
+        List<Map<String, Object>> dipendenti = db.executeReturnQuery(SELECT);
+
+        StringBuilder listaDipen = new StringBuilder();
+        String cf, nome, cognome;
 
         if (dipendenti != null) {
             for (Map<String, Object> row : dipendenti) {
@@ -55,9 +47,8 @@ public class Proprietario {
      * Pressoché identico al metodo presente in Kart per aggiungere i kart,
      * tranne la gestione dei ruoli tramite l'ENUM Ruoli
      *
-     * @param nuovoDip
-     * @param clientSocket
-     * @throws SQLException
+     * @param nuovoDip Il dipendente da aggiungere
+     * @param clientSocket Socket per inviare la risposta
      */
     public void aggiuntaDipendente(Dipendente nuovoDip, Socket clientSocket) {
         db = new DBConnector();
@@ -78,15 +69,12 @@ public class Proprietario {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 
-    ;
-
     /**
      * Metodo per rimuovere i dipendenti.
      * Identico al metodo presente in Kart per rimuovere i kart.
      *
-     * @param d
-     * @param clientSocket
-     * @throws SQLException
+     * @param d Il dipendente da rimuovere
+     * @param clientSocket Socket per inviare la risposta
      */
     public void rimozioneDipendenti(Dipendente d, Socket clientSocket) {
         db = new DBConnector();

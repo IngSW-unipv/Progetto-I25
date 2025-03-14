@@ -3,13 +3,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-
 public class Socio extends Persona {
     private String SELECT, UPDATE, INSERT;
     private PHPResponseHandler responder;
     private int queryIndicator;
     private DBConnector db;
-    private String[] querys;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -23,7 +21,7 @@ public class Socio extends Persona {
      * Metodo per registrare un utente nel db
      * La query viene eseguita tramite il metodo sendResponse della classe DBConnector
      *
-     * @param clientSocket
+     * @param clientSocket, Socket per rispondere al client
      */
     public void registrazione(Socket clientSocket) {
         db = new DBConnector();
@@ -53,7 +51,7 @@ public class Socio extends Persona {
         }
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
-        System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
+        //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
         INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
@@ -66,7 +64,7 @@ public class Socio extends Persona {
 
         UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
         INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDate.now());
-        querys = new String[2];
+        String[] querys = new String[2];
         querys[0] = UPDATE;
         querys[1] = INSERT;
 
