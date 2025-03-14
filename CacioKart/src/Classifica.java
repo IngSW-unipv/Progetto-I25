@@ -97,12 +97,12 @@ public class Classifica {
         }
     }
 
-    public void classificaPenalità(String query, Socket clientSocket) {
+    public void classificaPenalità(String idGara, Socket clientSocket) {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
 
         // Esecuzione della query
-        result = getClassifica(query);
+        result = getClassifica(Query.MOSTRA_CLASSIFICA_PENALITA.getQuery(idGara));
 
         classifica = new StringBuilder();
 

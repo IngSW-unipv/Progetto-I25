@@ -41,9 +41,9 @@ public class Organizzatore {
         System.out.println("Nome dei soci: " + t.getSoci());
 
         INSERT_ITERATOR = new String[3];
-        INSERT_ITERATOR[0] = "INSERT INTO caciokart.team (nome, colore) VALUES ('" + t.getNome() + "', '" + t.getColore() + "')";
-        INSERT_ITERATOR[1] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[0].getCf() + "', '" + t.getNome() + "')";
-        INSERT_ITERATOR[2] = "INSERT INTO caciokart.appartenenza (socio, nome) VALUES ('" + t.getSoci()[1].getCf() + "', '" + t.getNome() + "'); ";
+        INSERT_ITERATOR[0] = Query.CREA_TEAM_TABELLA_TEAM.getQuery(t.getNome(), t.getColore());
+        INSERT_ITERATOR[1] = Query.CREA_TEAM_TABELLA_APPARTENENZA.getQuery(t.getSoci()[0].getCf(), t.getNome());
+        INSERT_ITERATOR[2] = Query.CREA_TEAM_TABELLA_APPARTENENZA.getQuery(t.getSoci()[1].getCf(), t.getNome());
 
         for (String team : INSERT_ITERATOR) {
             queryIndicator = db.executeUpdateQuery(team);
@@ -87,7 +87,7 @@ public class Organizzatore {
         }
     }
 
-    public void mostraCamp(String query, Socket clientSocket) {
+    public void mostraCampionato(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
         db = new DBConnector();
         result = db.executeReturnQuery(query);
@@ -109,7 +109,7 @@ public class Organizzatore {
     public void mostraGareInserimento(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT g.idGara , g.ora FROM garas g WHERE NOT EXISTS ( SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara );";
+        SELECT = Query.MOSTRA_GARE_INSERIMENTO.getQuery();
 
         gare = db.executeReturnQuery(SELECT);
         listaGare = new StringBuilder();
@@ -133,9 +133,7 @@ public class Organizzatore {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        INSERT = "INSERT INTO partecipa (idGara, idCampionato) VALUES ('" +
-                idGara + "', '" +
-                idCamp + "')";
+        INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idGara, idCamp);
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 

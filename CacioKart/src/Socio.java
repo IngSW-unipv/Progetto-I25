@@ -67,8 +67,8 @@ public class Socio extends Persona implements Iinventario {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" + p.getIdProdotto() + "'";
-        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + this.getCf() + "', '" + p.getIdProdotto() + "', '" + LocalDate.now() + "')";
+        UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
+        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDate.now());
         querys = new String[2];
         querys[0] = UPDATE;
         querys[1] = INSERT;

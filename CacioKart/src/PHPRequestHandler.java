@@ -131,7 +131,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_GARA:
-                    mostraGaraCase(info,clientSocket);
+                    mostraGaraPenalitàCase(info,clientSocket);
                     break;
 
                 case AGGIUNGI_PENALITA:
@@ -320,7 +320,7 @@ public class PHPRequestHandler {
      */
     private void mostraAggiuntaKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
-        query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery();
+        query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO_SOCIO.getQuery();
         m.mostraKart(query,clientSocket);
     }
 
@@ -428,6 +428,7 @@ public class PHPRequestHandler {
         String text = mex[2];
         double prezzo = Double.parseDouble(mex[1]);
         LocalDate today = LocalDate.now();
+
         /* query = "SELECT " +
                 "    m.idM, " +
                 "    e.targa, " +
@@ -438,6 +439,7 @@ public class PHPRequestHandler {
                 "RIGHT JOIN caciokart.kart e ON m.targa = e.targa " +
                 "WHERE m.dataM IS NULL OR DATEDIFF('" + today + "', m.dataM) > 180 " +
                 "GROUP BY m.idM, e.targa, m.tipoInt, m.costo;";*/
+
         m.aggiornamentoManutenzione(targa,text,prezzo, clientSocket);
     }
 
@@ -446,35 +448,37 @@ public class PHPRequestHandler {
         c.mostraPezzo(clientSocket);
     }
 
-    private void mostraGaraCase(String idGara, Socket clientSocket) {
+    private void mostraGaraPenalitàCase(String idGara, Socket clientSocket) {
         Classifica c = new Classifica();
-        query = "SELECT * FROM caciokart.classifica WHERE idGara = '" + idGara + "'";
-        c.classificaPenalità(query, clientSocket);
+        c.classificaPenalità(idGara, clientSocket);
     }
 
     private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) {
         //socio idgara tempo
         String[] info = messaggio.split(" ");
-        String cf = info[0];
+        Socio s = new Socio();
+        s.setCf(info[0]);
         String idGara = info[1];
         LocalTime penalità = LocalTime.parse(info[2], DateTimeFormatter.ofPattern("HH:mm:ss"));
         //Metodo in arbitro per inserire le penalità
         Arbitro a = new Arbitro();
-        a.inserimentoPenalita(cf, idGara, penalità, clientSocket);
+        a.inserimentoPenalita(s, idGara, penalità, clientSocket);
     }
 
     private void aggiungiPezziCase(String messaggio, Socket clientSocket) {
         //idPezzo quantità
         String[] info = messaggio.split(" ");
-        String idPezzo = info[0];
-        String quantità = info[1];
+        Pezzo p = new Pezzo();
+        p.setIdProdotto(info[0]);
+        p.setQuantita(Integer.parseInt(info[1]));
+
         Concessionaria c = new Concessionaria();
-        c.inserimentoPezzo(idPezzo, quantità, clientSocket);
+        c.inserimentoPezzo(p, clientSocket);
     }
 
     private void mostraSociCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        query = "SELECT socio, nome, cognome FROM caciokart.socio WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)";
+        query = Query.MOSTRA_SOCI_INSERIMENTO_CAMPIONATO.getQuery();
         o.mostraSociInserimento(query, clientSocket);
     }
 
@@ -493,8 +497,8 @@ public class PHPRequestHandler {
 
     private void mostraCampionato(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        query =  "SELECT idCampionato FROM caciokart.campionato";
-        o.mostraCamp(query, clientSocket);
+        query = Query.MOSTRA_CAMPIONATI.getQuery();
+        o.mostraCampionato(query, clientSocket);
     }
 
     private void selezionaGaraCampionato(Socket clientSocket) {
@@ -506,7 +510,7 @@ public class PHPRequestHandler {
         Organizzatore o = new Organizzatore();
         //nome colore cf1 cf2
         String[] team = messaggio.split(" ");
-        //Usare oggetto di tipo team
+
         Team t = new Team(team[0], team[1], team[2], team[3]);
         o.creaTeam(t, clientSocket);
     }
@@ -523,13 +527,13 @@ public class PHPRequestHandler {
 
     private void mostraPrenotazione(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        query = "SELECT  idP FROM prenotazione WHERE dataG>curdate();";
+        query = Query.MOSTRA_PRENOTAZIONE.getQuery();
         o.mostraPren(query, clientSocket);
     }
 
     private void selezionaSocio(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        query = "SELECT socio, nome, cognome FROM socio";
+        query = Query.SELEZIONA_SOCIO.getQuery();
         o.mostraSociInserimento(query, clientSocket);
     }
 }

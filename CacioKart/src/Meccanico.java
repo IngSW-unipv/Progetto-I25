@@ -33,19 +33,15 @@ public class Meccanico {
         String idM;
         //kart = db.executeReturnQuery(SELECT);
 
-        SELECT = "SELECT COALESCE(MAX(idM), '0') FROM manutenzione";
+        SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
         idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
         //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
+
         idM = String.valueOf(Integer.parseInt(idM) + 1);
 
-        System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
+        //System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
 
-        INSERT = "INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES ('" +
-                idM + "', '" +
-                text + "', " +
-                prezzo + ", '" +
-                LocalDate.now() + "', '" +
-                targa + "')";
+        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));

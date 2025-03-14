@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public enum Query {
 
     LOGIN_SOCIO("SELECT * FROM caciokart.socio WHERE socio = '%s' AND passw = '%S'"),
@@ -49,7 +51,7 @@ public enum Query {
     INSERIMENTO_KART_MECCANICO("DELETE FROM caciokart.concessionaria " +
             "WHERE tipol = '%s'"),
 
-    MOSTRA_AGGIUNTA_KART_MECCANICO("SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
+    MOSTRA_AGGIUNTA_KART_MECCANICO_SOCIO("SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
             "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
             "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)"),
 
@@ -89,6 +91,51 @@ public enum Query {
             "WHERE tipol = '%s'"),
 
     ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) VALUES('%s', '%s', '%s')"),
+
+    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') FROM manutenzione"),
+
+    AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) " +
+            "VALUES ('%s', '%s', '%s', '%s', '%s')"),
+
+    MOSTRA_PEZZI_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'"),
+
+    MOSTRA_CLASSIFICA_PENALITA("SELECT * FROM caciokart.classifica WHERE idGara = '%s'"),
+
+    INSERIMENTO_PENALITA_ARBITRO("UPDATE caciokart.classifica " +
+            "SET tempTot = ADDTIME(tempTot, '%s') " +
+            "WHERE idGara = '%s' AND socio  = '%s'"),
+
+    INSERIMENTO_NUOVI_PEZZI("UPDATE caciokart.concessionaria " +
+            "SET quantita = quantita + %s + " +
+            "WHERE idProdotto = '%s'"),
+
+    MOSTRA_SOCI_INSERIMENTO_CAMPIONATO("SELECT socio, nome, cognome FROM caciokart.socio " +
+            "WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)"),
+
+    ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA("UPDATE concessionaria " +
+            "SET quantita = quantita - 1 " +
+            "WHERE idProdotto = '%s'"),
+
+    ACQUISTA_PEZZI_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) " +
+            "VALUES('%s', '%s', '%s')"),
+
+    MOSTRA_CAMPIONATI("SELECT idCampionato FROM caciokart.campionato"),
+
+    MOSTRA_GARE_INSERIMENTO("SELECT g.idGara, g.ora FROM garas g " +
+            "WHERE NOT EXISTS (SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara)"),
+
+    CREA_TEAM_TABELLA_TEAM("INSERT INTO caciokart.team (nome, colore) " +
+            "VALUES ('%s', '%s')"),
+
+    CREA_TEAM_TABELLA_APPARTENENZA("INSERT INTO caciokart.appartenenza (socio, nome) " +
+            "VALUES ('%s', '%s')"),
+
+    AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("INSERT INTO partecipa (idGara, idCampionato) " +
+            "VALUES ('%s', '%s')"),
+
+    MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > urdate()"),
+
+    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio")
     ;
 
     private final String query;

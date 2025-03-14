@@ -70,7 +70,7 @@ public class Concessionaria {
     public void mostraPezzo(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'";
+        SELECT = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
         pezzi = db.executeReturnQuery(SELECT);
 
         if (pezzi != null) {
@@ -89,10 +89,10 @@ public class Concessionaria {
         }
     }
 
-    public void inserimentoPezzo(String idPezzo, String quantita, Socket clientSocket) {
+    public void inserimentoPezzo(Pezzo p, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = "UPDATE caciokart.concessionaria SET quantita = quantita + " + quantita + " WHERE idProdotto = '" + idPezzo + "'";
+        INSERT = Query.INSERIMENTO_NUOVI_PEZZI.getQuery(p.getQuantita(), p.getIdProdotto());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }

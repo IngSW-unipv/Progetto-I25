@@ -12,10 +12,10 @@ public class Arbitro {
 
     }
 
-    public void inserimentoPenalita(String cf, String idGara, LocalTime penalità, Socket clientSocket) {
+    public void inserimentoPenalita(Socio s, String idGara, LocalTime penalità, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        UPDATE = "UPDATE caciokart.classifica SET tempTot = ADDTIME(tempTot, '" + penalità + "') WHERE idGara = '" + idGara + "' AND socio  = '" + cf + "'";
+        UPDATE = Query.INSERIMENTO_PENALITA_ARBITRO.getQuery(penalità, idGara, s.getCf());
 
         queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
