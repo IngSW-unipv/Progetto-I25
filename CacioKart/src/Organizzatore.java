@@ -162,7 +162,7 @@ public class Organizzatore {
     public void aggiornaPrenota(String idP, String socio, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idP, socio, LocalDate.now());
+        INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, socio, LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }

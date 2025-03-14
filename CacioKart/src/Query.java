@@ -135,7 +135,12 @@ public enum Query {
 
     MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > curdate()"),
 
-    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio");
+    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio"),
+
+    INSERIMENTO_SOCIO_GARA("INSERT INTO prenota (idP, socio, data) " +
+            "VALUES('%s', '%s', '%s')")
+
+    ;
 
     private final String query;
 
