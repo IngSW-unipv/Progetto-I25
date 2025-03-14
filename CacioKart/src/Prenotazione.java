@@ -54,7 +54,7 @@ public class Prenotazione {
                 SELECT="SELECT dip FROM caciokart.dipendente";
                 result=db.executeReturnQuery(SELECT);
                 if (result.contains(cf)){
-                    cf="null";
+                    cf=null;
                     INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                             idPrenotazione + "', '" +
                             dataGara + "', '" +
