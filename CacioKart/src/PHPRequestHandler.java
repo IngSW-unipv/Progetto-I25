@@ -170,6 +170,10 @@ public class PHPRequestHandler {
                     selezionaSocio(clientSocket);
                     break;
 
+                case INSERIMENTO_SOCI_GARA:
+                    aggiornamentoPrenota(info, clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -542,5 +546,14 @@ public class PHPRequestHandler {
         Organizzatore o = new Organizzatore();
         query = Query.SELEZIONA_SOCIO.getQuery();
         o.mostraSociInserimento(query, clientSocket);
+    }
+
+    private void aggiornamentoPrenota(String messaggio, Socket clientSocket) {
+        Organizzatore  o = new Organizzatore();
+
+        String[] info = messaggio.split(" ");
+        String idP = info[0];
+        String socio = info[1];
+        o.aggiornaPrenota(idP, socio, clientSocket);
     }
 }

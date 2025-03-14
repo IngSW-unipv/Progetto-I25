@@ -1,4 +1,5 @@
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -156,6 +157,14 @@ public class Organizzatore {
         } else {
             responder.sendResponse(clientSocket, "end");
         }
+    }
+
+    public void aggiornaPrenota(String idP, String socio, Socket clientSocket) {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idP, socio, LocalDate.now());
+        queryIndicator = db.executeUpdateQuery(INSERT);
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
 }
 
