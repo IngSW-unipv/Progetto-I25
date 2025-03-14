@@ -21,6 +21,8 @@ public class Organizzatore {
     private String ora;
     private StringBuilder listaGare;
     private String INSERT;
+    private StringBuilder prenotazione;
+    private String idP;
 
     public Organizzatore() {
 
@@ -139,5 +141,26 @@ public class Organizzatore {
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 
     }
+
+    public void mostraPren(String query, Socket clientSocket) {
+        responder = new PHPResponseHandler();
+        db = new DBConnector();
+        result = db.executeReturnQuery(query);
+        prenotazione = new StringBuilder();
+
+        if (result != null) {
+            for (Map<String, Object> row : result) {
+                idP = row.get("idP").toString();
+                prenotazione.append(idP).append("\n");
+            }
+            prenotazione.append("end");
+            responder.sendResponse(clientSocket, prenotazione.toString());
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+
 }
 

@@ -162,6 +162,10 @@ public class PHPRequestHandler {
                    aggiungiGaraCampionato(info, clientSocket);
                    break;
 
+                case RICHIESTA_GARA_SECCA:
+                    mostraPrenotazione(clientSocket);
+                    break;
+
                 default:
                     break;
             }
@@ -512,4 +516,9 @@ public class PHPRequestHandler {
         o.aggiungiGaraPartecipa(idGara, idCamp, clientSocket);
     }
 
+    private void mostraPrenotazione(Socket clientSocket) {
+        Organizzatore o = new Organizzatore();
+        query = "SELECT  idP FROM prenotazione WHERE dataG>curdate();";
+        o.mostraPren(query, clientSocket);
+    }
 }
