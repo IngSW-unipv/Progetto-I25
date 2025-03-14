@@ -51,7 +51,6 @@ public class Prenotazione {
                 result = db.executeReturnQuery(SELECT);
 
                 if (result.contains(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
-                    cf = "null";
 
                     INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                             idPrenotazione + "', '" +
@@ -61,8 +60,7 @@ public class Prenotazione {
                             costo + "')";
 
                     INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
-                            idPrenotazione + "', '" +
-                            (cf == null ? "NULL" : "'" + cf + "'") + "', '" +
+                            idPrenotazione + "', 'NULL', '" +
                             dataO + "')";
 
                 } else {
