@@ -69,8 +69,7 @@ public class Organizzatore {
     public void mostraSociInserimento(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        SELECT = "SELECT socio, nome, cognome FROM caciokart.socio WHERE socio.socio NOT IN (SELECT socio FROM appartenenza)";
-        soci = db.executeReturnQuery(SELECT);
+        soci = db.executeReturnQuery(query);
         listaUtenti = new StringBuilder();
 
         if (soci != null) {
