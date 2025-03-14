@@ -58,7 +58,7 @@ public class Socio extends Persona implements Iinventario {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = "INSERT INTO acquista (socio, idProdotto) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "')";
+        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + cf + "', '" + idProdotto.toString().replaceAll("\\D", "") + "','" + LocalDate.now() +")";
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
@@ -69,7 +69,7 @@ public class Socio extends Persona implements Iinventario {
         responder = new PHPResponseHandler();
 
         UPDATE = "UPDATE concessionaria SET quantita = quantita - 1 WHERE idProdotto ='" + p.getIdProdotto() + "'";
-        INSERT = "INSERT INTO acquista (socio, idProdotto) VALUES('" + this.getCf() + "', '" + p.getIdProdotto() + "')";
+        INSERT = "INSERT INTO acquista (socio, idProdotto, data) VALUES('" + this.getCf() + "', '" + p.getIdProdotto() + "', '" + LocalDate.now() + ")";
         querys = new String[2];
         querys[0] = UPDATE;
         querys[1] = INSERT;

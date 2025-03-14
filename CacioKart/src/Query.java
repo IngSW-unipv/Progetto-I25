@@ -71,6 +71,7 @@ public enum Query {
             "FROM caciokart.kart k " +
             "LEFT JOIN caciokart.manutenzione m ON k.targa = m.targa " +
             "GROUP BY k.targa;"),
+
     AGGIUNTA_DIPENDENTE_PROPRIETARIO("INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) " +
             "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"),
 
