@@ -134,7 +134,7 @@ public class Organizzatore {
 
         INSERT = "INSERT INTO partecipa (idGara, idCampionato) VALUES ('" +
                 idGara + "', '" +
-                idCampionato + "')";
+                idCamp + "')";
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
 

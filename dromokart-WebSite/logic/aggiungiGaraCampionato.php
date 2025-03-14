@@ -27,7 +27,7 @@
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: transazioneCorretta.php');
+        header('Location: ../inserimentoCampionato.php');
         die();
     }
 ?>
