@@ -88,20 +88,21 @@ public class Proprietario {
     public void bilancio(Socket clientSocket){
     db = new DBConnector();
     responder = new PHPResponseHandler();
+    INSERT_ITERATOR=new String[3];
 
     // QUERY PER L' ENTRATE
     INSERT_ITERATOR[0]= "SELECT " +
-            "    (SELECT SUM(c.quantita * c.prezzo) AS ENTRATE " +
-            "     FROM acquista a " +
-            "     JOIN concessionaria c ON a.idprodotto = c.idprodotto)  " +
+            "    COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+            "              FROM acquista a " +
+            "              JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)" +
             "    +" +
-            "    (SELECT SUM(costo) FROM prenotazione) AS ENTRATE" +
+            "    COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
             "    +" +
-            "    (SELECT SUM(costo) FROM manutenzione) AS ENTRATE " +
-            "    AS ENTRATE; ";
+            "    COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
+            "    AS ENTRATE;";
 
     //QUERY PER LE USCITE
-    INSERT_ITERATOR[1]="SELECT SUM(stipendio) AS USCITE FROM dipendenti;";
+    INSERT_ITERATOR[1]="SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendenti;";
 
     // QUERY PEER IL SALDO TOTALE
     INSERT_ITERATOR[2]="SELECT " +
