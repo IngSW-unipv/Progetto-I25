@@ -51,6 +51,7 @@ public enum TipoComandi {
 
     //PROPRIETARIO
 
+    MOSTRA_BILANCIO("mostraBilancio"),
     REGISTRAZIONE_DIPENDENTE("registrazioneDipen"),
     ELIMINA_DIPENDENTE("eliminaDipen"),
     RICHIESTA_DIPENDENTE("richiestaDipen");
