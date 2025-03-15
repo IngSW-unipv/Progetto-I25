@@ -95,7 +95,7 @@ public class Proprietario {
     INSERT_ITERATOR[0]= "SELECT " +
             "    COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
             "              FROM acquista a " +
-            "              JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)" +
+            "              JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
             "    +" +
             "    COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
             "    +" +
@@ -128,7 +128,7 @@ public class Proprietario {
             }
         }
 
-        responder.sendResponse(clientSocket, result.toString());
+        responder.sendResponse(clientSocket, result.toString().trim().replaceAll("[{}\\[\\]]", "").replaceAll("ENTRATE=", "").replaceAll("USCITE=", "").replaceAll("TOTALE=", ""));
 
     }
 }
