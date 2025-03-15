@@ -12,6 +12,8 @@ include 'default/footerConce.php';
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
   <link rel="stylesheet" href="css/profilo.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/registration.css">
 </head>
   <!-- Header -->
   <header>
@@ -31,6 +33,10 @@ include 'default/footerConce.php';
   </header>
 
   <body>
+    <section class="hero">
+        <h1>Benvenuti nella pagina del bilancio</h1>
+    </section>
+
     <div class="table-section">
         <?php
         require 'logic/requestData.php';
