@@ -8,6 +8,7 @@ public class Proprietario {
     private String INSERT, SELECT, DELETE;
     private int queryIndicator;
     private String[] INSERT_ITERATOR;
+    private List<Map<String, Object>> result;
 
     public Proprietario() {
 
@@ -118,15 +119,15 @@ public class Proprietario {
             "    AS SALDO; ";
 
         for (String saldo : INSERT_ITERATOR) {
-            queryIndicator = db.executeUpdateQuery(saldo);
-
-            if (queryIndicator == 0) {
-                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            result = db.executeReturnQuery(saldo);
+            if (result.isEmpty()) {
+                responder.sendResponse(clientSocket, "0");
                 return;
             }
         }
 
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, result.toString());
+
     }
 }
 
