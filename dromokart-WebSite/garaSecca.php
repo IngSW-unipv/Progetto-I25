@@ -6,11 +6,7 @@ include 'default/headerProfilo.php';  // Se hai un header personalizzato
 include 'default/footerHome.php';     // Se hai un footer
 require 'logic/controlloLogin.php';   // Controllo login (opzionale)
 
-// 1) Ricevi l'idGara passato dal form
 $IdPrenotazione = isset($_POST['IdPrenotazione']) ? $_POST['IdPrenotazione'] : '';
-
-// 2) Includi il file con la funzione che richiama il server Java
-require_once 'logic/mostraSoci.php';
 
 ?>
 
@@ -27,6 +23,8 @@ require_once 'logic/mostraSoci.php';
 
   <div class="table-section">
     <?php
+    require 'logic/requestData.php';
+    $res = request("mostraSoci", $socket);
     // 4) Analizzo la risposta $res
     // Suddivido in righe usando "explode"
     $rows = explode("\n", trim($res));

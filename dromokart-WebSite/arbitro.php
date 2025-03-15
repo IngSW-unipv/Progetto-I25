@@ -2,7 +2,6 @@
 include 'default/headerProfilo.php';     // Header personalizzato per la sezione
 include 'default/footerHome.php';        // Footer del sito
 require 'logic/controlloLogin.php';      // Verifica se l'utente è loggato
-require 'logic/richiestaGare.php';       // Riempie la variabile $res con i dati delle gare
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +23,8 @@ require 'logic/richiestaGare.php';       // Riempie la variabile $res con i dati
 
   <div class="table-section">
     <?php
+    require 'logic/requestData.php';
+    $res = request("richiestaClassAr", $socket);
     // Suddivido $res per righe
     $rows = explode("\n", $res);
 

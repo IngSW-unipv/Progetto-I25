@@ -16,6 +16,8 @@
 <body>
   <div class="table-section">
     <?php
+    require 'logic/requestData.php';
+    $res = request("mostraKartManutenzione", $socket);
     // Suddivide $res in righe
     $rows = explode("\n", $res);
     

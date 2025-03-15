@@ -1,7 +1,6 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
 <?php require 'logic/controlloLogin.php'; ?>
-<?php include 'logic/mostrakartAggiunta.php'; ?>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -18,6 +17,8 @@
 <body>
     <div class="table-section">
         <?php
+        require 'logic/requestData.php';
+        $res = request("mostraKartAggiunta", $socket);
         // Suddivide $res in righe
         $rows = explode("\n", $res);
         
