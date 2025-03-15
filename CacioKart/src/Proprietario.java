@@ -103,7 +103,7 @@ public class Proprietario {
             "    AS ENTRATE;";
 
     //QUERY PER LE USCITE
-    INSERT_ITERATOR[1]="SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendenti;";
+    INSERT_ITERATOR[1]="SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
 
     // QUERY PEER IL SALDO TOTALE
     INSERT_ITERATOR[2]="SELECT " +
@@ -115,7 +115,7 @@ public class Proprietario {
             "    +" +
             "    COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
             "    -" +
-            "    COALESCE((SELECT SUM(stipendio) FROM dipendenti), 0)" +
+            "    COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
             "    AS SALDO; ";
 
         for (String saldo : INSERT_ITERATOR) {
