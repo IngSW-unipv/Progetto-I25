@@ -106,17 +106,19 @@ public class Proprietario {
     INSERT_ITERATOR[1]="SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
 
     // QUERY PEER IL SALDO TOTALE
-    INSERT_ITERATOR[2]="SELECT " +
-            "    COALESCE((SELECT SUM(a.quantita * c.prezzo) " +
-            "              FROM acquista a " +
-            "              JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)" +
-            "    +" +
-            "    COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
-            "    +" +
-            "    COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
-            "    -" +
-            "    COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
-            "    AS SALDO; ";
+    INSERT_ITERATOR[2]="""
+            SELECT 
+                COALESCE((SELECT SUM(c.prezzo) 
+                          FROM acquista a 
+                          JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)
+                +
+                COALESCE((SELECT SUM(costo) FROM prenotazione), 0)
+                +
+                COALESCE((SELECT SUM(costo) FROM manutenzione), 0)
+                -
+                COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)
+                AS SALDO;
+            """;
 
         for (String saldo : INSERT_ITERATOR) {
             result = db.executeReturnQuery(saldo);
