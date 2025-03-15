@@ -13,6 +13,7 @@ public class PHPRequestHandler {
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private String query;
+    Proprietario p;
 
     public PHPRequestHandler() {
     }
@@ -173,7 +174,10 @@ public class PHPRequestHandler {
                 case INSERIMENTO_SOCI_GARA:
                     aggiornamentoPrenota(info, clientSocket);
                     break;
-
+                case MOSTRA_BILANCIO:
+                    p=new Proprietario();
+                    p.bilancio(clientSocket);
+                    break;
                 default:
                     break;
             }

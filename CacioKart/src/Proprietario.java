@@ -7,6 +7,7 @@ public class Proprietario {
     private PHPResponseHandler responder;
     private String INSERT, SELECT, DELETE;
     private int queryIndicator;
+    private String[] INSERT_ITERATOR;
 
     public Proprietario() {
 
@@ -83,4 +84,48 @@ public class Proprietario {
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
     }
+
+    public void bilancio(Socket clientSocket){
+    db = new DBConnector();
+    responder = new PHPResponseHandler();
+
+    // QUERY PER L' ENTRATE
+    INSERT_ITERATOR[0]= "SELECT " +
+            "    (SELECT SUM(c.quantita * c.prezzo) AS ENTRATE " +
+            "     FROM acquista a " +
+            "     JOIN concessionaria c ON a.idprodotto = c.idprodotto)  " +
+            "    +" +
+            "    (SELECT SUM(costo) FROM prenotazione) AS ENTRATE" +
+            "    +" +
+            "    (SELECT SUM(costo) FROM manutenzione) AS ENTRATE " +
+            "    AS ENTRATE; ";
+
+    //QUERY PER LE USCITE
+    INSERT_ITERATOR[1]="SELECT SUM(stipendio) AS USCITE FROM dipendenti;";
+
+    // QUERY PEER IL SALDO TOTALE
+    INSERT_ITERATOR[2]="SELECT " +
+            "    COALESCE((SELECT SUM(a.quantita * c.prezzo) " +
+            "              FROM acquista a " +
+            "              JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)" +
+            "    +" +
+            "    COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
+            "    +" +
+            "    COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
+            "    -" +
+            "    COALESCE((SELECT SUM(stipendio) FROM dipendenti), 0)" +
+            "    AS SALDO; ";
+
+        for (String saldo : INSERT_ITERATOR) {
+            queryIndicator = db.executeUpdateQuery(saldo);
+
+            if (queryIndicator == 0) {
+                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                return;
+            }
+        }
+
+        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+    }
 }
+
