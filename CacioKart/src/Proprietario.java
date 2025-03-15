@@ -128,7 +128,7 @@ public class Proprietario {
             }
         }
 
-        responder.sendResponse(clientSocket, result.toString().trim().replaceAll("[{}\\[\\]]", "").replaceAll("ENTRATE=", "").replaceAll("USCITE=", "").replaceAll("TOTALE=", ""));
+        responder.sendResponse(clientSocket, result.toString().trim().replaceAll("[{}\\[\\]],", "").replaceAll("ENTRATE=", "").replaceAll("USCITE=", "").replaceAll("SALDO=", "").replaceAll(", ", " ").replaceAll("^,|,$", ""));
 
     }
 }
