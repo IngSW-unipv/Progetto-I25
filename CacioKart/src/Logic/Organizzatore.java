@@ -14,31 +14,16 @@ public class Organizzatore {
     private PHPResponseHandler responder;
     private String SELECT;
     private List<Map<String, Object>> soci;
-    private String cf;
-    private String nome;
-    private String cognome;
-    private StringBuilder listaUtenti;
     private String[] INSERT_ITERATOR;
     private String queryIndicator;
-    private StringBuilder campionato;
-    private String idCampionato;
     private List<Map<String, Object>> result;
     private List<Map<String, Object>> gare;
-    private String idGara;
-    private String ora;
-    private StringBuilder listaGare;
     private String INSERT;
-    private StringBuilder prenotazione;
-    private String idP;
     private TableMaker maker;
 
     public Organizzatore() {
 
     }
-
-    public void creaGara(){
-
-    };
 
     public void creaTeam(Team t, Socket clientSocket) {
         db = new DBConnector();
@@ -65,20 +50,10 @@ public class Organizzatore {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    public void creaCampionato() {
-
-    }
-
-    //solo gara campionato??
-    public void inserimentoGara() {
-
-    }
-
     public void mostraSociInserimento(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         soci = db.executeReturnQuery(query);
-        listaUtenti = new StringBuilder();
 
         if (soci != null) {
             maker = new TableMaker();
@@ -93,7 +68,6 @@ public class Organizzatore {
         responder = new PHPResponseHandler();
         db = new DBConnector();
         result = db.executeReturnQuery(query);
-        campionato = new StringBuilder();
 
         if (result != null) {
             maker = new TableMaker();
@@ -110,7 +84,6 @@ public class Organizzatore {
         SELECT = Query.MOSTRA_GARE_INSERIMENTO.getQuery();
 
         gare = db.executeReturnQuery(SELECT);
-        listaGare = new StringBuilder();
 
         if (gare != null) {
             maker = new TableMaker();
@@ -135,7 +108,6 @@ public class Organizzatore {
         responder = new PHPResponseHandler();
         db = new DBConnector();
         result = db.executeReturnQuery(query);
-        prenotazione = new StringBuilder();
 
         if (result != null) {
             maker = new TableMaker();

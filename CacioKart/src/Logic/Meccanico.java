@@ -14,15 +14,8 @@ public class Meccanico {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT, DELETE, UPDATE, INSERT;
-    private StringBuilder listaKart;
-
-    //DEVE DIVENTARE UN KART
-    private String targa;
-    private String cilindrata;
-    private String serbatoio;
-
+    private TableMaker maker;
     private String queryIndicator;
-    private String ultimaManutenzione;
 
     public Meccanico() {
 
@@ -73,7 +66,7 @@ public class Meccanico {
         kart = db.executeReturnQuery(query);
 
         if (kart != null) {
-            TableMaker maker = new TableMaker();
+            maker = new TableMaker();
             responder.sendResponse(clientSocket,  maker.stringTableMaker(kart, "targa", "cilindrata", "serbatoio"));
 
         } else {
@@ -85,23 +78,11 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
-        listaKart = new StringBuilder();
-
-        //Oggetto in entrata non nullo di tipo List<Map<String, Object>>
-        //Per ogni oggetto nella mappa prendo la chiave e il valore associato
-        //Il nome e la quantità di chiavi cambia ogni volta
-        //Creo una super stringa e la ritorno
-
 
 
         if (kart != null) {
-            for (Map<String, Object> row : kart) {
-                targa = row.get("targa").toString();
-                ultimaManutenzione = row.get("giorniDallaManutenzione").toString();
-                listaKart.append(targa).append(" ").append(ultimaManutenzione).append("\n");
-            }
-            listaKart.append("end");
-            responder.sendResponse(clientSocket, listaKart.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(kart,"targa", "giorniDallaManutenzione"));
 
         } else {
             responder.sendResponse(clientSocket, "end");

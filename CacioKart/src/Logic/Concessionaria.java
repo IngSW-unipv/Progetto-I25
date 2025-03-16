@@ -13,10 +13,9 @@ public class Concessionaria {
 
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String INSERT, SELECT, idProdotto, tipol, quantita, prezzo, ultimoProdotto;
+    private String INSERT, SELECT, idProdotto, ultimoProdotto;
     private String queryResult, queryIndicator;
     private List<Map<String, Object>> maxIDProdotto, pezzi;
-    private StringBuilder listaPezzi;
 
     public Concessionaria() {
 
@@ -69,7 +68,6 @@ public class Concessionaria {
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
         pezzi = db.executeReturnQuery(SELECT);
-        listaPezzi = new StringBuilder();
 
         if (pezzi != null) {
             TableMaker maker = new TableMaker();

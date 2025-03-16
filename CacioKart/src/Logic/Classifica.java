@@ -10,9 +10,8 @@ import java.util.Map;
 public class Classifica {
     private DBConnector db;
     private PHPResponseHandler responder;
-    private StringBuilder classifica;
     private List<Map<String, Object>> result;
-    private String nomep, cognomep, targa, bGiro, tempoTot, idGara, cf, SELECT;
+    private String SELECT;
     private TableMaker maker;
 
     public Classifica() {
@@ -22,7 +21,6 @@ public class Classifica {
         responder = new PHPResponseHandler();
         SELECT = Query.CLASSIFICA_ARBITRO.getQuery();
         result = getClassifica(SELECT);
-        classifica = new StringBuilder();
 
         if (result != null) {
             maker = new TableMaker();
@@ -54,7 +52,6 @@ public class Classifica {
         // Esegui la query
         SELECT = Query.CLASSIFICA_UTENTE.getQuery(s.getCf());
         result = getClassifica(SELECT);
-        classifica = new StringBuilder();
 
         if (result != null) {
             maker = new TableMaker();
@@ -71,8 +68,6 @@ public class Classifica {
 
         // Esecuzione della query
         result = getClassifica(Query.MOSTRA_CLASSIFICA_PENALITA.getQuery(idGara));
-
-        classifica = new StringBuilder();
 
         if (result != null) {
 

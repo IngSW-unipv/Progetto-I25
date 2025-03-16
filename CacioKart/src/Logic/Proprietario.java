@@ -46,7 +46,7 @@ public class Proprietario {
      * Pressoché identico al metodo presente in Objects.Kart per aggiungere i kart,
      * tranne la gestione dei ruoli tramite l'ENUM Enums.Ruoli
      *
-     * @param nuovoDip Il dipendente da aggiungere
+     * @param nuovoDip     Il dipendente da aggiungere
      * @param clientSocket Socket per inviare la risposta
      */
     public void aggiuntaDipendente(Dipendente nuovoDip, Socket clientSocket) {
@@ -72,7 +72,7 @@ public class Proprietario {
      * Metodo per rimuovere i dipendenti.
      * Identico al metodo presente in Objects.Kart per rimuovere i kart.
      *
-     * @param d Il dipendente da rimuovere
+     * @param d            Il dipendente da rimuovere
      * @param clientSocket Socket per inviare la risposta
      */
     public void rimozioneDipendenti(Dipendente d, Socket clientSocket) {
@@ -83,39 +83,33 @@ public class Proprietario {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    public void bilancio(Socket clientSocket){
-    db = new DBConnector();
-    responder = new PHPResponseHandler();
-    INSERT_ITERATOR=new String[3];
+    public void bilancio(Socket clientSocket) {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        INSERT_ITERATOR = new String[3];
 
-    // QUERY PER L' ENTRATE
-    INSERT_ITERATOR[0]= "SELECT " +
-            "    COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
-            "              FROM acquista a " +
-            "              JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
-            "    +" +
-            "    COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
-            "    +" +
-            "    COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
-            "    AS ENTRATE;";
+        // QUERY PER L' ENTRATE
+        INSERT_ITERATOR[0] = "SELECT " +
+                " COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+                " FROM acquista a " +
+                "  JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
+                " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
+                " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
+                " AS ENTRATE;";
 
-    //QUERY PER LE USCITE
-    INSERT_ITERATOR[1]="SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
+        //QUERY PER LE USCITE
+        INSERT_ITERATOR[1] = "SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
 
-    // QUERY PEER IL SALDO TOTALE
-    INSERT_ITERATOR[2]="""
-            SELECT 
-                COALESCE((SELECT SUM(c.prezzo) 
-                          FROM acquista a 
-                          JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0)
-                +
-                COALESCE((SELECT SUM(costo) FROM prenotazione), 0)
-                +
-                COALESCE((SELECT SUM(costo) FROM manutenzione), 0)
-                -
-                COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)
-                AS SALDO;
-            """;
+        // QUERY PEER IL SALDO TOTALE
+        INSERT_ITERATOR[2] = "SELECT " +
+                "COALESCE((SELECT SUM(c.prezzo) " +
+                " FROM acquista a " +
+                " JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0) " +
+                " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0) " +
+                " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0) " +
+                " - COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
+                " AS SALDO";
+
 
         for (String saldo : INSERT_ITERATOR) {
             result = db.executeReturnQuery(saldo);
