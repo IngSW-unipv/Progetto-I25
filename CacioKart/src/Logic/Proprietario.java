@@ -102,7 +102,7 @@ public class Proprietario {
 
         // QUERY PEER IL SALDO TOTALE
         INSERT_ITERATOR[2] = "SELECT " +
-                "COALESCE((SELECT SUM(c.prezzo) " +
+                "COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
                 " FROM acquista a " +
                 " JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0) " +
                 " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0) " +
