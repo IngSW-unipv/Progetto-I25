@@ -1,3 +1,5 @@
+package Objects;
+
 public class Kart {
     private String targa;
     private int cilindrata;

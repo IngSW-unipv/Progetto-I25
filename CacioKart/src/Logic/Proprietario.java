@@ -1,3 +1,9 @@
+package Logic;
+
+import Enums.Query;
+import Objects.Dipendente;
+import WebTalker.PHPResponseHandler;
+
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +22,7 @@ public class Proprietario {
 
     /**
      * Metodo per mostrare i dipendenti.
-     * Identico al metodo presente in Kart per mostrare tutti i kart.
+     * Identico al metodo presente in Objects.Kart per mostrare tutti i kart.
      *
      * @param clientSocket Socket per inviare la risposta
      */
@@ -46,8 +52,8 @@ public class Proprietario {
 
     /**
      * Metodo per aggiungere i dipendenti.
-     * Pressoché identico al metodo presente in Kart per aggiungere i kart,
-     * tranne la gestione dei ruoli tramite l'ENUM Ruoli
+     * Pressoché identico al metodo presente in Objects.Kart per aggiungere i kart,
+     * tranne la gestione dei ruoli tramite l'ENUM Enums.Ruoli
      *
      * @param nuovoDip Il dipendente da aggiungere
      * @param clientSocket Socket per inviare la risposta
@@ -73,7 +79,7 @@ public class Proprietario {
 
     /**
      * Metodo per rimuovere i dipendenti.
-     * Identico al metodo presente in Kart per rimuovere i kart.
+     * Identico al metodo presente in Objects.Kart per rimuovere i kart.
      *
      * @param d Il dipendente da rimuovere
      * @param clientSocket Socket per inviare la risposta

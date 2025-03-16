@@ -1,3 +1,7 @@
+package Objects;
+
+import Logic.Socio;
+
 public class Team {
     private String nome;
     private String colore;

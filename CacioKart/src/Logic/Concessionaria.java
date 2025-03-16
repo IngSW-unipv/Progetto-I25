@@ -1,3 +1,10 @@
+package Logic;
+
+import Enums.Query;
+import Objects.Kart;
+import Objects.Pezzo;
+import WebTalker.PHPResponseHandler;
+
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +25,8 @@ public class Concessionaria {
     /**
      * Metodo per inserire i kart nella concessionaria.
      * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
-     * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
-     * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
+     * Creo un oggetto di tipo Objects.Kart in modo da poterlo manipolare con i vari get,
+     * dopodiché utilizzo il metodo di Logic.DBConnector per inserire il nuovo kart e
      * il metodo di ResponseHandler per mandare una risposta
      *
      * @param nuovoKart

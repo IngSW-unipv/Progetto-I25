@@ -1,3 +1,5 @@
+package Logic;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class DBConnector {
      */
     private void dbOpenConnection() {
         try {
-            fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/credenzialiDB.txt"));
+            fileReader = new BufferedReader(new FileReader("../Progetto-I25/CacioKart/Java docs/credenzialiDB.txt"));
             USER = fileReader.readLine();
             PASSWORD = fileReader.readLine();
             fileReader.close();

@@ -1,3 +1,9 @@
+package Logic;
+
+import Enums.Query;
+import Objects.Pezzo;
+import WebTalker.PHPResponseHandler;
+
 import java.net.Socket;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +25,7 @@ public class Socio extends Persona {
 
     /**
      * Metodo per registrare un utente nel db
-     * La query viene eseguita tramite il metodo sendResponse della classe DBConnector
+     * La query viene eseguita tramite il metodo sendResponse della classe Logic.DBConnector
      *
      * @param clientSocket, Socket per rispondere al client
      */

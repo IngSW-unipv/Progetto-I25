@@ -1,3 +1,5 @@
+package Objects;
+
 public class Pezzo {
     private String idProdotto, descrizione;
     private int quantita;

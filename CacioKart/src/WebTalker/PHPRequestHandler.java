@@ -1,3 +1,10 @@
+package WebTalker;
+
+import Enums.Query;
+import Enums.TipoComandi;
+import Logic.*;
+import Objects.*;
+
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
@@ -265,7 +272,7 @@ public class PHPRequestHandler {
     //riceve i dati della prenotazione dal sito
     //va in socio e crea una prenotazione
     //risponde al sito tramite phpresponsehandler
-    //usa DBConnector e PHPResponsehandle
+    //usa Logic.DBConnector e PHPResponsehandle
 
     private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) {
 
@@ -381,7 +388,7 @@ public class PHPRequestHandler {
 
     /**Metodo per aggiungere dipendenti.
      * Dopo aver formattato le date tramite i formatter, le passo al costruttore
-     * di Dipendente per utilizzare i metodi di get e set nel metodo
+     * di Objects.Dipendente per utilizzare i metodi di get e set nel metodo
      * di aggiuntaDipendenti.
      *
      * @param dati
@@ -553,7 +560,7 @@ public class PHPRequestHandler {
     }
 
     private void aggiornamentoPrenota(String messaggio, Socket clientSocket) {
-        Organizzatore  o = new Organizzatore();
+        Organizzatore o = new Organizzatore();
 
         String[] info = messaggio.split(" ");
         String idP = info[0];

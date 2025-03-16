@@ -1,3 +1,7 @@
+package Objects;
+
+import Logic.Persona;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 

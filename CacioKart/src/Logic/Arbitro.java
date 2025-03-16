@@ -1,3 +1,8 @@
+package Logic;
+
+import Enums.Query;
+import WebTalker.PHPResponseHandler;
+
 import java.net.Socket;
 import java.time.LocalTime;
 

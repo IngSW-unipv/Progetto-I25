@@ -1,3 +1,5 @@
+package Enums;
+
 /**
  * Classe di tipo Enum per gestire i comandi in arrivo dal client.
  * Ogni possibile comando ha associato a esso una stringa, che
