@@ -24,7 +24,8 @@
         <div class="main-container">
           <div class="products-container">
         <?php
-          require 'logic/requestParts.php';
+          require 'logic/requestData.php';
+          $res = request("mostraPezzi", $socket);
           
           //i parametri sono: id, nome del pezzo, quantita`, prezzo       
           $parts =  explode("\n", $res);

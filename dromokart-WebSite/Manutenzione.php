@@ -1,6 +1,5 @@
 <?php include 'default/footerHome.php'; ?>
 <?php include 'default/headerProfilo.php'; ?>
-<?php require 'logic/mostrakartManutenzione.php'; ?>
 <?php require 'logic/controlloLogin.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
