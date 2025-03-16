@@ -13,6 +13,7 @@ public class Classifica {
     private StringBuilder classifica;
     private List<Map<String, Object>> result;
     private String nomep, cognomep, targa, bGiro, tempoTot, idGara, cf, SELECT;
+    private TableMaker maker;
 
     public Classifica() {
     }
@@ -24,12 +25,8 @@ public class Classifica {
         classifica = new StringBuilder();
 
         if (result != null) {
-            for (Map<String, Object> row : result) {
-                idGara = row.get("idGara").toString();
-                classifica.append(idGara).append("\n");
-            }
-            classifica.append("end");
-            responder.sendResponse(clientSocket, classifica.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
@@ -43,32 +40,9 @@ public class Classifica {
         // Esecuzione della query
         result = getClassifica(SELECT);
 
-        classifica = new StringBuilder();
-
         if (result != null) {
-            // Iterazione sui risultati
-            for (Map<String, Object> row : result) {
-                idGara = row.get("idGara").toString();
-                nomep = row.get("nome").toString();
-                cognomep = row.get("cognome").toString();
-                targa = row.get("targa").toString();
-                bGiro = row.get("bGiro").toString();
-                tempoTot = row.get("tempTot").toString();
-
-                // Componiamo la riga di output
-                classifica.append(idGara).append(" ")
-                        .append(nomep).append(" ")
-                        .append(cognomep).append(" ")
-                        .append(targa).append(" ")
-                        .append(bGiro).append(" ")
-                        .append(tempoTot).append("\n");
-            }
-
-            // Aggiungiamo un marcatore di fine
-            classifica.append("end");
-
-            // Invio della risposta al client
-            responder.sendResponse(clientSocket, classifica.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "nome", "cognome", "targa", "bGiro", "tempTot"));
         } else {
             // Se la query non ha restituito risultati
             responder.sendResponse(clientSocket, "end");
@@ -83,19 +57,9 @@ public class Classifica {
         classifica = new StringBuilder();
 
         if (result != null) {
-            for (Map<String, Object> row : result) {
-                idGara = row.get("idGara").toString();
-                targa = row.get("targa").toString();
-                bGiro = row.get("bGiro").toString();
-                tempoTot = row.get("tempTot").toString();
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "targa", "bGiro", "tempTot"));
 
-                classifica.append(idGara).append(" ")
-                        .append(targa).append(" ")
-                        .append(bGiro).append(" ")
-                        .append(tempoTot).append("\n");
-            }
-            classifica.append("end");
-            responder.sendResponse(clientSocket, classifica.toString());
         } else {
             responder.sendResponse(clientSocket, "end");
         }
@@ -111,27 +75,9 @@ public class Classifica {
         classifica = new StringBuilder();
 
         if (result != null) {
-            // Iterazione sui risultati
-            for (Map<String, Object> row : result) {
-                idGara = row.get("idGara").toString();
-                cf = row.get("socio").toString();
-                targa = row.get("targa").toString();
-                bGiro = row.get("bGiro").toString();
-                tempoTot = row.get("tempTot").toString();
 
-                // Componiamo la riga di output
-                classifica.append(idGara).append(" ")
-                        .append(cf).append(" ")
-                        .append(targa).append(" ")
-                        .append(bGiro).append(" ")
-                        .append(tempoTot).append("\n");
-            }
-
-            // Aggiungiamo un marcatore di fine
-            classifica.append("end");
-
-            // Invio della risposta al client
-            responder.sendResponse(clientSocket, classifica.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "socio", "targa", "bGiro", "tempTot"));
         } else {
             // Se la query non ha restituito risultati
             responder.sendResponse(clientSocket, "end");

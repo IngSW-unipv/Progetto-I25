@@ -550,7 +550,7 @@ public class PHPRequestHandler {
     private void mostraPrenotazione(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         query = Query.MOSTRA_PRENOTAZIONE.getQuery();
-        o.mostraPren(query, clientSocket);
+        o.mostraPrenotazioni(query, clientSocket);
     }
 
     private void selezionaSocio(Socket clientSocket) {

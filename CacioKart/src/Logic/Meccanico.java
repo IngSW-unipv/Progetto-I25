@@ -71,17 +71,10 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
-        listaKart = new StringBuilder();
 
         if (kart != null) {
-            for (Map<String, Object> row : kart) {
-                targa = row.get("targa").toString();
-                cilindrata = row.get("cilindrata").toString();
-                serbatoio = row.get("serbatoio").toString();
-                listaKart.append(targa).append(" ").append(cilindrata).append(" ").append(serbatoio).append("\n");
-            }
-            listaKart.append("end");
-            responder.sendResponse(clientSocket, listaKart.toString());
+            TableMaker maker = new TableMaker();
+            responder.sendResponse(clientSocket,  maker.stringTableMaker(kart, "targa", "cilindrata", "serbatoio"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
@@ -93,6 +86,13 @@ public class Meccanico {
         responder = new PHPResponseHandler();
         kart = db.executeReturnQuery(query);
         listaKart = new StringBuilder();
+
+        //Oggetto in entrata non nullo di tipo List<Map<String, Object>>
+        //Per ogni oggetto nella mappa prendo la chiave e il valore associato
+        //Il nome e la quantità di chiavi cambia ogni volta
+        //Creo una super stringa e la ritorno
+
+
 
         if (kart != null) {
             for (Map<String, Object> row : kart) {

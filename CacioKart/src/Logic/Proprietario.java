@@ -32,18 +32,9 @@ public class Proprietario {
         SELECT = Query.MOSTRA_DIPENDENTI_PROPRIETARIO.getQuery();
         List<Map<String, Object>> dipendenti = db.executeReturnQuery(SELECT);
 
-        StringBuilder listaDipen = new StringBuilder();
-        String cf, nome, cognome;
-
         if (dipendenti != null) {
-            for (Map<String, Object> row : dipendenti) {
-                cf = row.get("dip").toString();
-                nome = row.get("nome").toString();
-                cognome = row.get("cognome").toString();
-                listaDipen.append(cf).append(" ").append(nome).append(" ").append(cognome).append("\n");
-            }
-            listaDipen.append("end");
-            responder.sendResponse(clientSocket, listaDipen.toString());
+            TableMaker maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(dipendenti, "dip", "nome", "cognome"));
 
         } else {
             responder.sendResponse(clientSocket, "end");

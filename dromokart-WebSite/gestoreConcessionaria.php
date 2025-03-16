@@ -26,7 +26,7 @@
     <div class="profile-buttons">
       <button onclick="location.href='aggiungiKart.php'">Aggiungi Kart</button>
       <button onclick="location.href='aggiungiPezzi.php'">Aggiungi Pezzi</button>
-      <button onclick="location.href='concessionaria-home.php'">torna alla concessionaria</button>
+      <button onclick="location.href='concessionaria-home.php'">Torna alla concessionaria</button>
     </div>
   </main>
 </body>

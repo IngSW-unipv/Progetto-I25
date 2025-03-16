@@ -30,6 +30,7 @@ public class Organizzatore {
     private String INSERT;
     private StringBuilder prenotazione;
     private String idP;
+    private TableMaker maker;
 
     public Organizzatore() {
 
@@ -80,14 +81,8 @@ public class Organizzatore {
         listaUtenti = new StringBuilder();
 
         if (soci != null) {
-            for (Map<String, Object> row : soci) {
-                cf = row.get("socio").toString();
-                nome = row.get("nome").toString();
-                cognome = row.get("cognome").toString();
-                listaUtenti.append(cf).append(" ").append(nome).append(" ").append(cognome).append("\n");
-            }
-            listaUtenti.append("end");
-            responder.sendResponse(clientSocket, listaUtenti.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(soci, "socio", "nome", "cognome"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
@@ -101,12 +96,8 @@ public class Organizzatore {
         campionato = new StringBuilder();
 
         if (result != null) {
-            for (Map<String, Object> row : result) {
-                idCampionato = row.get("idCampionato").toString();
-                campionato.append(idCampionato).append("\n");
-            }
-            campionato.append("end");
-            responder.sendResponse(clientSocket, campionato.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idCampionato"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
@@ -121,18 +112,12 @@ public class Organizzatore {
         gare = db.executeReturnQuery(SELECT);
         listaGare = new StringBuilder();
 
-        if (gare == null) {
-            responder.sendResponse(clientSocket, "end");
-        }
-        else {
-            for(Map<String, Object> row : gare) {
-                idGara = row.get("idGara").toString();
-                ora = row.get("ora").toString();
-                listaGare.append(idGara).append(" ").append(ora).append("\n");
-            }
-            listaGare.append("end");
+        if (gare != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(gare, "idGara", "ora"));
 
-            responder.sendResponse(clientSocket, listaGare.toString());
+        } else {
+            responder.sendResponse(clientSocket, "end");
         }
     }
 
@@ -146,19 +131,15 @@ public class Organizzatore {
 
     }
 
-    public void mostraPren(String query, Socket clientSocket) {
+    public void mostraPrenotazioni(String query, Socket clientSocket) {
         responder = new PHPResponseHandler();
         db = new DBConnector();
         result = db.executeReturnQuery(query);
         prenotazione = new StringBuilder();
 
         if (result != null) {
-            for (Map<String, Object> row : result) {
-                idP = row.get("idP").toString();
-                prenotazione.append(idP).append("\n");
-            }
-            prenotazione.append("end");
-            responder.sendResponse(clientSocket, prenotazione.toString());
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idP"));
 
         } else {
             responder.sendResponse(clientSocket, "end");

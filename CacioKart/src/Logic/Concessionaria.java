@@ -16,7 +16,7 @@ public class Concessionaria {
     private String INSERT, SELECT, idProdotto, tipol, quantita, prezzo, ultimoProdotto;
     private String queryResult, queryIndicator;
     private List<Map<String, Object>> maxIDProdotto, pezzi;
-    private StringBuilder listaPezzi = new StringBuilder();
+    private StringBuilder listaPezzi;
 
     public Concessionaria() {
 
@@ -69,17 +69,11 @@ public class Concessionaria {
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
         pezzi = db.executeReturnQuery(SELECT);
+        listaPezzi = new StringBuilder();
 
         if (pezzi != null) {
-            for (Map<String, Object> row : pezzi) {
-                idProdotto = row.get("idProdotto").toString();
-                tipol = row.get("tipol").toString();
-                quantita = row.get("quantita").toString();
-                prezzo = row.get("prezzo").toString();
-                listaPezzi.append(idProdotto).append(" ").append(tipol).append(" ").append(quantita).append(" ").append(prezzo).append("\n");
-            }
-            listaPezzi.append("end");
-            responder.sendResponse(clientSocket, listaPezzi.toString());
+            TableMaker maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(pezzi, "idProdotto", "tipol", "quantita", "prezzo"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
