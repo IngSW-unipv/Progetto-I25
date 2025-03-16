@@ -12,7 +12,7 @@ import java.util.Map;
 public class Socio extends Persona {
     private String SELECT, UPDATE, INSERT;
     private PHPResponseHandler responder;
-    private int queryIndicator;
+    private String queryIndicator;
     private DBConnector db;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
@@ -35,7 +35,7 @@ public class Socio extends Persona {
         SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
 
         queryIndicator = db.executeUpdateQuery(SELECT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
 
     }
 
@@ -51,8 +51,8 @@ public class Socio extends Persona {
         SELECT = Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(targa);
 
         queryIndicator = db.executeUpdateQuery(UPDATE);
-        if (queryIndicator == 0) {
-            responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        if (queryIndicator == "0") {
+            responder.sendResponse(clientSocket, queryIndicator);
             return;
         }
 
@@ -60,7 +60,7 @@ public class Socio extends Persona {
         //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
         INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
 
@@ -77,12 +77,12 @@ public class Socio extends Persona {
         for (String prodotto : querys) {
             queryIndicator = db.executeUpdateQuery(prodotto);
 
-            if (queryIndicator == 0) {
-                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            if (queryIndicator == "0") {
+                responder.sendResponse(clientSocket, queryIndicator);
                 return;
             }
         }
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
 

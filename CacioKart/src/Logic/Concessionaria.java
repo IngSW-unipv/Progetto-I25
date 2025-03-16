@@ -14,7 +14,7 @@ public class Concessionaria {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String INSERT, SELECT, idProdotto, tipol, quantita, prezzo, ultimoProdotto;
-    private int queryResult, queryIndicator;
+    private String queryResult, queryIndicator;
     private List<Map<String, Object>> maxIDProdotto, pezzi;
     private StringBuilder listaPezzi = new StringBuilder();
 
@@ -57,7 +57,7 @@ public class Concessionaria {
 
         INSERT = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA.getQuery(idProdotto, nuovoKart.getTarga(), 1, prezzo);
         queryResult = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryResult));
+        responder.sendResponse(clientSocket, queryResult);
 
     }
 
@@ -91,6 +91,6 @@ public class Concessionaria {
         responder = new PHPResponseHandler();
         INSERT = Query.INSERIMENTO_NUOVI_PEZZI.getQuery(p.getQuantita(), p.getIdProdotto());
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 }

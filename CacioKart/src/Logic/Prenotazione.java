@@ -13,7 +13,7 @@ public class Prenotazione {
     private String SELECT, INSERT[];
     private DBConnector db;
     private PHPResponseHandler responder;
-    private int queryIndicator;
+    private String queryIndicator;
     private List<Map<String, Object>> result;
     private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
@@ -84,8 +84,8 @@ public class Prenotazione {
 
                 for (String gara : INSERT) {
                     queryIndicator = db.executeUpdateQuery(gara);
-                    if (queryIndicator == 0) {
-                        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                    if (queryIndicator == "0") {
+                        responder.sendResponse(clientSocket, queryIndicator);
                         return;
                     }
                 }
@@ -98,8 +98,8 @@ public class Prenotazione {
                         + idPrenotazione + "', '" + dataGara + "', '" + fasciaOraria + "', '"
                         + tipologia + "', '" + costo + "')";
                 queryIndicator = db.executeUpdateQuery(INSERT[0]);
-                if (queryIndicator == 0) {
-                    responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+                if (queryIndicator == "0") {
+                    responder.sendResponse(clientSocket, queryIndicator);
                     return;
                 }
                 break;

@@ -17,7 +17,7 @@ public class Arbitro {
         PHPResponseHandler responder = new PHPResponseHandler();
         String UPDATE = Query.INSERIMENTO_PENALITA_ARBITRO.getQuery(penalita, idGara, s.getCf());
 
-        int queryIndicator = db.executeUpdateQuery(UPDATE);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        String queryIndicator = db.executeUpdateQuery(UPDATE);
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 }

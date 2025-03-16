@@ -19,7 +19,7 @@ public class Organizzatore {
     private String cognome;
     private StringBuilder listaUtenti;
     private String[] INSERT_ITERATOR;
-    private int queryIndicator;
+    private String queryIndicator;
     private StringBuilder campionato;
     private String idCampionato;
     private List<Map<String, Object>> result;
@@ -55,13 +55,13 @@ public class Organizzatore {
         for (String team : INSERT_ITERATOR) {
             queryIndicator = db.executeUpdateQuery(team);
 
-            if (queryIndicator == 0) {
-                responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+            if (queryIndicator == "0") {
+                responder.sendResponse(clientSocket, queryIndicator);
                 return;
             }
         }
 
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     public void creaCampionato() {
@@ -142,7 +142,7 @@ public class Organizzatore {
 
         INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idGara, idCamp);
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
 
     }
 
@@ -170,7 +170,7 @@ public class Organizzatore {
         responder = new PHPResponseHandler();
         INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, socio, LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 }
 

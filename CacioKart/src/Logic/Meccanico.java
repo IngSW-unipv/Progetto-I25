@@ -21,7 +21,7 @@ public class Meccanico {
     private String cilindrata;
     private String serbatoio;
 
-    private int queryIndicator;
+    private String queryIndicator;
     private String ultimaManutenzione;
 
     public Meccanico() {
@@ -45,7 +45,7 @@ public class Meccanico {
         INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
 
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
 
     }
 
@@ -55,7 +55,7 @@ public class Meccanico {
 
         DELETE = Query.INSERIMENTO_KART_MECCANICO.getQuery(targa);
         queryIndicator = db.executeUpdateQuery(DELETE);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     public void aggiuntaBenzina(Kart k, Socket clientSocket) {
@@ -64,7 +64,7 @@ public class Meccanico {
 
         UPDATE = Query.AGGIUNTA_BENZINA_MECCANICO.getQuery(k.getTarga());
         queryIndicator = db.executeUpdateQuery(UPDATE);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     public void mostraKart(String query, Socket clientSocket) {
@@ -113,7 +113,7 @@ public class Meccanico {
         responder = new PHPResponseHandler();
         DELETE = Query.RIMUOVI_KART_MECCANICO.getQuery(k.getTarga());
         queryIndicator = db.executeUpdateQuery(DELETE);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
 }

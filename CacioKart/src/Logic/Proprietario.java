@@ -12,7 +12,7 @@ public class Proprietario {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String INSERT, SELECT, DELETE;
-    private int queryIndicator;
+    private String queryIndicator;
     private String[] INSERT_ITERATOR;
     private List<Map<String, Object>> result;
 
@@ -74,7 +74,7 @@ public class Proprietario {
                 nuovoDip.getStipendio());
 
         queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Proprietario {
         responder = new PHPResponseHandler();
         DELETE = Query.RIMOZIONE_DIPENDENTE_PROPRIETARIO.getQuery(d.getCf());
         queryIndicator = db.executeUpdateQuery(DELETE);
-        responder.sendResponse(clientSocket, Integer.toString(queryIndicator));
+        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     public void bilancio(Socket clientSocket){
