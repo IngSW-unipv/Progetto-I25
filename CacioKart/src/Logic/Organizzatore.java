@@ -17,7 +17,6 @@ public class Organizzatore {
     private String[] INSERT_ITERATOR;
     private String queryIndicator;
     private List<Map<String, Object>> result;
-    private List<Map<String, Object>> gare;
     private String INSERT;
     private TableMaker maker;
 
@@ -83,11 +82,11 @@ public class Organizzatore {
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_GARE_INSERIMENTO.getQuery();
 
-        gare = db.executeReturnQuery(SELECT);
+        result = db.executeReturnQuery(SELECT);
 
-        if (gare != null) {
+        if (result != null) {
             maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(gare, "idGara", "ora"));
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "ora"));
 
         } else {
             responder.sendResponse(clientSocket, "end");

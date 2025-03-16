@@ -15,7 +15,7 @@ public class Concessionaria {
     private PHPResponseHandler responder;
     private String INSERT, SELECT, idProdotto, ultimoProdotto;
     private String queryResult, queryIndicator;
-    private List<Map<String, Object>> maxIDProdotto, pezzi;
+    private List<Map<String, Object>> result;
 
     public Concessionaria() {
 
@@ -40,11 +40,11 @@ public class Concessionaria {
         db.executeUpdateQuery(INSERT);
 
         SELECT = Query.INSERIMENTO_KART_CONCESSIONARIA_MAX_ID.getQuery();
-        maxIDProdotto = db.executeReturnQuery(SELECT);
+        result = db.executeReturnQuery(SELECT);
         //System.out.println(maxIDProdotto.get(0));
 
         //Logica per rimuovere tutti i caratteri tranne i numeri
-        ultimoProdotto = maxIDProdotto.get(0).toString().replaceAll("\\D", "");
+        ultimoProdotto = result.get(0).toString().replaceAll("\\D", "");
 
         if (ultimoProdotto == "") {
             idProdotto = "1";
@@ -67,11 +67,11 @@ public class Concessionaria {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
-        pezzi = db.executeReturnQuery(SELECT);
+        result = db.executeReturnQuery(SELECT);
 
-        if (pezzi != null) {
+        if (result != null) {
             TableMaker maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(pezzi, "idProdotto", "tipol", "quantita", "prezzo"));
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idProdotto", "tipol", "quantita", "prezzo"));
 
         } else {
             responder.sendResponse(clientSocket, "end");

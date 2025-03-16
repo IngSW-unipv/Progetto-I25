@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Prenotazione {
-    private String SELECT, INSERT[];
+    private String SELECT, INSERT_ITERATOR[];
     private DBConnector db;
     private PHPResponseHandler responder;
     private String queryIndicator;
@@ -45,7 +45,7 @@ public class Prenotazione {
         }
 
         costo = 15;
-        INSERT = new String[2];
+        INSERT_ITERATOR = new String[2];
         switch (tipologia) {
 
             case "libera":
@@ -55,34 +55,34 @@ public class Prenotazione {
 
                 if (result.contains(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
 
-                    INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                    INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                             idPrenotazione + "', '" +
                             dataGara + "', '" +
                             fasciaOraria + "', '" +
                             tipologia + "', '" +
                             costo + "')";
 
-                    INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
                             idPrenotazione + "', 'NULL', '" +
                             dataO + "')";
 
                 } else {
 
-                    INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
+                    INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
                             idPrenotazione + "', '" +
                             dataGara + "', '" +
                             fasciaOraria + "', '" +
                             tipologia + "', '" +
                             costo + "')";
 
-                    INSERT[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
                             idPrenotazione + "', '" +
                             cf + "', '" +
                             dataO + "')";
                 }
 
 
-                for (String gara : INSERT) {
+                for (String gara : INSERT_ITERATOR) {
                     queryIndicator = db.executeUpdateQuery(gara);
                     if (queryIndicator == "0") {
                         responder.sendResponse(clientSocket, queryIndicator);
@@ -94,10 +94,10 @@ public class Prenotazione {
 
             case "secca":
 
-                INSERT[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('"
+                INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('"
                         + idPrenotazione + "', '" + dataGara + "', '" + fasciaOraria + "', '"
                         + tipologia + "', '" + costo + "')";
-                queryIndicator = db.executeUpdateQuery(INSERT[0]);
+                queryIndicator = db.executeUpdateQuery(INSERT_ITERATOR[0]);
                 if (queryIndicator == "0") {
                     responder.sendResponse(clientSocket, queryIndicator);
                     return;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Meccanico {
-    private List<Map<String, Object>> kart;
+    private List<Map<String, Object>> result;
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT, DELETE, UPDATE, INSERT;
@@ -63,11 +63,11 @@ public class Meccanico {
     public void mostraKart(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        kart = db.executeReturnQuery(query);
+        result = db.executeReturnQuery(query);
 
-        if (kart != null) {
+        if (result != null) {
             maker = new TableMaker();
-            responder.sendResponse(clientSocket,  maker.stringTableMaker(kart, "targa", "cilindrata", "serbatoio"));
+            responder.sendResponse(clientSocket,  maker.stringTableMaker(result, "targa", "cilindrata", "serbatoio"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
@@ -77,12 +77,12 @@ public class Meccanico {
     public void mostraKartManutenzione(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        kart = db.executeReturnQuery(query);
+        result = db.executeReturnQuery(query);
 
 
-        if (kart != null) {
+        if (result != null) {
             maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(kart,"targa", "giorniDallaManutenzione"));
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result,"targa", "giorniDallaManutenzione"));
 
         } else {
             responder.sendResponse(clientSocket, "end");
