@@ -20,8 +20,8 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Classifica</h1>
-    <p>Consulta la classifica dei piloti</p>
+    <h1>Top 10 migliori giri</h1>
+    <p>Consulta la classifica dei migliori piloti</p>
   </section>
 
   <!-- Contenuto principale -->
@@ -35,7 +35,7 @@
 
       require 'logic/tableCreation.php';
 
-      $titolo = array("ID Gara", "NomePilota", "CognomePilota", "Targa", "Miglior Giro", "Tempo totale");
+      $titolo = array("ID Gara", "Nome", "Cognome", "Targa", "Miglior Giro", "Tempo totale");
       createTable($titolo, $res); 
       
     ?>

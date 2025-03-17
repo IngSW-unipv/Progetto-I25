@@ -21,17 +21,14 @@ public enum Query {
             "JOIN (SELECT idGara, MIN(tempTot) AS tempo_migliore FROM caciokart.classifica GROUP BY idGara) AS agg " +
             "ON c.idGara = agg.idGara AND c.tempTot = agg.tempo_migliore " +
             "JOIN caciokart.socio AS s ON c.socio = s.socio " +
-            "ORDER BY c.tempTot DESC " +
+            "ORDER BY c.tempTot ASC " +
             "LIMIT 10"),
 
-    CLASSIFICA_UTENTE("SELECT c.idGara, " +
-            "       c.targa, " +
-            "       c.bGiro, " +
-            "       c.tempTot " +
+    CLASSIFICA_UTENTE("SELECT c.idGara, c.targa, c.bGiro, c.tempTot " +
             "FROM caciokart.classifica AS c " +
             "JOIN caciokart.socio AS s ON c.socio = s.socio " +
             "WHERE s.nome = '%s' " +
-            "ORDER BY c.tempTot DESC " +
+            "ORDER BY c.idGara DESC " +
             "LIMIT 10"),
 
     MOSTRA_CLASSIFICA_PENALITA("SELECT * FROM caciokart.classifica WHERE idGara = '%s'"),
