@@ -86,8 +86,11 @@ public class Persona {
                         break;
 
                     default:
+                        /*Il PHP invierà sempre risposte esatte, questa risposta non è
+                        * praticamente mai necessaria.
+                        */
                         responder.sendResponse(clientSocket, "0 0 0");
-                        System.out.println("Ruolo non trovato");
+                        System.out.println("Ruolo non trovato\n");
                         break;
 
                 }

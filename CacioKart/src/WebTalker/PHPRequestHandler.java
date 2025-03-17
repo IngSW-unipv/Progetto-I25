@@ -22,6 +22,7 @@ public class PHPRequestHandler {
     private String query;
 
     public PHPRequestHandler() {
+
     }
 
     /**
@@ -35,22 +36,18 @@ public class PHPRequestHandler {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //Creo un oggetto per leggere i messaggi in arrivo
             messaggio = in.readLine().split(" ", 2); //Divido il messaggio in due: il comando e i dati
 
-            //comando informazioni
-
             comando = messaggio[0]; //Il comando da gestire sarà la prima parte del messaggio
             if (messaggio.length == 2) { //Controllo se il messaggio contiene più di una parola
                 info = messaggio[1]; //Le informazioni relative al resto del comando comporranno la seconda parte del messaggio
                 System.out.println("Messaggio ricevuto: " + messaggio[0] + " " + messaggio[1]);
             } else {
-                System.out.println("Messaggio ricevuto: " + messaggio[0]);
+                System.out.println("Messaggio ricevuto: " + messaggio[0]); //In alternativa esistono dei comandi che non necessitano di ulteriori informazioni
             }
 
             tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
 
-            /**Switch per gestire i comandi
-             *
-             */
-            switch (tipo) {
+
+            switch (tipo) { //Switch per gestire i comandi in ingresso
 
                 case LOGIN:
                     loginCase(info, clientSocket);
@@ -197,19 +194,16 @@ public class PHPRequestHandler {
 
     }
 
-    //SPLITTARE DATI QUA
-    //FARE LE QUERY NELLE CLASSI SINGOLE
-
     /**
      * Metodo per gestire la logica di login.
-     * Prendo il messaggio e lo divido nelle singole informazioni richieste.
+     * I dati in ingresso sono il CF (chiave nel db) e la password.
      *
-     * @param dati
-     * @param clientSocket
+     * @param dati CF, pwd.
+     * @param clientSocket Socket per la risposta. È presente in tutti i case.
      */
     private void loginCase(String dati, Socket clientSocket) {
-        String[] loginData = dati.split(" ");
-        Persona utente = new Persona();
+        String[] loginData = dati.split(" "); //Divido i dati in ingresso
+        Persona utente = new Persona(); //Utilizzo un oggetto di tipo persona per manipolare i dati con i setter
         utente.setCf(loginData[0]);
         utente.setPassword(loginData[1]);
         utente.login(clientSocket);
@@ -221,7 +215,6 @@ public class PHPRequestHandler {
      * gare effettuate, senza duplicati.
      *
      * @param clientSocket
-     * @throws SQLException
      */
     private void classificaArbitro(Socket clientSocket) {
         Classifica c = new Classifica();

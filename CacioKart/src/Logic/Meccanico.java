@@ -79,7 +79,6 @@ public class Meccanico {
         responder = new PHPResponseHandler();
         result = db.executeReturnQuery(query);
 
-
         if (result != null) {
             maker = new TableMaker();
             responder.sendResponse(clientSocket, maker.stringTableMaker(result,"targa", "giorniDallaManutenzione"));

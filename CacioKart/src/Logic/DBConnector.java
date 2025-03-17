@@ -74,7 +74,6 @@ public class DBConnector {
      *
      * @param query
      * @return
-     * @throws SQLException
      */
     public List<Map<String, Object>> executeReturnQuery(String query) {
         try {
@@ -114,8 +113,7 @@ public class DBConnector {
      * In caso di errore (principalmente di PK duplicata) dà come
      * valore di risposta 0.
      *
-     * @param query
-     * @throws SQLException
+     * @param query La query da eseguire.
      */
     public String executeUpdateQuery(String query) {
         try {

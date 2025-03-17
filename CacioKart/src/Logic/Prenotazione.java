@@ -34,6 +34,7 @@ public class Prenotazione {
             return;
         }
         SELECT = Query.PRENOTAZIONE_MAX_ID.getQuery();
+        result.clear();
         result = db.executeReturnQuery(SELECT);
         idPrenotazione = result.toString().replaceAll("\\D", "");
 
@@ -44,38 +45,27 @@ public class Prenotazione {
             idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
         }
 
-        costo = 15;
         INSERT_ITERATOR = new String[2];
+
         switch (tipologia) {
 
             case "libera":
 
-                SELECT = "SELECT dip FROM caciokart.dipendente"; //WHERE dip = cf
+                costo = 15;
+                SELECT = "SELECT dip FROM caciokart.dipendente WHERE dip = '" + cf + "'";
+                result.clear();
                 result = db.executeReturnQuery(SELECT);
+                INSERT_ITERATOR[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
 
-                if (result.contains(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
+                if (result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
 
-                    INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
-                            idPrenotazione + "', '" +
-                            dataGara + "', '" +
-                            fasciaOraria + "', '" +
-                            tipologia + "', '" +
-                            costo + "')";
-
-                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
-                            idPrenotazione + "', 'NULL', '" +
+                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio, data) VALUES ('" +
+                            idPrenotazione + "', NULL, '" +
                             dataO + "')";
 
                 } else {
 
-                    INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('" +
-                            idPrenotazione + "', '" +
-                            dataGara + "', '" +
-                            fasciaOraria + "', '" +
-                            tipologia + "', '" +
-                            costo + "')";
-
-                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio,data) VALUES ('" +
+                    INSERT_ITERATOR[1] = "INSERT INTO prenota (idP, socio, data) VALUES ('" +
                             idPrenotazione + "', '" +
                             cf + "', '" +
                             dataO + "')";
@@ -89,19 +79,16 @@ public class Prenotazione {
                         return;
                     }
                 }
-
+                responder.sendResponse(clientSocket, queryIndicator);
                 break;
 
             case "secca":
 
-                INSERT_ITERATOR[0] = "INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('"
-                        + idPrenotazione + "', '" + dataGara + "', '" + fasciaOraria + "', '"
-                        + tipologia + "', '" + costo + "')";
-                queryIndicator = db.executeUpdateQuery(INSERT_ITERATOR[0]);
-                if (queryIndicator == "0") {
-                    responder.sendResponse(clientSocket, queryIndicator);
-                    return;
-                }
+                costo = 20;
+                String INSERT = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
+
+                queryIndicator = db.executeUpdateQuery(INSERT);
+                responder.sendResponse(clientSocket, queryIndicator);
                 break;
 
 
