@@ -136,7 +136,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_GARA:
-                    mostraGaraPenalitàCase(info, clientSocket);
+                    mostraGaraPenalitaCase(info, clientSocket);
                     break;
 
                 case AGGIUNGI_PENALITA:
@@ -465,9 +465,9 @@ public class PHPRequestHandler {
         c.mostraPezzo(clientSocket);
     }
 
-    private void mostraGaraPenalitàCase(String idGara, Socket clientSocket) {
+    private void mostraGaraPenalitaCase(String idGara, Socket clientSocket) {
         Classifica c = new Classifica();
-        c.classificaPenalità(idGara, clientSocket);
+        c.classificaPenalita(idGara, clientSocket);
     }
 
     private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) {
@@ -476,10 +476,10 @@ public class PHPRequestHandler {
         Socio s = new Socio();
         s.setCf(info[0]);
         String idGara = info[1];
-        LocalTime penalità = LocalTime.parse(info[2], DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalTime penalita = LocalTime.parse(info[2], DateTimeFormatter.ofPattern("HH:mm:ss"));
         //Metodo in arbitro per inserire le penalità
         Arbitro a = new Arbitro();
-        a.inserimentoPenalita(s, idGara, penalità, clientSocket);
+        a.inserimentoPenalita(s, idGara, penalita, clientSocket);
     }
 
     private void aggiungiPezziCase(String messaggio, Socket clientSocket) {

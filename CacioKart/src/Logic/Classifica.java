@@ -62,7 +62,7 @@ public class Classifica {
         }
     }
 
-    public void classificaPenalità(String idGara, Socket clientSocket) {
+    public void classificaPenalita(String idGara, Socket clientSocket) {
         // Inizializza il responder.
         responder = new PHPResponseHandler();
 

@@ -80,15 +80,13 @@ public enum Query {
             "SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) " +
             "AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)"),
 
-    MOSTRA_KART_MANUTENZIONE("SELECT " +
-            "    k.*, " +
-            "    COALESCE( " +
-            "        CASE " +
-            "            WHEN MAX(m.dataM) IS NULL THEN 'MAI_FATTA' " +
-            "            ELSE CAST(DATEDIFF(CURRENT_DATE, MAX(m.dataM)) AS CHAR) " +
-            "        END, 'MAI_FATTA' " +
-            "    ) AS giorniDallaManutenzione, " +
-            "    MAX(m.dataM) AS ultimaManutenzione " +
+    MOSTRA_KART_MANUTENZIONE("SELECT k.*, " +
+            "COALESCE(CASE " +
+            "WHEN MAX(m.dataM) IS NULL THEN 'MAI_FATTA' " +
+            "ELSE CAST(DATEDIFF(MAX(m.dataM), CURRENT_DATE) AS CHAR) " +
+            "END, 'MAI_FATTA' " +
+            ") AS giorniDallaManutenzione, " +
+            "MAX(m.dataM) AS ultimaManutenzione " +
             "FROM caciokart.kart k " +
             "LEFT JOIN caciokart.manutenzione m ON k.targa = m.targa " +
             "GROUP BY k.targa;"),

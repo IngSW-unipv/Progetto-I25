@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * Classe per istanziare connessioni con il database, eseguire query e restituire risultati
  */
+@SuppressWarnings("SqlSourceToSinkFlow")
 public class DBConnector {
     private BufferedReader fileReader;
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";

@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Prenotazione {
-    private String SELECT, INSERT_ITERATOR[];
+    private String SELECT;
+    private String[] INSERT_ITERATOR;
     private DBConnector db;
     private PHPResponseHandler responder;
     private String queryIndicator;
