@@ -141,8 +141,8 @@ public enum Query {
     PRENOTAZIONE_GENERICA_INSERIMENTO("INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) " +
             "VALUES('%s', '%s', '%s', '%s', '%s')"),
 
-    PRENOTAZIONE_SECCA_INSERIMENTO_2("INSERT INTO prenota (idP, socio, data) " +
-            "VALUES ('%s', '%s', '%s')"),
+    PRENOTAZIONE_LIBERA_INSERIMENTO("INSERT INTO prenota (idP, socio, data) " +
+            "VALUES ('%s', %s, '%s')"),
 
     // =============================== //
     //           PROPRIETARIO

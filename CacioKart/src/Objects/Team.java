@@ -5,7 +5,7 @@ import Logic.Socio;
 public class Team {
     private String nome;
     private String colore;
-    private Socio[] soci;
+    private final Socio[] soci;
 
     public Team(String nome, String colore, String cf1, String cf2) {
         this.nome = nome;

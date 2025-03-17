@@ -19,7 +19,7 @@ public class DBConnector {
     private static String USER, PASSWORD;
     private Connection conn;
 
-    private List<Map<String, Object>> resultList = new ArrayList<>();
+    private final List<Map<String, Object>> resultList = new ArrayList<>();
     private ResultSet rs;
     private ResultSetMetaData rsmd;
 

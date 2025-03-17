@@ -60,8 +60,6 @@ public class Concessionaria {
 
     }
 
-    ;
-
     //mostra tutti i pezzi della concessionaria tranne quelli che iniziano per KRT
     public void mostraPezzo(Socket clientSocket) {
         db = new DBConnector();
