@@ -22,7 +22,7 @@
 
     fclose($socket);
 
-    if($res === "0"){
+    if($res === "0" || $res != "1"){
         header('Location: ../erroreGenerale.php');
         die();
     } else{
