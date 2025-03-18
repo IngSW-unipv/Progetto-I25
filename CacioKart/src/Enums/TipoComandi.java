@@ -11,9 +11,11 @@ public enum TipoComandi {
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
     CLASSIFICA_UTENTE("richiestaClassUsr"),
+    RICHIESTA_PRENOTAZIONI("richiestaPren"), //mando: il messaggio e il cf, mi aspetto: dataG, fasciaO, tipo
     PRENOTAZIONE_LIBERA("prenotazioneLibera"),
     ACQUISTA_KART("acquistaKart"),
     MOSTRA_KART_AGGIUNTA("mostraKartAggiunta"),
+    MOSTRA_KART("richiestaKartUsr"), //mando: il messaggio e il cf, mi aspetto: traga, cilindrata, serbatoio
     CLASSIFICA_GENERALE("richiestaClass"),
     ACQUISTA_PEZZI("acquistaPezzi"),
 

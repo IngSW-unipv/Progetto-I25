@@ -28,6 +28,8 @@
       <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
       <button onclick="location.href='acquistaKart.php'">Compra Kart</button>
       <button onclick="location.href='acquistaPezzi.php'">Compra Pezzi di ricambio</button>
+      <button onclick="location.href='mostraPrenotUser.php'">Prenotazioni effettuate</button>
+      <button onclick="location.href='mostraKartUser.php'">Kart Posseduto</button>
     </div>
   </main>
 </body>
