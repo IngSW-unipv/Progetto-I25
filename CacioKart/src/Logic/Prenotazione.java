@@ -27,17 +27,18 @@ public class Prenotazione {
 
         SELECT = Query.PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI.getQuery(dataGara, fasciaOraria);
         result = db.executeReturnQuery(SELECT);
-        prenotazioniConcorrenti = result.get(0).toString().replaceAll("\\D", "");
+        prenotazioniConcorrenti = result.get(0).get("concurrent").toString();
 
         if (prenotazioniConcorrenti.equals("20")) {
             System.out.println("Nessun posto disponibile\n!");
             responder.sendResponse(clientSocket, "0");
             return;
         }
+
         SELECT = Query.PRENOTAZIONE_MAX_ID.getQuery();
         result.clear();
         result = db.executeReturnQuery(SELECT);
-        idPrenotazione = result.toString().replaceAll("\\D", "");
+        idPrenotazione = result.get(0).get("max").toString();
 
         if (!idPrenotazione.equals("0")) {
             idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione) + 1);

@@ -100,7 +100,7 @@ public class Proprietario {
         //QUERY PER LE USCITE
         INSERT_ITERATOR[1] = "SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
 
-        // QUERY PEER IL SALDO TOTALE
+        // QUERY PER IL SALDO TOTALE
         INSERT_ITERATOR[2] = "SELECT " +
                 "COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
                 " FROM acquista a " +

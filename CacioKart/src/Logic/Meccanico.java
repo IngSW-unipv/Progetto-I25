@@ -28,12 +28,9 @@ public class Meccanico {
         //kart = db.executeReturnQuery(SELECT);
 
         SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
-        idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
+        idM = db.executeReturnQuery(SELECT).get(0).get("max").toString();
         //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
-
         idM = String.valueOf(Integer.parseInt(idM) + 1);
-
-        //System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
 
         INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
 

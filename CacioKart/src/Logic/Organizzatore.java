@@ -45,8 +45,8 @@ public class Organizzatore {
                 return;
             }
         }
-
         responder.sendResponse(clientSocket, queryIndicator);
+
     }
 
     public void mostraSociInserimento(String query, Socket clientSocket) {

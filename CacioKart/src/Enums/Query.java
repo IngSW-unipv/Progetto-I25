@@ -40,7 +40,7 @@ public enum Query {
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART("INSERT INTO kart (targa, cilindrata, serbatoio) " +
             "VALUES('%s', '%s', '%s')"),
 
-    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED) FROM concessionaria"),
+    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED)) AS max FROM concessionaria"),
 
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA("INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) " +
             "VALUES('%s', '%s', '%s', '%s')"),
@@ -56,7 +56,7 @@ public enum Query {
     //            MECCANICO
     // =============================== //
 
-    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') FROM manutenzione"),
+    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') AS max FROM manutenzione"),
 
     AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) " +
             "VALUES ('%s', '%s', '%s', '%s', '%s')"),
@@ -130,10 +130,10 @@ public enum Query {
     //            PRENOTAZIONE
     // =============================== //
 
-    PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI("SELECT count(*) FROM caciokart.prenotazione " +
+    PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI("SELECT count(*) AS concurrent FROM caciokart.prenotazione " +
             "WHERE dataG = '%s' AND fasciaO = '%s'"),
 
-    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) FROM PRENOTAZIONE"),
+    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) AS max FROM PRENOTAZIONE"),
 
     PRENOTAZIONE_GENERICA_INSERIMENTO("INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) " +
             "VALUES('%s', '%s', '%s', '%s', '%s')"),
