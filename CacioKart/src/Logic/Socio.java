@@ -6,6 +6,7 @@ import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class Socio extends Persona {
         SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
 
         queryIndicator = db.executeUpdateQuery(SELECT);
-        responder.sendResponse(clientSocket, queryIndicator);
+        responder.sendResponse(clientSocket,queryIndicator);
 
     }
 
@@ -58,7 +59,7 @@ public class Socio extends Persona {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDate.now());
+        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.get(0).get("idProdotto").toString(), LocalDateTime.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
     }
@@ -69,7 +70,7 @@ public class Socio extends Persona {
         responder = new PHPResponseHandler();
 
         UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
-        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDate.now());
+        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDateTime.now());
         String[] querys = new String[2];
         querys[0] = UPDATE;
         querys[1] = INSERT;
