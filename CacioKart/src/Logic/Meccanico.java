@@ -14,6 +14,7 @@ public class Meccanico {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT, DELETE, UPDATE, INSERT;
+    private String[] DELETE_ITERATOR;
     private TableMaker maker;
     private String queryIndicator;
 
@@ -43,8 +44,18 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        DELETE = Query.INSERIMENTO_KART_MECCANICO.getQuery(targa);
-        queryIndicator = db.executeUpdateQuery(DELETE);
+        DELETE_ITERATOR = new String[2];
+        DELETE_ITERATOR[0] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA.getQuery(targa);
+        DELETE_ITERATOR[1] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA.getQuery(targa);
+
+        for (String delete : DELETE_ITERATOR) {
+            queryIndicator = db.executeUpdateQuery(delete);
+
+            if (queryIndicator == "0") {
+                responder.sendResponse(clientSocket, queryIndicator);
+                return;
+            }
+        }
         responder.sendResponse(clientSocket, queryIndicator);
     }
 

@@ -61,7 +61,10 @@ public enum Query {
     AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) " +
             "VALUES ('%s', '%s', '%s', '%s', '%s')"),
 
-    INSERIMENTO_KART_MECCANICO("DELETE FROM caciokart.concessionaria " +
+    INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA("DELETE FROM caciokart.acquista " +
+            "WHERE idProdotto = (SELECT idProdotto FROM concessionaria WHERE tipol = '%s')"),
+
+    INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA("DELETE FROM caciokart.concessionaria " +
             "WHERE tipol = '%s'"),
 
     AGGIUNTA_BENZINA_MECCANICO("UPDATE caciokart.kart " +
