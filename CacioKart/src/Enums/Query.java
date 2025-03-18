@@ -153,6 +153,25 @@ public enum Query {
 
     RIMOZIONE_DIPENDENTE_PROPRIETARIO("DELETE FROM caciokart.dipendente WHERE dip = '%s'"),
 
+    BILANCIO_ENTRATE_PROPRIETARIO("SELECT " +
+            " COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+            " FROM acquista a " +
+            "  JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
+            " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
+            " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
+            " AS ENTRATE"),
+
+    BILANCIO_USCITE_PROPRIETARIO("SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente"),
+
+    BILANCIO_SALDO_TOTALE("SELECT " +
+            "COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+            " FROM acquista a " +
+            " JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0) " +
+            " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0) " +
+            " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0) " +
+            " - COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
+            " AS SALDO"),
+
     // =============================== //
     //              SOCIO
     // =============================== //

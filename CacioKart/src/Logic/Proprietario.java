@@ -88,28 +88,14 @@ public class Proprietario {
         responder = new PHPResponseHandler();
         INSERT_ITERATOR = new String[3];
 
-        // QUERY PER L' ENTRATE
-        INSERT_ITERATOR[0] = "SELECT " +
-                " COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
-                " FROM acquista a " +
-                "  JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
-                " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
-                " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
-                " AS ENTRATE;";
+        // Query per le entrate
+        INSERT_ITERATOR[0] = Query.BILANCIO_ENTRATE_PROPRIETARIO.getQuery();
 
-        //QUERY PER LE USCITE
-        INSERT_ITERATOR[1] = "SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente;";
+        // Query per le uscite
+        INSERT_ITERATOR[1] = Query.BILANCIO_USCITE_PROPRIETARIO.getQuery();
 
-        // QUERY PER IL SALDO TOTALE
-        INSERT_ITERATOR[2] = "SELECT " +
-                "COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
-                " FROM acquista a " +
-                " JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0) " +
-                " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0) " +
-                " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0) " +
-                " - COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
-                " AS SALDO";
-
+        // Query per il saldo totale
+        INSERT_ITERATOR[2] = Query.BILANCIO_SALDO_TOTALE.getQuery();
 
         for (String saldo : INSERT_ITERATOR) {
             result = db.executeReturnQuery(saldo);
