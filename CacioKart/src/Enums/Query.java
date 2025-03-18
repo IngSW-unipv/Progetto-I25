@@ -104,7 +104,6 @@ public enum Query {
     MOSTRA_GARE_INSERIMENTO("SELECT g.idGara, g.ora FROM garas g " +
             "WHERE NOT EXISTS (SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara)"),
 
-
     AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("INSERT INTO partecipa (idGara, idCampionato) " +
             "VALUES ('%s', '%s')"),
 
@@ -119,6 +118,9 @@ public enum Query {
     MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > curdate()"),
 
     SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio"),
+
+    SELEZIONA_DIPENDENTE_PRENOTAZIONE("SELECT dip " +
+            "FROM caciokart.dipendente WHERE dip = '%s'"),
 
     // =============================== //
     //             PERSONA
@@ -142,8 +144,10 @@ public enum Query {
             "VALUES('%s', '%s', '%s', '%s', '%s')"),
 
     PRENOTAZIONE_LIBERA_INSERIMENTO("INSERT INTO prenota (idP, socio, data) " +
-            "VALUES ('%s', %s, '%s')"),
+            "VALUES ('%s', '%s', '%s')"),
 
+    PRENOTAZIONE_LIBERA_INSERIMENTO_NULL("INSERT INTO prenota (idP, socio, data) " +
+            "VALUES ('%s', NULL, '%s')"),
     // =============================== //
     //           PROPRIETARIO
     // =============================== //
