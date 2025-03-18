@@ -277,7 +277,7 @@ DROP TABLE IF EXISTS `manutenzione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `manutenzione` (
-  `idM` varchar(5) NOT NULL,
+  `idM` int(5) NOT NULL,
   `tipoInt` varchar(1000) DEFAULT NULL,
   `costo` double DEFAULT NULL,
   `dataM` date DEFAULT NULL,
