@@ -10,6 +10,9 @@
       <nav>
         <ul>
           <li><a href="index.php">Home</a></li>
+          <?php
+            require_once 'rankCheck.php';
+          ?>
           <li><a href="chi-siamo.php">Chi Siamo</a></li>
           <li><a href="tracciato.php">Il Tracciato</a></li>
           <li><a href="classifica.php">Classifica</a></li>

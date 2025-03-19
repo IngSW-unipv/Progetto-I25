@@ -18,6 +18,7 @@ public enum TipoComandi {
     MOSTRA_KART("richiestaKartUsr"), //mando: il messaggio e il cf, mi aspetto: traga, cilindrata, serbatoio
     CLASSIFICA_GENERALE("richiestaClass"),
     ACQUISTA_PEZZI("acquistaPezzi"),
+    MOSTRRA_PEZZI("richiestaPezziUsr"), //mando: il messaggio e il cf, mi aspetto: Nome del prodotto e data acquisto
 
     //MECCANICO
 

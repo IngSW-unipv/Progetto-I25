@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kart posseduto - Dromokart</title>
+  <title>Pagina delle parti acquistate</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
@@ -17,7 +17,7 @@
 <body>
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Kart Posseduto</h1>
+    <h1>Parti acquistate</h1>
   </section>
   
   <!-- Contenuto principale -->
@@ -26,14 +26,14 @@
     <?php
       //
       require_once 'logic/requestData.php';
-      $msg = 'richiestaKartUsr ' .$_SESSION['username'];
+      $msg = 'richiestaPezziUsr ' .$_SESSION['username'];
       $res = request($msg, $socket);
 
       if(!strcmp($res, "Nessun dato ricevuto.")){
         require 'logic/tableCreation.php';
         echo '<div class="table-section">';
 
-        $titolo = array("Targa", "Cilindrata", "Serbatoio");
+        $titolo = array("Nome Prodotto", "Data acquisto");
         createTable($titolo, $res);
         echo '</div>';
       }
