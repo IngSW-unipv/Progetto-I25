@@ -58,7 +58,7 @@ public class Prenotazione {
                 result = db.executeReturnQuery(SELECT);
                 INSERT_ITERATOR[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
 
-                if (result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
+                if (result.size() != 0 && result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
                     INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO.getQuery(idPrenotazione, "NULL", dataO);
 
                 } else {

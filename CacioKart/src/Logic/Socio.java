@@ -1,11 +1,13 @@
 package Logic;
 
 import Enums.Query;
+import Objects.Kart;
 import Objects.Pezzo;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +41,10 @@ public class Socio extends Persona {
 
     }
 
-    public void compraKart(String info, Socket clientSocket) {
+    public void compraKart(Kart k, Socket clientSocket) {
         // Inserisco la targa in quell'utente specifico
-        String[] kartUtente = info.split(" ");
-        String cf = kartUtente[0];
-        String targa = kartUtente[1];
+        String cf = this.getCf();
+        String targa = k.getTarga();
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
@@ -58,18 +59,24 @@ public class Socio extends Persona {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDate.now());
+        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDateTime.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-
+    /** Metodo per finalizzare l'acquisto dei pezzi da parte dell'utente.
+     * Si riduce di 1 la quantità del pezzo disponibile nell'inventario del concessionario,
+     * per poi associare all'utente l'id del pezzo acquistato nella tabella acquista.
+     *
+     * @param p
+     * @param clientSocket
+     */
     public void acquistaPezzi(Pezzo p, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
         UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
-        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDate.now());
+        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDateTime.now());
         String[] querys = new String[2];
         querys[0] = UPDATE;
         querys[1] = INSERT;

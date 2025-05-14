@@ -40,7 +40,7 @@ public enum Query {
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART("INSERT INTO kart (targa, cilindrata, serbatoio) " +
             "VALUES('%s', '%s', '%s')"),
 
-    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED) FROM concessionaria"),
+    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED)) AS idProdotto FROM concessionaria"),
 
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA("INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) " +
             "VALUES('%s', '%s', '%s', '%s')"),
@@ -139,7 +139,7 @@ public enum Query {
             "VALUES('%s', '%s', '%s', '%s', '%s')"),
 
     PRENOTAZIONE_LIBERA_INSERIMENTO("INSERT INTO prenota (idP, socio, data) " +
-            "VALUES ('%s', %s, '%s')"),
+            "VALUES ('%s', '%s', '%s')"),
 
     // =============================== //
     //           PROPRIETARIO

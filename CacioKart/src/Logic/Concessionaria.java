@@ -24,9 +24,9 @@ public class Concessionaria {
     /**
      * Metodo per inserire i kart nella concessionaria.
      * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
-     * Creo un oggetto di tipo Objects.Kart in modo da poterlo manipolare con i vari get,
-     * dopodiché utilizzo il metodo di Logic.DBConnector per inserire il nuovo kart e
-     * il metodo di ResponseHandler per mandare una risposta
+     * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
+     * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
+     * il metodo di ResponseHandler per mandare una risposta.
      *
      * @param nuovoKart
      * @param prezzo
@@ -44,7 +44,8 @@ public class Concessionaria {
         //System.out.println(maxIDProdotto.get(0));
 
         //Logica per rimuovere tutti i caratteri tranne i numeri
-        ultimoProdotto = result.get(0).toString().replaceAll("\\D", "");
+        ultimoProdotto = result.get(0).get("idProdotto").toString();
+        //ultimoProdotto = result.get(0).toString().replaceAll("\\D", "");
 
         if (ultimoProdotto == "") {
             idProdotto = "1";

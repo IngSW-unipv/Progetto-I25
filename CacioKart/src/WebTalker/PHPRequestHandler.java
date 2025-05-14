@@ -46,7 +46,6 @@ public class PHPRequestHandler {
 
             tipo = TipoComandi.requestedCommand(comando); //Controllo a quale ENUM corrisponde il comando
 
-
             switch (tipo) { //Switch per gestire i comandi in ingresso
 
                 case LOGIN:
@@ -300,6 +299,7 @@ public class PHPRequestHandler {
 
         Prenotazione p = new Prenotazione();
         p.prenotazione(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
+
     }
 
     /**
@@ -394,7 +394,7 @@ public class PHPRequestHandler {
     /**
      * Metodo per aggiungere dipendenti.
      * Dopo aver formattato le date tramite i formatter, le passo al costruttore
-     * di Objects.Dipendente per utilizzare i metodi di get e set nel metodo
+     * di Dipendente per utilizzare i metodi di get e set nel metodo
      * di aggiuntaDipendenti.
      *
      * @param dati
@@ -437,6 +437,13 @@ public class PHPRequestHandler {
         p.mostraDipendenti(clientSocket);
     }
 
+    /** Metodo per aggiungere la benzina a un kart.
+     * Data una targa, imposto la benzina di quel kart specifico al massimo
+     * possibile.
+     *
+     * @param targa
+     * @param clientSocket
+     */
     private void aggiungiBenzinaCase(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
         Kart k = new Kart();
@@ -445,31 +452,66 @@ public class PHPRequestHandler {
     }
 
 
-    //DA QUA IN POI
+    /** Metodo per l'acquisto di un kart da parte dell'utente.
+     * Ricevo il cf dell'utente e la targa del kart da assegnargli.
+     *
+     * @param dati
+     * @param clientSocket
+     */
     private void acquistaKartCase(String dati, Socket clientSocket) {
         Socio s = new Socio();
-        s.compraKart(dati, clientSocket);
+        String[] kartUtente = dati.split(" ");
+        s.setCf(kartUtente[0]);
+        Kart k = new Kart();
+        k.setTarga(kartUtente[1]);
+        s.compraKart(k, clientSocket);
     }
 
+    /** Metodo per effettuare la manutenzione di un kart.
+     * Ricevo la targa del kart e la descrizione della manutenzione effettuata.
+     *
+     * @param info
+     * @param clientSocket
+     */
     private void manutenzioneCase(String info, Socket clientSocket) {
         Meccanico m = new Meccanico();
         String[] mex = info.split(" ", 3);
-        String targa = mex[0];
+        Kart k = new Kart();
+        k.setTarga(mex[0]);
         String text = mex[2];
         double prezzo = Double.parseDouble(mex[1]);
-        m.aggiornamentoManutenzione(targa, text, prezzo, clientSocket);
+        m.aggiornamentoManutenzione(k, text, prezzo, clientSocket);
     }
 
+    /** Metodo per mostrare i pezzi al client.
+     *  Non ci sono dati in ingresso perché la query non varia.
+     *
+     * @param clientSocket
+     */
     private void mostraPezziCase(Socket clientSocket) {
         Concessionaria c = new Concessionaria();
         c.mostraPezzo(clientSocket);
     }
 
+    /** Metodo per mostrare i partecipanti di una gara all'arbitro per
+     * inserire le penalità.
+     * Dato un idgara, si mostrano all'arbitro le informazioni relative a quella gara.
+     *
+     * @param idGara
+     * @param clientSocket
+     */
     private void mostraGaraPenalitaCase(String idGara, Socket clientSocket) {
         Classifica c = new Classifica();
         c.classificaPenalita(idGara, clientSocket);
     }
 
+    /** Metodo per inserire le penalità.
+     * Dato il cf, idgara e il tempo di penalità, inserisco una penalità
+     * a un determinato pilota.
+     *
+     * @param messaggio
+     * @param clientSocket
+     */
     private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) {
         //socio idgara tempo
         String[] info = messaggio.split(" ");
@@ -482,6 +524,12 @@ public class PHPRequestHandler {
         a.inserimentoPenalita(s, idGara, penalita, clientSocket);
     }
 
+    /** Metodo per aggiungere pezzi all'inventario della concessionaria.
+     * Dati i dati del nuovo pezzo, lo si aggiunge al db.
+     *
+     * @param messaggio
+     * @param clientSocket
+     */
     private void aggiungiPezziCase(String messaggio, Socket clientSocket) {
         //idPezzo quantità
         String[] info = messaggio.split(" ");
@@ -492,12 +540,25 @@ public class PHPRequestHandler {
         c.inserimentoPezzo(p, clientSocket);
     }
 
+    /** Metodo per mostrare i soci disponibili a essere inseriti all'interno
+     * di un nuovo team.
+     * Non ci sono dati in ingresso oltre al socket perché la query non varia.
+     *
+     * @param clientSocket
+     */
     private void mostraSociCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         query = Query.MOSTRA_SOCI_INSERIMENTO_CAMPIONATO.getQuery();
         o.mostraSociInserimento(query, clientSocket);
     }
 
+    /** Metodo per l'acquisto pezzi da parte di un socio.
+     * Preso il cf e l'id del pezzo, posso associare a un utente
+     * il pezzo acquistato.
+     *
+     * @param messaggio
+     * @param clientSocket
+     */
     private void acquistaPezziCase(String messaggio, Socket clientSocket) {
         //cf pezzo
         String[] info = messaggio.split(" ");
@@ -508,17 +569,35 @@ public class PHPRequestHandler {
         s.acquistaPezzi(p, clientSocket);
     }
 
+    /** Metodo per mostrare tutti i campionati correnti all'organizzatore.
+     * Non ci sono dati in ingresso oltre al socket perché la query non varia.
+     *
+     * @param clientSocket
+     */
     private void mostraCampionato(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         query = Query.MOSTRA_CAMPIONATI.getQuery();
         o.mostraCampionato(query, clientSocket);
     }
 
+    /** Metodo per mostrare le gare disponibili a essere associate a un campionato.
+     * Non ci sono dati in ingresso oltre al socket perché la query non varia.
+     *
+     * @param clientSocket
+     */
     private void selezionaGaraCampionato(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         o.mostraGareInserimento(clientSocket);
     }
 
+    /** Metodo per l'organizzatore per creare team.
+     * In ingresso si ha il nome del team, il colore del team (in RGB) e i due codici fiscali dei soci.
+     * Viene creato un oggetto di tipo Team per gestire il tutto con i costruttori
+     * e i metodi appositi.
+     *
+     * @param messaggio
+     * @param clientSocket
+     */
     private void creazioneTeamCase(String messaggio, Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         //nome colore cf1 cf2

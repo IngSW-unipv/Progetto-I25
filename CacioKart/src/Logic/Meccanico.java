@@ -21,13 +21,14 @@ public class Meccanico {
 
     }
 
-    public void aggiornamentoManutenzione(String targa, String text, double prezzo, Socket clientSocket) {
+    public void aggiornamentoManutenzione(Kart k, String text, double prezzo, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         String idM;
         //kart = db.executeReturnQuery(SELECT);
 
         SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
+        //CAMBIARE CON L'ALTRO METODO
         idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
         //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
 
@@ -35,7 +36,7 @@ public class Meccanico {
 
         //System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
 
-        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
+        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), k.getTarga());
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
