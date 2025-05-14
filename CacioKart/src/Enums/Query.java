@@ -200,16 +200,6 @@ public enum Query {
 
     ACQUISTA_PEZZI_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) " +
             "VALUES('%s', '%s', '%s')"),
-
-
-
-
-
-
-
-
-
-
     ;
 
     private final String query;

@@ -33,7 +33,7 @@ public class Meccanico {
         //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
         idM = String.valueOf(Integer.parseInt(idM) + 1);
 
-        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
+        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), k.getTarga());
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
