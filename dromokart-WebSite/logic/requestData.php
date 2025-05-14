@@ -4,21 +4,21 @@
 
     $socket = connectionOpen($address, $port);
     function request($msg, $socket){
-    fwrite($socket, $msg ."\n");
+        fwrite($socket, $msg ."\n");
 
-    $res = '';
-    while (!feof($socket)) {
-        $line = fgets($socket);
-        // Se la riga, una volta rimossi spazi e newline, è "end", esci dal ciclo
-        if (trim($line) === "end") {
-            break;
+        $res = '';
+        while (!feof($socket)) {
+            $line = fgets($socket);
+            // Se la riga, una volta rimossi spazi e newline, è "end", esci dal ciclo
+            if (trim($line) === "end") {
+                break;
+            }
+            $res .= $line;
         }
-        $res .= $line;
-    }
-    fclose($socket);
+        fclose($socket);
 
-    $res = trim($res);
+        $res = trim($res);
 
-    return $res;
+        return $res;
     }
 ?>

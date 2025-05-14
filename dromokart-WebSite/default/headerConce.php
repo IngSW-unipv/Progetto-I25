@@ -12,6 +12,9 @@
       <nav>
         <ul>
           <li><a href="index.php">Home</a></li>
+          <?php
+            require_once 'rankCheck.php';
+          ?>
           <li><a href="chi-siamo.php">Chi Siamo</a></li>
           <li><a href="concessionaria-home.php">I Nostri Modelli</a></li>
           <li><a href="parti.php">Parti di ricambio</a></li>

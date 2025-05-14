@@ -27,17 +27,18 @@ public class Prenotazione {
 
         SELECT = Query.PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI.getQuery(dataGara, fasciaOraria);
         result = db.executeReturnQuery(SELECT);
-        prenotazioniConcorrenti = result.get(0).toString().replaceAll("\\D", "");
+        prenotazioniConcorrenti = result.get(0).get("concurrent").toString();
 
         if (prenotazioniConcorrenti.equals("20")) {
             System.out.println("Nessun posto disponibile\n!");
             responder.sendResponse(clientSocket, "0");
             return;
         }
+
         SELECT = Query.PRENOTAZIONE_MAX_ID.getQuery();
         result.clear();
         result = db.executeReturnQuery(SELECT);
-        idPrenotazione = result.toString().replaceAll("\\D", "");
+        idPrenotazione = result.get(0).get("max").toString();
 
         if (!idPrenotazione.equals("0")) {
             idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione) + 1);
@@ -53,19 +54,19 @@ public class Prenotazione {
             case "libera":
 
                 costo = 15;
-                SELECT = "SELECT dip FROM caciokart.dipendente WHERE dip = '" + cf + "'";
+                SELECT = Query.SELEZIONA_DIPENDENTE_PRENOTAZIONE.getQuery(cf);
                 result.clear();
+
                 result = db.executeReturnQuery(SELECT);
                 INSERT_ITERATOR[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
 
                 if (result.size() != 0 && result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
-                    INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO.getQuery(idPrenotazione, "NULL", dataO);
+                    INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO_NULL.getQuery(idPrenotazione, dataO);
 
                 } else {
                     INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO.getQuery(idPrenotazione, cf, dataO);
 
                 }
-
 
                 for (String gara : INSERT_ITERATOR) {
                     queryIndicator = db.executeUpdateQuery(gara);

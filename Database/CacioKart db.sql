@@ -8,7 +8,6 @@ DROP DATABASE IF EXISTS caciokart;
 CREATE DATABASE caciokart;
 USE caciokart;
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -30,7 +29,7 @@ DROP TABLE IF EXISTS `acquista`;
 CREATE TABLE `acquista` (
   `socio` varchar(16) NOT NULL,
   `idProdotto` varchar(5) NOT NULL,
-  `data` date NOT NULL,
+  `data` datetime NOT NULL,
   PRIMARY KEY (`socio`,`idProdotto`,`data`),
   KEY `idProdotto` (`idProdotto`),
   CONSTRAINT `acquista_ibfk_1` FOREIGN KEY (`socio`) REFERENCES `socio` (`socio`),
@@ -44,7 +43,7 @@ CREATE TABLE `acquista` (
 
 LOCK TABLES `acquista` WRITE;
 /*!40000 ALTER TABLE `acquista` DISABLE KEYS */;
-INSERT INTO `acquista` VALUES ('Andrea','5','2025-03-14'),('Andrea','6','2025-03-14'),('Andrea','9','2025-03-14');
+INSERT INTO `acquista` VALUES ('Andrea','10','2025-03-18 16:56:22'),('Andrea','10','2025-03-18 16:56:25'),('Andrea','10','2025-03-18 16:56:30'),('Andrea','9','2025-03-14 00:00:00');
 /*!40000 ALTER TABLE `acquista` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +153,7 @@ CREATE TABLE `concessionaria` (
 
 LOCK TABLES `concessionaria` WRITE;
 /*!40000 ALTER TABLE `concessionaria` DISABLE KEYS */;
-INSERT INTO `concessionaria` VALUES ('10','Corona',150,25),('101','KRTLUC',1,2500),('11','Disco_freno_anteriore',9,30),('12','disco_freno_posteriore',30,80),('13','pastiglie freno',50,30),('14','ruota',12,110),('15','Volante',5,140),('16','Volante2',7,170),('2','KRT577',1,6500),('3','KRT111',10,199.99),('4','KRT633',1,4500),('5','KRT444',12,459.25),('6','KRT555',8,150),('7','Radiatore',2,200),('8','Motore_125cc',9,1500),('9','Carburatore_28',12,170);
+INSERT INTO `concessionaria` VALUES ('10','Corona',147,25),('11','Disco_freno_anteriore',9,30),('12','disco_freno_posteriore',30,80),('13','pastiglie freno',50,30),('14','ruota',12,110),('15','Volante',5,140),('16','Volante2',7,170),('2','KRT577',1,6500),('7','Radiatore',2,200),('8','Motore_125cc',9,1500),('9','Carburatore_28',12,170);
 /*!40000 ALTER TABLE `concessionaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +264,7 @@ CREATE TABLE `kart` (
 
 LOCK TABLES `kart` WRITE;
 /*!40000 ALTER TABLE `kart` DISABLE KEYS */;
-INSERT INTO `kart` VALUES ('KRT000',125,10),('KRT111',150,10),('KRT222',150,10),('KRT228',50,20),('KRT234',150,20),('KRT267',125,20),('KRT292',150,20),('KRT323',125,20),('KRT333',900,20),('KRT347',150,20),('KRT432',50,20),('KRT435',125,20),('KRT444',500,10),('KRT555',125,20),('KRT577',150,20),('KRT633',125,20),('KRT654',125,20),('KRT666',125,20),('KRT675',125,20),('KRT920',50,20),('KRTCON',150,20),('KRTLUC',50,20),('KRTNOL',150,20),('KRTSOC',125,20);
+INSERT INTO `kart` VALUES ('KRT000',125,10),('KRT092',150,20),('KRT111',150,10),('KRT112',50,20),('KRT115',150,20),('KRT119',125,20),('KRT222',150,10),('KRT228',50,20),('KRT234',150,20),('KRT267',125,20),('KRT292',150,20),('KRT323',125,20),('KRT333',900,20),('KRT347',150,20),('KRT432',50,20),('KRT435',125,20),('KRT444',500,10),('KRT555',125,20),('KRT577',150,20),('KRT633',125,20),('KRT654',125,20),('KRT666',125,20),('KRT675',125,20),('KRT920',50,20),('KRTCON',150,20),('KRTLUC',50,20),('KRTNOL',150,20),('KRTSOC',125,20);
 /*!40000 ALTER TABLE `kart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +276,7 @@ DROP TABLE IF EXISTS `manutenzione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `manutenzione` (
-  `idM` varchar(5) NOT NULL,
+  `idM` int NOT NULL,
   `tipoInt` varchar(1000) DEFAULT NULL,
   `costo` double DEFAULT NULL,
   `dataM` date DEFAULT NULL,
@@ -294,7 +293,7 @@ CREATE TABLE `manutenzione` (
 
 LOCK TABLES `manutenzione` WRITE;
 /*!40000 ALTER TABLE `manutenzione` DISABLE KEYS */;
-INSERT INTO `manutenzione` VALUES ('1','Esplosione alla ruota sinistra',80,'2025-03-12','KRT267'),('10','Sostituzione olio motore',60,'2025-03-07','KRT292'),('11','Riparazione carburatore',130,'2025-03-08','KRT323'),('12','Controllo sistema elettrico',75,'2025-03-09','KRT333'),('13','Sostituzione pastiglie freno',85,'2025-03-10','KRT347'),('14','Controllo trasmissione',95,'2025-03-11','KRT432'),('15','Riparazione sistema di scarico',140,'2025-03-12','KRT435'),('16','Sostituzione filtri aria',50,'2025-03-13','KRT444'),('17','Verifica batteria',45,'2025-03-14','KRT555'),('18','Sostituzione frizione',120,'2025-03-15','KRT577'),('19','Controllo luci e indicatori',40,'2025-03-16','KRT633'),('2','motore fuso',700,'2025-03-12','KRT000'),('20','Sostituzione gomme posteriori',85,'2025-03-17','KRT654'),('21','Verifica olio freni',70,'2025-03-18','KRT666'),('22','Riparazione sospensioni',150,'2025-03-19','KRT675'),('23','Controllo motore',110,'2025-03-20','KRT920'),('24','Sostituzione cinghia di distribuzione',130,'2025-03-21','KRT000'),('25','Sostituzione pastiglie freno',90,'2025-03-22','KRT111'),('26','Controllo sistema di raffreddamento',100,'2025-03-23','KRT222'),('27','Riparazione carburatore',125,'2025-03-24','KRT228'),('28','Sostituzione gomme anteriori',80,'2025-03-25','KRT234'),('29','Sostituzione freni posteriori',95,'2025-03-26','KRT267'),('3','Rottura asse anteriore',2000,'2025-03-12','KRT432'),('30','Controllo trasmissione',90,'2025-03-27','KRT292'),('31','Riparazione sistema di scarico',110,'2025-03-28','KRT323'),('32','Verifica batteria',45,'2025-03-29','KRT333'),('33','Sostituzione filtri aria',50,'2025-03-30','KRT347'),('34','Riparazione sospensioni',150,'2025-03-31','KRT432'),('35','Controllo motore e carburatore',140,'2025-04-01','KRT435'),('36','Controllo luci e indicatori',40,'2025-04-02','KRT444'),('37','Sostituzione frizione',120,'2025-04-03','KRT555'),('38','Controllo sistema elettrico',75,'2025-04-04','KRT577'),('39','Sostituzione gomme posteriori',85,'2025-04-05','KRT633'),('4','Sostituzione gomme anteriori',80,'2025-03-01','KRT000'),('40','Verifica olio freni',70,'2025-04-06','KRT654'),('41','Sostituzione pastiglie freno',90,'2025-04-07','KRT666'),('42','Riparazione sistema di scarico',140,'2025-04-08','KRT675'),('43','Controllo sospensioni',100,'2025-04-09','KRT920'),('44','Sostituzione cinghia di distribuzione',110,'2025-04-10','KRT000'),('45','Sostituzione gomme anteriori',80,'2025-04-11','KRT111'),('46','Riparazione carburatore',130,'2025-04-12','KRT222'),('47','Controllo trasmissione',90,'2025-04-13','KRT228'),('48','Controllo luci e indicatori',40,'2025-04-14','KRT267'),('49','Sostituzione freni posteriori',95,'2025-04-15','KRT292'),('5','Controllo motore e carburatore',150,'2025-03-02','KRT111'),('50','Verifica batteria',45,'2025-04-16','KRT323'),('6','Sostituzione freni posteriori',90,'2025-03-03','KRT222'),('7','Riparazione sistema di raffreddamento',120,'2025-03-04','KRT228'),('8','Sostituzione cinghia di distribuzione',110,'2025-03-05','KRT234'),('9','Controllo sospensioni',100,'2025-03-06','KRT267');
+INSERT INTO `manutenzione` VALUES (1,'Esplosione alla ruota sinistra',80,'2025-03-12','KRT267'),(2,'motore fuso',700,'2025-03-12','KRT000'),(3,'Rottura asse anteriore',2000,'2025-03-12','KRT432'),(4,'Sostituzione gomme anteriori',80,'2025-03-01','KRT000'),(5,'Controllo motore e carburatore',150,'2025-03-02','KRT111'),(6,'Sostituzione freni posteriori',90,'2025-03-03','KRT222'),(7,'Riparazione sistema di raffreddamento',120,'2025-03-04','KRT228'),(8,'Sostituzione cinghia di distribuzione',110,'2025-03-05','KRT234'),(9,'Controllo sospensioni',100,'2025-03-06','KRT267'),(10,'Sostituzione olio motore',60,'2025-03-07','KRT292'),(11,'Riparazione carburatore',130,'2025-03-08','KRT323'),(12,'Controllo sistema elettrico',75,'2025-03-09','KRT333'),(13,'Sostituzione pastiglie freno',85,'2025-03-10','KRT347'),(14,'Controllo trasmissione',95,'2025-03-11','KRT432'),(15,'Riparazione sistema di scarico',140,'2025-03-12','KRT435'),(16,'Sostituzione filtri aria',50,'2025-03-13','KRT444'),(17,'Verifica batteria',45,'2025-03-14','KRT555'),(18,'Sostituzione frizione',120,'2025-03-15','KRT577'),(19,'Controllo luci e indicatori',40,'2025-03-16','KRT633'),(20,'Sostituzione gomme posteriori',85,'2025-03-17','KRT654'),(21,'Verifica olio freni',70,'2025-03-18','KRT666'),(22,'Riparazione sospensioni',150,'2025-03-19','KRT675'),(23,'Controllo motore',110,'2025-03-20','KRT920'),(24,'Sostituzione cinghia di distribuzione',130,'2025-03-21','KRT000'),(25,'Sostituzione pastiglie freno',90,'2025-03-22','KRT111'),(26,'Controllo sistema di raffreddamento',100,'2025-03-23','KRT222'),(27,'Riparazione carburatore',125,'2025-03-24','KRT228'),(28,'Sostituzione gomme anteriori',80,'2025-03-25','KRT234'),(29,'Sostituzione freni posteriori',95,'2025-03-26','KRT267'),(30,'Controllo trasmissione',90,'2025-03-27','KRT292'),(31,'Riparazione sistema di scarico',110,'2025-03-28','KRT323'),(32,'Verifica batteria',45,'2025-03-29','KRT333'),(33,'Sostituzione filtri aria',50,'2025-03-30','KRT347'),(34,'Riparazione sospensioni',150,'2025-03-31','KRT432'),(35,'Controllo motore e carburatore',140,'2025-04-01','KRT435'),(36,'Controllo luci e indicatori',40,'2025-04-02','KRT444'),(37,'Sostituzione frizione',120,'2025-04-03','KRT555'),(38,'Controllo sistema elettrico',75,'2025-04-04','KRT577'),(39,'Sostituzione gomme posteriori',85,'2025-04-05','KRT633'),(40,'Verifica olio freni',70,'2025-04-06','KRT654'),(41,'Sostituzione pastiglie freno',90,'2025-04-07','KRT666'),(42,'Riparazione sistema di scarico',140,'2025-04-08','KRT675'),(43,'Controllo sospensioni',100,'2025-04-09','KRT920'),(44,'Sostituzione cinghia di distribuzione',110,'2025-04-10','KRT000'),(45,'Sostituzione gomme anteriori',80,'2025-04-11','KRT111'),(46,'Riparazione carburatore',130,'2025-04-12','KRT222'),(47,'Controllo trasmissione',90,'2025-04-13','KRT228'),(48,'Controllo luci e indicatori',40,'2025-04-14','KRT267'),(49,'Sostituzione freni posteriori',95,'2025-04-15','KRT292'),(50,'Verifica batteria',45,'2025-04-16','KRT323'),(51,'Riccardo è caduto, bucando tutte e 4 le gomme del kart',150,'2025-03-18','KRT112');
 /*!40000 ALTER TABLE `manutenzione` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,7 +406,7 @@ CREATE TABLE `socio` (
 
 LOCK TABLES `socio` WRITE;
 /*!40000 ALTER TABLE `socio` DISABLE KEYS */;
-INSERT INTO `socio` VALUES ('1111111111111111','Davide','Albani','ciao@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','2025-02-27',NULL),('2222222222222222','Davide','Albani','videogdavide@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','2025-02-16',NULL),('Adriano','Bacicchi','Gialli','paolo.gialli@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1978-12-05',NULL),('Alessandro','Piacentini','Verdi','luca.verdi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1990-03-10',NULL),('Andrea','Andrea','Renelli','mario.rossi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1980-01-15','KRT444'),('Davide','Albani','Neri','sara.neri@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1982-09-25',NULL),('Luca','Tripodi','Bianchi','giulia.bianchi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1985-06-20',NULL),('S0001','Mario','Rossi','mario.rossi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1990-01-01','T001'),('S0002','Luca','Bianchi','luca.bianchi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1992-02-02','T002'),('S0003','Anna','Verdi','anna.verdi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1988-03-03','T003'),('S0004','Paolo','Neri','paolo.neri@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1985-04-04','T004'),('S0005','Elisa','Gallo','elisa.gallo@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1993-05-05','T005'),('S0006','Marco','Ferrari','marco.ferrari@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1987-06-06','T006'),('S0007','Sara','Romano','sara.romano@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1991-07-07','T007'),('S0008','Giovanni','Moretti','giovanni.moretti@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1994-08-08','T008'),('S0009','Valentina','Rizzo','valentina.rizzo@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1995-09-09','T009'),('S0010','Antonio','Costa','antonio.costa@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1986-10-10','T010');
+INSERT INTO `socio` VALUES ('1111111111111111','Davide','Albani','ciao@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','2025-02-27',NULL),('2222222222222222','Davide','Albani','videogdavide@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','2025-02-16',NULL),('Adriano','Bacicchi','Gialli','paolo.gialli@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1978-12-05',NULL),('Alessandro','Piacentini','Verdi','luca.verdi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1990-03-10',NULL),('Andrea','Andrea','Renelli','mario.rossi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1980-01-15','KRT577'),('Davide','Albani','Neri','sara.neri@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1982-09-25',NULL),('Luca','Tripodi','Bianchi','giulia.bianchi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1985-06-20',NULL),('S0001','Mario','Rossi','mario.rossi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1990-01-01','T001'),('S0002','Luca','Bianchi','luca.bianchi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1992-02-02','T002'),('S0003','Anna','Verdi','anna.verdi@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1988-03-03','T003'),('S0004','Paolo','Neri','paolo.neri@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1985-04-04','T004'),('S0005','Elisa','Gallo','elisa.gallo@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1993-05-05','T005'),('S0006','Marco','Ferrari','marco.ferrari@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1987-06-06','T006'),('S0007','Sara','Romano','sara.romano@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1991-07-07','T007'),('S0008','Giovanni','Moretti','giovanni.moretti@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1994-08-08','T008'),('S0009','Valentina','Rizzo','valentina.rizzo@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1995-09-09','T009'),('S0010','Antonio','Costa','antonio.costa@example.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','1986-10-10','T010');
 /*!40000 ALTER TABLE `socio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,4 +443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-16 20:36:05
+-- Dump completed on 2025-03-18 17:25:42

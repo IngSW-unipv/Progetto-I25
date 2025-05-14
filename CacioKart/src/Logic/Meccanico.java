@@ -14,6 +14,7 @@ public class Meccanico {
     private DBConnector db;
     private PHPResponseHandler responder;
     private String SELECT, DELETE, UPDATE, INSERT;
+    private String[] DELETE_ITERATOR;
     private TableMaker maker;
     private String queryIndicator;
 
@@ -28,15 +29,11 @@ public class Meccanico {
         //kart = db.executeReturnQuery(SELECT);
 
         SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
-        //CAMBIARE CON L'ALTRO METODO
-        idM = db.executeReturnQuery(SELECT).toString().replaceAll("\\D", "");
+        idM = db.executeReturnQuery(SELECT).get(0).get("max").toString();
         //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
-
         idM = String.valueOf(Integer.parseInt(idM) + 1);
 
-        //System.out.println("Dati dell'INSERT: " + idM + " " + text + " " + prezzo + " " + LocalDate.now() + " " + targa);
-
-        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), k.getTarga());
+        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), targa);
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
@@ -47,8 +44,18 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        DELETE = Query.INSERIMENTO_KART_MECCANICO.getQuery(targa);
-        queryIndicator = db.executeUpdateQuery(DELETE);
+        DELETE_ITERATOR = new String[2];
+        DELETE_ITERATOR[0] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA.getQuery(targa);
+        DELETE_ITERATOR[1] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA.getQuery(targa);
+
+        for (String delete : DELETE_ITERATOR) {
+            queryIndicator = db.executeUpdateQuery(delete);
+
+            if (queryIndicator == "0") {
+                responder.sendResponse(clientSocket, queryIndicator);
+                return;
+            }
+        }
         responder.sendResponse(clientSocket, queryIndicator);
     }
 

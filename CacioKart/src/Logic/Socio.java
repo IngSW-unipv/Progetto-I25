@@ -59,7 +59,7 @@ public class Socio extends Persona {
 
         List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
         //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.toString().replaceAll("\\D", ""), LocalDateTime.now());
+        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.get(0).get("idProdotto").toString(), LocalDateTime.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
     }

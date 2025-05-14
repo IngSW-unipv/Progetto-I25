@@ -40,7 +40,7 @@ public enum Query {
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART("INSERT INTO kart (targa, cilindrata, serbatoio) " +
             "VALUES('%s', '%s', '%s')"),
 
-    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED)) AS idProdotto FROM concessionaria"),
+    INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED)) AS max FROM concessionaria"),
 
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA("INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) " +
             "VALUES('%s', '%s', '%s', '%s')"),
@@ -56,12 +56,15 @@ public enum Query {
     //            MECCANICO
     // =============================== //
 
-    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') FROM manutenzione"),
+    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') AS max FROM manutenzione"),
 
     AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) " +
             "VALUES ('%s', '%s', '%s', '%s', '%s')"),
 
-    INSERIMENTO_KART_MECCANICO("DELETE FROM caciokart.concessionaria " +
+    INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA("DELETE FROM caciokart.acquista " +
+            "WHERE idProdotto = (SELECT idProdotto FROM concessionaria WHERE tipol = '%s')"),
+
+    INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA("DELETE FROM caciokart.concessionaria " +
             "WHERE tipol = '%s'"),
 
     AGGIUNTA_BENZINA_MECCANICO("UPDATE caciokart.kart " +
@@ -101,7 +104,6 @@ public enum Query {
     MOSTRA_GARE_INSERIMENTO("SELECT g.idGara, g.ora FROM garas g " +
             "WHERE NOT EXISTS (SELECT 1 FROM partecipa p WHERE p.idGara = g.idGara)"),
 
-
     AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("INSERT INTO partecipa (idGara, idCampionato) " +
             "VALUES ('%s', '%s')"),
 
@@ -117,6 +119,9 @@ public enum Query {
 
     SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio"),
 
+    SELEZIONA_DIPENDENTE_PRENOTAZIONE("SELECT dip " +
+            "FROM caciokart.dipendente WHERE dip = '%s'"),
+
     // =============================== //
     //             PERSONA
     // =============================== //
@@ -130,10 +135,10 @@ public enum Query {
     //            PRENOTAZIONE
     // =============================== //
 
-    PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI("SELECT count(*) FROM caciokart.prenotazione " +
+    PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI("SELECT count(*) AS concurrent FROM caciokart.prenotazione " +
             "WHERE dataG = '%s' AND fasciaO = '%s'"),
 
-    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) FROM PRENOTAZIONE"),
+    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) AS max FROM PRENOTAZIONE"),
 
     PRENOTAZIONE_GENERICA_INSERIMENTO("INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) " +
             "VALUES('%s', '%s', '%s', '%s', '%s')"),
@@ -141,6 +146,8 @@ public enum Query {
     PRENOTAZIONE_LIBERA_INSERIMENTO("INSERT INTO prenota (idP, socio, data) " +
             "VALUES ('%s', '%s', '%s')"),
 
+    PRENOTAZIONE_LIBERA_INSERIMENTO_NULL("INSERT INTO prenota (idP, socio, data) " +
+            "VALUES ('%s', NULL, '%s')"),
     // =============================== //
     //           PROPRIETARIO
     // =============================== //
@@ -152,6 +159,25 @@ public enum Query {
             "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"),
 
     RIMOZIONE_DIPENDENTE_PROPRIETARIO("DELETE FROM caciokart.dipendente WHERE dip = '%s'"),
+
+    BILANCIO_ENTRATE_PROPRIETARIO("SELECT " +
+            " COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+            " FROM acquista a " +
+            "  JOIN concessionaria c ON a.idProdotto = c.idProdotto), 0)" +
+            " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0)" +
+            " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0)" +
+            " AS ENTRATE"),
+
+    BILANCIO_USCITE_PROPRIETARIO("SELECT COALESCE(SUM(stipendio), 0) AS USCITE FROM dipendente"),
+
+    BILANCIO_SALDO_TOTALE("SELECT " +
+            "COALESCE((SELECT SUM(c.quantita * c.prezzo) " +
+            " FROM acquista a " +
+            " JOIN concessionaria c ON a.idprodotto = c.idprodotto), 0) " +
+            " + COALESCE((SELECT SUM(costo) FROM prenotazione), 0) " +
+            " + COALESCE((SELECT SUM(costo) FROM manutenzione), 0) " +
+            " - COALESCE((SELECT SUM(stipendio) FROM dipendente), 0)" +
+            " AS SALDO"),
 
     // =============================== //
     //              SOCIO
