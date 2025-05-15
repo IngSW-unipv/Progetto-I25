@@ -282,7 +282,6 @@ CREATE TABLE `manutenzione` (
   `targa` varchar(6) NOT NULL,
   PRIMARY KEY (`idM`),
   KEY `targa_idx` (`targa`),
-  CONSTRAINT `targa` FOREIGN KEY (`targa`) REFERENCES `kart` (`targa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
