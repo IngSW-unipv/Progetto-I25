@@ -141,6 +141,13 @@ public class Organizzatore {
         }
     }
 
+    /** Metodo per associare un socio a una prenotazione.
+     *
+     *
+     * @param idP Id della prenotazione
+     * @param s Il socio da associare
+     * @param clientSocket Il socket di risposta
+     */
     public void aggiornaPrenota(String idP, Socio s, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();

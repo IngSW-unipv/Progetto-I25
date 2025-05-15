@@ -25,8 +25,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * La classe riceve stringhe composte in questo modo: *parola singola* *dati*
+    /**La classe riceve stringhe composte in questo modo: *parola singola* *dati*
      * La prima parola indica la richiesta del client da eseguire.
      * La seconda parte del messaggio cambia in base alla richiesta da eseguire,
      * potrebbe contenere 0 o più informazioni a seconda dei dati necessari.
@@ -193,8 +192,7 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo per gestire la logica di login.
+    /** Metodo per gestire la logica di login.
      * I dati in ingresso sono il CF (chiave nel db) e la password.
      *
      * @param dati CF, pwd.
@@ -208,8 +206,7 @@ public class PHPRequestHandler {
         utente.login(clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica delle classifiche per l'arbitro.
+    /** Metodo per gestire la logica delle classifiche per l'arbitro.
      * L'arbitro è interessato a vedere tutte le classifiche delle
      * gare effettuate, senza duplicati.
      *
@@ -220,29 +217,25 @@ public class PHPRequestHandler {
         c.classificaArbitro(clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica della classifica generale
+    /** Metodo per gestire la logica della classifica generale
      * visibile nella prima pagina del sito.
      * Seleziono dal db tutte le informazioni di una singola classifica
      * mettendola in Join con i soci per ottenere le informazioni di un singolo
      * socio.
      *
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void classificaGenerale(Socket clientSocket) {
         Classifica c = new Classifica();
         c.classificaCompleta(clientSocket);
     }
 
-    /**
-     * Metodo per gestire la classifica visibile da un singolo utente.
+    /** Metodo per gestire la classifica visibile da un singolo utente.
      * In ingresso il cf dell'utente ci permette di fare una query
      * di tutte le classifiche che appartengono solo a lui.
      *
      * @param cfPilota
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void classificaUtente(String cfPilota, Socket clientSocket) {
         Classifica c = new Classifica();
@@ -251,8 +244,7 @@ public class PHPRequestHandler {
         c.classificaUtente(s, clientSocket);
     }
 
-    /**
-     * Metodo per gestire la logica di registrazione.
+    /** Metodo per gestire la logica di registrazione.
      * Prendo il messaggio e lo divido nelle singole informazioni richieste.
      * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
      * il tipo Date presente nel database.
@@ -302,13 +294,11 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo di aggiunta kart.
+    /** Metodo di aggiunta kart.
      * Pressoché identico al metodo di registrazione.
      *
      * @param dati
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) {
         String[] info = dati.split(" "); //Passare a kart
@@ -319,15 +309,13 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo per aggiungere i kart dalla vendita del concessionario
+    /** Metodo per aggiungere i kart dalla vendita del concessionario
      * al noleggio del kartdromo a cura del meccanico.
      * La targa in ingresso ci permette di selezionare un kart specifico da rimuovere
      * dalla tabella concessionario.
      *
      * @param targa
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
@@ -335,12 +323,10 @@ public class PHPRequestHandler {
 
     }
 
-    /**
-     * Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
+    /** Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
      * Non richiede parametri oltre al socket per spedire la risposta.
      *
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void mostraAggiuntaKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
@@ -348,14 +334,12 @@ public class PHPRequestHandler {
         m.mostraKart(query, clientSocket);
     }
 
-    /**
-     * Metodo per rimuovere i kart dal kartodromo.
+    /** Metodo per rimuovere i kart dal kartodromo.
      * Il client manda una targa da rimuovere dal db, il metodo
      * la utilizza per la query e risponde al client.
      *
      * @param targa
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void rimozioneKartCase(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
@@ -364,12 +348,10 @@ public class PHPRequestHandler {
         m.rimozioneKart(k, clientSocket);
     }
 
-    /**
-     * Metodo per mostrare i kart disponibili alla rimozione.
+    /** Metodo per mostrare i kart disponibili alla rimozione.
      * Non necessita di dati in ingresso, la query è sempre quella.
      *
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void mostraRimuoviKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
@@ -377,13 +359,11 @@ public class PHPRequestHandler {
         m.mostraKart(query, clientSocket);
     }
 
-    /**
-     * Metodo per mostrare i kart appartenenti ai clienti e
+    /** Metodo per mostrare i kart appartenenti ai clienti e
      * disponibili al noleggio per modificarne la manutenzione.
      * Non necessita di dati in ingresso, la query è sempre quella.
      *
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
@@ -391,15 +371,13 @@ public class PHPRequestHandler {
         m.mostraKartManutenzione(query, clientSocket);
     }
 
-    /**
-     * Metodo per aggiungere dipendenti.
+    /** Metodo per aggiungere dipendenti.
      * Dopo aver formattato le date tramite i formatter, le passo al costruttore
      * di Dipendente per utilizzare i metodi di get e set nel metodo
      * di aggiuntaDipendenti.
      *
      * @param dati
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) {
         String[] dipendente = dati.split(" ");
@@ -410,13 +388,11 @@ public class PHPRequestHandler {
         p.aggiuntaDipendente(d, clientSocket);
     }
 
-    /**
-     * Metodo di rimozione dipendenti.
+    /** Metodo di rimozione dipendenti.
      * Pressoché identico al metodo di rimozione kart.
      *
      * @param dati
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void eliminaDipendenteCase(String dati, Socket clientSocket) {
         Proprietario p = new Proprietario();
@@ -425,12 +401,10 @@ public class PHPRequestHandler {
         p.rimozioneDipendenti(d, clientSocket);
     }
 
-    /**
-     * Metodo per mostrare tutti i dipendenti.
+    /** Metodo per mostrare tutti i dipendenti.
      * Pressoché identico al metodo per mostrare i kart.
      *
      * @param clientSocket Socket per la risposta
-     * @throws SQLException
      */
     private void mostraDipendentiCase(Socket clientSocket) {
         Proprietario p = new Proprietario();
