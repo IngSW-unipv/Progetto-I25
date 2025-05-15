@@ -198,7 +198,7 @@ DROP TABLE IF EXISTS `garal`;
 CREATE TABLE `garal` (
   `idGara` varchar(5) NOT NULL,
   `ora` time DEFAULT NULL,
-  `idP` varchar(5) DEFAULT NULL,
+  `idP` int DEFAULT NULL,
   PRIMARY KEY (`idGara`),
   KEY `idP` (`idP`),
   CONSTRAINT `garal_ibfk_1` FOREIGN KEY (`idP`) REFERENCES `prenotazione` (`idP`)
@@ -226,7 +226,7 @@ CREATE TABLE `garas` (
   `idGara` varchar(5) NOT NULL,
   `ora` time DEFAULT NULL,
   `btempo` time DEFAULT NULL,
-  `idP` varchar(5) DEFAULT NULL,
+  `idP` int DEFAULT NULL,
   PRIMARY KEY (`idGara`),
   KEY `idP` (`idP`),
   CONSTRAINT `garas_ibfk_1` FOREIGN KEY (`idP`) REFERENCES `prenotazione` (`idP`)
@@ -360,7 +360,7 @@ DROP TABLE IF EXISTS `prenotazione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `prenotazione` (
-  `idP` varchar(5) NOT NULL,
+  `idP` int NOT NULL,
   `dataG` date DEFAULT NULL,
   `fasciaO` time DEFAULT NULL,
   `tipologia` varchar(6) DEFAULT NULL,
