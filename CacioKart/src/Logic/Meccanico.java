@@ -22,11 +22,12 @@ public class Meccanico {
 
     }
 
-    /**
+    /** Metodo per aggiungere manutenzioni su un determinato kart.
      *
-     * @param k
-     * @param text
-     * @param prezzo
+     *
+     * @param k Il kart su cui viene effettuata la manutenzione
+     * @param text La descrizione della manutenzione
+     * @param prezzo Il costo della manutenzione
      * @param clientSocket Il socket di risposta
      */
     public void aggiornamentoManutenzione(Kart k, String text, double prezzo, Socket clientSocket) {
@@ -47,18 +48,19 @@ public class Meccanico {
 
     }
 
-    /**
+    /** Metodo per aggiungere kart al noleggio,
+     * togliendoli dalla concessionaria.
      *
-     * @param targa
+     * @param k Il kart da aggiungere
      * @param clientSocket Il socket di risposta
      */
-    public void aggiuntaKart(String targa, Socket clientSocket) {
+    public void aggiuntaKart(Kart k, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
         DELETE_ITERATOR = new String[2];
-        DELETE_ITERATOR[0] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA.getQuery(targa);
-        DELETE_ITERATOR[1] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA.getQuery(targa);
+        DELETE_ITERATOR[0] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA.getQuery(k.getTarga());
+        DELETE_ITERATOR[1] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA.getQuery(k.getTarga());
 
         for (String delete : DELETE_ITERATOR) {
             queryIndicator = db.executeUpdateQuery(delete);
@@ -71,9 +73,9 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    /**
+    /** Metodo per riempire completamente il serbatoio di un kart.
      *
-     * @param k
+     * @param k Il kart a cui aggiungere la benzina
      * @param clientSocket Il socket di risposta
      */
     public void aggiuntaBenzina(Kart k, Socket clientSocket) {
@@ -85,9 +87,12 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    /**
+    /** Metodo generico per mostrare i kart.
+     * Tramite la query in ingresso si fa la distinzione tra mostrare i kart disponibili
+     * all'aggiunta al noleggio e i kart disponibili alla completa rimozione dal
+     * kartodromo.
      *
-     * @param query
+     * @param query La query da eseguire
      * @param clientSocket Il socket di risposta
      */
     public void mostraKart(String query, Socket clientSocket) {
@@ -104,15 +109,15 @@ public class Meccanico {
         }
     }
 
-    /**
+    /** Metodo per mostrare i kart su cui è possibile effettuare la manutenzione.
      *
-     * @param query
      * @param clientSocket Il socket di risposta
      */
-    public void mostraKartManutenzione(String query, Socket clientSocket) {
+    public void mostraKartManutenzione(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        result = db.executeReturnQuery(query);
+        SELECT = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
+        result = db.executeReturnQuery(SELECT);
 
         if (result != null) {
             maker = new TableMaker();
@@ -123,9 +128,9 @@ public class Meccanico {
         }
     }
 
-    /**
+    /** Metodo per rimuovere completamente un kart dal kartodromo.
      *
-     * @param k
+     * @param k Il kart da rimuovere
      * @param clientSocket Il socket di risposta
      */
     public void rimozioneKart(Kart k, Socket clientSocket) {

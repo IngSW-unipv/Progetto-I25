@@ -24,12 +24,11 @@ public enum Ruoli {
         return descrizione;
     }
 
-    /**
-     * Metodo per riconoscere la stringa in entrata e
+    /** Metodo per riconoscere il ruolo in entrata sotto forma di stringa e
      * convertirla in un ENUM per facilità di gestione.
      *
-     * @param ruoloRichiesto
-     * @return
+     * @param ruoloRichiesto Il ruolo richiesto sotto forma di String
+     * @return Il ruolo sotto forma di ENUM se c'è una corrispondenza. Altrimenti NULL
      */
     public static Ruoli requestedRole(String ruoloRichiesto) {
         for (Ruoli ruolo : Ruoli.values()) {

@@ -9,10 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Classe per istanziare connessioni con il database, eseguire query e restituire risultati
- */
-@SuppressWarnings("SqlSourceToSinkFlow")
+/**Classe per istanziare connessioni con il database, eseguire query e restituire risultati*/
+
 public class DBConnector {
     private BufferedReader fileReader;
     private final static String URL = "jdbc:mysql://localhost:3306/caciokart";
@@ -32,8 +30,7 @@ public class DBConnector {
     public DBConnector() {
     }
 
-    /**
-     * Metodo per aprire la connessione al database.
+    /** Metodo per aprire la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
      * eseguire le varie query
      *
@@ -52,13 +49,9 @@ public class DBConnector {
         }
     }
 
-    /**
-     * Metodo per chiudere la connessione al database.
+    /** Metodo per chiudere la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
-     * eseguire le varie query
-     *
-     * @throws SQLException
-     */
+     * eseguire le varie query*/
     private void dbCloseConnection() {
         try {
             conn.close();
@@ -67,14 +60,10 @@ public class DBConnector {
         }
     }
 
-    /**
-     * Metodo per eseguire query di lettura dati.
-     * Il metodo riceve in ingresso la query richiesta e
-     * ha come valore di ritorno una Map contenente i dati trovati
-     * dalla query.
+    /** Metodo per eseguire query di lettura dati.
      *
-     * @param query
-     * @return
+     * @param query La query da eseguire
+     * @return Una Map con dentro i risultati della lettura
      */
     public List<Map<String, Object>> executeReturnQuery(String query) {
         try {
@@ -99,22 +88,19 @@ public class DBConnector {
             return resultList;
 
         } catch (SQLException e) {
-            System.out.println("La lettura non è andato a buon fine: " + e.getMessage());
+            System.out.println("La lettura non è andata a buon fine: " + e.getMessage());
             db.dbCloseConnection();
             return null;
         }
 
     }
 
-    /**
-     * Metodo per eseguire query di scritture dati.
-     * Tramite la stringa in ingresso, il metodo esegue query
-     * che modificano i dati presenti nel database, cancellando
+    /** Metodo per eseguire query di scritture dati.
+     * Il metodo esegue query che modificano i dati presenti nel database, cancellandone
      * o aggiungendone di nuovi.
-     * In caso di errore (principalmente di PK duplicata) dà come
-     * valore di risposta 0.
+     * In caso di errore (generalmente PK duplicata) dà come valore di risposta 0, altrimenti 1.
      *
-     * @param query La query da eseguire.
+     * @param query La query da eseguire
      */
     public String executeUpdateQuery(String query) {
         try {

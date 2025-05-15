@@ -318,7 +318,9 @@ public class PHPRequestHandler {
      */
     private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) {
         Meccanico m = new Meccanico();
-        m.aggiuntaKart(targa, clientSocket);
+        Kart k = new Kart();
+        k.setTarga(targa);
+        m.aggiuntaKart(k, clientSocket);
 
     }
 
@@ -329,7 +331,7 @@ public class PHPRequestHandler {
      */
     private void mostraAggiuntaKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
-        query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO_SOCIO.getQuery();
+        query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery();
         m.mostraKart(query, clientSocket);
     }
 
@@ -366,8 +368,7 @@ public class PHPRequestHandler {
      */
     private void mostraManutenzioneKartCase(Socket clientSocket) {
         Meccanico m = new Meccanico();
-        query = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
-        m.mostraKartManutenzione(query, clientSocket);
+        m.mostraKartManutenzione(clientSocket);
     }
 
     /** Metodo per aggiungere dipendenti.

@@ -19,12 +19,23 @@ public class Prenotazione {
     private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
 
-    /**
+    /** Metodo per gestire le prenotazioni.
+     * Si effettua un controllo di prenotazioni concorrenti per vedere se
+     * ci sono spazi in quella data e in quella fascia oraria.
+     * In caso ci sia spazio, si identifica l'id massimo della prenotazione + 1 e
+     * si passa al controllo della tipologia.
+     * In caso la prenotazione sia per una gara libera si deve controllare se la persona
+     * che sta prenotando sia un socio oppure un dipendente.
+     * In caso sia un dipendente il cf di prenotazione viene impostato a NULL.
+     * Dopodiché vengono aggiornate le tabelle prenota e prenotazione con i relativi dati.
      *
-     * @param cf
-     * @param tipologia
-     * @param dataGara
-     * @param fasciaOraria
+     * In caso la prenotazione sia per una gara secca si modifica solo la tabella prenotazione,
+     * perché le prenotazioni secche le può fare soltanto l'organizzatore.
+     *
+     * @param cf Il cf dell'utente che sta prenotando
+     * @param tipologia Libera o Secca
+     * @param dataGara Il giorno in cui si è prenotata la gara
+     * @param fasciaOraria La fascia oraria (11:00-12:00) in cui si è prenotata la gara
      * @param clientSocket Il socket di risposta
      */
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
@@ -76,8 +87,8 @@ public class Prenotazione {
 
                 }
 
-                for (String gara : INSERT_ITERATOR) {
-                    queryIndicator = db.executeUpdateQuery(gara);
+                for (String prenotazione : INSERT_ITERATOR) {
+                    queryIndicator = db.executeUpdateQuery(prenotazione);
                     if (queryIndicator == "0") {
                         responder.sendResponse(clientSocket, queryIndicator);
                         return;

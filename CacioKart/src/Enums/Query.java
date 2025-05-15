@@ -72,7 +72,7 @@ public enum Query {
 
     RIMUOVI_KART_MECCANICO("DELETE FROM caciokart.kart WHERE targa = '%s'"),
 
-    MOSTRA_AGGIUNTA_KART_MECCANICO_SOCIO("SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
+    MOSTRA_AGGIUNTA_KART_MECCANICO("SELECT * FROM caciokart.kart WHERE kart.targa NOT IN " +
             "(SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL)" +
             "AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)"),
 

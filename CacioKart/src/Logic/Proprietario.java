@@ -20,9 +20,7 @@ public class Proprietario {
 
     }
 
-    /**
-     * Metodo per mostrare i dipendenti.
-     * Identico al metodo presente in Objects.Kart per mostrare tutti i kart.
+    /** Metodo per mostrare i dipendenti.
      *
      * @param clientSocket Socket per inviare la risposta
      */
@@ -41,10 +39,9 @@ public class Proprietario {
         }
     }
 
-    /**
-     * Metodo per aggiungere i dipendenti.
-     * Pressoché identico al metodo presente in Objects.Kart per aggiungere i kart,
-     * tranne la gestione dei ruoli tramite l'ENUM Enums.Ruoli
+    /** Metodo per aggiungere i dipendenti.
+     * Preso l'oggetto Dipendente in ingresso, si crea
+     * la query da eseguire per effettuare la modifica del db.
      *
      * @param nuovoDip     Il dipendente da aggiungere
      * @param clientSocket Socket per inviare la risposta
