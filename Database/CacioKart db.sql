@@ -115,7 +115,6 @@ CREATE TABLE `classifica` (
   PRIMARY KEY (`idGara`,`socio`,`targa`),
   KEY `targa` (`targa`),
   KEY `socio` (`socio`),
-  CONSTRAINT `classifica_ibfk_1` FOREIGN KEY (`targa`) REFERENCES `kart` (`targa`),
   CONSTRAINT `classifica_ibfk_2` FOREIGN KEY (`idGara`) REFERENCES `garas` (`idGara`),
   CONSTRAINT `classifica_ibfk_3` FOREIGN KEY (`socio`) REFERENCES `socio` (`socio`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -283,7 +282,6 @@ CREATE TABLE `manutenzione` (
   `targa` varchar(6) NOT NULL,
   PRIMARY KEY (`idM`),
   KEY `targa_idx` (`targa`),
-  CONSTRAINT `targa` FOREIGN KEY (`targa`) REFERENCES `kart` (`targa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
