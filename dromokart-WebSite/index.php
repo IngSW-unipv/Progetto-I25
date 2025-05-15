@@ -23,7 +23,7 @@
     <!-- Sezione Hero -->
     <section class="hero">
       <h1>Benvenuti in CacioKart</h1>
-      <p>Scopri il mondo del karting con noi.</p>
+      <p>Scopri il mondo del karting con noi</p>
     </section>
 
     <!-- Sezione scrollabile con immagine iniziale -->
@@ -72,7 +72,8 @@
 <section class="contacts-section">
   <h2>CONTATTI</h2>
   <p>
-    Se sei alla ricerca di un'esperienza di guida emozionante o sei un fan delle corse sui Kart, CacioKart a Pavia è il luogo ideale per te. Siamo un tracciato di kart che offre una vasta gamma di servizi di guida per soddisfare le tue esigenze. Se hai domande o hai bisogno di maggiori informazioni, non esitare a contattarci. Puoi farlo attraverso il nostro numero di telefono o la nostra email.
+    Se sei alla ricerca di un'esperienza di guida emozionante o sei un fan delle corse sui Kart, CacioKart a Pavia è il luogo ideale per te. Offriamo un tracciato di kart con una vasta gamma di servizi di guida per soddisfare le tue esigenze.
+      <br>Se hai domande o hai bisogno di maggiori informazioni, non esitare a contattarci  attraverso il nostro numero di telefono o la nostra email.
   </p>
 </section>
 </body>

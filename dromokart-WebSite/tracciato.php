@@ -34,7 +34,7 @@
           <br><strong>Lunghezza pista:<strong> 1256 mt
           <br><strong>Larghezza carreggiata:<strong> 10 mt (8 - 10 mt)
           <br><strong>Rettilineo più lungo:<strong> 170 mt
-          <br><strong>Rettilineo minore:<strong> 145 mt
+          <br><strong>Rettilineo più corto:<strong> 145 mt
         </ul>
     </p>
   </div>
@@ -48,11 +48,11 @@
   <div class="description-text">
     <p>
         <ul>
-          <br><strong>Capienza piloti<strong> in gara 34 – prove libere fino a 51
-          <br><strong>Bande magnetiche<strong> N. 3 bande magnetiche ALFANO
-          <br><strong>Curve<strong> Curve a raggio costante e variabile. Cordoli interni ed esterni a norme CIK
-          <br><strong>Asfalto<strong> Manto di asfalto realizzato con bitume STIRELF
-          <br><strong>Area Paddock<strong> Area Paddock interamente asfaltata e recintata
+          <br><strong>Capienza piloti: in gara 34 – prove libere fino a 51
+          <br>N. 3 bande magnetiche ALFANO
+          <br>Curve a raggio costante e variabile, cordoli interni ed esterni a norme CIK
+          <br>Manto di asfalto realizzato con bitume STIRELF
+          <br>Area Paddock interamente asfaltata e recintata
         </ul>
     </p>
   </div>
