@@ -22,6 +22,13 @@ public class Meccanico {
 
     }
 
+    /**
+     *
+     * @param k
+     * @param text
+     * @param prezzo
+     * @param clientSocket Il socket di risposta
+     */
     public void aggiornamentoManutenzione(Kart k, String text, double prezzo, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -40,6 +47,11 @@ public class Meccanico {
 
     }
 
+    /**
+     *
+     * @param targa
+     * @param clientSocket Il socket di risposta
+     */
     public void aggiuntaKart(String targa, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -59,6 +71,11 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
+    /**
+     *
+     * @param k
+     * @param clientSocket Il socket di risposta
+     */
     public void aggiuntaBenzina(Kart k, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -68,6 +85,11 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
+    /**
+     *
+     * @param query
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraKart(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -82,6 +104,11 @@ public class Meccanico {
         }
     }
 
+    /**
+     *
+     * @param query
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraKartManutenzione(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -96,6 +123,11 @@ public class Meccanico {
         }
     }
 
+    /**
+     *
+     * @param k
+     * @param clientSocket Il socket di risposta
+     */
     public void rimozioneKart(Kart k, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();

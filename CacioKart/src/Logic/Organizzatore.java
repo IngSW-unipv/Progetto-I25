@@ -24,6 +24,11 @@ public class Organizzatore {
 
     }
 
+    /**
+     *
+     * @param t Il team da inserire nel db
+     * @param clientSocket Il socket di risposta
+     */
     public void creaTeam(Team t, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -51,7 +56,6 @@ public class Organizzatore {
 
     /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
      * a una determinata prenotazione.
-     *
      * Dopo aver effettuato la query, si utilizza tablemaker per ottenere la stringa da
      * spedire al client.
      *
@@ -72,10 +76,15 @@ public class Organizzatore {
         }
     }
 
-    public void mostraCampionato(String query, Socket clientSocket) {
+    /**
+     *
+     * @param clientSocket Il socket di risposta
+     */
+    public void mostraCampionato(Socket clientSocket) {
         responder = new PHPResponseHandler();
         db = new DBConnector();
-        result = db.executeReturnQuery(query);
+        SELECT = Query.MOSTRA_CAMPIONATI.getQuery();
+        result = db.executeReturnQuery(SELECT);
 
         if (result != null) {
             maker = new TableMaker();
@@ -86,6 +95,10 @@ public class Organizzatore {
         }
     }
 
+    /**
+     *
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraGareInserimento(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();

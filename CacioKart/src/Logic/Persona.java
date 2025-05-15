@@ -27,19 +27,16 @@ public class Persona {
         this.password = password;
     }
 
-    /**
-     * Costruttore alternativo per chiamare i metodi
+    /**Costruttore alternativo da utilizzare se si vuole solo chiamare i metodi
      */
     public Persona() {
 
     }
 
-    /**
-     * Metodo per effettuare la login.
-     * Il chiamante deve fornire il socket da utilizzare per rispondere al client.
-     * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1 o 0* *valore del ruolo*
+    /** Metodo per effettuare la login.
+     * Dopo aver controllato il db, il metodo invierà una risposta di questo tipo: *1* o *0* *valore del ruolo*
      *
-     * @param clientSocket
+     * @param clientSocket Il socket di risposta
      */
     public void login(Socket clientSocket) {
         db = new DBConnector();
@@ -86,7 +83,7 @@ public class Persona {
                         break;
 
                     default:
-                        /*Il PHP invierà sempre risposte esatte, questa risposta non è
+                        /**Il PHP invierà sempre risposte esatte, questa risposta non è
                         * praticamente mai necessaria.
                         */
                         responder.sendResponse(clientSocket, "0 0 0");

@@ -21,8 +21,7 @@ public class Concessionaria {
 
     }
 
-    /**
-     * Metodo per inserire i kart nella concessionaria.
+    /** Metodo per inserire i kart nella concessionaria.
      * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
      * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
      * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
@@ -59,7 +58,13 @@ public class Concessionaria {
 
     }
 
-    //mostra tutti i pezzi della concessionaria tranne quelli che iniziano per KRT
+    /** Metodo per mostrare tutti i pezzi presenti nella concessionaria.
+     * Si fa una query per tutte le tuple presenti nella tabella concessionaria
+     * il cui nome non inizia con KRT (targa standard dei kart) per poi creare
+     * un table con tutti i risultati.
+     *
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraPezzo(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -75,6 +80,11 @@ public class Concessionaria {
         }
     }
 
+    /**
+     *
+     * @param p Il pezzo da inserire
+     * @param clientSocket Il socket di risposta
+     */
     public void inserimentoPezzo(Pezzo p, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();

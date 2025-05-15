@@ -19,6 +19,14 @@ public class Prenotazione {
     private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
 
+    /**
+     *
+     * @param cf
+     * @param tipologia
+     * @param dataGara
+     * @param fasciaOraria
+     * @param clientSocket Il socket di risposta
+     */
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         //cf dataGara fasciaOraria
         db = new DBConnector();
@@ -60,7 +68,7 @@ public class Prenotazione {
                 result = db.executeReturnQuery(SELECT);
                 INSERT_ITERATOR[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
 
-                if (result.size() != 0 && result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
+                if (!result.isEmpty() && result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
                     INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO_NULL.getQuery(idPrenotazione, dataO);
 
                 } else {

@@ -7,7 +7,6 @@ import Objects.*;
 
 import java.io.*;
 import java.net.*;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -154,15 +153,15 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_CAMPIONATO:
-                    mostraCampionato(clientSocket);
+                    mostraCampionatoCase(clientSocket);
                     break;
 
                 case SELEZIONE_GARE_CAMPIONATO:
-                    selezionaGaraCampionato(clientSocket);
+                    selezionaGaraCampionatoCase(clientSocket);
                     break;
 
                 case AGGIUNGI_GARE_CAMPIONATO:
-                    aggiungiGaraCampionato(info, clientSocket);
+                    aggiungiGaraCampionatoCase(info, clientSocket);
                     break;
 
                 case RICHIESTA_GARA_SECCA:
@@ -549,10 +548,10 @@ public class PHPRequestHandler {
      *
      * @param clientSocket Socket per la risposta
      */
-    private void mostraCampionato(Socket clientSocket) {
+    private void mostraCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         query = Query.MOSTRA_CAMPIONATI.getQuery();
-        o.mostraCampionato(query, clientSocket);
+        o.mostraCampionato(clientSocket);
     }
 
     /** Metodo per mostrare le gare disponibili a essere associate a un campionato.
@@ -560,7 +559,7 @@ public class PHPRequestHandler {
      *
      * @param clientSocket Socket per la risposta
      */
-    private void selezionaGaraCampionato(Socket clientSocket) {
+    private void selezionaGaraCampionatoCase(Socket clientSocket) {
         Organizzatore o = new Organizzatore();
         o.mostraGareInserimento(clientSocket);
     }
@@ -584,7 +583,7 @@ public class PHPRequestHandler {
      * @param messaggio idGara, idCampionato
      * @param clientSocket Socket per la risposta
      */
-    private void aggiungiGaraCampionato(String messaggio, Socket clientSocket) {
+    private void aggiungiGaraCampionatoCase(String messaggio, Socket clientSocket) {
         String[] info = messaggio.split(" ");
         String idGara = info[0];
         String idCamp = info[1];
