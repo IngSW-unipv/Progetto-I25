@@ -25,11 +25,10 @@ public class Socio extends Persona {
 
     }
 
-    /**
-     * Metodo per registrare un utente nel db
+    /** Metodo per registrare un utente nel db
      * La query viene eseguita tramite il metodo sendResponse della classe Logic.DBConnector
      *
-     * @param clientSocket, Socket per rispondere al client
+     * @param clientSocket Il socket di risposta
      */
     public void registrazione(Socket clientSocket) {
         db = new DBConnector();
@@ -41,8 +40,14 @@ public class Socio extends Persona {
 
     }
 
+    /** Metodo per associare un kart a un socio.
+     * Dopo aver associato la targa al socio, si inserisce in acquista
+     * la tupla che indica l'avvenuto acquisto.
+     *
+     * @param k Il kart da associare
+     * @param clientSocket Il socket di risposta
+     */
     public void compraKart(Kart k, Socket clientSocket) {
-        // Inserisco la targa in quell'utente specifico
         String cf = this.getCf();
         String targa = k.getTarga();
         db = new DBConnector();

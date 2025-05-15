@@ -10,8 +10,7 @@ public class TableMaker {
 
     }
 
-    /**
-     * Metodo per rispondere alla richiesta di creazione table.
+    /** Metodo per rispondere alla richiesta di creazione table.
      * Richieste come la classifica ad esempio vogliono ricevere una stringa
      * unica separata da spazi per delimitare i dati, terminatori di linea
      * per delimitare le righe e "end" per indicare il termine dei dati.
