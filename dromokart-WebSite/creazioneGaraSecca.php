@@ -29,7 +29,7 @@ require 'logic/controlloLogin.php';      // Verifica se l'utente è loggato
         echo '<table>';
         echo '  <thead>';
         echo '    <tr>';
-        echo '      <th>IdPrenotazione</th>';
+        echo '      <th>Id Prenotazione</th>';
         echo '      <th>Seleziona</th>';
         echo '    </tr>';
         echo '  </thead>';

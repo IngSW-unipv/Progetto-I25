@@ -115,9 +115,9 @@ public enum Query {
 
     MOSTRA_CAMPIONATI("SELECT idCampionato FROM caciokart.campionato"),
 
-    MOSTRA_PRENOTAZIONE("SELECT idP FROM prenotazione WHERE dataG > curdate()"),
+    MOSTRA_PRENOTAZIONI("SELECT idP FROM prenotazione WHERE dataG > curdate() ORDER BY idP DESC"),
 
-    SELEZIONA_SOCIO("SELECT socio, nome, cognome FROM socio"),
+    SELEZIONA_SOCIO_AGGIUNTA_PRENOTAZIONE("SELECT socio, nome, cognome FROM socio"),
 
     SELEZIONA_DIPENDENTE_PRENOTAZIONE("SELECT dip " +
             "FROM caciokart.dipendente WHERE dip = '%s'"),

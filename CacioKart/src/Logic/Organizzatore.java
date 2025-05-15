@@ -49,6 +49,15 @@ public class Organizzatore {
 
     }
 
+    /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
+     * a una determinata prenotazione.
+     *
+     * Dopo aver effettuato la query, si utilizza tablemaker per ottenere la stringa da
+     * spedire al client.
+     *
+     * @param query La query da eseguire
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraSociInserimento(String query, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -93,6 +102,15 @@ public class Organizzatore {
         }
     }
 
+    /** Metodo per associare una gara a un determinato campionato.
+     * Avendo gli id della gara e del campionato si può effettuare
+     * una query che modifica la tabella "partecipa", utilizzata
+     * per indicare quale gara appartiene a quale campionato.
+     *
+     * @param idGara L'id della gara
+     * @param idCamp L'id del campionato
+     * @param clientSocket Il socket di risposta
+     */
     public void aggiungiGaraPartecipa(String idGara, String idCamp, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -103,10 +121,16 @@ public class Organizzatore {
 
     }
 
-    public void mostraPrenotazioni(String query, Socket clientSocket) {
+    /** Metodo per mostrare all'organizzatore tutte le prenotazioni che sono state effettuate.
+     * Dopo aver effettuato una query invariabile, utilizzo tablemaker per rispondere al client.
+     *
+     * @param clientSocket Il socket di risposta
+     */
+    public void mostraPrenotazioni(Socket clientSocket) {
         responder = new PHPResponseHandler();
         db = new DBConnector();
-        result = db.executeReturnQuery(query);
+        SELECT = Query.MOSTRA_PRENOTAZIONI.getQuery();
+        result = db.executeReturnQuery(SELECT);
 
         if (result != null) {
             maker = new TableMaker();
@@ -117,10 +141,10 @@ public class Organizzatore {
         }
     }
 
-    public void aggiornaPrenota(String idP, String socio, Socket clientSocket) {
+    public void aggiornaPrenota(String idP, Socio s, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, socio, LocalDate.now());
+        INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, s.getCf(), LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
     }

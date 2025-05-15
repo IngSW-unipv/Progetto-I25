@@ -17,8 +17,8 @@
  
   <!-- Hero Section -->
   <section class="hero">
-    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
-    <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
+    <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
+    <p>Aggiorna l'inventario del kartodromo aggiungendo nuovi pezzi o nuovi kart</p>
   </section>
 
   <!-- Main Content: Area Bottoni -->
@@ -26,7 +26,6 @@
     <div class="profile-buttons">
       <button onclick="location.href='aggiungiKart.php'">Aggiungi Kart</button>
       <button onclick="location.href='aggiungiPezzi.php'">Aggiungi Pezzi</button>
-      <button onclick="location.href='concessionaria-home.php'">Torna alla concessionaria</button>
     </div>
   </main>
 </body>

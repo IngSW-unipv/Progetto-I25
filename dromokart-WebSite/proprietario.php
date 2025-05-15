@@ -18,7 +18,8 @@
 <body>
 
 <section class="hero">
-    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
+    <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
+    <p>Gestisci i dipendenti oppure visualizza il bilancio del kartodromo</p>
   </section>
 
   <div class="profile-buttons">

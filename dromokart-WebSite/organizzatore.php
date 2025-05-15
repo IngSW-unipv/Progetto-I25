@@ -17,7 +17,7 @@
  
   <!-- Hero Section -->
   <section class="hero">
-    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
+    <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
     <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
   </section>
 

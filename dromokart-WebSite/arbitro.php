@@ -18,7 +18,8 @@ require 'logic/controlloLogin.php';      // Verifica se l'utente è loggato
 <body>
   <!-- Hero Section (titolo / benvenuto) -->
   <section class="hero">
-    <h2>Benvenuto, <?php echo htmlspecialchars($name); ?>!</h2>
+    <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
+      <p>Scegli una gara per inserire le penalità</p>
   </section>
 
   <div class="table-section">

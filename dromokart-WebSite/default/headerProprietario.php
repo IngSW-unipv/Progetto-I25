@@ -16,7 +16,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="proprietario.php">Home</a></li>
+          <li><a href="proprietario.php">Proprietario</a></li>
           <li><a href="default/logout.php" id="logoutBtn">Logout</a></li>
         </ul>
       </nav>
