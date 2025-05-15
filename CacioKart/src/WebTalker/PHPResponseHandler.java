@@ -12,17 +12,16 @@ public class PHPResponseHandler {
 
     /**
      * Metodo per inviare risposte al client.
-     * Il chiamante deve passare il socket di comunicazione con il client e
-     * il messaggio da spedire.
+     * Tramite la classe PrintWriter utilizzo lo stream di comunicazione
+     * verso il client per spedire messaggi e fare il flush del buffer.
      *
-     * @param clientSocket
-     * @param messaggio
+     * @param clientSocket Il socket attraverso il cui mandare la risposta
+     * @param messaggio Il messaggio da spedire
      */
     public void sendResponse(Socket clientSocket, String messaggio) {
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             out.println(messaggio);
-            out.flush();    //Pulisco il buffer di dati per evitare problemi
             System.out.println("Il messaggio spedito è: " + messaggio + "\n");
 
         } catch (IOException e) {

@@ -82,7 +82,7 @@ public class DBConnector {
             db.dbOpenConnection();
             stmt = db.conn.createStatement();
             rs = stmt.executeQuery(query);
-            //System.out.println("Eseguo la query di lettura richiesta: " + query);
+            System.out.println("Eseguo la query di lettura richiesta: " + query);
             rsmd = rs.getMetaData();
             columnCount = rsmd.getColumnCount();
 

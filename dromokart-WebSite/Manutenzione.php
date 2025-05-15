@@ -26,8 +26,8 @@
       echo '<thead>';
       echo '<tr>';
       echo '<th>Targa</th>';
-      echo '<th>Ultima Manutenzione</th>';
-      echo '<th>Aggiungi</th>';
+      echo '<th>Giorni dall\'ultima manutenzione</th>';
+      echo '<th>Effettua manutenzione</th>';
       echo '</tr>';
       echo '</thead>';
       echo '<tbody>';

@@ -24,12 +24,12 @@
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='migliori_tempi.php'">Migliori Tempi</button>
-      <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
-      <button onclick="location.href='acquistaKart.php'">Compra Kart</button>
-      <button onclick="location.href='acquistaPezzi.php'">Compra Pezzi di ricambio</button>
+      <button onclick="location.href='migliori_tempi.php'">Guarda i tuoi tempi migliori</button>
+      <button onclick="location.href='prenota_gara.php'">Prenota una gara libera</button>
+      <button onclick="location.href='acquistaKart.php'">Acquista un kart</button>
+      <button onclick="location.href='acquistaPezzi.php'">Acquista pezzi di ricambio</button>
       <button onclick="location.href='mostraPrenotUser.php'">Prenotazioni effettuate</button>
-      <button onclick="location.href='mostraKartUser.php'">Kart Posseduto</button>
+      <button onclick="location.href='mostraKartUser.php'">Il tuo kart</button>
     </div>
   </main>
 </body>

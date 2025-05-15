@@ -83,7 +83,7 @@ public enum Query {
     MOSTRA_KART_MANUTENZIONE("SELECT k.*, " +
             "COALESCE(CASE " +
             "WHEN MAX(m.dataM) IS NULL THEN 'MAI_FATTA' " +
-            "ELSE CAST(DATEDIFF(MAX(m.dataM), CURRENT_DATE) AS CHAR) " +
+            "ELSE CAST(ABS(DATEDIFF(MAX(m.dataM), CURRENT_DATE)) AS CHAR) " +
             "END, 'MAI_FATTA' " +
             ") AS giorniDallaManutenzione, " +
             "MAX(m.dataM) AS ultimaManutenzione " +

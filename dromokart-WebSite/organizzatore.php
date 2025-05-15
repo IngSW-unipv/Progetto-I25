@@ -18,17 +18,19 @@
   <!-- Hero Section -->
   <section class="hero">
     <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
-    <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
+    <p>Crea o modifica le prenotazioni e gestisci i dettagli dei campionati</p>
   </section>
 
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='creazioneTeam.php'">Crea Team</button>
-      <button onclick="location.href='prenotazioneGaraSecca.php'">Prenotazione Gara Secca</button>
-      <button onclick="location.href='creazioneGaraSecca.php'">Inserimento soci prenotazione</button>
-      <button onclick="location.href='prenota_gara.php'">Prenota Gara Libera</button>
-      <button onclick="location.href='inserimentoCampionato.php'">Inserimento Campionato</button>
+      <button onclick="location.href='creazioneTeam.php'">Crea team per il campionato</button>
+      <button onclick="location.href='inserimentoCampionato.php'">Associa gare a un campionato</button>
+      <button onclick="location.href='prenota_gara.php'">Prenota una gara libera</button>
+      <button onclick="location.href='prenotazioneGaraSecca.php'">Prenota una gara secca</button>
+      <button onclick="location.href='creazioneGaraSecca.php'">Inserisci i partecipanti di una prenotazione</button>
+
+
     </div>
   </main>
 </body>

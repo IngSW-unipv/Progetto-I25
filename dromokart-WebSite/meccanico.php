@@ -18,15 +18,15 @@
   <!-- Hero Section -->
   <section class="hero">
     <h2>Benvenuto/a, <?php echo htmlspecialchars($name); ?>!</h2>
-    <p>Accedi alle tue informazioni personali e alle funzionalità riservate</p>
+    <p>Modifica la disponibilità di vetture al noleggio e effettuane la manutenzione</p>
   </section>
 
   <!-- Main Content: Area Bottoni -->
   <main>
     <div class="profile-buttons">
-      <button onclick="location.href='aggiungiKartMeccanico.php'">Aggiungere kart</button>
-      <button onclick="location.href='eliminaKartMeccanico.php'">Togliere kart</button>
-      <button onclick="location.href='aggiungaBenzina.php'">Aggiungere benzina</button>
+      <button onclick="location.href='aggiungiKartMeccanico.php'">Aggiungi kart al noleggio</button>
+      <button onclick="location.href='eliminaKartMeccanico.php'">Rimuovi kart dal noleggio</button>
+      <button onclick="location.href='aggiungaBenzina.php'">Fai il pieno</button>
       <button onclick="location.href='Manutenzione.php'">Manutenzione</button>
 
     </div>

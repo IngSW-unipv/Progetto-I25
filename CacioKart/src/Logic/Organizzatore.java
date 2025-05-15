@@ -142,7 +142,8 @@ public class Organizzatore {
     }
 
     /** Metodo per associare un socio a una prenotazione.
-     *
+     * Dopo aver effettuato la query di modifica del db, rispondo al client
+     * con l'esito dell'operazione.
      *
      * @param idP Id della prenotazione
      * @param s Il socio da associare

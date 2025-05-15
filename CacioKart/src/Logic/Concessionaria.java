@@ -43,9 +43,6 @@ public class Concessionaria {
         result = db.executeReturnQuery(SELECT);
         //System.out.println(maxIDProdotto.get(0));
 
-        //Logica per rimuovere tutti i caratteri tranne i numeri
-        ultimoProdotto = result.get(0).get("idProdotto").toString();
-        //ultimoProdotto = result.get(0).toString().replaceAll("\\D", "");
         ultimoProdotto = result.get(0).get("max").toString();
 
         if (ultimoProdotto == "") {
