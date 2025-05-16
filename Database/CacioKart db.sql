@@ -281,7 +281,7 @@ CREATE TABLE `manutenzione` (
   `dataM` date DEFAULT NULL,
   `targa` varchar(6) NOT NULL,
   PRIMARY KEY (`idM`),
-  KEY `targa_idx` (`targa`),
+  KEY `targa_idx` (`targa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
