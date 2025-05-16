@@ -208,7 +208,19 @@ public enum Query {
         this.query = query;
     }
 
-    // Metodo per ottenere la descrizione
+    /** Metodo per ottenere una query dato il suo ENUM.
+     * Le query da effettuare variano di dimensioni, di scopo e
+     * di colonne richieste. Tramite il parametro Object... args
+     * accettiamo variabili di tutti i tipi e in qualsiasi quantità.
+     * Si effettua un if per controllare se la query ha dei valori da
+     * sostituire: se bisogna effettuare delle sostituzioni si prendono
+     * gli args in ingresso e si inseriscono nella query, altrimenti
+     * si restituisce la query così com'è.
+     *
+     * @param args Eventuali valori da inserire nella query. Possono
+     *             essere nomi di colonne o valori di ricerca (ad esempio WHERE = 20)
+     * @return La query richiesta, in caso, con i parametri dati alla funzione
+     */
     public String getQuery(Object... args) {
         if(args.length == 0) {
             return query;
