@@ -578,7 +578,6 @@ public class PHPRequestHandler {
 
     /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
      * a una determinata prenotazione.
-     *
      * Dato che il metodo in Organizzatore è utilizzato da più case,
      * la query è passata come parametro.
      *
@@ -605,8 +604,6 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per mostrare il bilancio al proprietario.
-     *
-     * Dato che la query non varia, l'unico parametro è clientSocket.
      *
      * @param clientSocket Socket per la risposta
      */
