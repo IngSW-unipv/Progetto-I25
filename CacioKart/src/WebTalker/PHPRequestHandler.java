@@ -192,9 +192,11 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per gestire la logica di login.
-     * I dati in ingresso sono il CF (chiave nel db) e la password.
+     * I dati in ingresso vengono suddivisi tramite il metodo split.
+     * Si utilizza poi il costruttore vuoto di persona per istanziare solo
+     * gli attributi che ci servono.
      *
-     * @param dati CF, pwd.
+     * @param dati CF, pwd
      * @param clientSocket Socket per la risposta
      */
     private void loginCase(String dati, Socket clientSocket) {
@@ -206,8 +208,6 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per gestire la logica delle classifiche per l'arbitro.
-     * L'arbitro è interessato a vedere tutte le classifiche delle
-     * gare effettuate, senza duplicati.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -218,9 +218,6 @@ public class PHPRequestHandler {
 
     /** Metodo per gestire la logica della classifica generale
      * visibile nella prima pagina del sito.
-     * Seleziono dal db tutte le informazioni di una singola classifica
-     * mettendola in Join con i soci per ottenere le informazioni di un singolo
-     * socio.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -229,11 +226,9 @@ public class PHPRequestHandler {
         c.classificaCompleta(clientSocket);
     }
 
-    /** Metodo per gestire la classifica visibile da un singolo utente.
-     * In ingresso il cf dell'utente ci permette di fare una query
-     * di tutte le classifiche che appartengono solo a lui.
+    /** Metodo per gestire le classifiche visibili da un singolo utente.
      *
-     * @param cfPilota
+     * @param cfPilota Il cf del pilota di cui vogliamo sapere le classifiche
      * @param clientSocket Socket per la risposta
      */
     private void classificaUtente(String cfPilota, Socket clientSocket) {
@@ -244,11 +239,10 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per gestire la logica di registrazione.
-     * Prendo il messaggio e lo divido nelle singole informazioni richieste.
-     * Utilizzo il DateTimeFormatter per far combaciare la data in ingresso con
-     * il tipo Date presente nel database.
+     * Utilizzo il metodo split per suddividere le informazioni in ingresso,
+     * dopodiché creo un Socio e chiamo il metodo per la registrazione.
      *
-     * @param dati
+     * @param dati In ordine: nome, cognome, data di nascita, cf, mail, password
      * @param clientSocket Socket per la risposta
      */
     private void registrazioneSocioCase(String dati, Socket clientSocket) {
@@ -257,11 +251,6 @@ public class PHPRequestHandler {
         Socio nuovoUtente = new Socio(socio[0], socio[1], dataNascita, socio[3], socio[4], socio[5]);
         nuovoUtente.registrazione(clientSocket);
     }
-
-    //riceve i dati della prenotazione dal sito
-    //va in socio e crea una prenotazione
-    //risponde al sito tramite phpresponsehandler
-    //usa Logic.DBConnector e PHPResponsehandle
 
     /** Metodo per gestire la logica di prenotazione.
      * Tramite gli split si prende la stringa dati e la si suddivide nelle informazioni
@@ -273,7 +262,6 @@ public class PHPRequestHandler {
      */
     private void prenotazioneCase(String tipologia, String dati, Socket clientSocket) {
 
-        //data fasciaOraria username
         String[] info = dati.split(" ");
         LocalDate dataG;
         LocalTime orarioI;
@@ -289,9 +277,12 @@ public class PHPRequestHandler {
     }
 
     /** Metodo di aggiunta kart.
-     * Pressoché identico al metodo di registrazione.
+     * Suddivido i dati in ingresso tramite il metodo split,
+     * dopodiché creo un Kart e associo i dati in input.
+     * Creo una Concessionaria e utilizzo il metodo per inserire
+     * il nuovo kart nel db.
      *
-     * @param dati
+     * @param dati In ordine: targa, cilindrata, prezzo
      * @param clientSocket Socket per la risposta
      */
     private void aggiuntaKartCaseConcessionaria(String dati, Socket clientSocket) {
@@ -306,9 +297,9 @@ public class PHPRequestHandler {
     /** Metodo per aggiungere i kart dalla vendita del concessionario
      * al noleggio del kartdromo a cura del meccanico.
      * La targa in ingresso ci permette di selezionare un kart specifico da rimuovere
-     * dalla tabella concessionario.
+     * dai kart noleggiabili (tabella concessionaria).
      *
-     * @param targa
+     * @param targa Il kart da aggiungere al noleggio
      * @param clientSocket Socket per la risposta
      */
     private void aggiuntaKartCaseMeccanico(String targa, Socket clientSocket) {
@@ -320,7 +311,8 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per mostrare i kart disponibili a passare dalla vendita al noleggio.
-     * Non richiede parametri oltre al socket per spedire la risposta.
+     * La query va specificata in questo metodo perché lo stesso
+     * metodo della classe meccanico viene riutilizzato.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -331,10 +323,8 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per rimuovere i kart dal kartodromo.
-     * Il client manda una targa da rimuovere dal db, il metodo
-     * la utilizza per la query e risponde al client.
      *
-     * @param targa
+     * @param targa La targa del kart da rimuovere
      * @param clientSocket Socket per la risposta
      */
     private void rimozioneKartCase(String targa, Socket clientSocket) {
@@ -345,7 +335,8 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per mostrare i kart disponibili alla rimozione.
-     * Non necessita di dati in ingresso, la query è sempre quella.
+     * La query va specificata in questo metodo perché lo stesso
+     * metodo della classe meccanico viene riutilizzato.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -355,9 +346,8 @@ public class PHPRequestHandler {
         m.mostraKart(query, clientSocket);
     }
 
-    /** Metodo per mostrare i kart appartenenti ai clienti e
-     * disponibili al noleggio per modificarne la manutenzione.
-     * Non necessita di dati in ingresso, la query è sempre quella.
+    /** Metodo per mostrare i kart dei clienti e
+     * del noleggio per modificarne la manutenzione.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -371,7 +361,7 @@ public class PHPRequestHandler {
      * di Dipendente per utilizzare i metodi di get e set nel metodo
      * di aggiuntaDipendenti.
      *
-     * @param dati
+     * @param dati In ordine: nome, cognome, data di nascita, cf, mail, password, stipendio, ruolo, ore lavorative
      * @param clientSocket Socket per la risposta
      */
     private void aggiungiDipendenteCase(String dati, Socket clientSocket) {
@@ -384,20 +374,18 @@ public class PHPRequestHandler {
     }
 
     /** Metodo di rimozione dipendenti.
-     * Pressoché identico al metodo di rimozione kart.
      *
-     * @param dati
+     * @param cf Il cf del dipendente da rimuovere
      * @param clientSocket Socket per la risposta
      */
-    private void eliminaDipendenteCase(String dati, Socket clientSocket) {
+    private void eliminaDipendenteCase(String cf, Socket clientSocket) {
         Proprietario p = new Proprietario();
         Dipendente d = new Dipendente();
-        d.setCf(dati);
+        d.setCf(cf);
         p.rimozioneDipendenti(d, clientSocket);
     }
 
     /** Metodo per mostrare tutti i dipendenti.
-     * Pressoché identico al metodo per mostrare i kart.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -407,10 +395,8 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per aggiungere la benzina a un kart.
-     * Data una targa, imposto la benzina di quel kart specifico al massimo
-     * possibile.
      *
-     * @param targa
+     * @param targa La targa del kart a cui fare il pieno
      * @param clientSocket Socket per la risposta
      */
     private void aggiungiBenzinaCase(String targa, Socket clientSocket) {
@@ -424,7 +410,7 @@ public class PHPRequestHandler {
     /** Metodo per l'acquisto di un kart da parte dell'utente.
      * Ricevo il cf dell'utente e la targa del kart da assegnargli.
      *
-     * @param dati
+     * @param dati In ordine: cf, targa del kart acquistato
      * @param clientSocket Socket per la risposta
      */
     private void acquistaKartCase(String dati, Socket clientSocket) {
@@ -439,21 +425,20 @@ public class PHPRequestHandler {
     /** Metodo per effettuare la manutenzione di un kart.
      * Ricevo la targa del kart e la descrizione della manutenzione effettuata.
      *
-     * @param dati
+     * @param dati In ordine: targa, costo della manutenzione, descrizione della manutenzione
      * @param clientSocket Socket per la risposta
      */
     private void manutenzioneCase(String dati, Socket clientSocket) {
         Meccanico m = new Meccanico();
-        String[] mex = dati.split(" ", 3);
+        String[] info = dati.split(" ", 3);
         Kart k = new Kart();
-        k.setTarga(mex[0]);
-        String text = mex[2];
-        double prezzo = Double.parseDouble(mex[1]);
+        k.setTarga(info[0]);
+        String text = info[2];
+        double prezzo = Double.parseDouble(info[1]);
         m.aggiornamentoManutenzione(k, text, prezzo, clientSocket);
     }
 
-    /** Metodo per mostrare i pezzi al client.
-     *  Non ci sono dati in ingresso perché la query non varia.
+    /** Metodo per mostrare i pezzi di ricambio al client.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -464,9 +449,8 @@ public class PHPRequestHandler {
 
     /** Metodo per mostrare i partecipanti di una gara all'arbitro per
      * inserire le penalità.
-     * Dato un idgara, si mostrano all'arbitro le informazioni relative a quella gara.
      *
-     * @param idGara
+     * @param idGara L'id della gara da mostrare
      * @param clientSocket Socket per la risposta
      */
     private void mostraGaraPenalitaCase(String idGara, Socket clientSocket) {
@@ -478,29 +462,26 @@ public class PHPRequestHandler {
      * Dato il cf, idgara e il tempo di penalità, inserisco una penalità
      * a un determinato pilota.
      *
-     * @param dati
+     * @param dati In ordine: cf del socio da penalizzare, l'id della gara che sto penalizzando,
+     *             la quantità di tempo da penalizzare
      * @param clientSocket Socket per la risposta
      */
     private void aggiungiPenalitaCase(String dati, Socket clientSocket) {
-        //socio idgara tempo
         String[] info = dati.split(" ");
         Socio s = new Socio();
         s.setCf(info[0]);
         String idGara = info[1];
         LocalTime penalita = LocalTime.parse(info[2], DateTimeFormatter.ofPattern("HH:mm:ss"));
-        //Metodo in arbitro per inserire le penalità
         Arbitro a = new Arbitro();
         a.inserimentoPenalita(s, idGara, penalita, clientSocket);
     }
 
     /** Metodo per aggiungere pezzi all'inventario della concessionaria.
-     * Dati i dati del nuovo pezzo, lo si aggiunge al db.
      *
-     * @param dati
+     * @param dati In ordine: id del prodotto da aggiungere, quantità da aggiungere
      * @param clientSocket Socket per la risposta
      */
     private void aggiungiPezziCase(String dati, Socket clientSocket) {
-        //idPezzo quantità
         String[] info = dati.split(" ");
         Pezzo p = new Pezzo();
         p.setIdProdotto(info[0]);
@@ -526,7 +507,7 @@ public class PHPRequestHandler {
      * Preso il cf e l'id del pezzo, posso associare a un utente
      * il pezzo acquistato.
      *
-     * @param dati
+     * @param dati In ordine: il cf del socio che acquista, l'id del pezzo acquistato
      * @param clientSocket Socket per la risposta
      */
     private void acquistaPezziCase(String dati, Socket clientSocket) {
@@ -540,7 +521,6 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per mostrare tutti i campionati correnti all'organizzatore.
-     * Non ci sono dati in ingresso oltre al socket perché la query non varia.
      *
      * @param clientSocket Socket per la risposta
      */
@@ -551,7 +531,6 @@ public class PHPRequestHandler {
     }
 
     /** Metodo per mostrare le gare disponibili a essere associate a un campionato.
-     * Non ci sono dati in ingresso oltre al socket perché la query non varia.
      *
      * @param clientSocket Socket per la risposta
      */

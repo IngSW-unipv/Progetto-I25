@@ -21,7 +21,7 @@ public class Classifica {
      * inserire penalità.
      * Il metodo restituisce le gare senza duplicati.
      *
-     * @param clientSocket
+     * @param clientSocket Il socket di risposta
      */
     public void classificaArbitro(Socket clientSocket) {
         responder = new PHPResponseHandler();

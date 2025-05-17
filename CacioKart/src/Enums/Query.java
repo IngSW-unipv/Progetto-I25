@@ -228,5 +228,4 @@ public enum Query {
         return String.format(query, args);
     }
 
-
 }
