@@ -272,21 +272,8 @@ public class PHPRequestHandler {
         Persona pers = new Persona();
         dataG = LocalDate.parse(info[0], dateFormatter);
         String[] orari = info[1].split("-");
-        orarioI = LocalTime.parse(orari[1], timeFormatter);
-
-        switch (tipologia) {
-
-            case "libera":
-                pers.setCf(info[2]);
-                break;
-
-            case "secca":
-                pers.setCf(null);
-                break;
-
-            default:
-                break;
-        }
+        orarioI = LocalTime.parse(orari[0], timeFormatter);
+        pers.setCf(info[2]);
 
         Prenotazione p = new Prenotazione();
         p.prenotazione(pers.getCf(), tipologia, dataG, orarioI, clientSocket);

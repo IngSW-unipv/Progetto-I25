@@ -39,7 +39,6 @@ public class Prenotazione {
      * @param clientSocket Il socket di risposta
      */
     public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
-        //cf dataGara fasciaOraria
         db = new DBConnector();
         responder = new PHPResponseHandler();
         LocalDate dataO = LocalDate.now();
@@ -106,7 +105,6 @@ public class Prenotazione {
                 responder.sendResponse(clientSocket, queryIndicator);
                 break;
 
-
             default:
                 responder.sendResponse(clientSocket, "0");
                 break;
@@ -114,6 +112,3 @@ public class Prenotazione {
 
     }
 }
-
-
-
