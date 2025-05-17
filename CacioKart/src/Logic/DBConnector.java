@@ -34,7 +34,6 @@ public class DBConnector {
      * Utilizzabile solo in questa classe dai metodi per
      * eseguire le varie query
      *
-     * @throws SQLException
      */
     private void dbOpenConnection() {
         try {
@@ -51,7 +50,8 @@ public class DBConnector {
 
     /** Metodo per chiudere la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
-     * eseguire le varie query*/
+     * eseguire le varie query
+     */
     private void dbCloseConnection() {
         try {
             conn.close();
@@ -61,6 +61,32 @@ public class DBConnector {
     }
 
     /** Metodo per eseguire query di lettura dati.
+     * Dopo aver creato un'istanza di DBConnector, il metodo
+     * istanzia una connessione aprendo anche un canale di comunicazione.
+     * Viene creato uno statement, un oggetto da utilizzare per comunicare
+     * con il db.
+     * <P>
+     * Tramite l'stmt appena creato eseguo la query richiesta dal chiamante.
+     * Finché l'oggetto resultSet (classe utilizzata per ottenere i risultati
+     * di una lettura da db di una determinata connessione) ha una riga che segye,
+     * i risultati vengono copiati dentro a una struttura di tipo List<Map<String, Object>>,
+     * aggiungendoli di riga in riga.
+     * <P>
+     * Questa struttura è sviluppata in questo modo: ogni riga (numerata da 0 in avanti)
+     * ha al suo interno delle chiavi (i nomi degli attributi) a cui sono associati
+     * i valori (il valore di quella colonna in quella specifica riga).
+     * Ad esempio nel caso in cui la query richieda le colonne "A, B, C" e vengano restituite
+     * 3 righe, esse saranno strutturate in questo modo: <P>
+     * Riga 0: A -> "Valore 1" B -> "Valore 2" C -> "Valore 3" <P>
+     * Riga 1: A -> "Valore 4" B -> "Valore 5" C -> "Valore 6" <P>
+     * Riga 2: A -> "Valore 7" B -> "Valore 8" C -> "Valore 9"
+     * <P>
+     * Per accedere ai valori della Map si utilizzano le chiavi, se volessi
+     * sapere che cosa è contenuto in "Valore 5" utilizzerei:
+     * Map.get(1).get("B")
+     * <P>
+     * Una volta finita la copiatura, si chiude la connessione e si restituisce
+     * la Map al chiamante.
      *
      * @param query La query da eseguire
      * @return Una Map con dentro i risultati della lettura
