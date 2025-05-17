@@ -263,10 +263,18 @@ public class PHPRequestHandler {
     //risponde al sito tramite phpresponsehandler
     //usa Logic.DBConnector e PHPResponsehandle
 
-    private void prenotazioneCase(String tipologia, String messaggio, Socket clientSocket) {
+    /** Metodo per gestire la logica di prenotazione.
+     * Tramite gli split si prende la stringa dati e la si suddivide nelle informazioni
+     * necessarie per la prenotazione: il cf, la fascia oraria e il giorno.
+     *
+     * @param tipologia Gara secca o Gara Libera
+     * @param dati In ordine: data della gara, fascia oraria, cf.
+     * @param clientSocket Il socket di risposta
+     */
+    private void prenotazioneCase(String tipologia, String dati, Socket clientSocket) {
 
         //data fasciaOraria username
-        String[] info = messaggio.split(" ");
+        String[] info = dati.split(" ");
         LocalDate dataG;
         LocalTime orarioI;
         Persona pers = new Persona();
@@ -431,12 +439,12 @@ public class PHPRequestHandler {
     /** Metodo per effettuare la manutenzione di un kart.
      * Ricevo la targa del kart e la descrizione della manutenzione effettuata.
      *
-     * @param info
+     * @param dati
      * @param clientSocket Socket per la risposta
      */
-    private void manutenzioneCase(String info, Socket clientSocket) {
+    private void manutenzioneCase(String dati, Socket clientSocket) {
         Meccanico m = new Meccanico();
-        String[] mex = info.split(" ", 3);
+        String[] mex = dati.split(" ", 3);
         Kart k = new Kart();
         k.setTarga(mex[0]);
         String text = mex[2];
@@ -470,12 +478,12 @@ public class PHPRequestHandler {
      * Dato il cf, idgara e il tempo di penalità, inserisco una penalità
      * a un determinato pilota.
      *
-     * @param messaggio
+     * @param dati
      * @param clientSocket Socket per la risposta
      */
-    private void aggiungiPenalitaCase(String messaggio, Socket clientSocket) {
+    private void aggiungiPenalitaCase(String dati, Socket clientSocket) {
         //socio idgara tempo
-        String[] info = messaggio.split(" ");
+        String[] info = dati.split(" ");
         Socio s = new Socio();
         s.setCf(info[0]);
         String idGara = info[1];
@@ -488,12 +496,12 @@ public class PHPRequestHandler {
     /** Metodo per aggiungere pezzi all'inventario della concessionaria.
      * Dati i dati del nuovo pezzo, lo si aggiunge al db.
      *
-     * @param messaggio
+     * @param dati
      * @param clientSocket Socket per la risposta
      */
-    private void aggiungiPezziCase(String messaggio, Socket clientSocket) {
+    private void aggiungiPezziCase(String dati, Socket clientSocket) {
         //idPezzo quantità
-        String[] info = messaggio.split(" ");
+        String[] info = dati.split(" ");
         Pezzo p = new Pezzo();
         p.setIdProdotto(info[0]);
         p.setQuantita(Integer.parseInt(info[1]));
@@ -518,12 +526,12 @@ public class PHPRequestHandler {
      * Preso il cf e l'id del pezzo, posso associare a un utente
      * il pezzo acquistato.
      *
-     * @param messaggio
+     * @param dati
      * @param clientSocket Socket per la risposta
      */
-    private void acquistaPezziCase(String messaggio, Socket clientSocket) {
+    private void acquistaPezziCase(String dati, Socket clientSocket) {
         //cf pezzo
-        String[] info = messaggio.split(" ");
+        String[] info = dati.split(" ");
         Socio s = new Socio();
         s.setCf(info[0]);
         Pezzo p = new Pezzo();
@@ -556,23 +564,23 @@ public class PHPRequestHandler {
      * Viene creato un oggetto di tipo Team per gestire il tutto con i costruttori
      * e i metodi appositi.
      *
-     * @param messaggio nome, colore, cf1, cf2.
+     * @param dati nome, colore, cf1, cf2.
      * @param clientSocket Socket per la risposta
      */
-    private void creazioneTeamCase(String messaggio, Socket clientSocket) {
+    private void creazioneTeamCase(String dati, Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        String[] team = messaggio.split(" ");
+        String[] team = dati.split(" ");
         Team t = new Team(team[0], team[1], team[2], team[3]);
         o.creaTeam(t, clientSocket);
     }
 
     /** Metodo per associare una determinata gara a un campionato.
      *
-     * @param messaggio idGara, idCampionato
+     * @param dati idGara, idCampionato
      * @param clientSocket Socket per la risposta
      */
-    private void aggiungiGaraCampionatoCase(String messaggio, Socket clientSocket) {
-        String[] info = messaggio.split(" ");
+    private void aggiungiGaraCampionatoCase(String dati, Socket clientSocket) {
+        String[] info = dati.split(" ");
         String idGara = info[0];
         String idCamp = info[1];
 
@@ -605,12 +613,12 @@ public class PHPRequestHandler {
 
     /** Metodo per associare un socio a una determinata prenotazione.
      *
-     * @param messaggio IdPrenotazione, cf
+     * @param dati IdPrenotazione, cf
      * @param clientSocket Socket per la risposta
      */
-    private void aggiornamentoPrenotaCase(String messaggio, Socket clientSocket) {
+    private void aggiornamentoPrenotaCase(String dati, Socket clientSocket) {
         Organizzatore o = new Organizzatore();
-        String[] info = messaggio.split(" ");
+        String[] info = dati.split(" ");
         String idP = info[0];
         Socio s = new Socio();
         s.setCf(info[1]);
