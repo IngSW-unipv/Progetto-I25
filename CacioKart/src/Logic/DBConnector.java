@@ -68,8 +68,8 @@ public class DBConnector {
      * <P>
      * Tramite l'stmt appena creato eseguo la query richiesta dal chiamante.
      * Finché l'oggetto resultSet (classe utilizzata per ottenere i risultati
-     * di una lettura da db di una determinata connessione) ha una riga che segye,
-     * i risultati vengono copiati dentro a una struttura di tipo List<Map<String, Object>>,
+     * di una lettura da db di una determinata connessione) ha una riga che segue,
+     * i risultati vengono copiati dentro a una struttura di tipo List Map<String, Object>>,
      * aggiungendoli di riga in riga.
      * <P>
      * Questa struttura è sviluppata in questo modo: ogni riga (numerata da 0 in avanti)
@@ -93,9 +93,8 @@ public class DBConnector {
      */
     public List<Map<String, Object>> executeReturnQuery(String query) {
         try {
-            db = new DBConnector();
-            db.dbOpenConnection();
-            stmt = db.conn.createStatement();
+            this.dbOpenConnection();
+            stmt = this.conn.createStatement();
             rs = stmt.executeQuery(query);
             System.out.println("Eseguo la query di lettura richiesta: " + query);
             rsmd = rs.getMetaData();
@@ -110,12 +109,12 @@ public class DBConnector {
                 }
                 resultList.add(row);
             }
-            db.dbCloseConnection();
+            this.dbCloseConnection();
             return resultList;
 
         } catch (SQLException e) {
             System.out.println("La lettura non è andata a buon fine: " + e.getMessage());
-            db.dbCloseConnection();
+            this.dbCloseConnection();
             return null;
         }
 
@@ -130,17 +129,16 @@ public class DBConnector {
      */
     public String executeUpdateQuery(String query) {
         try {
-            db = new DBConnector();
-            db.dbOpenConnection();
-            stmt = db.conn.createStatement();
+            this.dbOpenConnection();
+            stmt = this.conn.createStatement();
             stmt.executeUpdate(query);
             System.out.println("Eseguo la query di modifica richiesta: " + query);
-            db.dbCloseConnection();
+            this.dbCloseConnection();
             return "1";
 
         } catch (SQLException e) {
             System.out.println("L'inserimento non è andato a buon fine: " + e.getMessage());
-            db.dbCloseConnection();
+            this.dbCloseConnection();
             return "0";
 
         }
