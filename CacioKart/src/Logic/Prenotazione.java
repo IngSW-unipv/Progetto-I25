@@ -18,6 +18,7 @@ public class Prenotazione {
     private List<Map<String, Object>> result;
     private String idPrenotazione, prenotazioniConcorrenti;
     private double costo;
+    private TableMaker maker;
 
     /** Metodo per gestire le prenotazioni.
      * Si effettua un controllo di prenotazioni concorrenti per vedere se
@@ -111,4 +112,41 @@ public class Prenotazione {
         }
 
     }
+
+    /**
+     *
+     * @param clientSocket Il socket di risposta
+     */
+
+    //Una pagina vuole solo idP come risposta, l'altra vuole più roba
+    public void mostraPrenotazioniOrganizzatore(Socket clientSocket) {
+        responder = new PHPResponseHandler();
+        db = new DBConnector();
+        SELECT = Query.MOSTRA_PRENOTAZIONI_ORGANIZZATORE.getQuery();
+        result = db.executeReturnQuery(SELECT);
+
+        if (result != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idP"));
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public void mostraPrenotazioniSocio(Socio s,Socket clientSocket) {
+        responder = new PHPResponseHandler();
+        db = new DBConnector();
+        SELECT = Query.MOSTRA_PRENOTAZIONI_SOCIO.getQuery(s.getCf());
+        result = db.executeReturnQuery(SELECT);
+
+        if (result != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "dataG", "fasciaO", "tipologia"));
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
 }
+

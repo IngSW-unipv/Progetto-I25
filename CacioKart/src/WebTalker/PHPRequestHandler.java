@@ -165,7 +165,7 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_GARA_SECCA:
-                    mostraPrenotazioneCase(clientSocket);
+                    mostraPrenotazioniOrganizzatoreCase(clientSocket);
                     break;
 
                 case MOSTRA_SOCI:
@@ -175,8 +175,21 @@ public class PHPRequestHandler {
                 case INSERIMENTO_SOCI_GARA:
                     aggiornamentoPrenotaCase(info, clientSocket);
                     break;
+
                 case MOSTRA_BILANCIO:
                     mostraBilancioCase(clientSocket);
+                    break;
+
+                case MOSTRA_PRENOTAZIONI_UTENTE:
+                    mostraPrenotazioniSocioCase(info, clientSocket);
+                    break;
+
+                case MOSTRA_KART_UTENTE:
+                    mostraKartUtenteCase(info, clientSocket);
+                    break;
+
+                case MOSTRA_PEZZI_POSSEDUTI_UTENTE:
+                    mostraPezziUtenteCase(info, clientSocket);
                     break;
 
                 default:
@@ -567,13 +580,25 @@ public class PHPRequestHandler {
         o.aggiungiGaraPartecipa(idGara, idCamp, clientSocket);
     }
 
-    /** Metodo per mostrare all'organizzatore tutte le prenotazioni che sono state effettuate.
+    /**
      *
      * @param clientSocket Socket per la risposta
      */
-    private void mostraPrenotazioneCase(Socket clientSocket) {
-        Organizzatore o = new Organizzatore();
-        o.mostraPrenotazioni(clientSocket);
+    private void mostraPrenotazioniOrganizzatoreCase(Socket clientSocket) {
+        Prenotazione p = new Prenotazione();
+        p.mostraPrenotazioniOrganizzatore(clientSocket);
+    }
+
+    /**
+     *
+     * @param dati
+     * @param clientSocket
+     */
+    private void mostraPrenotazioniSocioCase(String dati, Socket clientSocket) {
+        Prenotazione p = new Prenotazione();
+        Socio s = new Socio();
+        s.setCf(dati);
+        p.mostraPrenotazioniSocio(s, clientSocket);
     }
 
     /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
@@ -610,5 +635,27 @@ public class PHPRequestHandler {
     private void mostraBilancioCase(Socket clientSocket) {
         Proprietario p = new Proprietario();
         p.bilancio(clientSocket);
+    }
+
+    /**
+     *
+     * @param dati
+     * @param clientSocket
+     */
+    private void mostraKartUtenteCase(String dati, Socket clientSocket) {
+        Socio s = new Socio();
+        s.setCf(dati);
+        s.mostraKartUtente(clientSocket);
+    }
+
+    /**
+     *
+     * @param dati
+     * @param clientSocket
+     */
+    private void mostraPezziUtenteCase(String dati, Socket clientSocket) {
+        Socio s = new Socio();
+        s.setCf(dati);
+        s.mostraPezziUtente(clientSocket);
     }
 }

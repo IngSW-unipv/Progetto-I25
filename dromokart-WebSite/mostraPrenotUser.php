@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Classifica Personale - Dromokart</title>
+  <title>Prenotazioni Personali - Dromokart</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
@@ -27,8 +27,9 @@
     <?php
       //
       require_once 'logic/requestData.php';
-      $msg = 'richiestaClassUsr ' .$_SESSION['username'];
+      $msg = 'richiestaPren ' .$_SESSION['username'];
       $res = request($msg, $socket);
+
       if(!strcmp($res, "Nessun dato ricevuto.")){
         require 'logic/tableCreation.php';
         echo '<div class="table-section">';
@@ -36,11 +37,13 @@
         $titolo = array("Data", "Fascia oraria", "Tipo gara");
         createTable($titolo, $res);
         echo '</div>';
-      } else{
+      }
+      else{
         echo '<div class=description-section>';
         echo '<h1>Non ci sono prenotazioni</h1>';
         echo '</div>';
       }
+
     ?>
     <div class="profile-buttons">
         <button onclick="window.location.href='profilo.php';">Torna indietro</button>

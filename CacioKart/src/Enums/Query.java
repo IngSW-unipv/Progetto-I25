@@ -115,7 +115,7 @@ public enum Query {
 
     MOSTRA_CAMPIONATI("SELECT idCampionato FROM caciokart.campionato"),
 
-    MOSTRA_PRENOTAZIONI("SELECT idP FROM prenotazione WHERE dataG > curdate() ORDER BY idP DESC"),
+    MOSTRA_PRENOTAZIONI_ORGANIZZATORE("SELECT idP FROM prenotazione WHERE dataG > curdate() ORDER BY idP DESC"),
 
     SELEZIONA_SOCIO_AGGIUNTA_PRENOTAZIONE("SELECT socio, nome, cognome FROM socio"),
 
@@ -153,7 +153,6 @@ public enum Query {
     // =============================== //
 
     MOSTRA_DIPENDENTI_PROPRIETARIO("SELECT * FROM caciokart.dipendente"),
-
 
     AGGIUNTA_DIPENDENTE_PROPRIETARIO("INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) " +
             "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"),
@@ -200,6 +199,18 @@ public enum Query {
 
     ACQUISTA_PEZZI_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) " +
             "VALUES('%s', '%s', '%s')"),
+
+    MOSTRA_PRENOTAZIONI_SOCIO("SELECT dataG, fasciaO, tipologia FROM caciokart.prenotazione " +
+            "JOIN prenota ON prenotazione.idP = prenota.idP " +
+            "WHERE socio = '%s' ORDER BY prenotazione.idP DESC"),
+
+    MOSTRA_KART_SOCIO("SELECT kart.targa, kart.cilindrata, kart.serbatoio FROM caciokart.kart " +
+            "JOIN socio ON kart.targa = socio.targa " +
+            "WHERE socio = '%s'"),
+
+    MOSTRA_PEZZI_SOCIO("SELECT tipol, data FROM caciokart.acquista " +
+            "JOIN concessionaria ON acquista.idProdotto = concessionaria.idProdotto " +
+            "WHERE socio = '%s'")
     ;
 
     private final String query;

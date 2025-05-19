@@ -16,6 +16,8 @@ public class Socio extends Persona {
     private PHPResponseHandler responder;
     private String queryIndicator;
     private DBConnector db;
+    private TableMaker maker;
+    private List<Map<String, Object>> result;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -97,5 +99,37 @@ public class Socio extends Persona {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
+    public void mostraKartUtente(Socket clientSocket) {
+        responder = new PHPResponseHandler();
+        db = new DBConnector();
+        SELECT = Query.MOSTRA_KART_SOCIO.getQuery(this.getCf());
+        result = db.executeReturnQuery(SELECT);
 
+        if (result != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "targa", "cilindrata", "serbatoio"));
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    /**
+     *
+     * @param clientSocket
+     */
+    public void mostraPezziUtente(Socket clientSocket) {
+        responder = new PHPResponseHandler();
+        db = new DBConnector();
+        SELECT = Query.MOSTRA_PEZZI_SOCIO.getQuery(this.getCf());
+        result = db.executeReturnQuery(SELECT);
+
+        if (result != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "tipol", "data"));
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
 }

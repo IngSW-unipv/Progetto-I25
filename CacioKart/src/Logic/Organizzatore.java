@@ -134,25 +134,7 @@ public class Organizzatore {
 
     }
 
-    /** Metodo per mostrare all'organizzatore tutte le prenotazioni che sono state effettuate.
-     * Dopo aver effettuato una query invariabile, utilizzo tablemaker per rispondere al client.
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void mostraPrenotazioni(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = new DBConnector();
-        SELECT = Query.MOSTRA_PRENOTAZIONI.getQuery();
-        result = db.executeReturnQuery(SELECT);
 
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idP"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
 
     /** Metodo per associare un socio a una prenotazione.
      * Dopo aver effettuato la query di modifica del db, rispondo al client

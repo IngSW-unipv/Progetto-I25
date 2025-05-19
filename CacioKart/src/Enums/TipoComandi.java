@@ -8,17 +8,18 @@ package Enums;
 public enum TipoComandi {
 
     //UTENTE
+
     REGISTRAZIONE("registrazioneSocio"),
     LOGIN("login"),
     CLASSIFICA_UTENTE("richiestaClassUsr"),
-    RICHIESTA_PRENOTAZIONI("richiestaPren"), //mando: il messaggio e il cf, mi aspetto: dataG, fasciaO, tipo
+    MOSTRA_PRENOTAZIONI_UTENTE("richiestaPren"), //mando: il messaggio e il cf, mi aspetto: dataG, fasciaO, tipo
     PRENOTAZIONE_LIBERA("prenotazioneLibera"),
     ACQUISTA_KART("acquistaKart"),
     MOSTRA_KART_AGGIUNTA("mostraKartAggiunta"),
-    MOSTRA_KART("richiestaKartUsr"), //mando: il messaggio e il cf, mi aspetto: traga, cilindrata, serbatoio
+    MOSTRA_KART_UTENTE("richiestaKartUsr"), //mando: il messaggio e il cf, mi aspetto: targa, cilindrata, serbatoio
     CLASSIFICA_GENERALE("richiestaClass"),
     ACQUISTA_PEZZI("acquistaPezzi"),
-    MOSTRRA_PEZZI("richiestaPezziUsr"), //mando: il messaggio e il cf, mi aspetto: Nome del prodotto e data acquisto
+    MOSTRA_PEZZI_POSSEDUTI_UTENTE("richiestaPezziUsr"), //mando: il messaggio e il cf, mi aspetto: Nome del prodotto e data acquisto
 
     //MECCANICO
 
@@ -52,7 +53,6 @@ public enum TipoComandi {
     SELEZIONE_GARE_CAMPIONATO("selezioneGareCampionato"),
     AGGIUNGI_GARE_CAMPIONATO("aggiungiGareCampionato"),
     CREAZIONE_TEAM("aggiungiTeam"),
-    CREAZIONE_CAMPIONATO("aggiungiCampionato"),
 
     //PROPRIETARIO
 
