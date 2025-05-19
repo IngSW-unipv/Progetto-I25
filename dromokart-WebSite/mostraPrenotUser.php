@@ -30,7 +30,7 @@
       $msg = 'richiestaPren ' .$_SESSION['username'];
       $res = request($msg, $socket);
 
-      if(!strcmp($res, "Nessun dato ricevuto.")){
+      if(strcmp($res, "Nessun dato ricevuto.") != 0){
         require 'logic/tableCreation.php';
         echo '<div class="table-section">';
 
