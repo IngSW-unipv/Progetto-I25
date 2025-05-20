@@ -109,11 +109,11 @@ public class PHPRequestHandler {
                     break;
 
                 case CLASSIFICA_GENERALE:
-                    classificaGenerale(clientSocket);
+                    classificaGeneraleCase(clientSocket);
                     break;
 
                 case CLASSIFICA_UTENTE:
-                    classificaUtente(info, clientSocket);
+                    classificaUtenteCase(info, clientSocket);
                     break;
 
                 case CLASSIFICA_ARBITRO:
@@ -234,7 +234,7 @@ public class PHPRequestHandler {
      *
      * @param clientSocket Socket per la risposta
      */
-    private void classificaGenerale(Socket clientSocket) {
+    private void classificaGeneraleCase(Socket clientSocket) {
         Classifica c = new Classifica();
         c.classificaCompleta(clientSocket);
     }
@@ -244,7 +244,7 @@ public class PHPRequestHandler {
      * @param cfPilota Il cf del pilota di cui vogliamo sapere le classifiche
      * @param clientSocket Socket per la risposta
      */
-    private void classificaUtente(String cfPilota, Socket clientSocket) {
+    private void classificaUtenteCase(String cfPilota, Socket clientSocket) {
         Classifica c = new Classifica();
         Socio s = new Socio();
         s.setCf(cfPilota);
