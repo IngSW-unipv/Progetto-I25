@@ -22,7 +22,6 @@ public class DBConnector {
     private ResultSetMetaData rsmd;
 
     private Statement stmt;
-    private DBConnector db;
 
     private int columnCount;
     private String columnName, columnValue;
@@ -33,7 +32,6 @@ public class DBConnector {
     /** Metodo per aprire la connessione al database.
      * Utilizzabile solo in questa classe dai metodi per
      * eseguire le varie query
-     *
      */
     private void dbOpenConnection() {
         try {

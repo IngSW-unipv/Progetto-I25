@@ -17,8 +17,6 @@ public class Classifica {
     public Classifica() {
     }
 
-
-
     /** Metodo per generare la classifica disponibile a tutti
      * i visitatori del sito.
      * Il metodo restituisce i 10 migliori giri in assoluto di
@@ -27,17 +25,14 @@ public class Classifica {
      * @param clientSocket Il socket di risposta
      */
     public void classificaCompleta(Socket clientSocket) {
-        // Inizializza il responder.
         responder = new PHPResponseHandler();
         SELECT = Query.CLASSIFICA_GENERALE.getQuery();
-        // Esecuzione della query
         result = getClassifica(SELECT);
 
         if (result != null) {
             maker = new TableMaker();
             responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "nome", "cognome", "targa", "bGiro", "tempTot"));
         } else {
-            // Se la query non ha restituito risultati
             responder.sendResponse(clientSocket, "end");
         }
     }
@@ -66,23 +61,18 @@ public class Classifica {
     /** Metodo per mostrare una classifica specifica all'arbitro
      * in modo da poter inserire penalità.
      *
-     * @param idGara
+     * @param idGara L'id della gara di cui si richiede la classifica
      * @param clientSocket Il socket di risposta
      */
     public void classificaPenalita(String idGara, Socket clientSocket) {
-        // Inizializza il responder.
         responder = new PHPResponseHandler();
-
-        // Esecuzione della query
         result = getClassifica(Query.MOSTRA_CLASSIFICA_PENALITA.getQuery(idGara));
 
         if (result != null) {
-            // Creo la stringa da rispondere a PHP
             maker = new TableMaker();
             responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "socio", "targa", "bGiro", "tempTot"));
 
         } else {
-            // Se la query non ha restituito risultati
             responder.sendResponse(clientSocket, "end");
 
         }

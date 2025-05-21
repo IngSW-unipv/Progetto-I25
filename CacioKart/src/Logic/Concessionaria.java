@@ -22,25 +22,26 @@ public class Concessionaria {
     }
 
     /** Metodo per inserire i kart nella concessionaria.
-     * In ingresso prendiamo i dati del kart e il socket per spedire la risposta.
-     * Creo un oggetto di tipo Kart in modo da poterlo manipolare con i vari get,
-     * dopodiché utilizzo il metodo di DBConnector per inserire il nuovo kart e
-     * il metodo di ResponseHandler per mandare una risposta.
+     * Il nuovo kart viene inserito nella tabella kart.
+     * Dopodiché si prende l'id massimo dei prodotti presenti
+     * nella concessionaria e lo si utilizza per calcolare l'id prodotto
+     * del kart nella concessionaria, per poi eseguire la query di inserimento
+     * nella tabella concessionaria.
+     * Il metodo non controlla targhe doppie perché non ci aspettiamo che
+     * ci siano targhe che appaiono due volte.
      *
-     * @param nuovoKart
-     * @param prezzo
-     * @param clientSocket
+     * @param nuovoKart I dati del nuovo kart da inserire
+     * @param prezzo Il prezzo del nuovo kart
+     * @param clientSocket Il socket di risposta
      */
     public void inserimentoKart(Kart nuovoKart, int prezzo, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
-        //devo aggiungere il kart in kart
         INSERT = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART.getQuery(nuovoKart.getTarga(), nuovoKart.getCilindrata(), nuovoKart.getSerbatoio());
         db.executeUpdateQuery(INSERT);
 
         SELECT = Query.INSERIMENTO_KART_CONCESSIONARIA_MAX_ID.getQuery();
         result = db.executeReturnQuery(SELECT);
-        //System.out.println(maxIDProdotto.get(0));
 
         ultimoProdotto = result.get(0).get("max").toString();
 
@@ -80,7 +81,8 @@ public class Concessionaria {
         }
     }
 
-    /**
+    /** Metodo per inserire i pezzi nuovi nella concessionaria.
+     * Il metodo esegue la query di inserimento e risponde al client.
      *
      * @param p Il pezzo da inserire
      * @param clientSocket Il socket di risposta

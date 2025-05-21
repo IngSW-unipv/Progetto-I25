@@ -23,7 +23,8 @@ public class Meccanico {
     }
 
     /** Metodo per aggiungere manutenzioni su un determinato kart.
-     *
+     * Dopo aver calcolato l'id della nuova manutenzione, il metodo
+     * aggiorna la tabella delle manutenzioni.
      *
      * @param k Il kart su cui viene effettuata la manutenzione
      * @param text La descrizione della manutenzione
@@ -50,6 +51,9 @@ public class Meccanico {
 
     /** Metodo per aggiungere kart al noleggio,
      * togliendoli dalla concessionaria.
+     * Il metodo utilizza un ciclo FOR per ciclare
+     * le due query che deve effettuare per rimuovere
+     * il kart dalle tabelle acquista e concessionaria.
      *
      * @param k Il kart da aggiungere
      * @param clientSocket Il socket di risposta
@@ -74,6 +78,8 @@ public class Meccanico {
     }
 
     /** Metodo per riempire completamente il serbatoio di un kart.
+     * Il metodo utilizza la targa del kart ricevuta per modificarne il
+     * serbatoio.
      *
      * @param k Il kart a cui aggiungere la benzina
      * @param clientSocket Il socket di risposta
