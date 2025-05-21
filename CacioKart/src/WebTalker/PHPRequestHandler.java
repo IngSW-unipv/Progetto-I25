@@ -225,8 +225,8 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void classificaArbitro(Socket clientSocket) {
-        Classifica c = new Classifica();
-        c.classificaArbitro(clientSocket);
+        Arbitro a = new Arbitro();
+        a.gareArbitro(clientSocket);
     }
 
     /** Metodo per gestire la logica della classifica generale

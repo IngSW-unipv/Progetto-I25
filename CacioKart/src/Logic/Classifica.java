@@ -17,25 +17,6 @@ public class Classifica {
     public Classifica() {
     }
 
-    /** Metodo per mostrare all'Arbitro tutte le gare disputate su cui è possibile
-     * inserire penalità.
-     * Il metodo restituisce le gare senza duplicati.
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void classificaArbitro(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        SELECT = Query.CLASSIFICA_ARBITRO.getQuery();
-        result = getClassifica(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
 
 
     /** Metodo per generare la classifica disponibile a tutti
@@ -43,7 +24,7 @@ public class Classifica {
      * Il metodo restituisce i 10 migliori giri in assoluto di
      * tutti gli utenti.
      *
-     * @param clientSocket
+     * @param clientSocket Il socket di risposta
      */
     public void classificaCompleta(Socket clientSocket) {
         // Inizializza il responder.
@@ -86,7 +67,7 @@ public class Classifica {
      * in modo da poter inserire penalità.
      *
      * @param idGara
-     * @param clientSocket
+     * @param clientSocket Il socket di risposta
      */
     public void classificaPenalita(String idGara, Socket clientSocket) {
         // Inizializza il responder.

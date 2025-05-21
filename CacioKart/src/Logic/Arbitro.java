@@ -5,8 +5,12 @@ import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 
 public class Arbitro {
+    private PHPResponseHandler responder;
+    private DBConnector db;
 
     public Arbitro() {
 
@@ -23,11 +27,34 @@ public class Arbitro {
      * @param clientSocket Il socket per mandare la risposta
      */
     public void inserimentoPenalita(Socio s, String idGara, LocalTime penalita, Socket clientSocket) {
-        DBConnector db = new DBConnector();
-        PHPResponseHandler responder = new PHPResponseHandler();
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
         String UPDATE = Query.INSERIMENTO_PENALITA_ARBITRO.getQuery(penalita, idGara, s.getCf());
 
         String queryIndicator = db.executeUpdateQuery(UPDATE);
         responder.sendResponse(clientSocket, queryIndicator);
     }
+
+    /** Metodo per mostrare all'Arbitro tutte le gare disputate su cui è possibile
+     * inserire penalità.
+     * Il metodo restituisce le gare senza duplicati.
+     *
+     * @param clientSocket Il socket di risposta
+     */
+    public void gareArbitro(Socket clientSocket) {
+        db = new DBConnector();
+        responder = new PHPResponseHandler();
+        String SELECT = Query.CLASSIFICA_ARBITRO.getQuery();
+        List<Map<String, Object>> result;
+        result = db.executeReturnQuery(SELECT);
+
+        if (result != null) {
+            TableMaker maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara"));
+
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
+    }
+
 }
