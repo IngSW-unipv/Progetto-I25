@@ -41,7 +41,7 @@ All'interno dell'applicazione, sono presenti **6 ruoli** con funzioni specifiche
 6. **Utente**
 
    * Acquistare kart e pezzi di ricambio
-   * Prenotare gare libere e gare secche
+   * Prenotare gare libere
    * Consultare il proprio miglior tempo
 
 ---
@@ -76,13 +76,14 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 
 2. **Configurare il Database**:
 
-   * Eseguire lo script `CreaDB.sql` per generare le tabelle.
-   * Eseguire `PopolaDB.sql` per inserire dati iniziali.
+   * Eseguire lo script `CacioKart db.sql`
 
 3. **Importare in IntelliJ**:
 
-   * Aprire IntelliJ e selezionare `File > Open`.
-   * Selezionare la directory `Progetto-I25`.
+   * Aprire IntelliJ
+   * Scegliere Get from Version Control
+   * Incollare l’URL "https://github.com/IngSW-unipv/Progetto-I25.git" e attendere la clonazione
+
 
 4. **Configurare MySQL Workbench**:
 
