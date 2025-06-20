@@ -282,7 +282,7 @@ public class PHPRequestHandler {
         dataG = LocalDate.parse(info[0], dateFormatter);
         String[] orari = info[1].split("-");
         orarioI = LocalTime.parse(orari[0], timeFormatter);
-        pers.setCf(info[2]);
+        pers.setCf(info[1]);
 
         Prenotazione p = new Prenotazione();
         p.prenotazione(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
