@@ -43,7 +43,7 @@ public class Proprietario {
      * Preso l'oggetto Dipendente in ingresso, si crea
      * la query da eseguire per effettuare la modifica del db.
      *
-     * @param nuovoDip     Il dipendente da aggiungere
+     * @param nuovoDip Il dipendente da aggiungere
      * @param clientSocket Socket per inviare la risposta
      */
     public void aggiuntaDipendente(Dipendente nuovoDip, Socket clientSocket) {
@@ -65,11 +65,11 @@ public class Proprietario {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    /**
-     * Metodo per rimuovere i dipendenti.
-     * Identico al metodo presente in Objects.Kart per rimuovere i kart.
+    /** Metodo per rimuovere i dipendenti.
+     * Preso l'oggetto Dipendente in ingresso, si crea
+     * la query da eseguire per effettuare la modifica del db.
      *
-     * @param d            Il dipendente da rimuovere
+     * @param d Il dipendente da rimuovere
      * @param clientSocket Socket per inviare la risposta
      */
     public void rimozioneDipendenti(Dipendente d, Socket clientSocket) {
@@ -80,6 +80,10 @@ public class Proprietario {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
+    /** Metodo per calcolare il bilancio del kartodromo.
+     *
+     * @param clientSocket Socket per inviare la risposta
+     */
     public void bilancio(Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
@@ -102,15 +106,17 @@ public class Proprietario {
             }
         }
 
-        responder.sendResponse(clientSocket,
-                result.toString()
-                        .trim()
-                        .replaceAll("[{}\\[\\],]", "")
-                        .replaceAll("ENTRATE=", "")
-                        .replaceAll("USCITE=", "")
-                        .replaceAll("SALDO=", "")
-                        .replaceAll("^\\s+|\\s+$", "")
-                        .replaceAll("\\s+", " "));
+        StringBuilder response = new StringBuilder();
+        response.append(result.get(0).get("ENTRATE"));
+        response.append(" ");
+        response.append(result.get(1).get("USCITE"));
+        response.append(" ");
+        response.append(result.get(2).get("SALDO"));
+
+        //System.out.println( "Ciao " + result.get(0).get("ENTRATE"));
+        //System.out.println( "Ciao " + result.get(1).get("USCITE"));
+
+        responder.sendResponse(clientSocket, response.toString());
     }
 }
 
