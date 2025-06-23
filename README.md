@@ -100,7 +100,7 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 
    * Avviare il server Apache tramite XAMPP.
    * Eseguire il `main` del codice da IntelliJ IDEA.
-   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/` oppure cliccando il bottone 'admin' su XAMPP.
+   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/` oppure cliccando il bottone `Admin` su XAMPP.
 
 ---
 
