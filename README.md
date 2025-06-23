@@ -65,6 +65,8 @@ Per eseguire il progetto localmente è necessario disporre di:
 * **Java Development Kit (JDK) 11+**: Disponibile [qui](https://www.oracle.com/java/technologies/downloads/#jdk23-windows).
 * **MySQL Workbench**: Scaricabile [qui](https://dev.mysql.com/downloads/installer/).
 * **IntelliJ IDEA Community**: Scaricabile [qui](https://www.jetbrains.com/idea/download/).
+* **XAMPP**: Scaricabile [qui](https://www.apachefriends.org/download.html).
+
 
 ## Configurazione del Progetto
 
@@ -93,7 +95,6 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 
    * Aprire XAMPP e selezionare `Config > Apache (httpd.conf)`.
    * Modificare il percorso di `DocumentRoot` e `Directory` con la posizione del sito.
-   * Se non installato, scaricare XAMPP da [qui](https://www.apachefriends.org/download.html).
    * Avviare Apache da XAMPP.
 
 5. **Avvio Applicazione**:
