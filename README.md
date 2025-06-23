@@ -95,13 +95,12 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 
    * Aprire XAMPP e selezionare `Config > Apache (httpd.conf)`.
    * Modificare il percorso di `DocumentRoot` e `Directory` con la posizione del sito.
-   * Avviare Apache da XAMPP.
 
 5. **Avvio Applicazione**:
 
    * Avviare il server Apache tramite XAMPP.
    * Eseguire il `main` del codice da IntelliJ IDEA.
-   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/`.
+   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/` oppure cliccando il bottone 'admin' su XAMPP.
 
 ---
 
