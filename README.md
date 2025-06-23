@@ -75,8 +75,13 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 ```
 
 2. **Configurare il Database**:
+   * Scaricare il file `CacioKart db.sql`
+   * Eseguire lo script
+   * Eseguire il comando:
 
-   * Eseguire lo script `CacioKart db.sql`
+   ```sql
+   ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+   ```
 
 3. **Importare in IntelliJ**:
 
@@ -84,23 +89,14 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
    * Scegliere Get from Version Control
    * Incollare l’URL "https://github.com/IngSW-unipv/Progetto-I25.git" e attendere la clonazione
 
-
-4. **Configurare MySQL Workbench**:
-
-   * Aprire MySQL Workbench ed eseguire:
-
-   ```sql
-   ALTER USER 'root'@'localhost' IDENTIFIED BY '';
-   ```
-
-5. **Impostare Server Apache (XAMPP)**:
+4. **Impostare Server Apache (XAMPP)**:
 
    * Aprire XAMPP e selezionare `Config > Apache (httpd.conf)`.
    * Modificare il percorso di `DocumentRoot` e `Directory` con la posizione del sito.
    * Se non installato, scaricare XAMPP da [qui](https://www.apachefriends.org/download.html).
    * Avviare Apache da XAMPP.
 
-6. **Avvio Applicazione**:
+5. **Avvio Applicazione**:
 
    * Avviare il server Apache tramite XAMPP.
    * Eseguire il `main` del codice da IntelliJ IDEA.
