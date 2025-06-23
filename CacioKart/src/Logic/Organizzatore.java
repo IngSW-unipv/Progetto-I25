@@ -33,9 +33,9 @@ public class Organizzatore {
         db = new DBConnector();
         responder = new PHPResponseHandler();
 
-        System.out.println("Nome del team: " + t.getNome());
-        System.out.println("Colore del team: " + t.getColore());
-        System.out.println("Nome dei soci: " + t.getSoci());
+        //System.out.println("Nome del team: " + t.getNome());
+        //System.out.println("Colore del team: " + t.getColore());
+        //System.out.println("Nome dei soci: " + t.getSoci());
 
         INSERT_ITERATOR = new String[3];
         INSERT_ITERATOR[0] = Query.CREA_TEAM_TABELLA_TEAM.getQuery(t.getNome(), t.getColore());

@@ -49,7 +49,7 @@ public enum Query {
 
 
     INSERIMENTO_NUOVI_PEZZI("UPDATE caciokart.concessionaria " +
-            "SET quantita = quantita + %s + " +
+            "SET quantita = quantita + %s " +
             "WHERE idProdotto = '%s'"),
 
     // =============================== //
@@ -152,7 +152,7 @@ public enum Query {
     //           PROPRIETARIO
     // =============================== //
 
-    MOSTRA_DIPENDENTI_PROPRIETARIO("SELECT * FROM caciokart.dipendente"),
+    MOSTRA_DIPENDENTI_PROPRIETARIO("SELECT * FROM caciokart.dipendente WHERE ruolo != 'proprietario'"),
 
     AGGIUNTA_DIPENDENTE_PROPRIETARIO("INSERT INTO dipendente (dip, nome, cognome, mail, passw, dataN, ruolo, oreL, stipendio) " +
             "VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"),
