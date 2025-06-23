@@ -65,6 +65,8 @@ Per eseguire il progetto localmente è necessario disporre di:
 * **Java Development Kit (JDK) 11+**: Disponibile [qui](https://www.oracle.com/java/technologies/downloads/#jdk23-windows).
 * **MySQL Workbench**: Scaricabile [qui](https://dev.mysql.com/downloads/installer/).
 * **IntelliJ IDEA Community**: Scaricabile [qui](https://www.jetbrains.com/idea/download/).
+* **XAMPP**: Scaricabile [qui](https://www.apachefriends.org/download.html).
+
 
 ## Configurazione del Progetto
 
@@ -75,8 +77,13 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
 ```
 
 2. **Configurare il Database**:
+   * Scaricare il file `CacioKart db.sql`
+   * Eseguire lo script
+   * Eseguire il comando:
 
-   * Eseguire lo script `CacioKart db.sql`
+   ```sql
+   ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+   ```
 
 3. **Importare in IntelliJ**:
 
@@ -84,27 +91,16 @@ git clone https://github.com/IngSW-unipv/Progetto-I25.git
    * Scegliere Get from Version Control
    * Incollare l’URL "https://github.com/IngSW-unipv/Progetto-I25.git" e attendere la clonazione
 
-
-4. **Configurare MySQL Workbench**:
-
-   * Aprire MySQL Workbench ed eseguire:
-
-   ```sql
-   ALTER USER 'root'@'localhost' IDENTIFIED BY '';
-   ```
-
-5. **Impostare Server Apache (XAMPP)**:
+4. **Impostare Server Apache (XAMPP)**:
 
    * Aprire XAMPP e selezionare `Config > Apache (httpd.conf)`.
    * Modificare il percorso di `DocumentRoot` e `Directory` con la posizione del sito.
-   * Se non installato, scaricare XAMPP da [qui](https://www.apachefriends.org/download.html).
-   * Avviare Apache da XAMPP.
 
-6. **Avvio Applicazione**:
+5. **Avvio Applicazione**:
 
    * Avviare il server Apache tramite XAMPP.
    * Eseguire il `main` del codice da IntelliJ IDEA.
-   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/`.
+   * Accedere all'applicazione dal browser all'indirizzo `http://localhost/` oppure cliccando il bottone `Admin` su XAMPP.
 
 ---
 

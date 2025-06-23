@@ -24,12 +24,10 @@
 
   <!-- Contenuto principale -->
   <main>
-    <div class="content">
-      <!-- Immagine "Noi" -->
-      <img src="immagini/noi.png" alt="Noi">
+    <div class="description-section">
       <!-- Testo già presente -->
       <p>
-        Siamo 5 giovani ragazzi impegnati in un ambizioso progetto di ingegneria del software per la gestione di un dromokart.
+        Siamo 5 giovani ragazzi impegnati in un ambizioso progetto di ingegneria del software per la gestione di un kartodromo.
         Il nostro obiettivo è sviluppare soluzioni innovative per migliorare l'esperienza delle competizioni e ottimizzare la gestione
         della pista, mettendo in gioco passione, creatività e competenze tecniche.
       </p>
