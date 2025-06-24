@@ -24,7 +24,10 @@ public class Organizzatore {
 
     }
 
-    /**
+    /** Il metodo per inserire un team nuovo nel db.
+     * Servono 3 query per inserire un nuovo team nel db:
+     * una per la tabella team e due per la tabella appartenenza,
+     * una per ogni membro.
      *
      * @param t Il team da inserire nel db
      * @param clientSocket Il socket di risposta
@@ -76,7 +79,10 @@ public class Organizzatore {
         }
     }
 
-    /**
+    /** Metodo per mostrare al client tutti gli id campionato
+     * attualmente presenti nel db.
+     * La risposta è ottenuta con una query di lettura e
+     * formattata tramite tablemaker.
      *
      * @param clientSocket Il socket di risposta
      */
@@ -95,7 +101,8 @@ public class Organizzatore {
         }
     }
 
-    /**
+    /** Metodo per mostrare al client tutte le
+     * gare secche ancora non appartenenti a un campionato.
      *
      * @param clientSocket Il socket di risposta
      */
