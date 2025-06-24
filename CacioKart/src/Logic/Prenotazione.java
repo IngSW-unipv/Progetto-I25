@@ -113,7 +113,8 @@ public class Prenotazione {
 
     }
 
-    /**
+    /** Metodo per mostrare all'organizzatore tutte le
+     * prenotazioni in cui è possibile inserire i soci.
      *
      * @param clientSocket Il socket di risposta
      */
@@ -134,6 +135,12 @@ public class Prenotazione {
         }
     }
 
+    /** Metodo per mostrare a un determinato socio
+     * le prenotazioni a cui è associato.
+     *
+     * @param s Il socio in esame
+     * @param clientSocket Il socket di risposta
+     */
     public void mostraPrenotazioniSocio(Socio s,Socket clientSocket) {
         responder = new PHPResponseHandler();
         db = new DBConnector();
