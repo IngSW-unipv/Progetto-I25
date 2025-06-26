@@ -19,7 +19,7 @@ public class PHPRequestHandler {
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private String query;
-
+    VisualizzazionePrenotazioniStrategy strategy;
     public PHPRequestHandler() {
 
     }
@@ -165,7 +165,7 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_GARA_SECCA:
-                    mostraPrenotazioniOrganizzatoreCase(clientSocket);
+                    mostraPrenotazioni(tipo,"null",clientSocket);
                     break;
 
                 case MOSTRA_SOCI:
@@ -181,7 +181,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_PRENOTAZIONI_UTENTE:
-                    mostraPrenotazioniSocioCase(info, clientSocket);
+                    mostraPrenotazioni(tipo,info, clientSocket);
                     break;
 
                 case MOSTRA_KART_UTENTE:
@@ -285,7 +285,7 @@ public class PHPRequestHandler {
         pers.setCf(info[1]);
 
         Prenotazione p = new Prenotazione();
-        p.prenotazione(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
+        p.prenotazioneGara(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
 
     }
 
@@ -584,6 +584,7 @@ public class PHPRequestHandler {
      *
      * @param clientSocket Socket per la risposta
      */
+    /*
     private void mostraPrenotazioniOrganizzatoreCase(Socket clientSocket) {
         Prenotazione p = new Prenotazione();
         p.mostraPrenotazioniOrganizzatore(clientSocket);
@@ -594,12 +595,34 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
+    /*
     private void mostraPrenotazioniSocioCase(String dati, Socket clientSocket) {
         Prenotazione p = new Prenotazione();
         Socio s = new Socio();
         s.setCf(dati);
         p.mostraPrenotazioniSocio(s, clientSocket);
     }
+    */
+    private void mostraPrenotazioni(TipoComandi tipo,String dati, Socket clientSocket) {
+        Prenotazione p = new Prenotazione();
+        Socio s = new Socio();
+        switch (tipo) {
+            case MOSTRA_PRENOTAZIONI_UTENTE:
+                strategy = new MostraPrenotazioniSocioStrategy(dati);
+                break;
+
+            case RICHIESTA_GARA_SECCA:
+                strategy = new MostraPrenotazioniOrganizzatoreStrategy();
+                break;
+
+            default:
+                new PHPResponseHandler().sendResponse(clientSocket, "comando non riconosciuto");
+                return;
+        }
+
+        p.mostraPrenotazioni(strategy, clientSocket);
+    }
+
 
     /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
      * a una determinata prenotazione.

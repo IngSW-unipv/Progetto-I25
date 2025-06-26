@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
-public class Prenotazione {
+public class Prenotazione  {
     private String SELECT;
     private String[] INSERT_ITERATOR;
     private DBConnector db;
@@ -39,11 +39,12 @@ public class Prenotazione {
      * @param fasciaOraria La fascia oraria (11:00-12:00) in cui si è prenotata la gara
      * @param clientSocket Il socket di risposta
      */
-    public void prenotazione(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
+    public void prenotazioneGara(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         LocalDate dataO = LocalDate.now();
 
+        // Controllo disponibilità posti
         SELECT = Query.PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI.getQuery(dataGara, fasciaOraria);
         result = db.executeReturnQuery(SELECT);
         prenotazioniConcorrenti = result.get(0).get("concurrent").toString();
@@ -54,96 +55,34 @@ public class Prenotazione {
             return;
         }
 
+        // Genera nuovo ID prenotazione
         SELECT = Query.PRENOTAZIONE_MAX_ID.getQuery();
         result.clear();
         result = db.executeReturnQuery(SELECT);
         idPrenotazione = result.get(0).get("max").toString();
+        idPrenotazione = (!idPrenotazione.equals("0")) ? String.valueOf(Integer.parseInt(idPrenotazione) + 1) : "1";
 
-        if (!idPrenotazione.equals("0")) {
-            idPrenotazione = String.valueOf(Integer.parseInt(idPrenotazione) + 1);
+        // Applica la strategia corretta
+        PrenotazioneStrategy strategy = PrenotazioneStrategyFactory.getStrategy(tipologia);
 
-        } else {
-            idPrenotazione = "1"; // Se non ci sono prenotazioni, partiamo da 1
+        if (strategy == null) {
+            responder.sendResponse(clientSocket, "0");
+            return;
         }
 
-        INSERT_ITERATOR = new String[2];
-
-        switch (tipologia) {
-
-            case "libera":
-
-                costo = 15;
-                SELECT = Query.SELEZIONA_DIPENDENTE_PRENOTAZIONE.getQuery(cf);
-                result.clear();
-
-                result = db.executeReturnQuery(SELECT);
-                INSERT_ITERATOR[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
-
-                if (!result.isEmpty() && result.get(0).get("dip").equals(cf)) { //se il cf è nei dipendenti, allora non associamo alla prenotazione nessun cf
-                    INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO_NULL.getQuery(idPrenotazione, dataO);
-
-                } else {
-                    INSERT_ITERATOR[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO.getQuery(idPrenotazione, cf, dataO);
-
-                }
-
-                for (String prenotazione : INSERT_ITERATOR) {
-                    queryIndicator = db.executeUpdateQuery(prenotazione);
-                    if (queryIndicator == "0") {
-                        responder.sendResponse(clientSocket, queryIndicator);
-                        return;
-                    }
-                }
-                responder.sendResponse(clientSocket, queryIndicator);
-                break;
-
-            case "secca":
-
-                costo = 20;
-                String INSERT = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, tipologia, costo);
-
-                queryIndicator = db.executeUpdateQuery(INSERT);
-                responder.sendResponse(clientSocket, queryIndicator);
-                break;
-
-            default:
-                responder.sendResponse(clientSocket, "0");
-                break;
+        strategy.eseguiPrenotazione(idPrenotazione, cf, dataGara, fasciaOraria, dataO, db, responder, clientSocket);
         }
 
-    }
+    public void mostraPrenotazioni(VisualizzazionePrenotazioniStrategy strategy, Socket clientSocket) {
+        PHPResponseHandler responder = new PHPResponseHandler();
+        DBConnector db = new DBConnector();
+        TableMaker maker = new TableMaker();
 
-    /**
-     *
-     * @param clientSocket Il socket di risposta
-     */
+        List<Map<String, Object>> result = strategy.eseguiQuery(db);
 
-    //Una pagina vuole solo idP come risposta, l'altra vuole più roba
-    public void mostraPrenotazioniOrganizzatore(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = new DBConnector();
-        SELECT = Query.MOSTRA_PRENOTAZIONI_ORGANIZZATORE.getQuery();
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idP"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
-    public void mostraPrenotazioniSocio(Socio s,Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = new DBConnector();
-        SELECT = Query.MOSTRA_PRENOTAZIONI_SOCIO.getQuery(s.getCf());
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "dataG", "fasciaO", "tipologia"));
-
+        if (result != null && !result.isEmpty()) {
+            String risposta = maker.stringTableMaker(result, strategy.getColonneDaMostrare());
+            responder.sendResponse(clientSocket, risposta);
         } else {
             responder.sendResponse(clientSocket, "end");
         }
