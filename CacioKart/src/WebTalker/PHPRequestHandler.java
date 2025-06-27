@@ -204,6 +204,7 @@ public class PHPRequestHandler {
 
     }
 
+
     /** Metodo per gestire la logica di login.
      * I dati in ingresso vengono suddivisi tramite il metodo split.
      * Si utilizza poi il costruttore vuoto di persona per istanziare solo
@@ -235,8 +236,8 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void classificaGeneraleCase(Socket clientSocket) {
-        Classifica c = new Classifica();
-        c.classificaCompleta(clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaCompletaStrategy(), clientSocket);
     }
 
     /** Metodo per gestire le classifiche visibili da un singolo utente.
@@ -245,10 +246,10 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void classificaUtenteCase(String cfPilota, Socket clientSocket) {
-        Classifica c = new Classifica();
         Socio s = new Socio();
         s.setCf(cfPilota);
-        c.classificaUtente(s, clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaUtenteStrategy(s), clientSocket);
     }
 
     /** Metodo per gestire la logica di registrazione.
@@ -381,9 +382,10 @@ public class PHPRequestHandler {
         String[] dipendente = dati.split(" ");
         LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
-        Proprietario p = new Proprietario();
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
-        p.aggiuntaDipendente(d, clientSocket);
+
+        OperazioneProprietario operazione = new AggiuntaDipendenteOperazione(new DBConnector(), new PHPResponseHandler(), d);
+        operazione.esegui(clientSocket);
     }
 
     /** Metodo di rimozione dipendenti.
@@ -392,10 +394,10 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void eliminaDipendenteCase(String cf, Socket clientSocket) {
-        Proprietario p = new Proprietario();
         Dipendente d = new Dipendente();
         d.setCf(cf);
-        p.rimozioneDipendenti(d, clientSocket);
+        OperazioneProprietario operazione = new RimozioneDipendenteOperazione(new DBConnector(), new PHPResponseHandler(), d);
+        operazione.esegui(clientSocket);
     }
 
     /** Metodo per mostrare tutti i dipendenti.
@@ -403,10 +405,9 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraDipendentiCase(Socket clientSocket) {
-        Proprietario p = new Proprietario();
-        p.mostraDipendenti(clientSocket);
+        OperazioneProprietario operazione = new MostraDipendentiOperazione(new DBConnector(), new PHPResponseHandler());
+        operazione.esegui(clientSocket);
     }
-
     /** Metodo per aggiungere la benzina a un kart.
      *
      * @param targa La targa del kart a cui fare il pieno
@@ -467,8 +468,8 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraGaraPenalitaCase(String idGara, Socket clientSocket) {
-        Classifica c = new Classifica();
-        c.classificaPenalita(idGara, clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaPenalitaStrategy(idGara), clientSocket);
     }
 
     /** Metodo per inserire le penalità.
@@ -656,10 +657,9 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraBilancioCase(Socket clientSocket) {
-        Proprietario p = new Proprietario();
-        p.bilancio(clientSocket);
+        OperazioneProprietario operazione = new BilancioOperazione(new DBConnector(), new PHPResponseHandler());
+        operazione.esegui(clientSocket);
     }
-
     /**
      *
      * @param dati

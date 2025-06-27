@@ -17,78 +17,16 @@ public class Classifica {
     public Classifica() {
     }
 
-    /** Metodo per generare la classifica disponibile a tutti
-     * i visitatori del sito.
-     * Il metodo restituisce i 10 migliori giri in assoluto di
-     * tutti gli utenti.
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void classificaCompleta(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        SELECT = Query.CLASSIFICA_GENERALE.getQuery();
-        result = getClassifica(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "nome", "cognome", "targa", "bGiro", "tempTot"));
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
-    /** Metodo per generare la classifica delle ultime 10 gare
-     * effettuate da uno specifico utente.
-     *
-     * @param s Il socio di cui vogliamo trovare le ultime 10 gare
-     * @param clientSocket Il socket a cui mandare la risposta
-     */
-    public void classificaUtente(Socio s, Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        // Esegui la query
-        SELECT = Query.CLASSIFICA_UTENTE.getQuery(s.getCf());
-        result = getClassifica(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "targa", "bGiro", "tempTot"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
-    /** Metodo per mostrare una classifica specifica all'arbitro
-     * in modo da poter inserire penalità.
-     *
-     * @param idGara L'id della gara di cui si richiede la classifica
-     * @param clientSocket Il socket di risposta
-     */
-    public void classificaPenalita(String idGara, Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        result = getClassifica(Query.MOSTRA_CLASSIFICA_PENALITA.getQuery(idGara));
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idGara", "socio", "targa", "bGiro", "tempTot"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-
-        }
-    }
-
-    /** Metodo per generare una classifica qualsiasi data una query.
-     * È utilizzabile solo all'interno di questa classe, in quanto
-     * tutti i metodi generano classiche, ma i dati da mostrare e
-     * la query richiesta cambiano, creando la necessità di avere un metodo in comune
-     *
-     * @param SELECT La query da eseguire
-     * @return La List<Map<String, Object>> che contiene la classifica richiesta
-     */
-    private List<Map<String, Object>> getClassifica(String SELECT) {
+    public void generaClassifica(ClassificaStrategy strategy, Socket clientSocket) {
         db = new DBConnector();
-        return db.executeReturnQuery(SELECT);
+        responder = new PHPResponseHandler();
+        result = db.executeReturnQuery(strategy.getQuery());
 
+        if (result != null) {
+            maker = new TableMaker();
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, strategy.getColumns()));
+        } else {
+            responder.sendResponse(clientSocket, "end");
+        }
     }
 }
