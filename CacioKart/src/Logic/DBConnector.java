@@ -58,18 +58,19 @@ public class DBConnector {
         }
     }
 
-    /** Metodo per eseguire query di lettura dati.
+    /**
+     * Metodo per eseguire query di lettura dati.
      * Dopo aver creato un'istanza di DBConnector, il metodo
      * istanzia una connessione aprendo anche un canale di comunicazione.
      * Viene creato uno statement, un oggetto da utilizzare per comunicare
      * con il db.
-     * <P>
+     * <p>
      * Tramite l'stmt appena creato eseguo la query richiesta dal chiamante.
      * Finché l'oggetto resultSet (classe utilizzata per ottenere i risultati
      * di una lettura da db di una determinata connessione) ha una riga che segue,
      * i risultati vengono copiati dentro a una struttura di tipo List Map<String, Object>>,
      * aggiungendoli di riga in riga.
-     * <P>
+     * <p>
      * Questa struttura è sviluppata in questo modo: ogni riga (numerata da 0 in avanti)
      * ha al suo interno delle chiavi (i nomi degli attributi) a cui sono associati
      * i valori (il valore di quella colonna in quella specifica riga).
@@ -78,11 +79,11 @@ public class DBConnector {
      * Riga 0: A -> "Valore 1" B -> "Valore 2" C -> "Valore 3" <P>
      * Riga 1: A -> "Valore 4" B -> "Valore 5" C -> "Valore 6" <P>
      * Riga 2: A -> "Valore 7" B -> "Valore 8" C -> "Valore 9"
-     * <P>
+     * <p>
      * Per accedere ai valori della Map si utilizzano le chiavi, se volessi
      * sapere che cosa è contenuto in "Valore 5" utilizzerei:
      * Map.get(1).get("B")
-     * <P>
+     * <p>
      * Una volta finita la copiatura, si chiude la connessione e si restituisce
      * la Map al chiamante.
      *

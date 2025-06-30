@@ -19,7 +19,7 @@ public class PHPRequestHandler {
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private String query;
-
+    VisualizzazionePrenotazioniStrategy strategy;
     public PHPRequestHandler() {
 
     }
@@ -165,7 +165,7 @@ public class PHPRequestHandler {
                     break;
 
                 case RICHIESTA_GARA_SECCA:
-                    mostraPrenotazioniOrganizzatoreCase(clientSocket);
+                    mostraPrenotazioni(tipo,"null",clientSocket);
                     break;
 
                 case MOSTRA_SOCI:
@@ -181,7 +181,7 @@ public class PHPRequestHandler {
                     break;
 
                 case MOSTRA_PRENOTAZIONI_UTENTE:
-                    mostraPrenotazioniSocioCase(info, clientSocket);
+                    mostraPrenotazioni(tipo,info, clientSocket);
                     break;
 
                 case MOSTRA_KART_UTENTE:
@@ -203,6 +203,7 @@ public class PHPRequestHandler {
         }
 
     }
+
 
     /** Metodo per gestire la logica di login.
      * I dati in ingresso vengono suddivisi tramite il metodo split.
@@ -235,8 +236,8 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void classificaGeneraleCase(Socket clientSocket) {
-        Classifica c = new Classifica();
-        c.classificaCompleta(clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaCompletaStrategy(), clientSocket);
     }
 
     /** Metodo per gestire le classifiche visibili da un singolo utente.
@@ -245,10 +246,10 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void classificaUtenteCase(String cfPilota, Socket clientSocket) {
-        Classifica c = new Classifica();
         Socio s = new Socio();
         s.setCf(cfPilota);
-        c.classificaUtente(s, clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaUtenteStrategy(s), clientSocket);
     }
 
     /** Metodo per gestire la logica di registrazione.
@@ -285,7 +286,7 @@ public class PHPRequestHandler {
         pers.setCf(info[1]);
 
         Prenotazione p = new Prenotazione();
-        p.prenotazione(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
+        p.prenotazioneGara(pers.getCf(), tipologia, dataG, orarioI, clientSocket);
 
     }
 
@@ -381,9 +382,10 @@ public class PHPRequestHandler {
         String[] dipendente = dati.split(" ");
         LocalDate dataN = LocalDate.parse(dipendente[2], dateFormatter);
         LocalTime oreL = LocalTime.parse(dipendente[8], timeFormatter);
-        Proprietario p = new Proprietario();
         Dipendente d = new Dipendente(dipendente[0], dipendente[1], dataN, dipendente[3], dipendente[4], dipendente[5], Double.parseDouble(dipendente[6]), dipendente[7], oreL);
-        p.aggiuntaDipendente(d, clientSocket);
+
+        OperazioneProprietario operazione = new AggiuntaDipendenteOperazione(new DBConnector(), new PHPResponseHandler(), d);
+        operazione.esegui(clientSocket);
     }
 
     /** Metodo di rimozione dipendenti.
@@ -392,10 +394,10 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void eliminaDipendenteCase(String cf, Socket clientSocket) {
-        Proprietario p = new Proprietario();
         Dipendente d = new Dipendente();
         d.setCf(cf);
-        p.rimozioneDipendenti(d, clientSocket);
+        OperazioneProprietario operazione = new RimozioneDipendenteOperazione(new DBConnector(), new PHPResponseHandler(), d);
+        operazione.esegui(clientSocket);
     }
 
     /** Metodo per mostrare tutti i dipendenti.
@@ -403,10 +405,9 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraDipendentiCase(Socket clientSocket) {
-        Proprietario p = new Proprietario();
-        p.mostraDipendenti(clientSocket);
+        OperazioneProprietario operazione = new MostraDipendentiOperazione(new DBConnector(), new PHPResponseHandler());
+        operazione.esegui(clientSocket);
     }
-
     /** Metodo per aggiungere la benzina a un kart.
      *
      * @param targa La targa del kart a cui fare il pieno
@@ -467,8 +468,8 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraGaraPenalitaCase(String idGara, Socket clientSocket) {
-        Classifica c = new Classifica();
-        c.classificaPenalita(idGara, clientSocket);
+        Classifica service = new Classifica();
+        service.generaClassifica(new ClassificaPenalitaStrategy(idGara), clientSocket);
     }
 
     /** Metodo per inserire le penalità.
@@ -584,6 +585,7 @@ public class PHPRequestHandler {
      *
      * @param clientSocket Socket per la risposta
      */
+    /*
     private void mostraPrenotazioniOrganizzatoreCase(Socket clientSocket) {
         Prenotazione p = new Prenotazione();
         p.mostraPrenotazioniOrganizzatore(clientSocket);
@@ -594,12 +596,34 @@ public class PHPRequestHandler {
      * @param dati
      * @param clientSocket
      */
+    /*
     private void mostraPrenotazioniSocioCase(String dati, Socket clientSocket) {
         Prenotazione p = new Prenotazione();
         Socio s = new Socio();
         s.setCf(dati);
         p.mostraPrenotazioniSocio(s, clientSocket);
     }
+    */
+    private void mostraPrenotazioni(TipoComandi tipo,String dati, Socket clientSocket) {
+        Prenotazione p = new Prenotazione();
+        Socio s = new Socio();
+        switch (tipo) {
+            case MOSTRA_PRENOTAZIONI_UTENTE:
+                strategy = new MostraPrenotazioniSocioStrategy(dati);
+                break;
+
+            case RICHIESTA_GARA_SECCA:
+                strategy = new MostraPrenotazioniOrganizzatoreStrategy();
+                break;
+
+            default:
+                new PHPResponseHandler().sendResponse(clientSocket, "comando non riconosciuto");
+                return;
+        }
+
+        p.mostraPrenotazioni(strategy, clientSocket);
+    }
+
 
     /** Metodo per mostrare all'organizzatore i soci disponibili a essere associati
      * a una determinata prenotazione.
@@ -633,10 +657,9 @@ public class PHPRequestHandler {
      * @param clientSocket Socket per la risposta
      */
     private void mostraBilancioCase(Socket clientSocket) {
-        Proprietario p = new Proprietario();
-        p.bilancio(clientSocket);
+        OperazioneProprietario operazione = new BilancioOperazione(new DBConnector(), new PHPResponseHandler());
+        operazione.esegui(clientSocket);
     }
-
     /**
      *
      * @param dati
