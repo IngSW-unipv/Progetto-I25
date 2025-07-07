@@ -10,7 +10,7 @@
     $username = $_SESSION['username'];
 
     //invio codice gara libera
-    fwrite($socket, "prenotazioneLibera ");
+    fwrite($socket, "prenotazione ");
     //invio dati
     fwrite($socket, $date . " ");
     fwrite($socket, $tempo . " ");

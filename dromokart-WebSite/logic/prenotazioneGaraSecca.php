@@ -10,7 +10,7 @@
     $cf = $_SESSION['username'];
 
     //invio codice gara Secca
-    fwrite($socket, "prenotazioneSecca ");
+    fwrite($socket, "prenotazione ");
     //invio dati
     
     fwrite($socket, $date . " ");
