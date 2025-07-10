@@ -1,6 +1,11 @@
 package WebTalker;
 
+import Enums.TipoComandi;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,26 +29,42 @@ public class WebConnector {
      * chiude il socket e ne riapre un altro.
      */
     public void createServer() {
-        Socket clientSocket;
-        ServerSocket serverSocket;
-
-        try {
-            System.out.println("Creazione server...");
-            serverSocket = new ServerSocket(porta);
+        try (ServerSocket serverSocket = new ServerSocket(porta)) {
             System.out.println("Server in ascolto sulla porta " + porta + "\n");
 
             while (true) {
-                clientSocket = serverSocket.accept(); // Attende connessioni
-                System.out.println("Client connesso!");
-                requestHandler.handleRequests(clientSocket);
-                clientSocket.close();
+                try (Socket clientSocket = serverSocket.accept()) {
+                    System.out.println("Client connesso!");
 
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+                    // Legge l'intera riga: tipo comando + argomenti
+                    String linea = reader.readLine();
+                    if (linea == null || linea.isBlank()) {
+                        System.out.println("Nessun comando ricevuto.");
+                        continue;
+                    }
+
+                    System.out.println("Richiesta ricevuta: " + linea);
+
+                    String[] tokens = linea.trim().split(" ");
+                    String tipoComandoStr = tokens[0];  // es: "login"
+
+                    TipoComandi tipoComando = TipoComandi.requestedCommand(tipoComandoStr);
+                    if (tipoComando != null) {
+                        requestHandler.handleRequest(clientSocket, tipoComando, linea);
+                    } else {
+                        new PHPResponseHandler().sendResponse(clientSocket, "Tipo richiesta non valido: " + tipoComandoStr);
+                    }
+
+                } catch (IOException e) {
+                    System.out.println("Errore connessione client: " + e.getMessage());
+                }
             }
 
         } catch (IOException e) {
-            System.out.println("Impossibile aprire il socket: " + e.getMessage());
+            System.out.println("Errore nel server: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
-
 }

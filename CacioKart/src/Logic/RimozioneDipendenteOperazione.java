@@ -19,8 +19,10 @@ public class RimozioneDipendenteOperazione implements OperazioneProprietario {
 
     @Override
     public void esegui(Socket clientSocket) {
-        String DELETE = Query.RIMOZIONE_DIPENDENTE_PROPRIETARIO.getQuery(dipendente.getCf());
-        String risultato = db.executeUpdateQuery(DELETE);
+        String deleteQuery = Query.RIMOZIONE_DIPENDENTE_PROPRIETARIO.getQuery(dipendente.getCf());
+        System.out.println("[DEBUG] DELETE QUERY: " + deleteQuery);
+        String risultato = db.executeUpdateQuery(deleteQuery);
+        System.out.println("[DEBUG] executeUpdateQuery returned: " + risultato);
         responder.sendResponse(clientSocket, risultato);
     }
 }

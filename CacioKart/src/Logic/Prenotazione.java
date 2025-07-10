@@ -11,14 +11,10 @@ import java.util.Map;
 
 public class Prenotazione  {
     private String SELECT;
-    private String[] INSERT_ITERATOR;
     private DBConnector db;
     private PHPResponseHandler responder;
-    private String queryIndicator;
     private List<Map<String, Object>> result;
     private String idPrenotazione, prenotazioniConcorrenti;
-    private double costo;
-    private TableMaker maker;
 
     /** Metodo per gestire le prenotazioni.
      * Si effettua un controllo di prenotazioni concorrenti per vedere se

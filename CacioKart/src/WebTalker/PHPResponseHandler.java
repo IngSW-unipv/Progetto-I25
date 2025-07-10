@@ -1,11 +1,11 @@
 package WebTalker;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class PHPResponseHandler {
-    private PrintWriter out;
 
     public PHPResponseHandler() {
     }
@@ -16,18 +16,14 @@ public class PHPResponseHandler {
      * verso il client per spedire messaggi e fare il flush del buffer.
      *
      * @param clientSocket Il socket attraverso il cui mandare la risposta
-     * @param messaggio Il messaggio da spedire
      */
-    public void sendResponse(Socket clientSocket, String messaggio) {
+    public void sendResponse(Socket clientSocket, String response) {
         try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            out.println(messaggio);
-            System.out.println("Il messaggio spedito è: " + messaggio + "\n");
-
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println(response);
+            System.out.println("Risposta inviata: " + response);
         } catch (IOException e) {
-            System.out.println("Non sono riuscito a spedire il messaggio: " + e.getMessage());
-
+            System.out.println("Errore nell'invio della risposta: " + e.getMessage());
         }
-
     }
 }

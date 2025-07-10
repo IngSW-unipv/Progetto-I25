@@ -101,34 +101,14 @@ public class Meccanico {
      * @param query La query da eseguire
      * @param clientSocket Il socket di risposta
      */
-    public void mostraKart(String query, Socket clientSocket) {
+    public void mostraKart(String query, Socket clientSocket, String... colonne) {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         result = db.executeReturnQuery(query);
 
-        if (result != null) {
+        if (result != null && !result.isEmpty()) {
             maker = new TableMaker();
-            responder.sendResponse(clientSocket,  maker.stringTableMaker(result, "targa", "cilindrata", "serbatoio"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
-    /** Metodo per mostrare i kart su cui è possibile effettuare la manutenzione.
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void mostraKartManutenzione(Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        SELECT = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result,"targa", "giorniDallaManutenzione"));
-
+            responder.sendResponse(clientSocket, maker.stringTableMaker(result, colonne));
         } else {
             responder.sendResponse(clientSocket, "end");
         }
