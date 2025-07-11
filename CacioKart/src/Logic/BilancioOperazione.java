@@ -31,7 +31,9 @@ public class BilancioOperazione implements OperazioneProprietario {
                 responder.sendResponse(clientSocket, "0");
                 return;
             }
-            response.append(result.get(0).values().iterator().next()).append(" ");
+            // ---- CORREZIONE SICURA ----
+            Object val = result.get(0).values().iterator().next();
+            response.append(val == null ? "" : val.toString()).append(" ");
         }
 
         responder.sendResponse(clientSocket, response.toString().trim());

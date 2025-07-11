@@ -18,11 +18,10 @@ public class Meccanico {
     private TableMaker maker;
     private String queryIndicator;
 
-    public Meccanico() {
+    public Meccanico() {}
 
-    }
-
-    /** Metodo per aggiungere manutenzioni su un determinato kart.
+    /**
+     * Metodo per aggiungere manutenzioni su un determinato kart.
      * Dopo aver calcolato l'id della nuova manutenzione, il metodo
      * aggiorna la tabella delle manutenzioni.
      *
@@ -35,21 +34,19 @@ public class Meccanico {
         db = new DBConnector();
         responder = new PHPResponseHandler();
         String idM;
-        //kart = db.executeReturnQuery(SELECT);
-
         SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
-        idM = db.executeReturnQuery(SELECT).get(0).get("max").toString();
-        //System.out.println("Ecco l'id massimo delle manutenzioni: " + idM);
+        Object val = db.executeReturnQuery(SELECT).get(0).get("max");
+        idM = (val == null) ? "0" : val.toString();
         idM = String.valueOf(Integer.parseInt(idM) + 1);
 
         INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), k.getTarga());
 
         queryIndicator = db.executeUpdateQuery(INSERT);
         responder.sendResponse(clientSocket, queryIndicator);
-
     }
 
-    /** Metodo per aggiungere kart al noleggio,
+    /**
+     * Metodo per aggiungere kart al noleggio,
      * togliendoli dalla concessionaria.
      * Il metodo utilizza un ciclo FOR per ciclare
      * le due query che deve effettuare per rimuovere
@@ -69,7 +66,7 @@ public class Meccanico {
         for (String delete : DELETE_ITERATOR) {
             queryIndicator = db.executeUpdateQuery(delete);
 
-            if (queryIndicator == "0") {
+            if ("0".equals(queryIndicator)) {
                 responder.sendResponse(clientSocket, queryIndicator);
                 return;
             }
@@ -77,7 +74,8 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    /** Metodo per riempire completamente il serbatoio di un kart.
+    /**
+     * Metodo per riempire completamente il serbatoio di un kart.
      * Il metodo utilizza la targa del kart ricevuta per modificarne il
      * serbatoio.
      *
@@ -93,7 +91,8 @@ public class Meccanico {
         responder.sendResponse(clientSocket, queryIndicator);
     }
 
-    /** Metodo generico per mostrare i kart.
+    /**
+     * Metodo generico per mostrare i kart.
      * Tramite la query in ingresso si fa la distinzione tra mostrare i kart disponibili
      * all'aggiunta al noleggio e i kart disponibili alla completa rimozione dal
      * kartodromo.
@@ -107,14 +106,29 @@ public class Meccanico {
         result = db.executeReturnQuery(query);
 
         if (result != null && !result.isEmpty()) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, colonne));
+            StringBuilder sb = new StringBuilder();
+            for (Map<String, Object> row : result) {
+                // Assicurati che i nomi siano esattamente quelli del database!
+                Object targa = row.get("targa");
+                Object cilindrata = row.get("cilindrata");
+                Object serbatoio = row.get("serbatoio");
+
+                sb.append(targa == null ? "" : targa.toString())
+                        .append(" ")
+                        .append(cilindrata == null ? "" : cilindrata.toString())
+                        .append(" ")
+                        .append(serbatoio == null ? "" : serbatoio.toString())
+                        .append("\n");
+            }
+            responder.sendResponse(clientSocket, sb.toString());
         } else {
             responder.sendResponse(clientSocket, "end");
         }
     }
 
-    /** Metodo per rimuovere completamente un kart dal kartodromo.
+
+    /**
+     * Metodo per rimuovere completamente un kart dal kartodromo.
      *
      * @param k Il kart da rimuovere
      * @param clientSocket Il socket di risposta
@@ -126,5 +140,4 @@ public class Meccanico {
         queryIndicator = db.executeUpdateQuery(DELETE);
         responder.sendResponse(clientSocket, queryIndicator);
     }
-
 }
