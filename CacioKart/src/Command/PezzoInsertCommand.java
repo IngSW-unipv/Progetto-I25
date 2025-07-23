@@ -1,12 +1,12 @@
-package Logic;
+package Command;
 
+import Logic.InserimentoContext;
 import Objects.Pezzo;
+import Strategy.StrategyFactory;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
-public class PezzoInsertCommand implements RequestCommand{
+public class PezzoInsertCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         System.out.println("pezzo" + in);

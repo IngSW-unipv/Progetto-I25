@@ -1,6 +1,7 @@
-package Logic;
+package Strategy;
 
 import Enums.Query;
+import Logic.Socio;
 
 public class ClassificaUtenteStrategy implements  ClassificaStrategy{
     private final Socio socio;

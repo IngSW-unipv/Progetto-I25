@@ -1,6 +1,7 @@
-package Logic;
+package Strategy;
 
 import Enums.Query;
+import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
 import java.time.LocalDate;

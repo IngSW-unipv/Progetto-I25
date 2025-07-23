@@ -1,9 +1,8 @@
-package Logic;
+package Command;
 
+import Logic.Socio;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class MostraKartUtenteCommand implements RequestCommand {

@@ -1,5 +1,6 @@
-package Logic;
+package Strategy;
 
+import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

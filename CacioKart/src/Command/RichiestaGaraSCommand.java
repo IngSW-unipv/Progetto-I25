@@ -1,13 +1,14 @@
-package Logic;
+package Command;
 
 import Enums.TipoComandi;
+import Logic.Prenotazione;
+import Strategy.MostraPrenotazioniOrganizzatoreStrategy;
+import Strategy.MostraPrenotazioniSocioStrategy;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
-public class RichiestaGaraSCommand implements RequestCommand{
+public class RichiestaGaraSCommand implements RequestCommand {
 
     private final TipoComandi tipo;
 

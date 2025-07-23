@@ -1,7 +1,6 @@
-package Logic;
+package Command;
 
 
-import Enums.Query;
 import Enums.TipoComandi;
 
 import static Enums.TipoComandi.*;
@@ -26,7 +25,7 @@ public class CommandFactory {
             case RICHIESTA_DIPENDENTE -> new MostraDipCommand(); //funziona
             case ELIMINA_DIPENDENTE-> new EliminaDipCommand();
             case ACQUISTA_KART-> new AcquistaKartCommand();
-            case AGGIUNGI_BENZINA-> new  AggiuntaBenzinaCommand();
+            case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand();
             case CLASSIFICA_GENERALE-> new ClassificaGeneraleCommand(); //funziona
             case CLASSIFICA_UTENTE-> new ClassificaUtenteCommand();
             case CLASSIFICA_ARBITRO-> new ClassificaArbitroCommand();

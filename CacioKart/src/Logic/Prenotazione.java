@@ -1,6 +1,9 @@
 package Logic;
 
 import Enums.Query;
+import Strategy.PrenotazioneStrategy;
+import Strategy.PrenotazioneStrategyFactory;
+import Strategy.VisualizzazionePrenotazioniStrategy;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

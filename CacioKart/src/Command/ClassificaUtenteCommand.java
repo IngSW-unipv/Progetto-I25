@@ -1,9 +1,10 @@
-package Logic;
+package Command;
 
+import Logic.Classifica;
+import Strategy.ClassificaUtenteStrategy;
+import Logic.Socio;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class ClassificaUtenteCommand implements RequestCommand {

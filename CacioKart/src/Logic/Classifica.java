@@ -1,6 +1,6 @@
 package Logic;
 
-import Enums.Query;
+import Strategy.ClassificaStrategy;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

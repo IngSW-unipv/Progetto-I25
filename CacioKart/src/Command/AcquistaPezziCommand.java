@@ -1,12 +1,12 @@
-package Logic;
+package Command;
 
+import Logic.Socio;
 import Objects.Pezzo;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
 import java.net.Socket;
 
-public class AcquistaPezziCommand implements RequestCommand{
+public class AcquistaPezziCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         PHPResponseHandler responder = new PHPResponseHandler();

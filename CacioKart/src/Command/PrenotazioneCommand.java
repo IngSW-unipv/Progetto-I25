@@ -1,8 +1,7 @@
-package Logic;
+package Command;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
+import Logic.Prenotazione;
+
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;

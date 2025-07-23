@@ -1,6 +1,7 @@
-package Logic;
+package Strategy;
 
 import Enums.Query;
+import Logic.DBConnector;
 
 import java.util.List;
 import java.util.Map;

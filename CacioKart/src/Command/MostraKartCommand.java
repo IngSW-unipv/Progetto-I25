@@ -1,4 +1,6 @@
-package Logic;
+package Command;
+
+import Logic.Meccanico;
 
 import java.net.Socket;
 

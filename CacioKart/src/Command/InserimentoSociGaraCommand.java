@@ -1,12 +1,12 @@
-package Logic;
+package Command;
 
+import Logic.Organizzatore;
+import Logic.Socio;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
-public class InserimentoSociGaraCommand implements RequestCommand{
+public class InserimentoSociGaraCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         try {

@@ -1,10 +1,10 @@
-package Logic;
+package Command;
 
+import Logic.InserimentoContext;
+import Strategy.StrategyFactory;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class KartInsertCommand implements RequestCommand {

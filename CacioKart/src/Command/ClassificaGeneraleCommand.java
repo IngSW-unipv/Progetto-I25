@@ -1,7 +1,8 @@
-package Logic;
+package Command;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
+import Logic.Classifica;
+import Strategy.ClassificaCompletaStrategy;
+
 import java.net.Socket;
 
 public class ClassificaGeneraleCommand implements RequestCommand {

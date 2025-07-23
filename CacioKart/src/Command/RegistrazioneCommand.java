@@ -1,14 +1,13 @@
-package Logic;
+package Command;
 
+import Logic.Socio;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-public class RegistrazioneCommand implements RequestCommand{
+public class RegistrazioneCommand implements RequestCommand {
 
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {

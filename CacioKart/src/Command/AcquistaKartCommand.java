@@ -1,12 +1,9 @@
-package Logic;
+package Command;
 import Logic.Socio;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
-import Logic.DBConnector;
 
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class AcquistaKartCommand implements RequestCommand {

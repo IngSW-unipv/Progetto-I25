@@ -1,13 +1,12 @@
-package Logic;
+package Command;
 
 import Enums.Query;
+import Logic.Organizzatore;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
-public class MostraSociCommand implements RequestCommand{
+public class MostraSociCommand implements RequestCommand {
 
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {

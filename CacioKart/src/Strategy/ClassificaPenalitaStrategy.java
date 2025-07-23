@@ -1,4 +1,4 @@
-package Logic;
+package Strategy;
 
 import Enums.Query;
 

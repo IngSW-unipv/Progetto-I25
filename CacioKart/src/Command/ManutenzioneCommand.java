@@ -1,5 +1,6 @@
-package Logic;
+package Command;
 
+import Logic.Meccanico;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;

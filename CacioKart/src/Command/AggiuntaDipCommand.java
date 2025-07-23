@@ -1,10 +1,11 @@
-package Logic;
+package Command;
 
+import Logic.AggiuntaDipendenteOperazione;
+import Logic.DBConnector;
+import Logic.OperazioneProprietario;
 import Objects.Dipendente;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,12 +1,11 @@
-package Logic;
+package Command;
 
 import Enums.Query;
+import Logic.Organizzatore;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
-public class MostraSociCampCommand implements RequestCommand{
+public class MostraSociCampCommand implements RequestCommand {
 
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {

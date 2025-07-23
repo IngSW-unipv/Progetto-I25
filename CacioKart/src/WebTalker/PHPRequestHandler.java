@@ -1,11 +1,9 @@
 package WebTalker;
 
 import Enums.TipoComandi;
-import Logic.CommandFactory;
-import Logic.RequestCommand;
+import Command.CommandFactory;
+import Command.RequestCommand;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class PHPRequestHandler {

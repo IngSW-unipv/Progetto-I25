@@ -1,14 +1,14 @@
-package Logic;
+package Command;
 
+import Logic.ConcessionariaService;
+import Logic.TableMaker;
 import WebTalker.PHPResponseHandler;
 
-import java.io.BufferedReader;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-public class MostraPezziCommand implements RequestCommand{
+public class MostraPezziCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         ConcessionariaService service = new ConcessionariaService();
