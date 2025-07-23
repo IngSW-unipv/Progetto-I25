@@ -1,6 +1,7 @@
-package Logic;
+package DAO;
 
 import Enums.Query;
+import Logic.DBConnector;
 import Objects.Pezzo;
 
 public class PezzoDAO {

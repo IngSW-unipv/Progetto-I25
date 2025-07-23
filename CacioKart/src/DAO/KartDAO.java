@@ -48,10 +48,11 @@ public class KartDAO {
         return lista;
     }
 
+
     // Inserisce un nuovo kart nella tabella
     public boolean insertKart(Kart k) {
         DBConnector db = new DBConnector();
-        String query = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART.getQuery(
+        String query = Query.INSERIMENTO_KART_CONCESSIONARIA.getQuery(
                 k.getTarga(),
                 k.getCilindrata(),
                 k.getSerbatoio()

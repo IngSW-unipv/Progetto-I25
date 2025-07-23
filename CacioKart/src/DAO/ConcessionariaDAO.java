@@ -52,4 +52,15 @@ public class ConcessionariaDAO {
         String result = db.executeUpdateQuery(query);
         return result.equals("OK");
     }
+
+    //LA STO USANDO IO ANDREA NON CANCELLARE
+    public boolean decrementaQuantitaConcessionaria(String tipol) {
+        DBConnector db = new DBConnector();
+        String query = Query.AGGIORNA_QUANTITA_CONCESSIONARIA.getQuery(tipol);
+        String result = db.executeUpdateQuery(query);
+        return "OK".equals(result) || "1".equals(result);
+    }
+
+
+
 }

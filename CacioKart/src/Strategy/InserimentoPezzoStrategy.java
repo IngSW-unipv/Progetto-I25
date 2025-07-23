@@ -1,6 +1,6 @@
 package Strategy;
 
-import Logic.PezzoDAO;
+import DAO.PezzoDAO;
 import Objects.Pezzo;
 import WebTalker.PHPResponseHandler;
 

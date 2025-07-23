@@ -25,30 +25,24 @@ public enum Query {
     //         CONCESSIONARIA
     // =============================== //
 
-    INSERIMENTO_KART_CONCESSIONARIA_TABELLA_KART("INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('%s', '%s', '%s')"),
     INSERIMENTO_KART_CONCESSIONARIA_MAX_ID("SELECT MAX(CAST(idProdotto AS UNSIGNED)) AS max FROM concessionaria"),
     INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA("INSERT INTO concessionaria (idProdotto, tipol, quantita, prezzo) VALUES('%s', '%s', '%s', '%s')"),
     MOSTRA_PEZZI_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'"),
     INSERIMENTO_NUOVI_PEZZI("UPDATE caciokart.concessionaria SET quantita = quantita + %s WHERE idProdotto = '%s'"),
+    INSERIMENTO_KART_CONCESSIONARIA("INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('%s', '%s', '%s')"),
+
 
     // =============================== //
     //            MECCANICO
     // =============================== //
 
-    AGGIORNAMENTO_MANUTENZIONE_MAX_ID("SELECT COALESCE(MAX(idM), '0') AS max FROM manutenzione"),
-    AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES ('%s', '%s', '%s', '%s', '%s')"),
-    INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA("DELETE FROM caciokart.acquista WHERE idProdotto = (SELECT idProdotto FROM concessionaria WHERE tipol = '%s')"),
-    INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA("DELETE FROM caciokart.concessionaria WHERE tipol = '%s'"),
+    //AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES ('%s', '%s', '%s', '%s', '%s')"),
+    AGGIORNA_QUANTITA_CONCESSIONARIA("UPDATE caciokart.concessionaria SET quantita = quantita - 1 WHERE tipol = '%s'"),
     AGGIUNTA_BENZINA_MECCANICO("UPDATE caciokart.kart SET kart.serbatoio = '20' WHERE kart.targa = '%s'"),
-    RIMUOVI_KART_MECCANICO("DELETE FROM caciokart.kart WHERE targa = '%s'"),
-    MOSTRA_AGGIUNTA_KART_MECCANICO("SELECT * FROM caciokart.kart WHERE kart.targa NOT IN (SELECT socio.targa FROM socio WHERE socio.targa IS NOT NULL) AND kart.targa IN (SELECT concessionaria.tipol FROM concessionaria)"),
-    MOSTRA_RIMUOVI_KART_MECCANICO("SELECT * FROM caciokart.kart WHERE targa NOT IN (SELECT tipol FROM caciokart.concessionaria WHERE tipol IS NOT NULL) AND targa NOT IN (SELECT targa FROM caciokart.socio WHERE targa IS NOT NULL)"),
-    MOSTRA_KART_MANUTENZIONE(
-            "SELECT k.targa, " +
-                    "COALESCE(CAST(MAX(m.dataM) AS CHAR), 'MAI_FATTA') AS ultimaManutenzione " +
-                    "FROM kart k LEFT JOIN manutenzione m ON k.targa = m.targa " +
-                    "GROUP BY k.targa"
-    ),
+    RIMUOVI_KART_MECCANICO("UPDATE caciokart.concessionaria SET quantita = quantita + 1 WHERE tipol = '%s'"),
+    MOSTRA_AGGIUNTA_KART_MECCANICO("SELECT * FROM caciokart.kart k " + "WHERE k.targa NOT IN (SELECT s.targa FROM caciokart.socio s WHERE s.targa IS NOT NULL) " + "AND k.targa IN (SELECT c.tipol FROM caciokart.concessionaria c WHERE c.quantita >= 1)"),
+    MOSTRA_RIMUOVI_KART_MECCANICO("SELECT * FROM caciokart.kart k " + "WHERE k.targa NOT IN (" + "SELECT s.targa FROM caciokart.socio s WHERE s.targa IS NOT NULL" + ") " + "AND EXISTS (" + "SELECT 1 FROM caciokart.concessionaria c WHERE c.tipol = k.targa AND c.quantita < 1" + ")"),
+    MOSTRA_KART_MANUTENZIONE("SELECT k.targa, " + "COALESCE(CAST(MAX(m.dataM) AS CHAR), 'MAI_FATTA') AS ultimaManutenzione " + "FROM kart k LEFT JOIN manutenzione m ON k.targa = m.targa " + "GROUP BY k.targa"),
 
     // =============================== //
     //           ORGANIZZATORE
@@ -105,7 +99,8 @@ public enum Query {
     ACQUISTA_PEZZI_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) VALUES('%s', '%s', '%s')"),
     MOSTRA_PRENOTAZIONI_SOCIO("SELECT dataG, fasciaO, tipologia FROM caciokart.prenotazione JOIN prenota ON prenotazione.idP = prenota.idP WHERE socio = '%s' ORDER BY prenotazione.idP DESC"),
     MOSTRA_KART_SOCIO("SELECT kart.targa, kart.cilindrata, kart.serbatoio FROM caciokart.kart JOIN socio ON kart.targa = socio.targa WHERE socio = '%s'"),
-    MOSTRA_PEZZI_SOCIO("SELECT tipol, data FROM caciokart.acquista JOIN concessionaria ON acquista.idProdotto = concessionaria.idProdotto WHERE socio = '%s'");
+    MOSTRA_PEZZI_SOCIO("SELECT tipol, data FROM caciokart.acquista JOIN concessionaria ON acquista.idProdotto = concessionaria.idProdotto WHERE socio = '%s'"),
+    INSERIMENTO_KART_UTENTE_TABELLA_ACQUISTA("DELETE FROM caciokart.acquista WHERE idProdotto = (SELECT idProdotto FROM concessionaria WHERE tipol = '%s')");
 
     private final String query;
 
