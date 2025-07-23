@@ -11,26 +11,26 @@ public class CommandFactory {
             case LOGIN -> new LoginCommand(); //funziona
             case REGISTRAZIONE -> new RegistrazioneCommand();//funziona
             case PRENOTAZIONE-> new PrenotazioneCommand();
-            case AGGIUNTA_KART_CONCESSIONARIA -> new KartInsertCommand();
-            case AGGIUNGI_KART_MECCANICO-> new AggiungiKartMeccanicoCommand();
-            case MOSTRA_KART_AGGIUNTA -> new MostraKartAggiuntaCommand(); //funziona
-            case MOSTRA_KART_RIMUOVI -> new MostraKartCommand(); //funziona
-            case MOSTRA_KART_MANUTENZIONE -> new MostraKartManutenzioneCommand(); //funziona
-            case ELIMINAZIONE_KART-> new EliminazioneKartCommand();
+            case AGGIUNTA_KART_CONCESSIONARIA -> new KartInsertCommand(); //funziona ANDREA
+            case AGGIUNGI_KART_MECCANICO-> new AggiungiKartMeccanicoCommand(); //funziona ANDREA
+            case MOSTRA_KART_AGGIUNTA -> new MostraKartAggiuntaCommand(); //funziona ANDREA
+            case MOSTRA_KART_RIMUOVI -> new MostraKartCommand(); //funziona ANDREA
+            case MOSTRA_KART_MANUTENZIONE -> new MostraKartManutenzioneCommand(); //funziona ANDREA
+            case ELIMINAZIONE_KART-> new EliminazioneKartCommand(); //funziona ANDREA
             case REGISTRAZIONE_DIPENDENTE-> new AggiuntaDipCommand(); //funziona
             case RICHIESTA_DIPENDENTE -> new MostraDipCommand(); //funziona
             case ELIMINA_DIPENDENTE-> new EliminaDipCommand();
             case ACQUISTA_KART-> new AcquistaKartCommand();
-            case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand();
+            case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand(); //funziona ANDREA
             case CLASSIFICA_GENERALE-> new ClassificaGeneraleCommand(); //funziona
             case CLASSIFICA_UTENTE-> new ClassificaUtenteCommand();
             case CLASSIFICA_ARBITRO-> new ClassificaArbitroCommand();
             case MANUTENZIONE-> new ManutenzioneCommand();
-                case MOSTRA_PEZZI -> new MostraPezziCommand(); //FUNZIONA
+            case MOSTRA_PEZZI -> new MostraPezziCommand(); //FUNZIONA
             case ACQUISTA_PEZZI->new AcquistaPezziCommand();
             case MOSTRA_GARA->new MostraGaraCommand();
             case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand();
-                case AGGIUNGI_PEZZI-> new PezzoInsertCommand();
+            case AGGIUNGI_PEZZI-> new PezzoInsertCommand();
             case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand();
             case CREAZIONE_TEAM->new CreazioneTeamCommand();
             case RICHIESTA_CAMPIONATO->new RichiestaCampCommand();
