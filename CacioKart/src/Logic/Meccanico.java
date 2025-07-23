@@ -1,143 +1,83 @@
 package Logic;
 
-import Enums.Query;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
-
+import DAO.KartDAO;
+import DAO.ManutenzioneDAO;
 import java.net.Socket;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 public class Meccanico {
-    private List<Map<String, Object>> result;
-    private DBConnector db;
-    private PHPResponseHandler responder;
-    private String SELECT, DELETE, UPDATE, INSERT;
-    private String[] DELETE_ITERATOR;
-    private TableMaker maker;
-    private String queryIndicator;
 
     public Meccanico() {}
 
-    /**
-     * Metodo per aggiungere manutenzioni su un determinato kart.
-     * Dopo aver calcolato l'id della nuova manutenzione, il metodo
-     * aggiorna la tabella delle manutenzioni.
-     *
-     * @param k Il kart su cui viene effettuata la manutenzione
-     * @param text La descrizione della manutenzione
-     * @param prezzo Il costo della manutenzione
-     * @param clientSocket Il socket di risposta
-     */
-    public void aggiornamentoManutenzione(Kart k, String text, double prezzo, Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        String idM;
-        SELECT = Query.AGGIORNAMENTO_MANUTENZIONE_MAX_ID.getQuery();
-        Object val = db.executeReturnQuery(SELECT).get(0).get("max");
-        idM = (val == null) ? "0" : val.toString();
-        idM = String.valueOf(Integer.parseInt(idM) + 1);
-
-        INSERT = Query.AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE.getQuery(idM, text, prezzo, LocalDate.now(), k.getTarga());
-
-        queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, queryIndicator);
+    // 1. Mostra tutti i kart disponibili da aggiungere al noleggio (in concessionaria)
+    public void mostraKartConcessionaria(Socket clientSocket) {
+        List<Kart> kartDisponibili = KartDAO.getInstance().getAllKartDisponibiliPerAggiunta();
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendKartList(clientSocket, kartDisponibili);
     }
 
-    /**
-     * Metodo per aggiungere kart al noleggio,
-     * togliendoli dalla concessionaria.
-     * Il metodo utilizza un ciclo FOR per ciclare
-     * le due query che deve effettuare per rimuovere
-     * il kart dalle tabelle acquista e concessionaria.
-     *
-     * @param k Il kart da aggiungere
-     * @param clientSocket Il socket di risposta
-     */
+    // 1bis. Aggiungi un kart al noleggio (tabella kart)
     public void aggiuntaKart(Kart k, Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
+        boolean inserito = KartDAO.getInstance().insertKart(k);
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendResponse(clientSocket, inserito ? "OK" : "ERRORE");
+    }
 
-        DELETE_ITERATOR = new String[2];
-        DELETE_ITERATOR[0] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_ACQUISTA.getQuery(k.getTarga());
-        DELETE_ITERATOR[1] = Query.INSERIMENTO_KART_MECCANICO_TABELLA_CONCESSIONARIA.getQuery(k.getTarga());
+    // 2. Mostra tutti i kart a noleggio
+    public void mostraKartNoleggio(Socket clientSocket) {
+        List<Kart> kartNoleggio = KartDAO.getInstance().getAllKart();
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendKartList(clientSocket, kartNoleggio);
+    }
 
-        for (String delete : DELETE_ITERATOR) {
-            queryIndicator = db.executeUpdateQuery(delete);
+    // 2bis. Rimuovi un kart dal noleggio
+    public void rimuoviKartDaNoleggio(Kart k, Socket clientSocket) {
+        boolean rimosso = KartDAO.getInstance().deleteKart(k);
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendResponse(clientSocket, rimosso ? "OK" : "ERRORE");
+    }
 
-            if ("0".equals(queryIndicator)) {
-                responder.sendResponse(clientSocket, queryIndicator);
-                return;
-            }
+    // 3. Effettua il pieno su un kart
+    public void effettuaPieno(Kart k, Socket clientSocket) {
+        boolean eseguito = KartDAO.getInstance().refillKart(k);
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendResponse(clientSocket, eseguito ? "OK" : "ERRORE");
+    }
+
+    // 4. Effettua la manutenzione su un kart
+    public void aggiornaManutenzione(Kart k, String tipoIntervento, double costo, Socket clientSocket) {
+        boolean eseguita = ManutenzioneDAO.getInstance().insertManutenzione(k, tipoIntervento, costo);
+        PHPResponseHandler responder = new PHPResponseHandler();
+        responder.sendResponse(clientSocket, eseguita ? "OK" : "ERRORE");
+    }
+
+    // 5. Mostra tutti i kart con info manutenzione (solo targa e ultima manutenzione o MAI_FATTA)
+    public void mostraKartManutenzione(Socket clientSocket) {
+        List<Map<String, Object>> lista = KartDAO.getInstance().getKartManutenzione();
+        PHPResponseHandler responder = new PHPResponseHandler();
+
+        if (lista == null || lista.isEmpty()) {
+            responder.sendResponse(clientSocket, "Nessun kart trovato");
+            return;
         }
-        responder.sendResponse(clientSocket, queryIndicator);
-    }
 
-    /**
-     * Metodo per riempire completamente il serbatoio di un kart.
-     * Il metodo utilizza la targa del kart ricevuta per modificarne il
-     * serbatoio.
-     *
-     * @param k Il kart a cui aggiungere la benzina
-     * @param clientSocket Il socket di risposta
-     */
-    public void aggiuntaBenzina(Kart k, Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-
-        UPDATE = Query.AGGIUNTA_BENZINA_MECCANICO.getQuery(k.getTarga());
-        queryIndicator = db.executeUpdateQuery(UPDATE);
-        responder.sendResponse(clientSocket, queryIndicator);
-    }
-
-    /**
-     * Metodo generico per mostrare i kart.
-     * Tramite la query in ingresso si fa la distinzione tra mostrare i kart disponibili
-     * all'aggiunta al noleggio e i kart disponibili alla completa rimozione dal
-     * kartodromo.
-     *
-     * @param query La query da eseguire
-     * @param clientSocket Il socket di risposta
-     */
-    public void mostraKart(String query, Socket clientSocket, String... colonne) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        result = db.executeReturnQuery(query);
-
-        if (result != null && !result.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (Map<String, Object> row : result) {
-                // Assicurati che i nomi siano esattamente quelli del database!
-                Object targa = row.get("targa");
-                Object cilindrata = row.get("cilindrata");
-                Object serbatoio = row.get("serbatoio");
-
-                sb.append(targa == null ? "" : targa.toString())
-                        .append(" ")
-                        .append(cilindrata == null ? "" : cilindrata.toString())
-                        .append(" ")
-                        .append(serbatoio == null ? "" : serbatoio.toString())
-                        .append("\n");
+        StringBuilder sb = new StringBuilder();
+        for (Map<String, Object> r : lista) {
+            String targa = String.valueOf(r.get("targa"));
+            String ultimaManutenzione = String.valueOf(r.get("ultimaManutenzione"));
+            if (ultimaManutenzione == null || ultimaManutenzione.equals("null")) {
+                ultimaManutenzione = "MAI_FATTA";
             }
-            responder.sendResponse(clientSocket, sb.toString());
-        } else {
-            responder.sendResponse(clientSocket, "end");
+            sb.append(targa).append(" ").append(ultimaManutenzione).append("\n");
         }
-    }
+        sb.append("end");
 
+        System.out.println("Invio lista manutenzione:");
+        System.out.println(sb.toString());
 
-    /**
-     * Metodo per rimuovere completamente un kart dal kartodromo.
-     *
-     * @param k Il kart da rimuovere
-     * @param clientSocket Il socket di risposta
-     */
-    public void rimozioneKart(Kart k, Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        DELETE = Query.RIMUOVI_KART_MECCANICO.getQuery(k.getTarga());
-        queryIndicator = db.executeUpdateQuery(DELETE);
-        responder.sendResponse(clientSocket, queryIndicator);
+        responder.sendResponse(clientSocket, sb.toString());
     }
 }

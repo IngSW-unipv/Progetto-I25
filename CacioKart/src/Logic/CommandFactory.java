@@ -14,9 +14,13 @@ public class CommandFactory {
             case PRENOTAZIONE-> new PrenotazioneCommand();
             case AGGIUNTA_KART_CONCESSIONARIA -> new KartInsertCommand(); //funziona
             case AGGIUNGI_KART_MECCANICO-> new KartInsertCommand();
-            case MOSTRA_KART_AGGIUNTA-> new MostraKartCommand(Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery(), "targa", "cilindrata");
-            case MOSTRA_KART_RIMUOVI-> new MostraKartCommand(Query.MOSTRA_RIMUOVI_KART_MECCANICO.getQuery(), "targa", "cilindrata");
-            case MOSTRA_KART_MANUTENZIONE-> new MostraKartCommand(Query.MOSTRA_KART_MANUTENZIONE.getQuery(), "targa", "giorniDallaManutenzione");
+            case MOSTRA_KART_AGGIUNTA -> new MostraKartCommand();
+            case MOSTRA_KART_RIMUOVI -> new MostraKartCommand();
+            case MOSTRA_KART_MANUTENZIONE -> new MostraKartManutenzioneCommand();
+
+            //case MOSTRA_KART_AGGIUNTA-> new MostraKartCommand(Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery(), "targa", "cilindrata");
+            //case MOSTRA_KART_RIMUOVI-> new MostraKartCommand(Query.MOSTRA_RIMUOVI_KART_MECCANICO.getQuery(), "targa", "cilindrata");
+            //case MOSTRA_KART_MANUTENZIONE-> new MostraKartCommand(Query.MOSTRA_KART_MANUTENZIONE.getQuery(), "targa", "giorniDallaManutenzione");
             case ELIMINAZIONE_KART-> new EliminazioneKartCommand();  //problema con la query come negli altri 4 sopraa
             case REGISTRAZIONE_DIPENDENTE-> new AggiuntaDipCommand(); //funziona
             case RICHIESTA_DIPENDENTE -> new MostraDipCommand(); //funziona

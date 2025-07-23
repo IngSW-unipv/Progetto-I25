@@ -130,18 +130,22 @@ public class DBConnector {
         try {
             this.dbOpenConnection();
             stmt = this.conn.createStatement();
-            stmt.executeUpdate(query);
+            int affectedRows = stmt.executeUpdate(query);
             System.out.println("Eseguo la query di modifica richiesta: " + query);
             this.dbCloseConnection();
-            return "1";
-
+            if (affectedRows > 0) {
+                return "OK";
+            } else {
+                System.out.println("Nessuna riga modificata/eliminata.");
+                return "0";
+            }
         } catch (SQLException e) {
             System.out.println("L'inserimento non è andato a buon fine: " + e.getMessage());
             this.dbCloseConnection();
             return "0";
-
         }
     }
+
 
     public Connection getConnection() {
         return conn;
