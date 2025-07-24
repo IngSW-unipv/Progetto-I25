@@ -39,7 +39,7 @@ public class Persona {
      * @param clientSocket Il socket di risposta
      */
     public void login(Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         SELECT = Query.LOGIN_SOCIO.getQuery(this.getCf(), this.getPassword());
 

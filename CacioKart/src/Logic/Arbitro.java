@@ -27,7 +27,7 @@ public class Arbitro {
      * @param clientSocket Il socket per mandare la risposta
      */
     public void inserimentoPenalita(Socio s, String idGara, LocalTime penalita, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         String UPDATE = Query.INSERIMENTO_PENALITA_ARBITRO.getQuery(penalita, idGara, s.getCf());
 
@@ -42,7 +42,7 @@ public class Arbitro {
      * @param clientSocket Il socket di risposta
      */
     public void gareArbitro(Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         String SELECT = Query.CLASSIFICA_ARBITRO.getQuery();
         List<Map<String, Object>> result;

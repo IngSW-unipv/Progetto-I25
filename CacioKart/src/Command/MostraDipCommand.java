@@ -10,7 +10,7 @@ import java.net.Socket;
 public class MostraDipCommand implements RequestCommand {
     public void execute(String in, Socket clientSocket) throws Exception {
         OperazioneProprietario operazione = new MostraDipendentiOperazione(
-                new DBConnector(),
+                DBConnector.getInstance(),
                 new PHPResponseHandler()
         );
         operazione.esegui(clientSocket);

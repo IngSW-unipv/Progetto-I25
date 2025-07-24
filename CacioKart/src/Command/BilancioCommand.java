@@ -11,7 +11,7 @@ public class BilancioCommand implements RequestCommand {
 
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
-        OperazioneProprietario operazione = new BilancioOperazione(new DBConnector(), new PHPResponseHandler());
+        OperazioneProprietario operazione = new BilancioOperazione(DBConnector.getInstance(), new PHPResponseHandler());
         operazione.esegui(clientSocket);
     }
 }

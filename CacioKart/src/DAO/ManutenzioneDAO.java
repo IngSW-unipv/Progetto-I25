@@ -13,7 +13,7 @@ public class ManutenzioneDAO {
     }
 
     public boolean insertManutenzione(Kart kart, String tipoInt, double costo) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String dataM = LocalDate.now().toString();
 
         // idM viene gestito direttamente dal DB (AUTO_INCREMENT)

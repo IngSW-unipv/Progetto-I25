@@ -17,7 +17,7 @@ public class KartDAO {
 
     public List<Kart> getAllKart() {
         List<Kart> lista = new ArrayList<>();
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_RIMUOVI_KART_MECCANICO.getQuery();
         List<Map<String, Object>> result = db.executeReturnQuery(query);
 
@@ -35,7 +35,7 @@ public class KartDAO {
     // Restituisce solo i kart disponibili per aggiunta (usa la query filtrata che hai già)
     public List<Kart> getAllKartDisponibiliPerAggiunta() {
         List<Kart> lista = new ArrayList<>();
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery();
         List<Map<String, Object>> result = db.executeReturnQuery(query);
 
@@ -51,7 +51,7 @@ public class KartDAO {
 
     // Inserisce un nuovo kart nella tabella
     public boolean insertKart(Kart k) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA.getQuery(
                 k.getTarga(),
                 k.getCilindrata(),
@@ -63,7 +63,7 @@ public class KartDAO {
 
     // Elimina un kart dalla tabella (usando la targa)
     public boolean deleteKart(Kart k) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.RIMUOVI_KART_MECCANICO.getQuery(k.getTarga());
         String result = db.executeUpdateQuery(query);
         return result.equals("OK");
@@ -71,14 +71,14 @@ public class KartDAO {
 
     // Esegue il pieno (serbatoio = 20) su un kart
     public boolean refillKart(Kart k) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.AGGIUNTA_BENZINA_MECCANICO.getQuery(k.getTarga());
         String result = db.executeUpdateQuery(query);
         return result.equals("OK");
     }
 
     public List<Map<String, Object>> getKartManutenzione() {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
         return db.executeReturnQuery(query);
     }

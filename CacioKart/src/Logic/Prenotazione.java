@@ -39,7 +39,7 @@ public class Prenotazione  {
      * @param clientSocket Il socket di risposta
      */
     public void prenotazioneGara(String cf, String tipologia, LocalDate dataGara, LocalTime fasciaOraria, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         LocalDate dataO = LocalDate.now();
 
@@ -74,7 +74,7 @@ public class Prenotazione  {
 
     public void mostraPrenotazioni(VisualizzazionePrenotazioniStrategy strategy, Socket clientSocket) {
         PHPResponseHandler responder = new PHPResponseHandler();
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         TableMaker maker = new TableMaker();
 
         List<Map<String, Object>> result = strategy.eseguiQuery(db);

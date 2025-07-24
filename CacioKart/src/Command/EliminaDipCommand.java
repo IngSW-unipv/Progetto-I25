@@ -48,7 +48,7 @@ public class EliminaDipCommand implements RequestCommand {
             dipendente.setCf(cf);
 
             OperazioneProprietario operazione = new RimozioneDipendenteOperazione(
-                    new DBConnector(),
+                    DBConnector.getInstance(),
                     responder,
                     dipendente
             );

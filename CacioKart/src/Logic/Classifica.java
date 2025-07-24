@@ -18,7 +18,7 @@ public class Classifica {
     }
 
     public void generaClassifica(ClassificaStrategy strategy, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         result = db.executeReturnQuery(strategy.getQuery());
 

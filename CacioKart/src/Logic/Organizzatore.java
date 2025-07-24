@@ -33,7 +33,7 @@ public class Organizzatore {
      * @param clientSocket Il socket di risposta
      */
     public void creaTeam(Team t, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
 
         //System.out.println("Nome del team: " + t.getNome());
@@ -66,7 +66,7 @@ public class Organizzatore {
      * @param clientSocket Il socket di risposta
      */
     public void mostraSociInserimento(String query, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         soci = db.executeReturnQuery(query);
 
@@ -88,7 +88,7 @@ public class Organizzatore {
      */
     public void mostraCampionato(Socket clientSocket) {
         responder = new PHPResponseHandler();
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         SELECT = Query.MOSTRA_CAMPIONATI.getQuery();
         result = db.executeReturnQuery(SELECT);
 
@@ -107,7 +107,7 @@ public class Organizzatore {
      * @param clientSocket Il socket di risposta
      */
     public void mostraGareInserimento(Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         SELECT = Query.MOSTRA_GARE_INSERIMENTO.getQuery();
 
@@ -132,7 +132,7 @@ public class Organizzatore {
      * @param clientSocket Il socket di risposta
      */
     public void aggiungiGaraPartecipa(String idGara, String idCamp, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
 
         INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idGara, idCamp);
@@ -152,7 +152,7 @@ public class Organizzatore {
      * @param clientSocket Il socket di risposta
      */
     public void aggiornaPrenota(String idP, Socio s, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, s.getCf(), LocalDate.now());
         queryIndicator = db.executeUpdateQuery(INSERT);

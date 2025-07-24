@@ -15,7 +15,7 @@ public class ConcessionariaDAO {
 
     // 1. Ottieni il prossimo idProdotto (MAX+1) per nuovi inserimenti
     public String getNextProductId() {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA_MAX_ID.getQuery();
         List<Map<String, Object>> result = db.executeReturnQuery(query);
         if (!result.isEmpty() && result.get(0).get("max") != null) {
@@ -28,7 +28,7 @@ public class ConcessionariaDAO {
 
     // 2. Inserisce un nuovo kart o pezzo nella tabella concessionaria
     public boolean insertConcessionariaItem(String idProdotto, String tipol, int quantita, int prezzo) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA.getQuery(
                 idProdotto, tipol, quantita, prezzo
         );
@@ -38,14 +38,14 @@ public class ConcessionariaDAO {
 
     // 3. Mostra tutti i pezzi presenti in concessionaria (esclusi i kart)
     public List<Map<String, Object>> getPezzi() {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
         return db.executeReturnQuery(query);
     }
 
     // 4. Aggiunge nuovi pezzi ad un idProdotto già presente (aumenta la quantità)
     public boolean aggiungiPezzi(String idProdotto, int quantitaDaAggiungere) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_NUOVI_PEZZI.getQuery(
                 quantitaDaAggiungere, idProdotto
         );
@@ -55,7 +55,7 @@ public class ConcessionariaDAO {
 
     //LA STO USANDO IO ANDREA NON CANCELLARE
     public boolean decrementaQuantitaConcessionaria(String tipol) {
-        DBConnector db = new DBConnector();
+        DBConnector db = DBConnector.getInstance();
         String query = Query.AGGIORNA_QUANTITA_CONCESSIONARIA.getQuery(tipol);
         String result = db.executeUpdateQuery(query);
         return "OK".equals(result) || "1".equals(result);

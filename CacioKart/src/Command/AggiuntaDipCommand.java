@@ -41,7 +41,7 @@ public class AggiuntaDipCommand implements RequestCommand {
             Dipendente d = new Dipendente(nome, cognome, dataNascita, cf, mail, password, stipendio, ruolo, oreLavoro);
 
             // Esecuzione operazione
-            OperazioneProprietario operazione = new AggiuntaDipendenteOperazione(new DBConnector(), responder, d);
+            OperazioneProprietario operazione = new AggiuntaDipendenteOperazione(DBConnector.getInstance(), responder, d);
             operazione.esegui(clientSocket);
 
         } catch (Exception e) {

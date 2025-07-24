@@ -34,7 +34,7 @@ public class Socio extends Persona {
      * @param clientSocket Il socket di risposta
      */
     public void registrazione(Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
         SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
 
@@ -53,7 +53,7 @@ public class Socio extends Persona {
     public void compraKart(Kart k, Socket clientSocket) {
         String cf = this.getCf();
         String targa = k.getTarga();
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
 
         UPDATE = Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(targa, cf);
@@ -80,7 +80,7 @@ public class Socio extends Persona {
      * @param clientSocket
      */
     public void acquistaPezzi(Pezzo p, Socket clientSocket) {
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         responder = new PHPResponseHandler();
 
         UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
@@ -102,7 +102,7 @@ public class Socio extends Persona {
 
     public void mostraKartUtente(Socket clientSocket) {
         responder = new PHPResponseHandler();
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         SELECT = Query.MOSTRA_KART_SOCIO.getQuery(this.getCf());
         result = db.executeReturnQuery(SELECT);
 
@@ -121,7 +121,7 @@ public class Socio extends Persona {
      */
     public void mostraPezziUtente(Socket clientSocket) {
         responder = new PHPResponseHandler();
-        db = new DBConnector();
+        db = DBConnector.getInstance();
         SELECT = Query.MOSTRA_PEZZI_SOCIO.getQuery(this.getCf());
         result = db.executeReturnQuery(SELECT);
 
