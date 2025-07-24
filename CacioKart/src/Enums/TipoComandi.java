@@ -51,6 +51,11 @@ public enum TipoComandi {
     SELEZIONE_GARE_CAMPIONATO("selezioneGareCampionato"),
     AGGIUNGI_GARE_CAMPIONATO("aggiungiGareCampionato"),
     CREAZIONE_TEAM("aggiungiTeam"),
+    AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("aggiungiGareCampionato"),
+    MOSTRA_PRENOTAZIONI_ORGANIZZATORE("mostraPrenotazioniOrganizzatore"),
+
+
+
 
     //PROPRIETARIO
 

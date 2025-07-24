@@ -19,28 +19,30 @@ public class CommandFactory {
             case ELIMINAZIONE_KART-> new EliminazioneKartCommand(); //funziona ANDREA
             case REGISTRAZIONE_DIPENDENTE-> new AggiungiDipendenteCommand(); //funziona
             case RICHIESTA_DIPENDENTE -> new MostraDipendentiCommand(); //funziona
-            case ELIMINA_DIPENDENTE-> new RimuoviDipendenteCommand();
+            case ELIMINA_DIPENDENTE-> new RimuoviDipendenteCommand(); //funziona
             case ACQUISTA_KART-> new AcquistaKartCommand();
             case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand(); //funziona ANDREA
             case CLASSIFICA_GENERALE-> new ClassificaGeneraleCommand(); //funziona
             case CLASSIFICA_UTENTE-> new ClassificaUtenteCommand();
-            case CLASSIFICA_ARBITRO-> new ClassificaArbitroCommand();
-            case MANUTENZIONE-> new ManutenzioneCommand();
-            case MOSTRA_PEZZI -> new MostraPezziCommand(); //FUNZIONA
+            case CLASSIFICA_ARBITRO-> new ClassificaArbitroCommand(); //Funziona ANDREA
+            case MANUTENZIONE-> new ManutenzioneCommand(); //funziona ANDREA
+            case MOSTRA_PEZZI -> new MostraPezziCommand(); //Funziona
             case ACQUISTA_PEZZI->new AcquistaPezziCommand();
             case MOSTRA_GARA->new MostraGareSvolteCommand();
-            case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand();
+            case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand(); //Funziona ANDREA
             case AGGIUNGI_PEZZI-> new PezzoInsertCommand(); //funziona ANDREA
-            case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand();
-            case CREAZIONE_TEAM->new CreazioneTeamCommand();
-            case RICHIESTA_CAMPIONATO->new RichiestaCampCommand();
-            case SELEZIONE_GARE_CAMPIONATO->new SelectGareCampCommand();
-            case AGGIUNGI_GARE_CAMPIONATO->new AggiungiGareCampCommand();
+            case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand(); //funziona ANDREA
+            case CREAZIONE_TEAM->new AggiungiTeamCommand(); //funziona ANDREA
+            case AGGIUNGI_GARA_PARTECIPA_CAMPIONATO->new AggiungiGaraCampionatoCommand(); //NON FUNZIONA ANDREA
+            case RICHIESTA_CAMPIONATO->new MostraCampionatiCommand(); //funziona ANDREA
+            case SELEZIONE_GARE_CAMPIONATO->new SelectGareCampCommand(); //Funziona ANDREA
+            case AGGIUNGI_GARE_CAMPIONATO->new MostraGareInserimentoCommand();
             case RICHIESTA_GARA_SECCA->new RichiestaGaraSCommand(RICHIESTA_GARA_SECCA);
-            case MOSTRA_SOCI->new MostraSociCommand();
+            case MOSTRA_SOCI->new MostraSociPrenotazioniCommand();
             case INSERIMENTO_SOCI_GARA->new InserimentoSociGaraCommand();
             case MOSTRA_BILANCIO->new BilancioCommand(); //funziona
             case MOSTRA_PRENOTAZIONI_UTENTE->new RichiestaGaraSCommand(TipoComandi.MOSTRA_PRENOTAZIONI_UTENTE);
+            case MOSTRA_PRENOTAZIONI_ORGANIZZATORE -> new MostraPrenotazioniCommand();
             case MOSTRA_KART_UTENTE->new MostraKartUtenteCommand();
             case MOSTRA_PEZZI_POSSEDUTI_UTENTE->new MostraPezziUtenteCommand();
                 default -> null;
