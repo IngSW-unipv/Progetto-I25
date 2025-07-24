@@ -9,13 +9,17 @@ import java.net.Socket;
 public class PezzoInsertCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
-        System.out.println("pezzo" + in);
+        System.out.println("pezzo " + in);
         String[] parti = in.split(" ");
+        if (parti.length < 3) {
+            System.out.println("Parametri insufficienti per il comando aggiungiPezzi.");
+            return;
+        }
         Pezzo nuovoPezzo = new Pezzo();
-        nuovoPezzo.setIdProdotto(parti[0]);
-        int prezzo = Integer.parseInt(parti[1]);
+        nuovoPezzo.setIdProdotto(parti[1]);
+        int quantita = Integer.parseInt(parti[2]);
         InserimentoContext ctx = new InserimentoContext();
         ctx.setStrategy(StrategyFactory.getStrategy(nuovoPezzo));
-        ctx.eseguiInserimento(nuovoPezzo, prezzo, clientSocket);
+        ctx.eseguiInserimento(nuovoPezzo, quantita, clientSocket);
     }
 }

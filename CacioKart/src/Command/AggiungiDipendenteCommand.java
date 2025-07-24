@@ -1,8 +1,7 @@
 package Command;
 
-import Logic.AggiuntaDipendenteOperazione;
+import DAO.DipendenteDAO;
 import Logic.DBConnector;
-import Logic.OperazioneProprietario;
 import Objects.Dipendente;
 import WebTalker.PHPResponseHandler;
 
@@ -10,7 +9,7 @@ import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AggiuntaDipCommand implements RequestCommand {
+public class AggiungiDipendenteCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         PHPResponseHandler responder = new PHPResponseHandler();
@@ -40,10 +39,11 @@ public class AggiuntaDipCommand implements RequestCommand {
             // Creazione oggetto Dipendente
             Dipendente d = new Dipendente(nome, cognome, dataNascita, cf, mail, password, stipendio, ruolo, oreLavoro);
 
-            // Esecuzione operazione
-            OperazioneProprietario operazione = new AggiuntaDipendenteOperazione(DBConnector.getInstance(), responder, d);
-            operazione.esegui(clientSocket);
+            // USO DIRETTO DEL DAO (Pattern consigliato)
+            DipendenteDAO dao = new DipendenteDAO(DBConnector.getInstance());
+            dao.inserisciDipendente(d);
 
+            responder.sendResponse(clientSocket, "Dipendente aggiunto correttamente");
         } catch (Exception e) {
             responder.sendResponse(clientSocket, "Errore aggiunta dipendente: " + e.getMessage());
         }

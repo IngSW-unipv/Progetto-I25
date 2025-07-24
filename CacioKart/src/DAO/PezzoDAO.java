@@ -1,15 +1,17 @@
 package DAO;
 
-import Enums.Query;
-import Logic.DBConnector;
 import Objects.Pezzo;
+import Logic.DBConnector;
+import Enums.Query;
+
 
 public class PezzoDAO {
-    private DBConnector db = DBConnector.getInstance();
-
-    public void insertPezzo(Pezzo p) {
-        String query = Query.INSERIMENTO_NUOVI_PEZZI.getQuery(p.getQuantita(), p.getIdProdotto());
-        db.executeUpdateQuery(query);
+    public void insertPezzo(Pezzo p, int quantita) {
+        String query = String.format(
+                Query.INSERIMENTO_NUOVI_PEZZI.getQuery(),
+                quantita, // Quantità giusta!
+                p.getIdProdotto()
+        );
+        DBConnector.getInstance().executeUpdateQuery(query);
     }
 }
-

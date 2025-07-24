@@ -17,9 +17,9 @@ public class CommandFactory {
             case MOSTRA_KART_RIMUOVI -> new MostraKartCommand(); //funziona ANDREA
             case MOSTRA_KART_MANUTENZIONE -> new MostraKartManutenzioneCommand(); //funziona ANDREA
             case ELIMINAZIONE_KART-> new EliminazioneKartCommand(); //funziona ANDREA
-            case REGISTRAZIONE_DIPENDENTE-> new AggiuntaDipCommand(); //funziona
-            case RICHIESTA_DIPENDENTE -> new MostraDipCommand(); //funziona
-            case ELIMINA_DIPENDENTE-> new EliminaDipCommand();
+            case REGISTRAZIONE_DIPENDENTE-> new AggiungiDipendenteCommand(); //funziona
+            case RICHIESTA_DIPENDENTE -> new MostraDipendentiCommand(); //funziona
+            case ELIMINA_DIPENDENTE-> new RimuoviDipendenteCommand();
             case ACQUISTA_KART-> new AcquistaKartCommand();
             case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand(); //funziona ANDREA
             case CLASSIFICA_GENERALE-> new ClassificaGeneraleCommand(); //funziona
@@ -30,7 +30,7 @@ public class CommandFactory {
             case ACQUISTA_PEZZI->new AcquistaPezziCommand();
             case MOSTRA_GARA->new MostraGaraCommand();
             case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand();
-            case AGGIUNGI_PEZZI-> new PezzoInsertCommand();
+            case AGGIUNGI_PEZZI-> new PezzoInsertCommand(); //funziona ANDREA
             case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand();
             case CREAZIONE_TEAM->new CreazioneTeamCommand();
             case RICHIESTA_CAMPIONATO->new RichiestaCampCommand();

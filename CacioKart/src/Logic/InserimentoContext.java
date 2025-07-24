@@ -1,16 +1,18 @@
 package Logic;
+
 import Strategy.InserimentoStrategy;
 
 import java.net.Socket;
 
 public class InserimentoContext {
-        private InserimentoStrategy strategy;
+    private InserimentoStrategy strategy;
 
-        public void setStrategy(InserimentoStrategy strategy) {
-            this.strategy = strategy;
-        }
+    public void setStrategy(InserimentoStrategy strategy) {
+        this.strategy = strategy;
+    }
 
-        public void eseguiInserimento(Object obj, int prezzo, Socket socket) {
-            strategy.inserisci(obj, prezzo, socket);
-        }
+    // Cambia “prezzo” in “quantita” anche qui
+    public void eseguiInserimento(Object obj, int quantita, Socket clientSocket) {
+        strategy.inserisci(obj, quantita, clientSocket);
+    }
 }
