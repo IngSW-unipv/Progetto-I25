@@ -38,7 +38,7 @@ public class DBConnector {
     // Metodo statico per ottenere l'istanza unica
     public static DBConnector getInstance() {
         if (instance == null) {
-            instance = DBConnector.getInstance();
+            instance = new DBConnector();
         }
         return instance;
     }
