@@ -28,7 +28,7 @@ public class CommandFactory {
             case MANUTENZIONE-> new ManutenzioneCommand();
             case MOSTRA_PEZZI -> new MostraPezziCommand(); //FUNZIONA
             case ACQUISTA_PEZZI->new AcquistaPezziCommand();
-            case MOSTRA_GARA->new MostraGaraCommand();
+            case MOSTRA_GARA->new MostraGareSvolteCommand();
             case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand();
             case AGGIUNGI_PEZZI-> new PezzoInsertCommand(); //funziona ANDREA
             case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand();
