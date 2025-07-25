@@ -1,33 +1,31 @@
 package Command;
 
-import Logic.Organizzatore;
-import Logic.Socio;
+import DAO.OrganizzatoreDAO;
+import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
+import java.time.LocalDate;
 
 public class InserimentoSociGaraCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
-        try {
-            System.out.println("Criando inserimentoSociGaraCommand" + in);
-            String[] info = in.split(" ");
+        String[] parti = in.split(" ");
+        if (parti.length < 3) {
+            new PHPResponseHandler().sendResponse(clientSocket, "Parametri insufficienti.\nend\n");
+            return;
+        }
+        String idP = parti[1];
+        String socio = parti[2];
+        String data = LocalDate.now().toString();
 
-            if (info.length < 2) {
-                new PHPResponseHandler().sendResponse(clientSocket, "Dati insufficienti");
-                return;
-            }
+        OrganizzatoreDAO dao = new OrganizzatoreDAO(DBConnector.getInstance());
+        String esito = dao.inserisciSocioInPrenotazione(idP, socio, data);
 
-            String idPrenotazione = info[0];
-            String cfSocio = info[1];
-
-            Organizzatore o = new Organizzatore();
-            Socio s = new Socio();
-            s.setCf(cfSocio);
-
-            o.aggiornaPrenota(idPrenotazione, s, clientSocket);
-        } catch (Exception e) {
-            new PHPResponseHandler().sendResponse(clientSocket, "Errore aggiornamento prenotazione: " + e.getMessage());
+        if ("OK".equals(esito)) {
+            new PHPResponseHandler().sendResponse(clientSocket, "Socio inserito correttamente.\nend\n");
+        } else {
+            new PHPResponseHandler().sendResponse(clientSocket, "Errore nell'inserimento.\nend\n");
         }
     }
 }

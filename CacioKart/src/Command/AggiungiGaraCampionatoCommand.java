@@ -9,7 +9,7 @@ import java.net.Socket;
 public class AggiungiGaraCampionatoCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
-        // Esempio comando: "aggiungiGaraCampionato G001 C005"
+        // Esempio comando: "aggiungiGareCampionato G0009 C001"
         String[] parti = in.split(" ");
         if (parti.length < 3) {
             new PHPResponseHandler().sendResponse(clientSocket, "Parametri insufficienti.\nend\n");
@@ -19,8 +19,12 @@ public class AggiungiGaraCampionatoCommand implements RequestCommand {
         String idCampionato = parti[2];
 
         OrganizzatoreDAO dao = new OrganizzatoreDAO(DBConnector.getInstance());
-        dao.aggiungiGaraACampionato(idGara, idCampionato);
+        String esito = dao.aggiungiGaraACampionato(idGara, idCampionato);
 
-        new PHPResponseHandler().sendResponse(clientSocket, "Gara aggiunta al campionato con successo.\nend\n");
+        if ("OK".equals(esito)) {
+            new PHPResponseHandler().sendResponse(clientSocket, "Gara aggiunta al campionato con successo.\nend\n");
+        } else {
+            new PHPResponseHandler().sendResponse(clientSocket, "Errore durante l'inserimento.\nend\n");
+        }
     }
 }

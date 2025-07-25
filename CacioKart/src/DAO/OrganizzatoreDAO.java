@@ -54,10 +54,12 @@ public class OrganizzatoreDAO {
         return db.executeReturnQuery(query);
     }
 
-    public void aggiungiGaraACampionato(String idGara, String idCampionato) {
+    public String aggiungiGaraACampionato(String idGara, String idCampionato) {
         String query = String.format(Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(), idGara, idCampionato);
-        db.executeUpdateQuery(query);
+        System.out.println("[DEBUG] Query eseguita: " + query);
+        return db.executeUpdateQuery(query);
     }
+
 
     public List<Map<String, Object>> mostraPrenotazioniOrganizzatore() {
         String query = Query.MOSTRA_PRENOTAZIONI_ORGANIZZATORE.getQuery();
@@ -67,6 +69,11 @@ public class OrganizzatoreDAO {
     public List<Map<String, Object>> mostraSociAggiuntaPrenotazione() {
         String query = Query.SELEZIONA_SOCIO_AGGIUNTA_PRENOTAZIONE.getQuery();
         return db.executeReturnQuery(query);
+    }
+
+    public String inserisciSocioInPrenotazione(String idP, String socio, String data) {
+        String query = String.format(Query.INSERIMENTO_SOCIO_GARA.getQuery(), idP, socio, data);
+        return db.executeUpdateQuery(query);
     }
 
 

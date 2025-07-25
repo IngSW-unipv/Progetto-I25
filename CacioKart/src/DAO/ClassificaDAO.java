@@ -40,4 +40,16 @@ public class ClassificaDAO {
         String query = String.format(Query.MOSTRA_CLASSIFICA_PENALITA.getQuery(), idGara);
         return db.executeReturnQuery(query);
     }
+
+    public List<Map<String, Object>> getClassificaGenerale() {
+        String query = Query.CLASSIFICA_GENERALE.getQuery();
+        return db.executeReturnQuery(query);
+    }
+
+    public List<Map<String, Object>> getClassificaUtente(String nome) {
+        String query = String.format(Query.CLASSIFICA_UTENTE.getQuery(), nome);
+        return db.executeReturnQuery(query);
+    }
+
+
 }

@@ -36,7 +36,6 @@ public class CommandFactory {
             case AGGIUNGI_GARA_PARTECIPA_CAMPIONATO->new AggiungiGaraCampionatoCommand(); //NON FUNZIONA ANDREA
             case RICHIESTA_CAMPIONATO->new MostraCampionatiCommand(); //funziona ANDREA
             case SELEZIONE_GARE_CAMPIONATO->new SelectGareCampCommand(); //Funziona ANDREA
-            case AGGIUNGI_GARE_CAMPIONATO->new MostraGareInserimentoCommand();
             case RICHIESTA_GARA_SECCA->new RichiestaGaraSCommand(RICHIESTA_GARA_SECCA);
             case MOSTRA_SOCI->new MostraSociPrenotazioniCommand();
             case INSERIMENTO_SOCI_GARA->new InserimentoSociGaraCommand();
