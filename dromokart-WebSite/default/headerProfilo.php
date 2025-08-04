@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Imposta il testo e il link del bottone in base al rank
-switch ( $_SESSION['rank']) {
+switch ($_SESSION['rank']) {
     case "0":
         $btnText = 'Profilo';
         $link = 'profilo.php';
@@ -36,6 +36,7 @@ switch ( $_SESSION['rank']) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo $btnText; ?></title>
+    <link rel="stylesheet" href="../css/registration.css"> <!-- <--- AGGIUNGI QUESTA RIGA! -->
 </head>
 <body>
   <!-- Header -->
@@ -49,12 +50,9 @@ switch ( $_SESSION['rank']) {
       <nav>
         <ul>
           <li><a href="<?php echo $link; ?>"><?php echo $btnText; ?></a></li>
-          <!-- Il link Logout ora reindirizza alla homepage -->
           <li><a href="default/logout.php">Logout</a></li>
         </ul>
       </nav>
     </div>
   </header>
-
-</body>
-</html>
+<!-- NON chiudere qui il body e html! -->

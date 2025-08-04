@@ -7,7 +7,9 @@
     }
 ?>
 <!-- Header -->
+
 <header>
+      <link rel="stylesheet" href="../css/registration.css"> <!-- <--- AGGIUNGI QUESTA RIGA! -->
     <div class="header-container">
       <div class="logo">
         <a href="index.php">

@@ -1,89 +1,83 @@
 <?php
-// aggiuntaPenalita.php
+include 'default/headerProfilo.php';
+require 'logic/controlloLogin.php';
+require_once 'logic/selezioneGara.php'; // recupera $res dal server usando $idGara
 
-// Include eventuali header o footer, se necessari
-include 'default/headerProfilo.php';  // Se hai un header personalizzato
-include 'default/footerHome.php';     // Se hai un footer
-require 'logic/controlloLogin.php';   // Controllo login (opzionale)
-
-// 1) Ricevi l'idGara passato dal form
+// Ricevi l'idGara passato dal form
 $idGara = isset($_POST['idGara']) ? $_POST['idGara'] : '';
 
-// 2) Includi il file con la funzione che richiama il server Java
-require_once 'logic/selezioneGara.php';
+// Analizzo la risposta ricevuta ($res)
+$rows = explode("\n", trim($res));
 
+// Prepara i dati come array associativo per la tabella generica
+$colonne = ["idGara", "Socio", "Targa", "bGiro", "tempoTot"];
+$dati = [];
+
+foreach ($rows as $row) {
+    $row = trim($row);
+    if (empty($row)) continue;
+    $columns = preg_split('/\s+/', $row);
+
+    if (count($columns) >= 5) {
+        $dati[] = array_combine($colonne, array_slice($columns, 0, 5));
+    }
+}
+
+// Parametri della tabella generica
+$colonnaAzione = "Penalità";
+$actionForm = "logic/aggiungiPenalita.php";
+$labelBottone = "Aggiungi penalità";
+$chiavePrimaria = "idGara";
+$nomeCampoHidden = "idGara"; // opzionale ma esplicito
+
+// Nessuna condizione per disabilitare il bottone
+$condizioneDisabilitaBottone = null;
+
+// Titolo della pagina
+echo "<h2>Dettagli della Gara: " . htmlspecialchars($idGara) . "</h2>";
 ?>
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Aggiunta Penalità</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/registration.css">
-</head>
-<body>
-  <h2>Dettagli della Gara: <?php echo htmlspecialchars($idGara); ?></h2>
+<div class="table-section">
+<?php
+// In questo caso la tabella richiede un campo aggiuntivo (input di tempo)
+// Implementiamo una versione specifica del ciclo per includere l'input extra:
 
-  <div class="table-section">
-    <?php
-    // 4) Analizzo la risposta $res
-    // Suddivido in righe usando "explode"
-    $rows = explode("\n", trim($res));
+if (count($dati) > 0) {
+    echo '<table class="styled-table"><thead><tr>';
+    foreach ($colonne as $col) {
+        echo "<th>$col</th>";
+    }
+    echo "<th>Penalità</th><th>$labelBottone</th>";
+    echo '</tr></thead><tbody>';
 
-    // Verifico se ho almeno una riga non vuota
-    if (count($rows) > 0 && !empty(trim($rows[0]))) {
-        echo '<table>';
-        echo '  <thead>';
-        echo '    <tr>';
-        echo '      <th>idGara</th>';
-        echo '      <th>Socio</th>';
-        echo '      <th>targa</th>';
-        echo '      <th>bGiro</th>';
-        echo '      <th>tempoTot</th>';
-        echo '      <th>Penalità</th>';
-        echo '      <th>Aggiungi Penalità</th>';
-        echo '    </tr>';
-        echo '  </thead>';
-        echo '  <tbody>';
-
-        foreach ($rows as $row) {
-            $row = trim($row);
-            if (empty($row)) continue;
-
-            // Ogni riga contiene i campi separati da spazi
-            $columns = preg_split('/\s+/', $row);
-
-            // Esempio: ci aspettiamo almeno 7-8 colonne
-            if (count($columns) >= 5) {
-                echo '<tr>';
-
-                echo '  <td>' . htmlspecialchars($columns[0]) . '</td>'; 
-                echo '  <td>' . htmlspecialchars($columns[1]) . '</td>';
-                echo '  <td>' . htmlspecialchars($columns[2]) . '</td>';
-                echo '  <td>' . htmlspecialchars($columns[3]) . '</td>';
-                echo '  <td>' . htmlspecialchars($columns[4]) . '</td>';
-                echo '  <td>';
-                echo '    <form action="logic/aggiungiPenalita.php" method="post">';
-                echo '      <input type="time" name="time" value="00:00:00" step="1">';
-                echo '      <input type="hidden" name="idGara" value="'. htmlspecialchars($columns[0]) .'">';
-                echo '      <input type="hidden" name="Socio" value="'. htmlspecialchars($columns[1]) .'">';
-                echo ' </td>';
-                echo '  <td>';
-                echo '      <button type="submit">Aggiungi penalità</button>';
-                echo '    </form>';
-                echo '  </td>';
-
-                echo '</tr>';
-            }
+    foreach ($dati as $riga) {
+        echo '<tr>';
+        foreach ($colonne as $col) {
+            echo '<td>' . htmlspecialchars($riga[$col]) . '</td>';
         }
 
-        echo '  </tbody>';
-        echo '</table>';
-    } else {
-        echo '<p>Nessun dato valido ricevuto dal server per questa gara.</p>';
+        echo '<td>'; 
+        echo '<form action="'.htmlspecialchars($actionForm).'" method="post" style="margin:0;">';
+        echo '<input type="time" name="time" value="00:00:00" step="1" required>';
+        
+        // Hidden inputs
+        echo '<input type="hidden" name="'.htmlspecialchars($nomeCampoHidden).'" value="'.htmlspecialchars($riga[$chiavePrimaria]).'">';
+        echo '<input type="hidden" name="Socio" value="'.htmlspecialchars($riga["Socio"]).'">';
+        echo '</td>';
+        
+        echo '<td>';
+        echo '<button type="submit" class="btn-green">'.$labelBottone.'</button>';
+        echo '</form>';
+        echo '</td>';
+        
+        echo '</tr>';
     }
-    ?>
-  </div>
-</body>
-</html>
+
+    echo '</tbody></table>';
+} else {
+    echo '<p>Nessun dato ricevuto per questa gara.</p>';
+}
+?>
+</div>
+
+<?php include 'default/footerHome.php'; ?>
