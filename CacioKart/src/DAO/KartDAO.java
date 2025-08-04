@@ -7,7 +7,10 @@ import Objects.Kart;
 import Logic.DBConnector;
 import Enums.Query;
 
-public class KartDAO {
+/**
+ * Implementazione concreta di KartDAOInterface.
+ */
+public class KartDAO implements KartDAOInterface {
     private static KartDAO instance;
     private KartDAO() {}
     public static KartDAO getInstance() {
@@ -15,6 +18,7 @@ public class KartDAO {
         return instance;
     }
 
+    @Override
     public List<Kart> getAllKart() {
         List<Kart> lista = new ArrayList<>();
         DBConnector db = DBConnector.getInstance();
@@ -30,9 +34,7 @@ public class KartDAO {
         return lista;
     }
 
-
-
-    // Restituisce solo i kart disponibili per aggiunta (usa la query filtrata che hai già)
+    @Override
     public List<Kart> getAllKartDisponibiliPerAggiunta() {
         List<Kart> lista = new ArrayList<>();
         DBConnector db = DBConnector.getInstance();
@@ -48,8 +50,7 @@ public class KartDAO {
         return lista;
     }
 
-
-    // Inserisce un nuovo kart nella tabella
+    @Override
     public boolean insertKart(Kart k) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA.getQuery(
@@ -61,7 +62,7 @@ public class KartDAO {
         return result.equals("OK");
     }
 
-    // Elimina un kart dalla tabella (usando la targa)
+    @Override
     public boolean deleteKart(Kart k) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.RIMUOVI_KART_MECCANICO.getQuery(k.getTarga());
@@ -69,7 +70,7 @@ public class KartDAO {
         return result.equals("OK");
     }
 
-    // Esegue il pieno (serbatoio = 20) su un kart
+    @Override
     public boolean refillKart(Kart k) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.AGGIUNTA_BENZINA_MECCANICO.getQuery(k.getTarga());
@@ -77,10 +78,10 @@ public class KartDAO {
         return result.equals("OK");
     }
 
+    @Override
     public List<Map<String, Object>> getKartManutenzione() {
         DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_KART_MANUTENZIONE.getQuery();
         return db.executeReturnQuery(query);
     }
-
 }

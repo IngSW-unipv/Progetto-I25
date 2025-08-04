@@ -4,7 +4,10 @@ import Objects.Kart;
 import Logic.DBConnector;
 import java.time.LocalDate;
 
-public class ManutenzioneDAO {
+/**
+ * Implementazione concreta di ManutenzioneDAOInterface.
+ */
+public class ManutenzioneDAO implements ManutenzioneDAOInterface {
     private static ManutenzioneDAO instance;
     private ManutenzioneDAO() {}
     public static ManutenzioneDAO getInstance() {
@@ -12,6 +15,7 @@ public class ManutenzioneDAO {
         return instance;
     }
 
+    @Override
     public boolean insertManutenzione(Kart kart, String tipoInt, double costo) {
         DBConnector db = DBConnector.getInstance();
         String dataM = LocalDate.now().toString();
