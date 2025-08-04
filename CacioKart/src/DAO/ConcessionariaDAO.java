@@ -5,15 +5,20 @@ import Enums.Query;
 import java.util.List;
 import java.util.Map;
 
-public class ConcessionariaDAO {
+/**
+ * Implementazione concreta di ConcessionariaDAOInterface.
+ */
+public class ConcessionariaDAO implements ConcessionariaDAOInterface {
     private static ConcessionariaDAO instance;
+
     private ConcessionariaDAO() {}
+
     public static ConcessionariaDAO getInstance() {
         if (instance == null) instance = new ConcessionariaDAO();
         return instance;
     }
 
-    // 1. Ottieni il prossimo idProdotto (MAX+1) per nuovi inserimenti
+    @Override
     public String getNextProductId() {
         DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA_MAX_ID.getQuery();
@@ -26,7 +31,7 @@ public class ConcessionariaDAO {
         }
     }
 
-    // 2. Inserisce un nuovo kart o pezzo nella tabella concessionaria
+    @Override
     public boolean insertConcessionariaItem(String idProdotto, String tipol, int quantita, int prezzo) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_KART_CONCESSIONARIA_TABELLA_CONCESSIONARIA.getQuery(
@@ -36,14 +41,14 @@ public class ConcessionariaDAO {
         return result.equals("OK");
     }
 
-    // 3. Mostra tutti i pezzi presenti in concessionaria (esclusi i kart)
+    @Override
     public List<Map<String, Object>> getPezzi() {
         DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_PEZZI_CONCESSIONARIA.getQuery();
         return db.executeReturnQuery(query);
     }
 
-    // 4. Aggiunge nuovi pezzi ad un idProdotto già presente (aumenta la quantità)
+    @Override
     public boolean aggiungiPezzi(String idProdotto, int quantitaDaAggiungere) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.INSERIMENTO_NUOVI_PEZZI.getQuery(
@@ -53,14 +58,11 @@ public class ConcessionariaDAO {
         return result.equals("OK");
     }
 
-    //LA STO USANDO IO ANDREA NON CANCELLARE
+    @Override
     public boolean decrementaQuantitaConcessionaria(String tipol) {
         DBConnector db = DBConnector.getInstance();
         String query = Query.AGGIORNA_QUANTITA_CONCESSIONARIA.getQuery(tipol);
         String result = db.executeUpdateQuery(query);
         return "OK".equals(result) || "1".equals(result);
     }
-
-
-
 }

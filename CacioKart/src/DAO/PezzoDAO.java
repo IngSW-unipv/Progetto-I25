@@ -4,12 +4,16 @@ import Objects.Pezzo;
 import Logic.DBConnector;
 import Enums.Query;
 
+/**
+ * Implementazione concreta di PezzoDAOInterface.
+ */
+public class PezzoDAO implements PezzoDAOInterface {
 
-public class PezzoDAO {
+    @Override
     public void insertPezzo(Pezzo p, int quantita) {
         String query = String.format(
                 Query.INSERIMENTO_NUOVI_PEZZI.getQuery(),
-                quantita, // Quantità giusta!
+                quantita,
                 p.getIdProdotto()
         );
         DBConnector.getInstance().executeUpdateQuery(query);
