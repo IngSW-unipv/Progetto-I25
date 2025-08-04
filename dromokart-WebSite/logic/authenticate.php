@@ -48,7 +48,7 @@ if ($str[0] === "0") {
             die();
             break;
         case "1":
-            header("Location: ../meccanico.php");
+            header("Location: ../Meccanico/meccanico.php");
             die();
             break;
         case "2":

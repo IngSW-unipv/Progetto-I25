@@ -4,11 +4,11 @@ session_start();
 switch ($_SESSION['rank']) {
     case "0":
         $btnText = 'Profilo';
-        $link = 'profilo.php';
+        $link = '../profilo.php';
         break;
     case "1":
         $btnText = 'Meccanico';
-        $link = 'meccanico.php';
+        $link = 'Meccanico/meccanico.php';
         break;
     case "2":
         $btnText = 'Gestore Concessionaria';
@@ -28,7 +28,7 @@ switch ($_SESSION['rank']) {
         break;
     default:
         $btnText = 'Profilo';
-        $link = 'profilo.php';
+        $link = '../profilo.php';
 }
 ?>
 <!DOCTYPE html>

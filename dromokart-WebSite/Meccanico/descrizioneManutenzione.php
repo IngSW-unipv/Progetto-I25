@@ -1,5 +1,5 @@
-<?php include 'default/footerHome.php'; ?> 
-<?php include 'default/headerHome.php'; ?>
+<?php include '../default/footerHome.php'; ?> 
+<?php include '../default/headerProfilo.php'; ?>
 <?php $targa = isset($_POST['targa']) ? $_POST['targa'] : ''; ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Descrizione Manutenzione</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/registration.css">
+  <link rel="stylesheet" href="../css/registration.css">
 </head>
 <body>
   <main>

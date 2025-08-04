@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+require '../logic/requestData.php';
 
 // Ricevi le righe dal server
 $res = request("mostraKartManutenzione", $socket);
@@ -37,9 +37,9 @@ $condizioneDisabilitaBottone = function($riga) {
 echo '<div class="table-section">';
 
 // Chiama la tabella generica con tutti i parametri già impostati
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
 ?>
