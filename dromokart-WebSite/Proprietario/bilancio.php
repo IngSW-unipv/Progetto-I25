@@ -1,7 +1,6 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php';
+require '../logic/requestData.php';
 
 // Richiedi i dati del bilancio dal server
 $res = request("mostraBilancio", $socket);
@@ -52,4 +51,4 @@ foreach ($rows as $row) {
     ?>
 </div>
 
-<?php include 'default/footerConce.php'; ?>
+<?php include '../default/footerConce.php'; ?>

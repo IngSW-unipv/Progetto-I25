@@ -1,26 +1,16 @@
-<?php
-    //controllo sul rango attraverso la variabile di sessione
-    session_start();
-    if($_SESSION['rank'] != 5){
-        header('Location: ../index.php');
-        die();
-    }
-?>
-<!-- Header -->
-
+<link rel="stylesheet" href="../css/registration.css">
 <header>
-      <link rel="stylesheet" href="../css/registration.css"> <!-- <--- AGGIUNGI QUESTA RIGA! -->
     <div class="header-container">
       <div class="logo">
-        <a href="index.php">
-          <img src="immagini/LOGO_KART.png" alt="Logo CacioKart">
+        <a href="proprietario.php">
+          <img src="../immagini/LOGO_KART.png" alt="Logo CacioKart">
         </a>
       </div>
       <nav>
         <ul>
           <li><a href="proprietario.php">Proprietario</a></li>
-          <li><a href="default/logout.php" id="logoutBtn">Logout</a></li>
+          <li><a href="../default/logout.php" id="logoutBtn">Logout</a></li>
         </ul>
       </nav>
     </div>
-  </header>
+</header>

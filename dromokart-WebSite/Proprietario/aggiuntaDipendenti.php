@@ -1,9 +1,7 @@
 <?php
-   include 'default/headerProprietario.php';
-   include 'default/footerConce.php';
+require '../logic/controlloLogin.php';        // controllo login e rank PRIMA di ogni output!
+include '../default/headerProprietario.php';  // header della pagina
 ?>
-<?php require 'logic/controlloLogin.php'; ?>
-
 
 <!DOCTYPE html>
 <html lang="it">
@@ -11,17 +9,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina aggiunta dipendenti</title>
-  <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-  <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/registration.css">
+  <link rel="stylesheet" href="../css/registration.css">
 </head>
 <body>
   <main>
     <section class="form-section">
       <h1>Inserisci un dipendente</h1>
       <!-- lista attributi: cf, nome, cognome, mail, password, data_n, ruolo, ore_lavorate, stipendio -->
-      <form action="logic/registerDip.php" method="post" class="registration-form">
+      <form action="../logic/registerDip.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" maxlength="30" required pattern="^[A-Za-z]+$" title="inserire solo lettere">
@@ -55,7 +51,7 @@
                <option value="organizzatore">Organizzatore</option>
             </select>
          </div>
-            <div class="form-group">
+         <div class="form-group">
             <label for="oreL">Ore lavorative</label>
             <input type="time" id="oreL" name="oreL">
          </div>
@@ -64,11 +60,13 @@
             <input type="text" id="stipendio" name="stipendio" required maxlength="6">
          </div>
          <div class="form-group">
-            <button type="submit">Registra</button>
+            <button type="submit" class="btn-green">Registra</button>
          </div>
       </form>
     </section>
   </main>
+
+<?php include '../default/footerConce.php'; ?>
 
 </body>
 </html>

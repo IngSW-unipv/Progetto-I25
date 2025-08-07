@@ -64,7 +64,7 @@ if ($str[0] === "0") {
             die();
             break;
         case "5":
-            header("Location: ../proprietario.php");
+            header("Location: ../Proprietario/proprietario.php");
             die();
             break;
         default:

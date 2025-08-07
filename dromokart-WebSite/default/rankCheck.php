@@ -19,7 +19,7 @@
             echo '<li><a href="organizzatore.php">Area riservata</a></li>';
             break;
         case 5:
-            echo '<li><a href="proprietario.php">Area riservata</a></li>';
+            echo '<li><a href="Proprietario/proprietario.php">Area riservata</a></li>';
             break;
         default:
             break;
