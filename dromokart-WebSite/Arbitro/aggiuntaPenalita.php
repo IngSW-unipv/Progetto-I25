@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require_once 'logic/selezioneGara.php'; // recupera $res dal server usando $idGara
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+require_once '../logic/selezioneGara.php'; // recupera $res dal server usando $idGara
 
 // Ricevi l'idGara passato dal form
 $idGara = isset($_POST['idGara']) ? $_POST['idGara'] : '';
@@ -25,7 +25,7 @@ foreach ($rows as $row) {
 
 // Parametri della tabella generica
 $colonnaAzione = "Penalità";
-$actionForm = "logic/aggiungiPenalita.php";
+$actionForm = "../logic/aggiungiPenalita.php";
 $labelBottone = "Aggiungi penalità";
 $chiavePrimaria = "idGara";
 $nomeCampoHidden = "idGara"; // opzionale ma esplicito
@@ -80,4 +80,4 @@ if (count($dati) > 0) {
 ?>
 </div>
 
-<?php include 'default/footerHome.php'; ?>
+<?php include '../default/footerHome.php'; ?>

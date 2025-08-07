@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+require '../logic/requestData.php';
 
 // Ricevi dati dal server
 $res = request("richiestaClassAr", $socket);
@@ -36,7 +36,7 @@ $condizioneDisabilitaBottone = null;
 </section>
 
 <div class="table-section">
-  <?php include 'richiestaDatiTable.php'; ?>
+  <?php include '../richiestaDatiTable.php'; ?>
 </div>
 
-<?php include 'default/footerHome.php'; ?>
+<?php include '../default/footerHome.php'; ?>

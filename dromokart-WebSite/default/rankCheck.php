@@ -13,7 +13,7 @@
             echo '<li><a href="Gestore_Della_Concessionaria/gestoreConcessionaria.php">Area riservata</a></li>';
             break;
         case 3:
-            echo '<li><a href="arbitro.php">Area riservata</a></li>';
+            echo '<li><a href="Arbitro/arbitro.php">Area riservata</a></li>';
             break;
         case 4:
             echo '<li><a href="organizzatore.php">Area riservata</a></li>';

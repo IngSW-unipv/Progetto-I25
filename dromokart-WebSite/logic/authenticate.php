@@ -56,7 +56,7 @@ if ($str[0] === "0") {
             die();
             break;
         case "3":
-            header("Location: ../arbitro.php");
+            header("Location: ../Arbitro/arbitro.php");
             die();
             break;
         case "4":
