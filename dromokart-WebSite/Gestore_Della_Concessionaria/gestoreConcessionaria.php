@@ -1,6 +1,10 @@
-<?php include 'default/footerHome.php'; ?>
-<?php include 'default/headerProfilo.php'; ?>
-<?php require 'logic/controlloLogin.php'; ?>
+<?php
+include '../default/footerHome.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -11,7 +15,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/profilo.css">
+  <link rel="stylesheet" href="../css/profilo.css">
 </head>
 <body>
  

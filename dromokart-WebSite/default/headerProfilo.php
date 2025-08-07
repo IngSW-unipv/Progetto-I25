@@ -8,7 +8,7 @@ switch ($_SESSION['rank']) {
         break;
     case "1":
         $btnText = 'Meccanico';
-        $link = 'Meccanico/meccanico.php';
+        $link = 'meccanico.php';
         break;
     case "2":
         $btnText = 'Gestore Concessionaria';
@@ -36,23 +36,23 @@ switch ($_SESSION['rank']) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo $btnText; ?></title>
-    <link rel="stylesheet" href="../css/registration.css"> <!-- <--- AGGIUNGI QUESTA RIGA! -->
+    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/profilo.css">
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="header-container">
       <div class="logo">
-        <a href="index.php">
-          <img src="../immagini/LOGO_KART.png" alt="Logo Dromokart">
+        <a href="/index.php">
+          <img src="/immagini/LOGO_KART.png" alt="Logo Dromokart">
         </a>
       </div>
       <nav>
         <ul>
           <li><a href="<?php echo $link; ?>"><?php echo $btnText; ?></a></li>
-          <li><a href="default/logout.php">Logout</a></li>
+          <li><a href="/default/logout.php">Logout</a></li>
         </ul>
       </nav>
     </div>
   </header>
-<!-- NON chiudere qui il body e html! -->

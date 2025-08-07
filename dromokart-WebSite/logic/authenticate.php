@@ -52,7 +52,7 @@ if ($str[0] === "0") {
             die();
             break;
         case "2":
-            header("Location: ../gestoreConcessionaria.php");
+            header("Location: ../Gestore_Della_Concessionaria/gestoreConcessionaria.php");
             die();
             break;
         case "3":

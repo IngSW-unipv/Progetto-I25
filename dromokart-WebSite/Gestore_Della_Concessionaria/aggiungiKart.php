@@ -1,12 +1,12 @@
 <?php
-include 'default/headerProfilo.php';      // Include head, CSS, body, header
-require 'logic/controlloLogin.php';
+include '../default/headerProfilo.php';      // Include head, CSS, body, header
+require '../logic/controlloLogin.php';
 ?>
 
 <main>
   <section class="form-section">
     <h1>Aggiungi Kart</h1>
-    <form action="logic/aggiuntaKart.php" method="post" class="registration-form">
+    <form action="../logic/aggiuntaKart.php" method="post" class="registration-form">
       <div class="form-group">
         <label for="targa">Targa</label>
         <input type="text" id="targa" name="targa" value="KRT" maxlength="6" required>
@@ -20,7 +20,6 @@ require 'logic/controlloLogin.php';
           <option value="150">150cc</option>
         </select>
       </div>
-      <!-- Nuovo input per il prezzo -->
       <div class="form-group">
         <label for="prezzo">Prezzo</label>
         <input type="text" id="prezzo" name="prezzo" readonly required>
@@ -32,7 +31,7 @@ require 'logic/controlloLogin.php';
   </section>
 </main>
 
-<?php include 'default/footerHome.php'; // Chiude </body> e </html> ?>
+<?php include '../default/footerHome.php'; ?>
 
 <script>
   document.getElementById("cilindrata").addEventListener("change", function() {
@@ -50,21 +49,17 @@ require 'logic/controlloLogin.php';
 
   document.getElementById("targa").addEventListener("input", function() {
     let targaInput = this;
-    // Mantieni il prefisso fisso
     if (!targaInput.value.startsWith("KRT")) {
       targaInput.value = "KRT";
     }
-    // Rimuove eventuali caratteri non numerici dopo "KRT"
-    let numeri = targaInput.value.substring(3).replace(/\D/g, ""); // Mantiene solo numeri
-    targaInput.value = "KRT" + numeri.substring(0, 3); // Limita a 3 numeri
+    let numeri = targaInput.value.substring(3).replace(/\D/g, "");
+    targaInput.value = "KRT" + numeri.substring(0, 3);
   });
 
   document.getElementById("targa").addEventListener("keydown", function(event) {
-    // Impedisce la modifica del prefisso
     if (this.selectionStart < 3) {
       event.preventDefault();
     }
-    // Permette solo numeri dopo "KRT"
     if (this.selectionStart >= 3 && !/[0-9]/.test(event.key) && event.key !== "Backspace") {
       event.preventDefault();
     }

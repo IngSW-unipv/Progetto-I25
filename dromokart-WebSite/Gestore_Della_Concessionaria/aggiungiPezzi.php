@@ -1,6 +1,8 @@
-<?php include 'default/footerHome.php'; ?>
-<?php include 'default/headerProfilo.php'; ?>
-<?php require 'logic/controlloLogin.php'; ?>
+<?php
+include '../default/footerHome.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,16 +12,16 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/registration.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/registration.css">
 </head>
 <body>
   <div class="main-container">
   <div class="products-container">
     <?php
-      require 'logic/requestData.php';
+      require '../logic/requestData.php';
       $res = request('mostraPezzi', $socket);
-      //i parametri sono: id, nome del pezzo, quantita`, prezzo 
+      // i parametri sono: id, nome del pezzo, quantita`, prezzo
 
       $parts =  explode("\n", $res);
       $nval = 4;
@@ -33,9 +35,9 @@
           if(count($columns) >= $nval) {
             $namePart = str_replace('_',' ',$columns[1]);
             echo '<div class="product">';
-            echo /*'<a href="/products/' .$columns[1] .'.php">*/'<img src="immagini/Pezzi/' .$namePart .'.png" alt="' .$namePart .'">'; //</a>';
-            echo /*'<a href="/products/' .$columns[1] .'.php">*/ '<h1>' .$namePart .'</h1>';//</a>';            
-            echo '<form method="post" action="logic/insertParts.php">';
+            echo '<img src="../immagini/Pezzi/' .$namePart .'.png" alt="' .$namePart .'">';
+            echo '<h1>' .$namePart .'</h1>';         
+            echo '<form method="post" action="../logic/insertParts.php">';
             echo '<input type="number" name="quantity" id="quantity" value=0 min=0 required>';
             echo '<input type="hidden" name="part" id="part" value="' .$columns[0] .'" required>';            
             echo '<button type="submit">Aggiungi</button>';
@@ -54,6 +56,8 @@
         echo '<p>Nessun dato ricevuto.</p>';
       }
     ?>
+    </div>
+  </div>
 </body>
 </html>
 <script>
