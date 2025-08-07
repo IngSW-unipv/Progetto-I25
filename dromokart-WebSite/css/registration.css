@@ -8,11 +8,10 @@ body {
 }
 
 h1 {
-  color: #43b34a;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-top: 32px;
-}
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
 
 .table-section {
   max-width: 900px;
@@ -31,6 +30,47 @@ h1 {
   font-size: 18px;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.form-section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.form-group {
+  margin: 0 auto 20px auto;
+  max-width: 600px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 6px rgba(102, 175, 233, 0.4);
+  outline: none;
 }
 
 .styled-table th, .styled-table td {
