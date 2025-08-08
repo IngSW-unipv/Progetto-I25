@@ -1,12 +1,12 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
 
 // Ricevo l'idCampionato dal form
 $idCampionato = isset($_POST['idCampionato']) ? $_POST['idCampionato'] : '';
 
 // Recupero le gare del campionato dal server
-require_once 'logic/selezioneGareCampionato.php'; // Deve valorizzare $res
+require_once '../logic/selezioneGareCampionato.php'; // Deve valorizzare $res
 
 $rows = explode("\n", trim($res));
 
@@ -24,7 +24,7 @@ foreach ($rows as $row) {
 
 // Parametri per la tabella generica
 $colonnaAzione = "Aggiungi gara";
-$actionForm = "logic/aggiungiGaraCampionato.php";
+$actionForm = "../logic/aggiungiGaraCampionato.php";
 $labelBottone = "Aggiungi gara";
 $chiavePrimaria = "idGara";
 $nomeCampoHidden = "idGara";
@@ -41,8 +41,8 @@ foreach ($dati as &$riga) {
         'idCampionato' => $idCampionato
     ];
 }
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
 ?>

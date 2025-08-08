@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php'; // Apre HTML, HEAD con CSS
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php'; // Apre HTML, HEAD con CSS
+require '../logic/controlloLogin.php';
+require '../logic/requestData.php';
 
 // Recupero dati dal server
 $res = request("richiestaCampionato", $socket);
@@ -29,8 +29,8 @@ $condizioneDisabilitaBottone = null; // Nessuna condizione di disabilitazione
 
 // Contenitore estetico + tabella generica
 echo '<div class="table-section">';
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php'; // Chiude HTML
+include '../default/footerHome.php'; // Chiude HTML
 ?>

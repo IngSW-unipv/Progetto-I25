@@ -1,23 +1,23 @@
-<?php include 'default/footerHome.php'; ?>
-<?php include 'default/headerProfilo.php'; ?>
-<?php require 'logic/controlloLogin.php'; ?>
+<?php include '../default/footerHome.php'; ?>
+<?php include '../default/headerProfilo.php'; ?>
+<?php require '../logic/controlloLogin.php'; ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prenota Gara Libera - Dromokart</title>
+  <title>Prenota Gara Secca - Dromokart</title>
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/prenota_gara.css">
+  <link rel="stylesheet" href="../css/prenota_gara.css">
 </head>
 <body>
   
   <!-- Main Content -->
   <main>
-    <h1>Prenota Gara Libera</h1>
-    <form action="logic/prenotazioneGaraLibera.php" method="post" class="reservation-form">
+    <h1>Prenota Gara Secca</h1>
+    <form action="../logic/prenotazioneGaraSecca.php" method="post" class="reservation-form">
       <!-- Sezione Orari -->
       <div class="timeslot-section">
         <h2>Seleziona un orario</h2>
@@ -55,7 +55,7 @@
       
       <!-- Bottone Submit -->
       <div class="form-group submit-group">
-        <button type="submit">Prenota Gara Libera</button>
+        <button type="submit">Prenota Gara Secca</button>
       </div>
     </form>
   </main>

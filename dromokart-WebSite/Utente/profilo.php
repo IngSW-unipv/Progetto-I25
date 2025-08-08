@@ -1,6 +1,6 @@
-<?php include 'default/footerHome.php'; ?>
-<?php include 'default/headerProfilo.php'; ?>
-<?php require 'logic/controlloLogin.php'; ?>
+<?php include '../default/footerHome.php'; ?>
+<?php include '../default/headerProfilo.php'; ?>
+<?php require '../logic/controlloLogin.php'; ?>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -11,7 +11,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
-  <link rel="stylesheet" href="css/profilo.css">
+  <link rel="stylesheet" href="../css/profilo.css">
 </head>
 <body>
  
@@ -25,7 +25,7 @@
   <main>
     <div class="profile-buttons">
       <button onclick="location.href='migliori_tempi.php'">Guarda i tuoi tempi migliori</button>
-      <button onclick="location.href='prenota_gara.php'">Prenota una gara libera</button>
+      <button onclick="location.href='prenotaGaraUser.php'">Prenota una gara libera</button>
       <button onclick="location.href='acquistaKart.php'">Acquista un kart</button>
       <button onclick="location.href='acquistaPezzi.php'">Acquista pezzi di ricambio</button>
       <button onclick="location.href='mostraPrenotUser.php'">Prenotazioni effettuate</button>

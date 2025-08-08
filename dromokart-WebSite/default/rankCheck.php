@@ -4,7 +4,7 @@
     if(isset($_SESSION['rank'])){
         switch($_SESSION['rank']){
         case 0:
-            echo '<li><a href="profilo.php">Area riservata</a></li>';
+            echo '<li><a href="Utente/profilo.php">Area riservata</a></li>';
             break;
         case 1:
             echo '<li><a href="Meccanico/meccanico.php">Area riservata</a></li>';

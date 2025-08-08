@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+require '../logic/requestData.php';
 
 // Ricevi i dati dal server
 $res = request("mostraPezzi", $socket);
@@ -26,7 +26,7 @@ foreach ($rows as $row) {
 
 // Parametri per la tabella generica
 $colonnaAzione = "Acquista";
-$actionForm = "logic/acquirePart.php";
+$actionForm = "../logic/acquirePart.php";
 $labelBottone = "Acquista Pezzo";
 $chiavePrimaria = "ID"; // Campo usato come chiave primaria
 $nomeCampoHidden = "pezzo";
@@ -36,8 +36,8 @@ $condizioneDisabilitaBottone = function($riga) {
 
 // Contenitore estetico per la tabella
 echo '<div class="table-section">';
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
 ?>

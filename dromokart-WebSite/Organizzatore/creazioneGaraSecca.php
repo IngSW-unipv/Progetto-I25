@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';     // Header personalizzato per la sezione
-require 'logic/controlloLogin.php';      // Verifica se l'utente è loggato
-require 'logic/requestData.php';         // Funzione request()
+include '../default/headerProfilo.php';     // Header personalizzato per la sezione
+require '../logic/controlloLogin.php';      // Verifica se l'utente è loggato
+require '../logic/requestData.php';         // Funzione request()
 
 // Recupera i dati dal server
 $res = request("richiestaGaraSecca", $socket);
@@ -29,8 +29,8 @@ $condizioneDisabilitaBottone = null; // Nessuna condizione di disabilitazione
 
 // Contenitore estetico
 echo '<div class="table-section">';
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
 ?>

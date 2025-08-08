@@ -44,7 +44,7 @@ if ($str[0] === "0") {
     $_SESSION['name'] = $str[2];
     switch($str[1]){
         case "0":
-            header("Location: ../profilo.php");
+            header("Location: ../Utente/profilo.php");
             die();
             break;
         case "1":

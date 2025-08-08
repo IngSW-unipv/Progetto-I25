@@ -122,3 +122,49 @@ h1 {
   cursor: not-allowed;
   opacity: 1;
 }
+
+/* === Fallback: applica lo stile "verde" a qualsiasi tabella nel main,
+   anche se NON ha la classe .styled-table === */
+
+main .table-section table,
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #fff;
+  font-size: 18px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* celle */
+main .table-section table th,
+main .table-section table td,
+main table th,
+main table td {
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid #e2e2e2;
+}
+
+/* intestazione verde */
+main .table-section table thead th,
+main table thead th,
+main .table-section table tr:first-child th,
+main table tr:first-child th {
+  background: #43b34a !important;
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #378a37;
+}
+
+/* zebra e hover */
+main .table-section table tbody tr:nth-child(even),
+main table tbody tr:nth-child(even) {
+  background: #f5faf6;
+}
+main .table-section table tbody tr:hover,
+main table tbody tr:hover {
+  background: #e6f7eb;
+}

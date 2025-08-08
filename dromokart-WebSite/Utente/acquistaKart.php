@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';
-require 'logic/controlloLogin.php';
-require 'logic/requestData.php';
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';
+require '../logic/requestData.php';
 
 // Ricevi i dati dal server
 $res = request("mostraKartAggiunta", $socket);
@@ -21,7 +21,7 @@ foreach ($rows as $row) {
 
 // Parametri per la tabella generica
 $colonnaAzione = "Acquista";
-$actionForm = "logic/acquistaKart.php";
+$actionForm = "../logic/acquistaKart.php";
 $labelBottone = "Acquista Kart";
 $chiavePrimaria = "Targa"; // Campo usato come chiave primaria
 $nomeCampoHidden = "targa";
@@ -29,8 +29,8 @@ $condizioneDisabilitaBottone = null; // Nessuna condizione di disabilitazione
 
 // Contenitore estetico per la tabella
 echo '<div class="table-section">';
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
 ?>

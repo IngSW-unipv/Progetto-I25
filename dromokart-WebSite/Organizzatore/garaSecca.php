@@ -1,7 +1,7 @@
 <?php
-include 'default/headerProfilo.php';  // Header personalizzato
-require 'logic/controlloLogin.php';   // Controllo login
-require 'logic/requestData.php';      // Funzione request()
+include '../default/headerProfilo.php';  // Header personalizzato
+require '../logic/controlloLogin.php';   // Controllo login
+require '../logic/requestData.php';      // Funzione request()
 
 $IdPrenotazione = isset($_POST['IdPrenotazione']) ? $_POST['IdPrenotazione'] : '';
 
@@ -23,7 +23,7 @@ foreach ($rows as $row) {
 
 // Parametri per la tabella generica
 $colonnaAzione = "Aggiungi Pilota";
-$actionForm = "logic/aggiungiSociGaraSecca.php";
+$actionForm = "../logic/aggiungiSociGaraSecca.php";
 $labelBottone = "Aggiungi Pilota";
 $chiavePrimaria = "CF";
 $nomeCampoHidden = "CF"; // Campo principale
@@ -36,7 +36,7 @@ $condizioneDisabilitaBottone = null; // Nessuna condizione di disabilitazione
 // Contenitore estetico per la tabella
 echo "<h2>Dettagli della Prenotazione: " . htmlspecialchars($IdPrenotazione) . "</h2>";
 echo '<div class="table-section">';
-include 'richiestaDatiTable.php';
+include '../richiestaDatiTable.php';
 echo '</div>';
 
-include 'default/footerHome.php';
+include '../default/footerHome.php';
