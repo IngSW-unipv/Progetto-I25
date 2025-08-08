@@ -16,7 +16,7 @@
             echo '<li><a href="Arbitro/arbitro.php">Area riservata</a></li>';
             break;
         case 4:
-            echo '<li><a href="organizzatore.php">Area riservata</a></li>';
+            echo '<li><a href="Organizzatore/organizzatore.php">Area riservata</a></li>';
             break;
         case 5:
             echo '<li><a href="Proprietario/proprietario.php">Area riservata</a></li>';

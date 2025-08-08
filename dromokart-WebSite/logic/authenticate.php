@@ -60,7 +60,7 @@ if ($str[0] === "0") {
             die();
             break;
         case "4":
-            header("Location: ../organizzatore.php");
+            header("Location: ../Organizzatore/organizzatore.php");
             die();
             break;
         case "5":

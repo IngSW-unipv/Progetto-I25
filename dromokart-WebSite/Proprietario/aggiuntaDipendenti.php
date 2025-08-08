@@ -1,6 +1,6 @@
 <?php
-require '../logic/controlloLogin.php';        // controllo login e rank PRIMA di ogni output!
-include '../default/headerProprietario.php';  // header della pagina
+include '../default/headerProfilo.php';
+require '../logic/controlloLogin.php';  
 ?>
 
 <!DOCTYPE html>
