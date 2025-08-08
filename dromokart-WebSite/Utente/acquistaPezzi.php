@@ -36,7 +36,7 @@ $condizioneDisabilitaBottone = function($riga) {
 
 // Contenitore estetico per la tabella
 echo '<div class="table-section">';
-include '../richiestaDatiTable.php';
+include '../logic/richiestaDatiTable.php';
 echo '</div>';
 
 include '../default/footerHome.php';

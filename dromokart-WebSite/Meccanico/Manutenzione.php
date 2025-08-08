@@ -37,7 +37,7 @@ $condizioneDisabilitaBottone = function($riga) {
 echo '<div class="table-section">';
 
 // Chiama la tabella generica con tutti i parametri già impostati
-include '../richiestaDatiTable.php';
+include '../logic/richiestaDatiTable.php';
 
 echo '</div>';
 

@@ -41,7 +41,7 @@ foreach ($dati as &$riga) {
         'idCampionato' => $idCampionato
     ];
 }
-include '../richiestaDatiTable.php';
+include '../logic/richiestaDatiTable.php';
 echo '</div>';
 
 include '../default/footerHome.php';

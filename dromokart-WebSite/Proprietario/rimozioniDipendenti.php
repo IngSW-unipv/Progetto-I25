@@ -32,7 +32,7 @@ $condizioneDisabilitaBottone = null;
 </section>
 
 <div class="table-section">
-  <?php include '../richiestaDatiTable.php'; ?>
+  <?php include '../logic/richiestaDatiTable.php'; ?>
 </div>
 
 <?php include '../default/footerConce.php'; ?>
