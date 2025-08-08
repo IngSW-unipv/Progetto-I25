@@ -29,7 +29,7 @@ $condizioneDisabilitaBottone = null; // Nessuna condizione di disabilitazione
 
 // Contenitore estetico per la tabella
 echo '<div class="table-section">';
-include '../logic/richiestaDatiTable.phpp';
+include '../logic/richiestaDatiTable.php';
 echo '</div>';
 
 include '../default/footerHome.php';
