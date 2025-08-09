@@ -1,4 +1,4 @@
-package DAO;
+package DAO.interfacce;
 
 import Objects.Pezzo;
 

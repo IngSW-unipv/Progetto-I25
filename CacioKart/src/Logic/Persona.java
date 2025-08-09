@@ -86,7 +86,7 @@ public class Persona {
                         break;
 
                     default:
-                        /**Il PHP invierà sempre risposte esatte, questa risposta non è
+                        /* Il PHP invierà sempre risposte esatte, questa risposta non è
                         * praticamente mai necessaria.
                         */
                         responder.sendResponse(clientSocket, "0 0 0");

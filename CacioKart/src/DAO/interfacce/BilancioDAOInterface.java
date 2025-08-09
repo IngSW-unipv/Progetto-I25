@@ -1,4 +1,4 @@
-package DAO;
+package DAO.interfacce;
 
 /**
  * Interfaccia per la gestione del bilancio e l'accesso ai dati finanziari.

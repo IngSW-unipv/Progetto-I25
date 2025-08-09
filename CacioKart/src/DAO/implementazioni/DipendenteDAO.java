@@ -1,5 +1,6 @@
-package DAO;
+package DAO.implementazioni;
 
+import DAO.interfacce.DipendenteDAOInterface;
 import Enums.Query;
 import Logic.DBConnector;
 import Objects.Dipendente;

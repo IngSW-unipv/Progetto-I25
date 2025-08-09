@@ -1,6 +1,6 @@
 package Logic;
 
-import DAO.BilancioDAO;
+import DAO.implementazioni.BilancioDAO;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
 

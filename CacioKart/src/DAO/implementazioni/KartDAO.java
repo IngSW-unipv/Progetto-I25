@@ -1,8 +1,10 @@
-package DAO;
+package DAO.implementazioni;
 
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+
+import DAO.interfacce.KartDAOInterface;
 import Objects.Kart;
 import Logic.DBConnector;
 import Enums.Query;

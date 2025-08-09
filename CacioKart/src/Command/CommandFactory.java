@@ -10,7 +10,7 @@ public class CommandFactory {
         return switch (tipo) {
             case LOGIN -> new LoginCommand(); //funziona
             case REGISTRAZIONE -> new RegistrazioneCommand();//funziona
-            case PRENOTAZIONE-> new PrenotazioneCommand();
+            case PRENOTAZIONE-> new PrenotazioneCommand(); //funziona ALE
             case AGGIUNTA_KART_CONCESSIONARIA -> new KartInsertCommand(); //funziona ANDREA
             case AGGIUNGI_KART_MECCANICO-> new AggiungiKartMeccanicoCommand(); //funziona ANDREA
             case MOSTRA_KART_AGGIUNTA -> new MostraKartAggiuntaCommand(); //funziona ANDREA

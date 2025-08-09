@@ -1,5 +1,6 @@
-package DAO;
+package DAO.implementazioni;
 
+import DAO.interfacce.OrganizzatoreDAOInterface;
 import Logic.DBConnector;
 import Enums.Query;
 import java.util.ArrayList;

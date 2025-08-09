@@ -1,7 +1,7 @@
 package Command;
 
 import Logic.BilancioOperazione;
-import DAO.BilancioDAO;
+import DAO.implementazioni.BilancioDAO;
 import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 

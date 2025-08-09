@@ -1,4 +1,4 @@
-package DAO;
+package DAO.interfacce;
 
 import Objects.Dipendente;
 import java.util.List;

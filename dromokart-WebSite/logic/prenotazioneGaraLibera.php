@@ -14,7 +14,8 @@
     //invio dati
     fwrite($socket, $date . " ");
     fwrite($socket, $tempo . " ");
-    fwrite($socket, $username . "\n");
+    fwrite($socket, $username . " ");
+    fwrite($socket, "libera" . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 

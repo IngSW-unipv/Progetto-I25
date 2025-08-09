@@ -1,5 +1,6 @@
-package DAO;
+package DAO.implementazioni;
 
+import DAO.interfacce.InterfacciaSocioDAO;
 import Enums.Query;
 import Logic.DBConnector;
 import Objects.Kart;
@@ -9,12 +10,13 @@ import Strategy.PrenotazioneStrategyFactory;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
+import java.net.StandardSocketOptions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
-public class SocioDAO implements InterfacciaSocioDAO{
+public class SocioDAO implements InterfacciaSocioDAO {
     private final DBConnector db;
 
     public SocioDAO(DBConnector db) {
@@ -34,33 +36,6 @@ public class SocioDAO implements InterfacciaSocioDAO{
             val = new Kart(r.get("targa").toString(), (Integer) r.get("cilindrata"), (Double) r.get("serbatoio"));
         }
         return val;
-    }
-
-/**controllo della prenotazione
- * (eventualmente inglobabile sotto, bisogna vedere)*/
-    public int checkPrenotazione(String username, LocalDate data, LocalTime intervallo , LocalDate dataCorr){
-
-        String query = Query.PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI.getQuery(data, intervallo);
-        List<Map<String, Object>> res = db.executeReturnQuery(query);
-        String prenotazioniConcorrenti = res.get(0).get("concurrent").toString();
-
-        return (prenotazioniConcorrenti.equals("20")) ? 1 : 0;
-    }
-
-/**inserimento prenotazione Libera utente
- * @param dataCorr data corrente*/
-    @Override
-    public int prenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr){
-        Socket clientSocket = null; //temp
-        PHPResponseHandler responder = null; //!!!temporaneo, errore
-        String query = Query.PRENOTAZIONE_MAX_ID.getQuery();
-        List<Map<String, Object>> res = db.executeReturnQuery(query);
-        String idPrenotazione;
-        idPrenotazione = res.get(0).get("max").toString();
-        idPrenotazione = (!idPrenotazione.equals("0")) ? String.valueOf(Integer.parseInt(idPrenotazione) + 1) : "1";
-        PrenotazioneStrategy strategy = PrenotazioneStrategyFactory.getStrategy("libera");
-
-        return strategy.eseguiPrenotazione(idPrenotazione, username, data, intervallo, data, db, responder, clientSocket);
     }
 
 /**metodo per effettuare la registrazione*/

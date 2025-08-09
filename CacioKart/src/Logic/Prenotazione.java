@@ -19,7 +19,9 @@ public class Prenotazione  {
     private List<Map<String, Object>> result;
     private String idPrenotazione, prenotazioniConcorrenti;
 
-    /** Metodo per gestire le prenotazioni.
+    /**
+     * Si può togliere
+     * Metodo per gestire le prenotazioni.
      * Si effettua un controllo di prenotazioni concorrenti per vedere se
      * ci sono spazi in quella data e in quella fascia oraria.
      * In caso ci sia spazio, si identifica l'id massimo della prenotazione + 1 e
@@ -69,7 +71,7 @@ public class Prenotazione  {
             return;
         }
 
-        strategy.eseguiPrenotazione(idPrenotazione, cf, dataGara, fasciaOraria, dataO, db, responder, clientSocket);
+        strategy.eseguiPrenotazione(idPrenotazione, cf, dataGara, fasciaOraria, dataO, db /*,responder, clientSocket*/);
         }
 
     public void mostraPrenotazioni(VisualizzazionePrenotazioniStrategy strategy, Socket clientSocket) {

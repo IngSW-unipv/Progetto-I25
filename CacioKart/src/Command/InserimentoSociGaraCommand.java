@@ -1,6 +1,6 @@
 package Command;
 
-import DAO.OrganizzatoreDAO;
+import DAO.implementazioni.OrganizzatoreDAO;
 import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 

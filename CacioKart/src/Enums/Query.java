@@ -71,7 +71,7 @@ public enum Query {
     // =============================== //
 
     PRENOTAZIONE_CONTEGGIO_POSTI_RIMASTI("SELECT count(*) AS concurrent FROM caciokart.prenotazione WHERE dataG = '%s' AND fasciaO = '%s'"),
-    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) AS max FROM PRENOTAZIONE"),
+    PRENOTAZIONE_MAX_ID("SELECT MAX(CAST(idP AS UNSIGNED)) AS max FROM prenotazione"),
     PRENOTAZIONE_GENERICA_INSERIMENTO("INSERT INTO prenotazione (idP, dataG , fasciaO, tipologia, costo) VALUES('%s', '%s', '%s', '%s', '%s')"),
     PRENOTAZIONE_LIBERA_INSERIMENTO("INSERT INTO prenota (idP, socio, data) VALUES ('%s', '%s', '%s')"),
     PRENOTAZIONE_LIBERA_INSERIMENTO_NULL("INSERT INTO prenota (idP, socio, data) VALUES ('%s', NULL, '%s')"),

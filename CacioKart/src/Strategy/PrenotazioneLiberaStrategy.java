@@ -1,9 +1,11 @@
 package Strategy;
 
+/*
+    Simile a secca in quanto alla gestione dei socket
+ */
+
 import Enums.Query;
 import Logic.DBConnector;
-import WebTalker.PHPResponseHandler;
-import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,9 +20,7 @@ public class PrenotazioneLiberaStrategy implements PrenotazioneStrategy {
             LocalDate dataGara,
             LocalTime fasciaOraria,
             LocalDate dataO,
-            DBConnector db,
-            PHPResponseHandler responder,
-            Socket clientSocket
+            DBConnector db
     ) {
         int costo = 15;
         String[] insertIterator = new String[2];
@@ -30,7 +30,7 @@ public class PrenotazioneLiberaStrategy implements PrenotazioneStrategy {
 
         insertIterator[0] = Query.PRENOTAZIONE_GENERICA_INSERIMENTO.getQuery(idPrenotazione, dataGara, fasciaOraria, "libera", costo);
 
-        if (!result.isEmpty() && cf.equals(result.get(0).get("dip"))) {
+        if (!result.isEmpty() && cf.equals(result.getFirst().get("dip"))) {
             insertIterator[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO_NULL.getQuery(idPrenotazione, dataO);
         } else {
             insertIterator[1] = Query.PRENOTAZIONE_LIBERA_INSERIMENTO.getQuery(idPrenotazione, cf, dataO);
@@ -39,11 +39,9 @@ public class PrenotazioneLiberaStrategy implements PrenotazioneStrategy {
         for (String query : insertIterator) {
             String indicator = db.executeUpdateQuery(query);
             if (indicator.equals("0")) {
-                responder.sendResponse(clientSocket, "1");
                 return 1;
             }
         }
-        responder.sendResponse(clientSocket, "0");
         return 0;
     }
 }

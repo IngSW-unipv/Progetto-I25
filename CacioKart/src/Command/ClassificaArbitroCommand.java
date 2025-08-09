@@ -1,13 +1,12 @@
 // Command/MostraGaraCommand.java
 package Command;
 
-import DAO.ClassificaDAO;
+import DAO.implementazioni.ClassificaDAO;
 import Logic.DBConnector;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.util.List;
-import java.util.Map;
 
 public class ClassificaArbitroCommand implements RequestCommand {
     @Override

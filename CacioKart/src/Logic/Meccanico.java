@@ -2,8 +2,8 @@ package Logic;
 
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
-import DAO.KartDAO;
-import DAO.ManutenzioneDAO;
+import DAO.implementazioni.KartDAO;
+import DAO.implementazioni.ManutenzioneDAO;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;

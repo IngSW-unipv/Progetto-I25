@@ -1,6 +1,6 @@
 package Command;
 
-import DAO.ConcessionariaDAO;
+import DAO.implementazioni.ConcessionariaDAO;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

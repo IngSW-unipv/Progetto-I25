@@ -1,5 +1,6 @@
-package DAO;
+package DAO.implementazioni;
 
+import DAO.interfacce.PezzoDAOInterface;
 import Objects.Pezzo;
 import Logic.DBConnector;
 import Enums.Query;

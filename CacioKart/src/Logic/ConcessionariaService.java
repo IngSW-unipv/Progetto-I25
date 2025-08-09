@@ -1,8 +1,8 @@
 package Logic;
 
 import Objects.Kart;
-import DAO.KartDAO;
-import DAO.ConcessionariaDAO;
+import DAO.implementazioni.KartDAO;
+import DAO.implementazioni.ConcessionariaDAO;
 
 import java.util.List;
 import java.util.Map;
