@@ -2,6 +2,7 @@ package Logic;
 
 import Enums.Query;
 import Enums.Ruoli;
+import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

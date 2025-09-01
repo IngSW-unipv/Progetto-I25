@@ -20,15 +20,15 @@ public class CommandFactory {
             case REGISTRAZIONE_DIPENDENTE-> new AggiungiDipendenteCommand(); //funziona
             case RICHIESTA_DIPENDENTE -> new MostraDipendentiCommand(); //funziona
             case ELIMINA_DIPENDENTE-> new RimuoviDipendenteCommand(); //funziona
-            case ACQUISTA_KART-> new AcquistaKartCommand();
+            case ACQUISTA_KART-> new AcquistaKartCommand();  //testare e fatemi sapere.............
             case AGGIUNGI_BENZINA-> new AggiuntaBenzinaCommand(); //funziona ANDREA
             case CLASSIFICA_GENERALE-> new ClassificaGeneraleCommand(); //funziona
-            case CLASSIFICA_UTENTE-> new ClassificaUtenteCommand();
+            case CLASSIFICA_UTENTE-> new ClassificaUtenteCommand(); //FATTA
             case CLASSIFICA_ARBITRO-> new ClassificaArbitroCommand(); //Funziona ANDREA
             case MANUTENZIONE-> new ManutenzioneCommand(); //funziona ANDREA
             case MOSTRA_PEZZI -> new MostraPezziCommand(); //Funziona
-            case ACQUISTA_PEZZI->new AcquistaPezziCommand();
-            case MOSTRA_GARA->new MostraGareSvolteCommand();
+            case ACQUISTA_PEZZI->new AcquistaPezziCommand(); // DA TESTARE
+            case MOSTRA_GARA->new MostraGareSvolteCommand(); //FATTA
             case AGGIUNGI_PENALITA->new AggiungiPenalitaCommand(); //Funziona ANDREA
             case AGGIUNGI_PEZZI-> new PezzoInsertCommand(); //funziona ANDREA
             case MOSTRA_SOCI_CAMPIONATO->new MostraSociCampCommand(); //funziona ANDREA

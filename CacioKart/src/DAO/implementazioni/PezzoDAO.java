@@ -17,6 +17,26 @@ public class PezzoDAO implements PezzoDAOInterface {
                 quantita,
                 p.getIdProdotto()
         );
+
         DBConnector.getInstance().executeUpdateQuery(query);
+    }
+
+    public boolean acquistaPezzo(Pezzo pezzo, String cfSocio) {
+        DBConnector db = DBConnector.getInstance();
+
+        String insertPezzoQuery = String.format(
+                Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(),
+                pezzo.getIdProdotto(), cfSocio
+        );
+
+        String updateSocioQuery = String.format(
+                Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(),
+                cfSocio
+        );
+
+        int insertResult = Integer.parseInt(db.executeUpdateQuery(insertPezzoQuery));
+        int updateResult = Integer.parseInt(db.executeUpdateQuery(updateSocioQuery));
+
+        return insertResult > 0 && updateResult > 0;
     }
 }

@@ -1,5 +1,7 @@
 package Logic;
 
+import DAO.implementazioni.KartDAO;
+import DAO.implementazioni.PezzoDAO;
 import Enums.Query;
 import Objects.Kart;
 
@@ -50,27 +52,6 @@ public class Socio extends Persona {
      * @param k Il kart da associare
      * @param clientSocket Il socket di risposta
      */
-    public void compraKart(Kart k, Socket clientSocket) {
-        String cf = this.getCf();
-        String targa = k.getTarga();
-        db = DBConnector.getInstance();
-        responder = new PHPResponseHandler();
-
-        UPDATE = Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(targa, cf);
-        SELECT = Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(targa);
-
-        queryIndicator = db.executeUpdateQuery(UPDATE);
-        if (queryIndicator == "0") {
-            responder.sendResponse(clientSocket, queryIndicator);
-            return;
-        }
-
-        List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
-        //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.get(0).get("idProdotto").toString(), LocalDateTime.now());
-        queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, queryIndicator);
-    }
 
     /** Metodo per finalizzare l'acquisto dei pezzi da parte dell'utente.
      * Si riduce di 1 la quantità del pezzo disponibile nell'inventario del concessionario,
@@ -79,25 +60,17 @@ public class Socio extends Persona {
      * @param p
      * @param clientSocket
      */
-    public void acquistaPezzi(Pezzo p, Socket clientSocket) {
-        db = DBConnector.getInstance();
-        responder = new PHPResponseHandler();
+    public void acquistaPezzi(Pezzo pezzo, Socket clientSocket) {
+        PezzoDAO dao = new PezzoDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
 
-        UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
-        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDateTime.now());
-        String[] querys = new String[2];
-        querys[0] = UPDATE;
-        querys[1] = INSERT;
+        boolean successo = dao.acquistaPezzo(pezzo, this.getCf());
 
-        for (String prodotto : querys) {
-            queryIndicator = db.executeUpdateQuery(prodotto);
-
-            if (queryIndicator == "0") {
-                responder.sendResponse(clientSocket, queryIndicator);
-                return;
-            }
+        if (successo) {
+            responder.sendResponse(clientSocket, "✅ Pezzo acquistato con successo!");
+        } else {
+            responder.sendResponse(clientSocket, "❌ Errore durante l'acquisto del pezzo.");
         }
-        responder.sendResponse(clientSocket, queryIndicator);
     }
 
     public void mostraKartUtente(Socket clientSocket) {
@@ -131,6 +104,19 @@ public class Socio extends Persona {
 
         } else {
             responder.sendResponse(clientSocket, "end");
+        }
+    }
+
+    public void compraKart(Kart kart, Socket clientSocket) {
+        KartDAO dao = new KartDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
+
+        boolean successo = dao.aggiungiKart(kart, this.getCf());
+
+        if (successo) {
+            responder.sendResponse(clientSocket, "✅ Kart acquistato con successo!");
+        } else {
+            responder.sendResponse(clientSocket, "❌ Errore durante l'acquisto del kart.");
         }
     }
 }

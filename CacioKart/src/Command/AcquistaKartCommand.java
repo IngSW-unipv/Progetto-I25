@@ -11,22 +11,27 @@ public class AcquistaKartCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         PHPResponseHandler responder = new PHPResponseHandler();
+
         try {
-            System.out.println("targa" + in);
+            System.out.println("Ricevuto input: " + in);
             String[] kartUtente = in.split(" ");
 
             if (kartUtente.length != 2) {
-                responder.sendResponse(clientSocket, "Formato dati errato");
+                responder.sendResponse(clientSocket, "Formato dati errato. Usa: CF TARGA");
                 return;
             }
 
+            String cf = kartUtente[0];
+            String targa = kartUtente[1];
+
+            Kart kart = new Kart();
+            kart.setTarga(targa);
+
             Socio socio = new Socio();
-            socio.setCf(kartUtente[0]);
+            socio.setCf(cf);
 
-            Kart k = new Kart();
-            k.setTarga(kartUtente[1]);
+            socio.compraKart(kart, clientSocket);
 
-             socio.compraKart(k, clientSocket);
         } catch (Exception e) {
             responder.sendResponse(clientSocket, "Errore durante acquisto kart: " + e.getMessage());
         }
