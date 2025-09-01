@@ -42,8 +42,8 @@ public class CommandFactory {
             case MOSTRA_BILANCIO->new BilancioCommand(); //funziona
             case MOSTRA_PRENOTAZIONI_UTENTE->new RichiestaGaraSCommand(TipoComandi.MOSTRA_PRENOTAZIONI_UTENTE);
             case MOSTRA_PRENOTAZIONI_ORGANIZZATORE -> new MostraPrenotazioniCommand();
-            case MOSTRA_KART_UTENTE->new MostraKartUtenteCommand();
-            case MOSTRA_PEZZI_POSSEDUTI_UTENTE->new MostraPezziUtenteCommand();
+            case MOSTRA_KART_UTENTE->new MostraKartUtenteCommand(); //FATTA
+            case MOSTRA_PEZZI_POSSEDUTI_UTENTE->new MostraPezziUtenteCommand(); //fatta
                 default -> null;
         };
     }

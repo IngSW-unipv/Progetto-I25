@@ -9,13 +9,17 @@ public class MostraKartUtenteCommand implements RequestCommand {
 
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
+        PHPResponseHandler responder = new PHPResponseHandler();
         try {
-            System.out.println("cf" + in); // Ricevi CF del socio
-            Socio s = new Socio();
-            s.setCf(in);
-            s.mostraKartUtente(clientSocket);
+            System.out.println("cf: " + in); // Ricevi CF del socio
+
+            Socio socio = new Socio();
+            socio.setCf(in);
+
+            socio.mostraKartUtente(clientSocket); // Questo ora usa il DAO internamente
+
         } catch (Exception e) {
-            new PHPResponseHandler().sendResponse(clientSocket, "Errore mostra kart utente: " + e.getMessage());
+            responder.sendResponse(clientSocket, "Errore mostra kart utente: " + e.getMessage());
         }
     }
 }

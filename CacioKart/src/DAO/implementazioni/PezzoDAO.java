@@ -5,6 +5,9 @@ import Objects.Pezzo;
 import Logic.DBConnector;
 import Enums.Query;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Implementazione concreta di PezzoDAOInterface.
  */
@@ -38,5 +41,11 @@ public class PezzoDAO implements PezzoDAOInterface {
         int updateResult = Integer.parseInt(db.executeUpdateQuery(updateSocioQuery));
 
         return insertResult > 0 && updateResult > 0;
+    }
+
+    public List<Map<String, Object>> mostraPezziDisponibili() {
+        DBConnector db = DBConnector.getInstance();
+        String query = Query.MOSTRA_PEZZI_SOCIO.getQuery();
+        return db.executeReturnQuery(query);
     }
 }

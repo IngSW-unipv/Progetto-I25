@@ -52,12 +52,25 @@ public class Socio extends Persona {
      * @param k Il kart da associare
      * @param clientSocket Il socket di risposta
      */
+    public void mostraKartUtente(Socket clientSocket) {
+        KartDAO dao = new KartDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
 
+        List<Map<String, Object>> kartUtente = dao.getKartByCf(this.getCf());
+
+        if (kartUtente != null && !kartUtente.isEmpty()) {
+            TableMaker maker = new TableMaker();
+            String tabella = maker.stringTableMaker(kartUtente, "targa", "modello", "anno", "stato");
+            responder.sendResponse(clientSocket, tabella);
+        } else {
+            responder.sendResponse(clientSocket, "Nessun kart associato al socio.");
+        }
+    }
     /** Metodo per finalizzare l'acquisto dei pezzi da parte dell'utente.
      * Si riduce di 1 la quantità del pezzo disponibile nell'inventario del concessionario,
      * per poi associare all'utente l'id del pezzo acquistato nella tabella acquista.
      *
-     * @param p
+     * @param
      * @param clientSocket
      */
     public void acquistaPezzi(Pezzo pezzo, Socket clientSocket) {
@@ -72,40 +85,10 @@ public class Socio extends Persona {
             responder.sendResponse(clientSocket, "❌ Errore durante l'acquisto del pezzo.");
         }
     }
-
-    public void mostraKartUtente(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = DBConnector.getInstance();
-        SELECT = Query.MOSTRA_KART_SOCIO.getQuery(this.getCf());
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "targa", "cilindrata", "serbatoio"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
     /**
      *
      * @param clientSocket
      */
-    public void mostraPezziUtente(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = DBConnector.getInstance();
-        SELECT = Query.MOSTRA_PEZZI_SOCIO.getQuery(this.getCf());
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "tipol", "data"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
 
     public void compraKart(Kart kart, Socket clientSocket) {
         KartDAO dao = new KartDAO();

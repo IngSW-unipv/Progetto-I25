@@ -105,6 +105,16 @@ public class KartDAO implements KartDAOInterface {
 
         return insertResult > 0 && updateResult > 0;
     }
+
+    public List<Map<String, Object>> getKartByCf(String cfSocio) {
+        DBConnector db = DBConnector.getInstance();
+        String query = String.format(
+                Query.MOSTRA_KART_SOCIO.getQuery(),
+                cfSocio
+        );
+
+        return db.executeReturnQuery(query);
+    }
 }
 
 
