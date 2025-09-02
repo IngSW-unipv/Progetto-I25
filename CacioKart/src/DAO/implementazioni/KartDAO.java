@@ -16,7 +16,10 @@ import Enums.Query;
  */
 public class KartDAO implements KartDAOInterface {
     private static KartDAO instance;
-    public KartDAO() {}
+
+    public KartDAO() {
+    }
+
     public static KartDAO getInstance() {
         if (instance == null) instance = new KartDAO();
         return instance;
@@ -91,24 +94,49 @@ public class KartDAO implements KartDAOInterface {
 
     public boolean aggiungiKart(Kart kart, String cfSocio) {
         DBConnector db = DBConnector.getInstance();
-        String flag=String.format(
-                Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(),
-                kart.getTarga()
-        );
-        String id=db.executeReturnQuery(flag).toString();
-        String insertKartQuery = String.format(
-                Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(),
-                cfSocio,id,LocalDate.now().toString()
-        );
-        String updateSocioQuery = String.format(
-                Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(),
-                kart.getTarga(),cfSocio
-        );
-        // Esegui le query
-        int insertResult = Integer.parseInt(db.executeUpdateQuery(insertKartQuery));
-        int updateResult = Integer.parseInt(db.executeUpdateQuery(updateSocioQuery));
 
-        return insertResult > 0 && updateResult > 0;
+        try {
+            // 1. Recupera idProdotto
+            String queryId = String.format(
+                    Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(),
+                    kart.getTarga()
+            );
+            List<Map<String, Object>> result = db.executeReturnQuery(queryId);
+            if (result.isEmpty()) {
+                System.out.println("Prodotto non trovato per targa: " + kart.getTarga());
+                return false;
+            }
+
+            String idProdotto = result.get(0).get("idProdotto").toString().trim();
+
+            // 2. Inserisce nella tabella acquista
+            String insertKartQuery = String.format(
+                    Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(),
+                    cfSocio, idProdotto, LocalDate.now().toString()
+            );
+            String insertResult = db.executeUpdateQuery(insertKartQuery);
+            if (!"OK".equals(insertResult)) {
+                System.out.println("Inserimento fallito: " + insertResult);
+                return false;
+            }
+
+            // 3. Aggiorna la targa del socio
+            String updateSocioQuery = String.format(
+                    Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(),
+                    kart.getTarga(), cfSocio
+            );
+            String updateResult = db.executeUpdateQuery(updateSocioQuery);
+            if (!"OK".equals(updateResult)) {
+                System.out.println("Aggiornamento socio fallito: " + updateResult);
+                return false;
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Errore durante l'aggiunta del kart: " + e.getMessage());
+            return false;
+        }
     }
 
     public List<Map<String, Object>> getKartByCf(String cfSocio) {
@@ -121,6 +149,9 @@ public class KartDAO implements KartDAOInterface {
         return db.executeReturnQuery(query);
     }
 }
+
+
+
 
 
 

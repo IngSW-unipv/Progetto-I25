@@ -49,7 +49,6 @@ public class Socio extends Persona {
      * Dopo aver associato la targa al socio, si inserisce in acquista
      * la tupla che indica l'avvenuto acquisto.
      *
-     * @param k Il kart da associare
      * @param clientSocket Il socket di risposta
      */
     public void mostraKartUtente(Socket clientSocket) {
@@ -97,9 +96,9 @@ public class Socio extends Persona {
         boolean successo = dao.aggiungiKart(kart, this.getCf());
 
         if (successo) {
-            responder.sendResponse(clientSocket, "✅ Kart acquistato con successo!");
+            responder.sendResponse(clientSocket, "OK");
         } else {
-            responder.sendResponse(clientSocket, "❌ Errore durante l'acquisto del kart.");
+            responder.sendResponse(clientSocket, "Non avvenuto");
         }
     }
 }
