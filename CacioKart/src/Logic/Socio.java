@@ -60,7 +60,7 @@ public class Socio extends Persona {
 
         if (kartUtente != null && !kartUtente.isEmpty()) {
             TableMaker maker = new TableMaker();
-            String tabella = maker.stringTableMaker(kartUtente, "targa", "modello", "anno", "stato");
+            String tabella = maker.stringTableMaker(kartUtente, "targa", "cilindrata", "serbatoio");
             responder.sendResponse(clientSocket, tabella);
         } else {
             responder.sendResponse(clientSocket, "Nessun kart associato al socio.");

@@ -30,7 +30,7 @@ public enum Query {
     MOSTRA_PEZZI_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'"),
     INSERIMENTO_NUOVI_PEZZI("UPDATE caciokart.concessionaria SET quantita = quantita + %s WHERE idProdotto = '%s'"),
     INSERIMENTO_KART_CONCESSIONARIA("INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('%s', '%s', '%s')"),
-
+    MOSTRA_KART_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol LIKE 'KRT%'"),
 
     // =============================== //
     //            MECCANICO

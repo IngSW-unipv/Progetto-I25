@@ -12,9 +12,9 @@ public class MostraKartUtenteCommand implements RequestCommand {
         PHPResponseHandler responder = new PHPResponseHandler();
         try {
             System.out.println("cf: " + in); // Ricevi CF del socio
-
+            String cf = in.replace("richiestaKartUsr ", "").trim();
             Socio socio = new Socio();
-            socio.setCf(in);
+            socio.setCf(cf);
 
             socio.mostraKartUtente(clientSocket); // Questo ora usa il DAO internamente
 

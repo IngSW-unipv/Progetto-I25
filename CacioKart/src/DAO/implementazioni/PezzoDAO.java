@@ -5,6 +5,7 @@ import Objects.Pezzo;
 import Logic.DBConnector;
 import Enums.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -29,12 +30,14 @@ public class PezzoDAO implements PezzoDAOInterface {
 
         String insertPezzoQuery = String.format(
                 Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(),
-                pezzo.getIdProdotto(), cfSocio
+                pezzo.getIdProdotto()
         );
 
         String updateSocioQuery = String.format(
                 Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(),
-                cfSocio
+                cfSocio,
+                pezzo.getIdProdotto(),
+                LocalDate.now().toString()
         );
 
         int insertResult = Integer.parseInt(db.executeUpdateQuery(insertPezzoQuery));

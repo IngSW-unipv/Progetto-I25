@@ -1,39 +1,39 @@
 package Command;
+import DAO.implementazioni.ConcessionariaDAO;
+import Logic.Meccanico;
 import Logic.Socio;
+import Logic.TableMaker;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 
 
 import java.net.Socket;
+import java.util.List;
+import java.util.Map;
 
 public class AcquistaKartCommand implements RequestCommand {
 
-    @Override
-    public void execute(String in, Socket clientSocket) throws Exception {
-        PHPResponseHandler responder = new PHPResponseHandler();
+        @Override
+        public void execute(String in, Socket clientSocket) throws Exception {
+            PHPResponseHandler responder = new PHPResponseHandler();
+                System.out.println("Ricevuto input: " + in);
+                String[] kartUtente = in.split(" ");
 
-        try {
-            System.out.println("Ricevuto input: " + in);
-            String[] kartUtente = in.split(" ");
+                if (kartUtente.length != 3) {
+                    responder.sendResponse(clientSocket, "Formato dati errato. Usa: CF TARGA");
+                    return;
+                }
 
-            if (kartUtente.length != 2) {
-                responder.sendResponse(clientSocket, "Formato dati errato. Usa: CF TARGA");
-                return;
-            }
+                String cf = kartUtente[1];
+                String targa = kartUtente[2];
 
-            String cf = kartUtente[0];
-            String targa = kartUtente[1];
+                Kart kart = new Kart();
+                kart.setTarga(targa);
 
-            Kart kart = new Kart();
-            kart.setTarga(targa);
+                Socio socio = new Socio();
+                socio.setCf(cf);
 
-            Socio socio = new Socio();
-            socio.setCf(cf);
+                socio.compraKart(kart, clientSocket);
 
-            socio.compraKart(kart, clientSocket);
-
-        } catch (Exception e) {
-            responder.sendResponse(clientSocket, "Errore durante acquisto kart: " + e.getMessage());
         }
     }
-}

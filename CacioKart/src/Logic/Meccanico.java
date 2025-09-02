@@ -1,5 +1,6 @@
 package Logic;
 
+import DAO.implementazioni.ConcessionariaDAO;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 import DAO.implementazioni.KartDAO;

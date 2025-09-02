@@ -1,6 +1,7 @@
 package DAO.implementazioni;
 
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -90,14 +91,18 @@ public class KartDAO implements KartDAOInterface {
 
     public boolean aggiungiKart(Kart kart, String cfSocio) {
         DBConnector db = DBConnector.getInstance();
+        String flag=String.format(
+                Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(),
+                kart.getTarga()
+        );
+        String id=db.executeReturnQuery(flag).toString();
         String insertKartQuery = String.format(
                 Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(),
-                kart.getTarga(), cfSocio
+                cfSocio,id,LocalDate.now().toString()
         );
-
         String updateSocioQuery = String.format(
                 Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(),
-                cfSocio
+                kart.getTarga(),cfSocio
         );
         // Esegui le query
         int insertResult = Integer.parseInt(db.executeUpdateQuery(insertKartQuery));
