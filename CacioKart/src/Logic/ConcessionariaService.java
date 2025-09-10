@@ -7,7 +7,6 @@ import DAO.implementazioni.ConcessionariaDAO;
 import java.util.List;
 import java.util.Map;
 
-//Rimane dov'è perché utilizza strategy
 
 public class ConcessionariaService {
     private final KartDAO kartDAO = KartDAO.getInstance();
@@ -15,7 +14,7 @@ public class ConcessionariaService {
 
     public void inserisciKartInConcessionaria(Kart kart, int prezzo) {
         kartDAO.insertKart(kart);
-        String idProdotto = concessionariaDAO.getNextProductId();  // <-- CORRETTO!
+        String idProdotto = concessionariaDAO.getNextProductId();
         concessionariaDAO.insertConcessionariaItem(idProdotto, kart.getTarga(), 1, prezzo);
     }
 

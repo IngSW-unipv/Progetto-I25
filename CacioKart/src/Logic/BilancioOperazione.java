@@ -4,7 +4,6 @@ import DAO.implementazioni.BilancioDAO;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
 
-//Spostare dentro il command usando bilancioDAO
 
 public class BilancioOperazione {
 
