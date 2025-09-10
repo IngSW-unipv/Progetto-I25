@@ -2,7 +2,7 @@ package Command;
 
 import Logic.InserimentoContext;
 import Objects.Pezzo;
-import Strategy.StrategyFactory;
+import Strategy.ConcessionariaStrategyFactory;
 
 import java.net.Socket;
 
@@ -19,7 +19,7 @@ public class PezzoInsertCommand implements RequestCommand {
         nuovoPezzo.setIdProdotto(parti[1]);
         int quantita = Integer.parseInt(parti[2]);
         InserimentoContext ctx = new InserimentoContext();
-        ctx.setStrategy(StrategyFactory.getStrategy(nuovoPezzo));
+        ctx.setStrategy(ConcessionariaStrategyFactory.getStrategy(nuovoPezzo));
         ctx.eseguiInserimento(nuovoPezzo, quantita, clientSocket);
     }
 }

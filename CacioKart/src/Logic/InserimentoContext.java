@@ -1,15 +1,15 @@
 package Logic;
 
-import Strategy.InserimentoStrategy;
+import Strategy.InserimentoConcessionariaStrategy;
 
 import java.net.Socket;
 
 //Ci pensa Luca?
 
 public class InserimentoContext {
-    private InserimentoStrategy strategy;
+    private InserimentoConcessionariaStrategy strategy;
 
-    public void setStrategy(InserimentoStrategy strategy) {
+    public void setStrategy(InserimentoConcessionariaStrategy strategy) {
         this.strategy = strategy;
     }
 

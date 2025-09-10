@@ -2,7 +2,7 @@ package Strategy;
 
 import java.net.Socket;
 
-public interface InserimentoStrategy {
+public interface InserimentoConcessionariaStrategy {
         void inserisci(Object obj, int quantita, Socket clientSocket);
 }
 

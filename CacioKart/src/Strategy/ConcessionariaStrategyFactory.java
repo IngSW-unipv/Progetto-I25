@@ -1,7 +1,9 @@
 package Strategy;
 
-public class StrategyFactory {
-    public static InserimentoStrategy getStrategy(Object obj) {
+//Rimuovere instanceof
+
+public class ConcessionariaStrategyFactory {
+    public static InserimentoConcessionariaStrategy getStrategy(Object obj) {
         if (obj instanceof Objects.Kart) {
             return new InserimentoKartStrategy();
         } else if (obj instanceof Objects.Pezzo) {

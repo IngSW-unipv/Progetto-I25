@@ -1,7 +1,7 @@
 package Command;
 
 import Logic.InserimentoContext;
-import Strategy.StrategyFactory;
+import Strategy.ConcessionariaStrategyFactory;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 
@@ -34,7 +34,7 @@ public class KartInsertCommand implements RequestCommand {
         nuovoKart.setCilindrata(cilindrata);
 
         InserimentoContext ctx = new InserimentoContext();
-        ctx.setStrategy(StrategyFactory.getStrategy(nuovoKart));
+        ctx.setStrategy(ConcessionariaStrategyFactory.getStrategy(nuovoKart));
         ctx.eseguiInserimento(nuovoKart, prezzo, clientSocket);
     }
 }

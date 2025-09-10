@@ -6,7 +6,7 @@ import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 
-public class InserimentoPezzoStrategy implements InserimentoStrategy {
+public class InserimentoPezzoStrategy implements InserimentoConcessionariaStrategy {
     @Override
     public void inserisci(Object obj, int quantita, Socket clientSocket) {
         Pezzo p = (Pezzo) obj;
