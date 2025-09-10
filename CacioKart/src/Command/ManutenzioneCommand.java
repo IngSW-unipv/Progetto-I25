@@ -1,6 +1,6 @@
 package Command;
 
-import Logic.Meccanico;
+import DAO.implementazioni.ManutenzioneDAO;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
@@ -27,8 +27,8 @@ public class ManutenzioneCommand implements RequestCommand {
             Kart k = new Kart();
             k.setTarga(targa);
 
-            Meccanico m = new Meccanico();
-            m.aggiornaManutenzione(k, descrizione, prezzo, clientSocket);
+            boolean eseguita = ManutenzioneDAO.getInstance().insertManutenzione(k, descrizione, prezzo);
+            responder.sendResponse(clientSocket, eseguita ? "OK" : "ERRORE");
 
         } catch (Exception e) {
             responder.sendResponse(clientSocket, "Errore manutenzione: " + e.getMessage());

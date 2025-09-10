@@ -1,6 +1,6 @@
 package Command;
 
-import Logic.Meccanico;
+import DAO.implementazioni.KartDAO;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
@@ -17,12 +17,12 @@ public class AggiuntaBenzinaCommand implements RequestCommand {
 
             Kart k = new Kart();
             k.setTarga(targa);
-            Meccanico m = new Meccanico();
-            m.effettuaPieno(k, clientSocket);
+
+            boolean eseguito = KartDAO.getInstance().refillKart(k);
+            responder.sendResponse(clientSocket, eseguito ? "OK" : "ERRORE");
 
         } catch (Exception e) {
             responder.sendResponse(clientSocket, "Errore durante aggiunta benzina: " + e.getMessage());
         }
     }
 }
-

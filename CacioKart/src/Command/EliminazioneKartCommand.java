@@ -1,7 +1,8 @@
 package Command;
 
-import Logic.Meccanico;
+import DAO.implementazioni.KartDAO;
 import Objects.Kart;
+import WebTalker.PHPResponseHandler;
 import java.net.Socket;
 
 public class EliminazioneKartCommand implements RequestCommand {
@@ -13,9 +14,8 @@ public class EliminazioneKartCommand implements RequestCommand {
         System.out.println("Elimino targa: " + targa);
         Kart kart = new Kart();
         kart.setTarga(targa);
-        Meccanico meccanico = new Meccanico();
-        meccanico.rimuoviKartDaNoleggio(kart, clientSocket);
+
+        boolean rimosso = KartDAO.getInstance().deleteKart(kart);
+        new PHPResponseHandler().sendResponse(clientSocket, rimosso ? "OK" : "ERRORE");
     }
 }
-
-

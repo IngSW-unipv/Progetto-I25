@@ -1,15 +1,10 @@
 package Command;
-import DAO.implementazioni.ConcessionariaDAO;
-import Logic.Meccanico;
 import Logic.Socio;
-import Logic.TableMaker;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 
 
 import java.net.Socket;
-import java.util.List;
-import java.util.Map;
 
 public class AcquistaKartCommand implements RequestCommand {
 
