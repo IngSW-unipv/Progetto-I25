@@ -1,5 +1,6 @@
 package DAO.interfacce;
 
+import Logic.Socio;
 import Objects.Kart;
 import Objects.Pezzo;
 
@@ -13,7 +14,7 @@ public interface InterfacciaSocioDAO{
     Kart getKart();
     //int checkPrenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);
     //int prenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);
-    int registrazione(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password);
+    int registrazione(Socio nuovoSocio);
     int acquistaKart(String targa, String cF, LocalDateTime ora);
     List<Pezzo> ottieniPezzi();
     int acquistaPezzi(String IDProdotto, int quantita, String username, LocalTime ora);
