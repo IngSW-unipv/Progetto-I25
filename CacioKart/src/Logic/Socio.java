@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+//Ci pensa Luca
+
 public class Socio extends Persona {
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
