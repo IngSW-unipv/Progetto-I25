@@ -47,4 +47,8 @@ public interface KartDAOInterface {
      * @return lista di mappe contenenti i dati dei kart in manutenzione
      */
     List<Map<String, Object>> getKartManutenzione();
+
+    List<Map<String, Object>> getKartByCf(String cfSocio);
+
+    boolean aggiungiKart(Kart kart, String cfSocio);
 }

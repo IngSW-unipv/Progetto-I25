@@ -77,7 +77,7 @@ public class Meccanico {
         sb.append("end");
 
         System.out.println("Invio lista manutenzione:");
-        System.out.println(sb.toString());
+        System.out.println(sb);
 
         responder.sendResponse(clientSocket, sb.toString());
     }

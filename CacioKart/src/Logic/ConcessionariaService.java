@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ConcessionariaService {
-    private KartDAO kartDAO = KartDAO.getInstance();
-    private ConcessionariaDAO concessionariaDAO = ConcessionariaDAO.getInstance();
+    private final KartDAO kartDAO = KartDAO.getInstance();
+    private final ConcessionariaDAO concessionariaDAO = ConcessionariaDAO.getInstance();
 
     public void inserisciKartInConcessionaria(Kart kart, int prezzo) {
         kartDAO.insertKart(kart);

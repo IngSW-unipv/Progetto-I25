@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MostraPrenotazioniSocioStrategy implements VisualizzazionePrenotazioniStrategy{
-    private String cf;
+    private final String cf;
 
     public MostraPrenotazioniSocioStrategy(String cf) {
         this.cf = cf;

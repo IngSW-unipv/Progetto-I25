@@ -1,22 +1,17 @@
 package DAO.implementazioni;
 
-import DAO.interfacce.InterfacciaSocioDAO;
+import DAO.interfacce.SocioDAOInterface;
 import Enums.Query;
 import Logic.DBConnector;
 import Objects.Kart;
 import Objects.Pezzo;
-import Strategy.PrenotazioneStrategy;
-import Strategy.PrenotazioneStrategyFactory;
-import WebTalker.PHPResponseHandler;
 
-import java.net.Socket;
-import java.net.StandardSocketOptions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
-public class SocioDAO implements InterfacciaSocioDAO {
+public class SocioDAO implements SocioDAOInterface {
     private final DBConnector db;
 
     public SocioDAO(DBConnector db) {

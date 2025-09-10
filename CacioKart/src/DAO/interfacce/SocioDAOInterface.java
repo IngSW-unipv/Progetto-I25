@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 
-public interface InterfacciaSocioDAO{
+public interface SocioDAOInterface {
     Kart getKart();
     //int checkPrenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);
     //int prenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);

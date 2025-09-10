@@ -32,7 +32,7 @@ public class DipendenteDAO implements DipendenteDAOInterface {
                 dataNascita,
                 d.getRuolo(),
                 oreL,
-                Double.toString(d.getStipendio())
+                d.getStipendio()
         );
         db.executeUpdateQuery(query);
     }

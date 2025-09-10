@@ -37,7 +37,7 @@ public class PezzoDAO implements PezzoDAOInterface {
                 Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(),
                 cfSocio,
                 pezzo.getIdProdotto(),
-                LocalDate.now().toString()
+                LocalDate.now()
         );
 
         int insertResult = Integer.parseInt(db.executeUpdateQuery(insertPezzoQuery));

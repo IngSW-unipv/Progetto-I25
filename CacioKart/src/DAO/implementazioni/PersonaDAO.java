@@ -1,15 +1,14 @@
 package DAO.implementazioni;
 
-import DAO.interfacce.InterfacciaPesonaDAO;
+import DAO.interfacce.PersonaDAOInterface;
 import Enums.Query;
 import Logic.DBConnector;
-import WebTalker.PHPResponseHandler;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PersonaDAO implements InterfacciaPesonaDAO {
+public class PersonaDAO implements PersonaDAOInterface {
 
     @Override
     public List<Map<String, Object>> login(String username, String password) {

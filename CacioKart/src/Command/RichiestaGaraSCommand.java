@@ -36,7 +36,6 @@ public class RichiestaGaraSCommand implements RequestCommand {
                 }
                 default -> {
                     responder.sendResponse(clientSocket, "Comando non riconosciuto");
-                    return;
                 }
             }
 
