@@ -3,7 +3,7 @@ package Command;
 
 import DAO.implementazioni.PersonaDAO;
 import Enums.Ruoli;
-import Logic.Persona;
+import Objects.Persona;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;

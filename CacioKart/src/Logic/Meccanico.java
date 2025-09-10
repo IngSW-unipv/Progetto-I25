@@ -1,6 +1,5 @@
 package Logic;
 
-import DAO.implementazioni.ConcessionariaDAO;
 import Objects.Kart;
 import WebTalker.PHPResponseHandler;
 import DAO.implementazioni.KartDAO;
@@ -8,6 +7,8 @@ import DAO.implementazioni.ManutenzioneDAO;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
+
+//Ci pensa Andrea
 
 public class Meccanico {
 

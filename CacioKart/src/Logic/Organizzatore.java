@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+//
+
 public class Organizzatore {
     private DBConnector db;
     private PHPResponseHandler responder;
@@ -79,28 +81,6 @@ public class Organizzatore {
         }
     }
 
-    /** Metodo per mostrare al client tutti gli id campionato
-     * attualmente presenti nel db.
-     * La risposta è ottenuta con una query di lettura e
-     * formattata tramite tablemaker.
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void mostraCampionato(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = DBConnector.getInstance();
-        SELECT = Query.MOSTRA_CAMPIONATI.getQuery();
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "idCampionato"));
-
-        } else {
-            responder.sendResponse(clientSocket, "end");
-        }
-    }
-
     /** Metodo per mostrare al client tutte le
      * gare secche ancora non appartenenti a un campionato.
      *
@@ -122,41 +102,5 @@ public class Organizzatore {
         }
     }
 
-    /** Metodo per associare una gara a un determinato campionato.
-     * Avendo gli id della gara e del campionato si può effettuare
-     * una query che modifica la tabella "partecipa", utilizzata
-     * per indicare quale gara appartiene a quale campionato.
-     *
-     * @param idGara L'id della gara
-     * @param idCamp L'id del campionato
-     * @param clientSocket Il socket di risposta
-     */
-    public void aggiungiGaraPartecipa(String idGara, String idCamp, Socket clientSocket) {
-        db = DBConnector.getInstance();
-        responder = new PHPResponseHandler();
-
-        INSERT = Query.AGGIUNGI_GARA_PARTECIPA_CAMPIONATO.getQuery(idGara, idCamp);
-        queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, queryIndicator);
-
-    }
-
-
-
-    /** Metodo per associare un socio a una prenotazione.
-     * Dopo aver effettuato la query di modifica del db, rispondo al client
-     * con l'esito dell'operazione.
-     *
-     * @param idP Id della prenotazione
-     * @param s Il socio da associare
-     * @param clientSocket Il socket di risposta
-     */
-    public void aggiornaPrenota(String idP, Socio s, Socket clientSocket) {
-        db = DBConnector.getInstance();
-        responder = new PHPResponseHandler();
-        INSERT = Query.INSERIMENTO_SOCIO_GARA.getQuery(idP, s.getCf(), LocalDate.now());
-        queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, queryIndicator);
-    }
 }
 

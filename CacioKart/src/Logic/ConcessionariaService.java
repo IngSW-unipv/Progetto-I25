@@ -7,6 +7,8 @@ import DAO.implementazioni.ConcessionariaDAO;
 import java.util.List;
 import java.util.Map;
 
+//Rimane dov'è perché utilizza strategy
+
 public class ConcessionariaService {
     private final KartDAO kartDAO = KartDAO.getInstance();
     private final ConcessionariaDAO concessionariaDAO = ConcessionariaDAO.getInstance();

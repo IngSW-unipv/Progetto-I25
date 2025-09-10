@@ -2,46 +2,24 @@ package Logic;
 
 import DAO.implementazioni.KartDAO;
 import DAO.implementazioni.PezzoDAO;
-import Enums.Query;
 import Objects.Kart;
 
+import Objects.Persona;
 import Objects.Pezzo;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 public class Socio extends Persona {
-    private String SELECT, UPDATE, INSERT;
-    private PHPResponseHandler responder;
-    private String queryIndicator;
-    private DBConnector db;
-    private TableMaker maker;
-    private List<Map<String, Object>> result;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
     }
 
     public Socio() {
-
-    }
-
-    /** Metodo per registrare un utente nel db
-     * La query viene eseguita tramite il metodo sendResponse della classe Logic.DBConnector
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void registrazione(Socket clientSocket) {
-        db = DBConnector.getInstance();
-        responder = new PHPResponseHandler();
-        SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
-
-        queryIndicator = db.executeUpdateQuery(SELECT);
-        responder.sendResponse(clientSocket, queryIndicator);
 
     }
 
@@ -79,9 +57,9 @@ public class Socio extends Persona {
         boolean successo = dao.acquistaPezzo(pezzo, this.getCf());
 
         if (successo) {
-            responder.sendResponse(clientSocket, "✅ Pezzo acquistato con successo!");
+            responder.sendResponse(clientSocket, "Pezzo acquistato con successo!");
         } else {
-            responder.sendResponse(clientSocket, "❌ Errore durante l'acquisto del pezzo.");
+            responder.sendResponse(clientSocket, "Errore durante l'acquisto del pezzo.");
         }
     }
     /**

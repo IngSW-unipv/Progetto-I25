@@ -4,7 +4,9 @@ import DAO.implementazioni.BilancioDAO;
 import WebTalker.PHPResponseHandler;
 import java.net.Socket;
 
-public class BilancioOperazione implements OperazioneProprietario {
+//Spostare dentro il command usando bilancioDAO
+
+public class BilancioOperazione {
 
     private final BilancioDAO bilancioDAO;
     private final PHPResponseHandler responder;
@@ -14,7 +16,6 @@ public class BilancioOperazione implements OperazioneProprietario {
         this.responder = responder;
     }
 
-    @Override
     public void esegui(Socket clientSocket) {
         double entrate = bilancioDAO.getEntrate();
         double uscite = bilancioDAO.getUscite();
