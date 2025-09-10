@@ -29,8 +29,5 @@ public class PrenotazioneCommand implements RequestCommand {
 
         int res = dao.prenota(cf, tipologia, dataGara, fasciaOraria, LocalDate.now());
         responder.sendResponse(clientSocket, "" + res);
-
-        //Prenotazione prenotazione = new Prenotazione();
-        //prenotazione.prenotazioneGara(cf, tipologia, dataGara, fasciaOraria, clientSocket);
     }
 }

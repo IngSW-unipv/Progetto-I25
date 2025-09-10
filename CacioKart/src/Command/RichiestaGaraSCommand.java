@@ -22,6 +22,7 @@ public class RichiestaGaraSCommand implements RequestCommand {
         MostraPrenotazioniSocioStrategy strategyS;
         MostraPrenotazioniOrganizzatoreStrategy strategyO;
         try {
+            in = in.substring(14); // taglio il nome del comando
             System.out.println("dati" + in );  // Es. CF utente o nessun dato
             switch (tipo) {
                 case MOSTRA_PRENOTAZIONI_UTENTE -> {

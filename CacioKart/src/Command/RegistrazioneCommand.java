@@ -1,5 +1,7 @@
 package Command;
 
+import DAO.implementazioni.SocioDAO;
+import Logic.DBConnector;
 import Logic.Socio;
 import WebTalker.PHPResponseHandler;
 
@@ -13,7 +15,6 @@ public class RegistrazioneCommand implements RequestCommand {
     public void execute(String in, Socket clientSocket) throws Exception {
         PHPResponseHandler responder = new PHPResponseHandler();
         try {
-            System.out.println("RegistrazioneCommand" + in );
             String[] data = in.split(" ");
 
             if (data.length == 7 && data[0].equalsIgnoreCase("registrazioneSocio")) {
@@ -32,7 +33,11 @@ public class RegistrazioneCommand implements RequestCommand {
             String mail = data[4];
             String password = data[5];
             Socio nuovoSocio = new Socio(nome, cognome, dataNascita, cf, mail, password);
-            nuovoSocio.registrazione(clientSocket);
+
+            SocioDAO dao = new SocioDAO(DBConnector.getInstance());
+            int res = dao.registrazione(nuovoSocio);
+
+            responder.sendResponse(clientSocket, "" + res);
 
         } catch (Exception e) {
             responder.sendResponse(clientSocket, "Errore registrazione: " + e.getMessage());

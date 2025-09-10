@@ -3,6 +3,7 @@ package DAO.implementazioni;
 import DAO.interfacce.SocioDAOInterface;
 import Enums.Query;
 import Logic.DBConnector;
+import Logic.Socio;
 import Objects.Kart;
 import Objects.Pezzo;
 
@@ -35,14 +36,17 @@ public class SocioDAO implements SocioDAOInterface {
 
 /**metodo per effettuare la registrazione*/
     @Override
-    public int registrazione(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
+    public int registrazione(Socio s) {
 
-        String query = Query.REGISTRAZIONE_SOCIO.getQuery(cF, nome, cognome, mail, password, dataNascita);
+        String query = Query.REGISTRAZIONE_SOCIO.getQuery(
+            s.getCf(), s.getNome(), s.getCognome(), s.getMail(), s.getPassword(), s.getDataNascita()
+        );
 
         String out = db.executeUpdateQuery(query);
-        if(out.equals("0"))
+        return ((out == "0") ? 0 : 1);
+        /*if(out.equals("0"))
             return 1; //preferisco usare 1 per segnalare un errore e
-        return 0;     // 0 quando non ci sono errori
+        return 0;     // 0 quando non ci sono errori*/
     }
 
 /**metodo per effettuare l'acquisto di un kart
