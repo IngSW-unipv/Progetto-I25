@@ -14,7 +14,7 @@
   <main>
     <section class="form-section">
       <h1>Manutenzione</h1>
-      <form action="logic/manutenzione.php" method="post" class="registration-form">
+      <form action="Manutenzione.php" method="post" class="registration-form">
          <div class="form-group">
             <label for="targa">Targa</label>
             <input type="text" id="targa" name="targa" maxlength="6" required readonly value="<?php echo htmlspecialchars($targa); ?>">
