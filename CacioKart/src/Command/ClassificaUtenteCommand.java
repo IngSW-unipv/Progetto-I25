@@ -2,6 +2,7 @@ package Command;
 
 import DAO.implementazioni.ClassificaDAO;
 import Logic.DBConnector;
+import Logic.TableMaker;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
@@ -22,18 +23,16 @@ public class ClassificaUtenteCommand implements RequestCommand {
         ClassificaDAO dao = new ClassificaDAO(DBConnector.getInstance());
         List<Map<String, Object>> classifica = dao.getClassificaUtente(nome);
 
-        StringBuilder sb = new StringBuilder();
+        String s;
         if (classifica == null || classifica.isEmpty()) {
-            sb.append("Nessuna classifica trovata.\nend\n");
+            s = "Nessuna classifica trovata.\nend\n";
         } else {
-            for (Map<String, Object> row : classifica) {
-                sb.append(row.get("idGara")).append(" ")
-                        .append(row.get("targa")).append(" ")
-                        .append(row.get("bGiro")).append(" ")
-                        .append(row.get("tempTot")).append("\n");
-            }
-            sb.append("end\n");
+            TableMaker maker = new TableMaker();
+            s = maker.stringTableMaker(
+                    classifica, "idGara", "targa", "bGiro", "TempTot"
+            );
+
         }
-        new PHPResponseHandler().sendResponse(clientSocket, sb.toString());
+        new PHPResponseHandler().sendResponse(clientSocket, s);
     }
 }
