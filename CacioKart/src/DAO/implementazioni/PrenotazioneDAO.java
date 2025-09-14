@@ -46,8 +46,4 @@ public class PrenotazioneDAO implements PrenotazioneDAOInterface {
         return (var == 0) ? 1 : 0;
     }
 
-    @Override
-    public List<Prenotazione> visualizzaPrenotazioni() {
-        return List.of();
-    }
 }
