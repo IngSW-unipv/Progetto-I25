@@ -21,7 +21,7 @@ public class ClassificaGeneraleCommand implements RequestCommand {
         } else {
             TableMaker maker = new TableMaker();
             s = maker.stringTableMaker(
-                    classifica, "idGara", "nome", "cognome", "targa", "bGiro", "TempTot"
+                    classifica, "idGara", "nome", "cognome", "targa", "bGiro", "tempTot"
             );
         }
         new PHPResponseHandler().sendResponse(clientSocket, s);

@@ -29,7 +29,7 @@ public class ClassificaUtenteCommand implements RequestCommand {
         } else {
             TableMaker maker = new TableMaker();
             s = maker.stringTableMaker(
-                    classifica, "idGara", "targa", "bGiro", "TempTot"
+                    classifica, "idGara", "targa", "bGiro", "tempTot"
             );
 
         }
