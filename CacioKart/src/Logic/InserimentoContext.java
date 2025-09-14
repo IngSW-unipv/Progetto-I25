@@ -4,7 +4,6 @@ import Strategy.InserimentoConcessionariaStrategy;
 
 import java.net.Socket;
 
-//Ci pensa Luca?
 
 public class InserimentoContext {
     private InserimentoConcessionariaStrategy strategy;
