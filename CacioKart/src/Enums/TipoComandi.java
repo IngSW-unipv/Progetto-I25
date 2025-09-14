@@ -54,8 +54,6 @@ public enum TipoComandi {
     MOSTRA_PRENOTAZIONI_ORGANIZZATORE("mostraPrenotazioniOrganizzatore"),
 
 
-
-
     //PROPRIETARIO
 
     MOSTRA_BILANCIO("mostraBilancio"),
