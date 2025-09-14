@@ -12,10 +12,5 @@ import java.util.List;
 
 public interface SocioDAOInterface {
     Kart getKart();
-    //int checkPrenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);
-    //int prenotazione(String username, LocalDate data, LocalTime intervallo, LocalDate dataCorr);
     int registrazione(Socio nuovoSocio);
-    int acquistaKart(String targa, String cF, LocalDateTime ora);
-    List<Pezzo> ottieniPezzi();
-    int acquistaPezzi(String IDProdotto, int quantita, String username, LocalTime ora);
 }

@@ -39,7 +39,7 @@
       }
       else{
         echo '<div class=description-section>';
-        echo '<h1>Non ci sono prenotazioni</h1>';
+        echo '<h3>Non ci sono prenotazioni</h3>';
         echo '</div>';
       }
 

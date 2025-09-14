@@ -28,7 +28,7 @@
       $msg = 'richiestaKartUsr ' .$_SESSION['username'];
       $res = request($msg, $socket);
 
-      if(strcmp($res, "Nessun dato ricevuto.") != 0){
+      if(strcmp($res, "Nessun kart associato al socio.") != 0){
         require '../logic/tableCreation.php';
         echo '<div class="table-section">';
 
@@ -38,7 +38,7 @@
       }
       else{
         echo '<div class=description-section>';
-        echo '<h1>Non possiedi un kart</h1>';
+        echo '<h3>Non possiedi un kart</h3>';
         echo '</div>';
       }
       

@@ -32,8 +32,4 @@ public class PersonaDAO implements PersonaDAOInterface {
         return result;
     }
 
-    @Override
-    public int registrazione(String username, String password) {
-        return 0;
-    }
 }

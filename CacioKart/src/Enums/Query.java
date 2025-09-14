@@ -30,13 +30,12 @@ public enum Query {
     MOSTRA_PEZZI_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol NOT LIKE 'KRT%'"),
     INSERIMENTO_NUOVI_PEZZI("UPDATE caciokart.concessionaria SET quantita = quantita + %s WHERE idProdotto = '%s'"),
     INSERIMENTO_KART_CONCESSIONARIA("INSERT INTO kart (targa, cilindrata, serbatoio) VALUES('%s', '%s', '%s')"),
-    MOSTRA_KART_CONCESSIONARIA("SELECT * FROM concessionaria WHERE tipol LIKE 'KRT%'"),
 
     // =============================== //
     //            MECCANICO
     // =============================== //
 
-    //AGGIORNAMENTO_MANUTENZIONE_TABELLA_MANUTENZIONE("INSERT INTO manutenzione (idM, tipoInt, costo, dataM, targa) VALUES ('%s', '%s', '%s', '%s', '%s')"),
+
     AGGIORNA_QUANTITA_CONCESSIONARIA("UPDATE caciokart.concessionaria SET quantita = quantita - 1 WHERE tipol = '%s'"),
     AGGIUNTA_BENZINA_MECCANICO("UPDATE caciokart.kart SET kart.serbatoio = '20' WHERE kart.targa = '%s'"),
     RIMUOVI_KART_MECCANICO("UPDATE caciokart.concessionaria SET quantita = quantita + 1 WHERE tipol = '%s'"),
@@ -99,8 +98,7 @@ public enum Query {
     ACQUISTA_PEZZI_TABELLA_ACQUISTA("INSERT INTO acquista (socio, idProdotto, data) VALUES('%s', '%s', '%s')"),
     MOSTRA_PRENOTAZIONI_SOCIO("SELECT dataG, fasciaO, tipologia FROM caciokart.prenotazione JOIN prenota ON prenotazione.idP = prenota.idP WHERE socio = '%s' ORDER BY prenotazione.idP DESC"),
     MOSTRA_KART_SOCIO("SELECT kart.targa, kart.cilindrata, kart.serbatoio FROM caciokart.kart JOIN socio ON kart.targa = socio.targa WHERE socio = '%s'"),
-    MOSTRA_PEZZI_SOCIO("SELECT tipol, data FROM caciokart.acquista JOIN concessionaria ON acquista.idProdotto = concessionaria.idProdotto WHERE socio = '%s'"),
-    INSERIMENTO_KART_UTENTE_TABELLA_ACQUISTA("DELETE FROM caciokart.acquista WHERE idProdotto = (SELECT idProdotto FROM concessionaria WHERE tipol = '%s')");
+    MOSTRA_PEZZI_SOCIO("SELECT tipol, data FROM caciokart.acquista JOIN concessionaria ON acquista.idProdotto = concessionaria.idProdotto WHERE socio = '%s'");
 
     private final String query;
 
