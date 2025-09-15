@@ -25,35 +25,21 @@ public class KartDAO implements KartDAOInterface {
     }
 
     @Override
-    public List<Kart> getAllKart() {
-        List<Kart> lista = new ArrayList<>();
+    public List<Map<String, Object>> getAllKart() {
         DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_RIMUOVI_KART_MECCANICO.getQuery();
         List<Map<String, Object>> result = db.executeReturnQuery(query);
 
-        for (Map<String, Object> r : result) {
-            String targa = (String) r.get("targa");
-            int cilindrata = Integer.parseInt(r.get("cilindrata").toString());
-            double serbatoio = Double.parseDouble(r.get("serbatoio").toString());
-            lista.add(new Kart(targa, cilindrata, serbatoio));
-        }
-        return lista;
+        return result;
     }
 
     @Override
-    public List<Kart> getAllKartDisponibiliPerAggiunta() {
-        List<Kart> lista = new ArrayList<>();
+    public List<Map<String, Object>> getAllKartDisponibiliPerAggiunta() {
         DBConnector db = DBConnector.getInstance();
         String query = Query.MOSTRA_AGGIUNTA_KART_MECCANICO.getQuery();
         List<Map<String, Object>> result = db.executeReturnQuery(query);
 
-        for (Map<String, Object> r : result) {
-            String targa = (String) r.get("targa");
-            int cilindrata = Integer.parseInt(r.get("cilindrata").toString());
-            double serbatoio = Double.parseDouble(r.get("serbatoio").toString());
-            lista.add(new Kart(targa, cilindrata, serbatoio));
-        }
-        return lista;
+        return result;
     }
 
     @Override

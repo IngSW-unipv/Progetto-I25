@@ -11,20 +11,6 @@ public class TableMaker {
 
     }
 
-    public String kartListToString(List<Kart> lista) {
-        if (lista == null || lista.isEmpty()) {
-            return "Nessun kart trovato\nend";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (Kart k : lista) {
-            sb.append(k.getTarga()).append(" ")
-                    .append(k.getCilindrata()).append(" ")
-                    .append(k.getSerbatoio()).append("\n");
-        }
-        sb.append("end");
-        return sb.toString();
-    }
-
     public String stringTableMaker(List<Map<String, Object>> inputMap, String... attributi) {
 
         returnString = new StringBuilder();

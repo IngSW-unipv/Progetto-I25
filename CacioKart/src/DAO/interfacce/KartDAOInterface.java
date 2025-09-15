@@ -13,13 +13,13 @@ public interface KartDAOInterface {
      * Restituisce la lista di tutti i kart.
      * @return lista di oggetti Kart presenti nel database
      */
-    List<Kart> getAllKart();
+    List<Map<String, Object>> getAllKart();
 
     /**
      * Restituisce solo i kart disponibili per aggiunta.
      * @return lista di kart disponibili
      */
-    List<Kart> getAllKartDisponibiliPerAggiunta();
+    List<Map<String, Object>> getAllKartDisponibiliPerAggiunta();
 
     /**
      * Inserisce un nuovo kart nel database.
