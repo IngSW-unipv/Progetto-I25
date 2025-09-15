@@ -1,196 +1,170 @@
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* GLOBAL STYLES */
-  body {
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    background: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-    /* Aggiunge spazio in fondo per evitare che il contenuto venga coperto dal footer fisso */
-    padding-bottom: 80px;
-  }
-  
-  /* HEADER */
-  header {
-    background: #222;
-    padding: 10px 20px;
-  }
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo img {
-    height: 50px;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s;
-  }
-  nav a:hover {
-    color: #4CAF50;
-  }
-  
-  /* FORM SECTION */
-  .form-section {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  .form-section h1 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #222;
-  }
-  .registration-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .form-group label {
-    margin-bottom: 5px;
-    font-weight: 700;
-  }
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  text-align: center;
 }
-  .form-group button {
-    width: 100%;
-    padding: 10px;
-    background: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .form-group button:hover {
-    background: #45a049;
-  }
-  
-  /* FOOTER: Ancorato in fondo alla pagina */
-  footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #222;
-    color: #fff;
-    text-align: center;
-    padding: 15px 20px;
-  }
 
-  .table-section{
-    max-width: 1000px;
-  margin: 20px auto;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-  .table-section button{
-    width: 100%;
-    padding: 10px;
-    background: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 40px 20px;
-    background: #e2e2e2;
-    margin-bottom: 40px;
-  } 
-  .hero h1 {
+h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
+    font-family: 'Roboto', Arial, sans-serif;
   }
 
-  table { 
-    border-collapse: collapse; 
-    width: 100%; 
-  }
-  th, td { 
-    border: 1px solid #ddd; 
-    padding: 8px; 
-    text-align: center; /* Testo centrato */
-  }
-  th { 
-    background-color: #4CAF50; 
-  }
-  
-  .product button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-  .product button:hover {
-    background-color: darkgreen;
-  }
+.table-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
 
-  input[type="number"] {
-      width: 80px;
-      padding: 10px;
-      font-size: 18px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      outline: none;
-      text-align: center;
-      transition: all 0.3s ease;
-  }
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: white;
+  font-size: 18px;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-  input[type="number"]:focus {
-      border-color: #4CAF50;
-      box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
-  }
+.form-section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
 
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: inner-spin-button;
-      margin: 0;
-  }
+.form-group {
+  margin: 0 auto 20px auto;
+  max-width: 600px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 6px rgba(102, 175, 233, 0.4);
+  outline: none;
+}
+
+.styled-table th, .styled-table td {
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid #e2e2e2;
+}
+
+.styled-table th {
+  background: #43b34a;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #378a37;
+}
+
+.styled-table tr:nth-child(even) {
+  background: #f5faf6;
+}
+
+.styled-table tr:hover {
+  background: #e6f7eb;
+}
+
+.btn-green {
+  background: #43b34a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(67,179,74,0.10);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  width: 100%;
+  margin: 0;
+  display: inline-block;
+}
+
+.btn-green:hover:not(:disabled) {
+  background: #2e9232;
+  box-shadow: 0 3px 10px rgba(67,179,74,0.18);
+}
+
+.btn-green:disabled {
+  background-color: #b5b5b5;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* === Fallback: applica lo stile "verde" a qualsiasi tabella nel main,
+   anche se NON ha la classe .styled-table === */
+
+main .table-section table,
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #fff;
+  font-size: 18px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* celle */
+main .table-section table th,
+main .table-section table td,
+main table th,
+main table td {
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid #e2e2e2;
+}
+
+/* intestazione verde */
+main .table-section table thead th,
+main table thead th,
+main .table-section table tr:first-child th,
+main table tr:first-child th {
+  background: #43b34a !important;
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #378a37;
+}
+
+/* zebra e hover */
+main .table-section table tbody tr:nth-child(even),
+main table tbody tr:nth-child(even) {
+  background: #f5faf6;
+}
+main .table-section table tbody tr:hover,
+main table tbody tr:hover {
+  background: #e6f7eb;
+}

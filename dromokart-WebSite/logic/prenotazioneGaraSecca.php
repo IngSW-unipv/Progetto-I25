@@ -10,11 +10,13 @@
     $cf = $_SESSION['username'];
 
     //invio codice gara Secca
-    fwrite($socket, "prenotazioneSecca ");
+    fwrite($socket, "prenotazione ");
     //invio dati
     
     fwrite($socket, $date . " ");
-    fwrite($socket, $tempo . "\n");
+    fwrite($socket, $tempo . " ");
+    fwrite($socket, $cf . " ");
+    fwrite($socket, "secca" . "\n");
 
     //viene ricevuta una cifra che indica se la registrazione è andata a buon fine o meno
 

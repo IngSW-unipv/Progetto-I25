@@ -23,7 +23,7 @@ $date = $_POST['date'];
 
 fclose($socket);
 
-    //nel caso di successo, viene impostato il rango a 0 e si salva 
+
     if($res === "0"){
         header('Location: ../erroreGenerale.php');
         die();

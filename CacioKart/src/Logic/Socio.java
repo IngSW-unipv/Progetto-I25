@@ -1,23 +1,21 @@
 package Logic;
 
-import Enums.Query;
+import DAO.implementazioni.KartDAO;
+import DAO.implementazioni.PezzoDAO;
 import Objects.Kart;
+
+import Objects.Persona;
 import Objects.Pezzo;
 import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+//Ci pensa Luca
+
 public class Socio extends Persona {
-    private String SELECT, UPDATE, INSERT;
-    private PHPResponseHandler responder;
-    private String queryIndicator;
-    private DBConnector db;
-    private TableMaker maker;
-    private List<Map<String, Object>> result;
 
     public Socio(String nome, String cognome, LocalDate dataNascita, String cF, String mail, String password) {
         super(nome, cognome, dataNascita, cF, mail, password);
@@ -27,109 +25,60 @@ public class Socio extends Persona {
 
     }
 
-    /** Metodo per registrare un utente nel db
-     * La query viene eseguita tramite il metodo sendResponse della classe Logic.DBConnector
-     *
-     * @param clientSocket Il socket di risposta
-     */
-    public void registrazione(Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
-        SELECT = Query.REGISTRAZIONE_SOCIO.getQuery(this.getCf(), this.getNome(), this.getCognome(), this.getMail(), this.getPassword(), this.getDataNascita());
-
-        queryIndicator = db.executeUpdateQuery(SELECT);
-        responder.sendResponse(clientSocket, queryIndicator);
-
-    }
-
     /** Metodo per associare un kart a un socio.
      * Dopo aver associato la targa al socio, si inserisce in acquista
      * la tupla che indica l'avvenuto acquisto.
      *
-     * @param k Il kart da associare
      * @param clientSocket Il socket di risposta
      */
-    public void compraKart(Kart k, Socket clientSocket) {
-        String cf = this.getCf();
-        String targa = k.getTarga();
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
+    public void mostraKartUtente(Socket clientSocket) {
+        KartDAO dao = new KartDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
 
-        UPDATE = Query.ACQUISTO_KART_UTENTE_TABELLA_SOCIO.getQuery(targa, cf);
-        SELECT = Query.ACQUISTO_KART_UTENTE_TROVA_ID_PRODOTTO.getQuery(targa);
+        List<Map<String, Object>> kartUtente = dao.getKartByCf(this.getCf());
 
-        queryIndicator = db.executeUpdateQuery(UPDATE);
-        if (queryIndicator == "0") {
-            responder.sendResponse(clientSocket, queryIndicator);
-            return;
+        if (kartUtente != null && !kartUtente.isEmpty()) {
+            TableMaker maker = new TableMaker();
+            String tabella = maker.stringTableMaker(kartUtente, "targa", "cilindrata", "serbatoio");
+            responder.sendResponse(clientSocket, tabella);
+        } else {
+            responder.sendResponse(clientSocket, "Nessun kart associato al socio.");
         }
-
-        List<Map<String, Object>> idProdotto = db.executeReturnQuery(SELECT);
-        //System.out.println("Ecco la targa che vogliamo acquistare: " + idProdotto);
-        INSERT = Query.ACQUISTO_KART_UTENTE_TABELLA_ACQUISTA.getQuery(cf, idProdotto.get(0).get("idProdotto").toString(), LocalDateTime.now());
-        queryIndicator = db.executeUpdateQuery(INSERT);
-        responder.sendResponse(clientSocket, queryIndicator);
     }
-
     /** Metodo per finalizzare l'acquisto dei pezzi da parte dell'utente.
      * Si riduce di 1 la quantità del pezzo disponibile nell'inventario del concessionario,
      * per poi associare all'utente l'id del pezzo acquistato nella tabella acquista.
      *
-     * @param p
+     * @param
      * @param clientSocket
      */
-    public void acquistaPezzi(Pezzo p, Socket clientSocket) {
-        db = new DBConnector();
-        responder = new PHPResponseHandler();
+    public void acquistaPezzi(Pezzo pezzo, Socket clientSocket) {
+        PezzoDAO dao = new PezzoDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
 
-        UPDATE = Query.ACQUISTA_PEZZI_TABELLA_CONCESSIONARIA.getQuery(p.getIdProdotto());
-        INSERT = Query.ACQUISTA_PEZZI_TABELLA_ACQUISTA.getQuery(this.getCf(), p.getIdProdotto(), LocalDateTime.now());
-        String[] querys = new String[2];
-        querys[0] = UPDATE;
-        querys[1] = INSERT;
+        boolean successo = dao.acquistaPezzo(pezzo, this.getCf());
 
-        for (String prodotto : querys) {
-            queryIndicator = db.executeUpdateQuery(prodotto);
-
-            if (queryIndicator == "0") {
-                responder.sendResponse(clientSocket, queryIndicator);
-                return;
-            }
-        }
-        responder.sendResponse(clientSocket, queryIndicator);
-    }
-
-    public void mostraKartUtente(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = new DBConnector();
-        SELECT = Query.MOSTRA_KART_SOCIO.getQuery(this.getCf());
-        result = db.executeReturnQuery(SELECT);
-
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "targa", "cilindrata", "serbatoio"));
-
+        if (successo) {
+            responder.sendResponse(clientSocket, "Pezzo acquistato con successo!");
         } else {
-            responder.sendResponse(clientSocket, "end");
+            responder.sendResponse(clientSocket, "Errore durante l'acquisto del pezzo.");
         }
     }
-
     /**
      *
      * @param clientSocket
      */
-    public void mostraPezziUtente(Socket clientSocket) {
-        responder = new PHPResponseHandler();
-        db = new DBConnector();
-        SELECT = Query.MOSTRA_PEZZI_SOCIO.getQuery(this.getCf());
-        result = db.executeReturnQuery(SELECT);
 
-        if (result != null) {
-            maker = new TableMaker();
-            responder.sendResponse(clientSocket, maker.stringTableMaker(result, "tipol", "data"));
+    public void compraKart(Kart kart, Socket clientSocket) {
+        KartDAO dao = new KartDAO();
+        PHPResponseHandler responder = new PHPResponseHandler();
 
+        boolean successo = dao.aggiungiKart(kart, this.getCf());
+
+        if (successo) {
+            responder.sendResponse(clientSocket, "OK");
         } else {
-            responder.sendResponse(clientSocket, "end");
+            responder.sendResponse(clientSocket, "Non avvenuto");
         }
     }
 }

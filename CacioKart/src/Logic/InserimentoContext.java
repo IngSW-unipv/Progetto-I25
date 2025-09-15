@@ -1,0 +1,19 @@
+package Logic;
+
+import Strategy.InserimentoConcessionariaStrategy;
+
+import java.net.Socket;
+
+
+public class InserimentoContext {
+    private InserimentoConcessionariaStrategy strategy;
+
+    public void setStrategy(InserimentoConcessionariaStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    // Cambia “prezzo” in “quantita” anche qui
+    public void eseguiInserimento(Object obj, int quantita, Socket clientSocket) {
+        strategy.inserisci(obj, quantita, clientSocket);
+    }
+}

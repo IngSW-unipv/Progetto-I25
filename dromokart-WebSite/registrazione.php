@@ -9,6 +9,7 @@
   <!-- Importa il font Roboto -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <!-- Collegamento al file CSS esterno -->
+   <link rel = "stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/registration.css">
 </head>
 <body>
@@ -42,7 +43,7 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" minlength="8" maxlength="16" required>
          </div>
-         <div class="form-group">
+         <div class="profile-buttons">
             <button type="submit">Registrati</button>
          </div>
       </form>

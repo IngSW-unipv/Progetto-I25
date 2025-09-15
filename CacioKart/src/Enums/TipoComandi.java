@@ -13,7 +13,7 @@ public enum TipoComandi {
     LOGIN("login"),
     CLASSIFICA_UTENTE("richiestaClassUsr"),
     MOSTRA_PRENOTAZIONI_UTENTE("richiestaPren"), //mando: il messaggio e il cf, mi aspetto: dataG, fasciaO, tipo
-    PRENOTAZIONE_LIBERA("prenotazioneLibera"),
+    PRENOTAZIONE("prenotazione"),
     ACQUISTA_KART("acquistaKart"),
     MOSTRA_KART_AGGIUNTA("mostraKartAggiunta"),
     MOSTRA_KART_UTENTE("richiestaKartUsr"), //mando: il messaggio e il cf, mi aspetto: targa, cilindrata, serbatoio
@@ -42,17 +42,17 @@ public enum TipoComandi {
     MOSTRA_GARA("mostraGara"),
     AGGIUNGI_PENALITA("aggiungiPenalita"),
 
-    //ORGANIZZATORE
-
-    PRENOTAZIONE_SECCA("prenotazioneSecca"),
+    //ORGANIZZATORE,
     MOSTRA_SOCI("mostraSoci"),
     INSERIMENTO_SOCI_GARA("inserimentoSociGara"),
     RICHIESTA_GARA_SECCA("richiestaGaraSecca"),
     MOSTRA_SOCI_CAMPIONATO("mostraSociCampionato"),
     RICHIESTA_CAMPIONATO("richiestaCampionato"),
     SELEZIONE_GARE_CAMPIONATO("selezioneGareCampionato"),
-    AGGIUNGI_GARE_CAMPIONATO("aggiungiGareCampionato"),
     CREAZIONE_TEAM("aggiungiTeam"),
+    AGGIUNGI_GARA_PARTECIPA_CAMPIONATO("aggiungiGareCampionato"),
+    MOSTRA_PRENOTAZIONI_ORGANIZZATORE("mostraPrenotazioniOrganizzatore"),
+
 
     //PROPRIETARIO
 

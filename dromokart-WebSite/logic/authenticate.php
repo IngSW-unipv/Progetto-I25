@@ -44,27 +44,27 @@ if ($str[0] === "0") {
     $_SESSION['name'] = $str[2];
     switch($str[1]){
         case "0":
-            header("Location: ../profilo.php");
+            header("Location: ../Utente/profilo.php");
             die();
             break;
         case "1":
-            header("Location: ../meccanico.php");
+            header("Location: ../Meccanico/meccanico.php");
             die();
             break;
         case "2":
-            header("Location: ../gestoreConcessionaria.php");
+            header("Location: ../Gestore_Della_Concessionaria/gestoreConcessionaria.php");
             die();
             break;
         case "3":
-            header("Location: ../arbitro.php");
+            header("Location: ../Arbitro/arbitro.php");
             die();
             break;
         case "4":
-            header("Location: ../organizzatore.php");
+            header("Location: ../Organizzatore/organizzatore.php");
             die();
             break;
         case "5":
-            header("Location: ../proprietario.php");
+            header("Location: ../Proprietario/proprietario.php");
             die();
             break;
         default:

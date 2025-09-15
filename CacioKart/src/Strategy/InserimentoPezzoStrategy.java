@@ -1,0 +1,16 @@
+package Strategy;
+
+import DAO.implementazioni.PezzoDAO;
+import Objects.Pezzo;
+import WebTalker.PHPResponseHandler;
+
+import java.net.Socket;
+
+public class InserimentoPezzoStrategy implements InserimentoConcessionariaStrategy {
+    @Override
+    public void inserisci(Object obj, int quantita, Socket clientSocket) {
+        Pezzo p = (Pezzo) obj;
+        new PezzoDAO().insertPezzo(p, quantita); // Passa la quantità!
+        new PHPResponseHandler().sendResponse(clientSocket, "Inserimento pezzo riuscito");
+    }
+}

@@ -21,12 +21,12 @@
             header('Location: ../erroreGenerale.php');
             die();
         } else{
-            header('Location: ../aggiungiPezzi.php');
+            header('Location: ../Gestore_Della_Concessionaria/aggiungiPezzi.php');
             die();
         }
     }
     else{
-        header('Location: ../aggiungiPezzi.php');
+        header('Location: ../Gestore_Della_Concessionaria/aggiungiPezzi.php');
         die();
     }
 ?>

@@ -1,0 +1,47 @@
+package Command;
+
+import Enums.TipoComandi;
+import Logic.Prenotazione;
+import Strategy.MostraPrenotazioniOrganizzatoreStrategy;
+import Strategy.MostraPrenotazioniSocioStrategy;
+import WebTalker.PHPResponseHandler;
+
+import java.net.Socket;
+
+public class RichiestaGaraSCommand implements RequestCommand {
+
+    private final TipoComandi tipo;
+
+    public RichiestaGaraSCommand(TipoComandi tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public void execute(String in, Socket clientSocket) throws Exception {
+        PHPResponseHandler responder = new PHPResponseHandler();
+        MostraPrenotazioniSocioStrategy strategyS;
+        MostraPrenotazioniOrganizzatoreStrategy strategyO;
+        try {
+            in = in.substring(14); // taglio il nome del comando
+            System.out.println("dati" + in );  // Es. CF utente o nessun dato
+            switch (tipo) {
+                case MOSTRA_PRENOTAZIONI_UTENTE -> {
+                     strategyS = new MostraPrenotazioniSocioStrategy(in);
+                    Prenotazione p = new Prenotazione();
+                    p.mostraPrenotazioni(strategyS, clientSocket);
+                }
+                case RICHIESTA_GARA_SECCA -> {
+                    strategyO = new MostraPrenotazioniOrganizzatoreStrategy();
+                    Prenotazione p = new Prenotazione();
+                    p.mostraPrenotazioni(strategyO, clientSocket);
+                }
+                default -> {
+                    responder.sendResponse(clientSocket, "Comando non riconosciuto");
+                }
+            }
+
+        } catch (Exception e) {
+            responder.sendResponse(clientSocket, "Errore durante la visualizzazione delle prenotazioni: " + e.getMessage());
+        }
+    }
+}

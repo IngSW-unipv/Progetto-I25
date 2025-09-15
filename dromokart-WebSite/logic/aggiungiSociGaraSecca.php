@@ -25,7 +25,7 @@ fclose($socket);
         header('Location: ../erroreGenerale.php');
         die();
     } else{
-        header('Location: ../organizzatore.php');
+        header('Location: ../Organizzatore/organizzatore.php');
         die();
     }
 ?>

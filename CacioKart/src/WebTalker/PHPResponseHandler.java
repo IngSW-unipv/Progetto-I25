@@ -5,29 +5,19 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class PHPResponseHandler {
-    private PrintWriter out;
 
-    public PHPResponseHandler() {
-    }
+    public PHPResponseHandler() {}
 
     /**
-     * Metodo per inviare risposte al client.
-     * Tramite la classe PrintWriter utilizzo lo stream di comunicazione
-     * verso il client per spedire messaggi e fare il flush del buffer.
-     *
-     * @param clientSocket Il socket attraverso il cui mandare la risposta
-     * @param messaggio Il messaggio da spedire
+     * Invia una risposta semplice (singola riga) al client.
      */
-    public void sendResponse(Socket clientSocket, String messaggio) {
+    public void sendResponse(Socket clientSocket, String response) {
         try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            out.println(messaggio);
-            System.out.println("Il messaggio spedito è: " + messaggio + "\n");
-
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println(response);
+            System.out.println(response); // Stampa la risposta sulla console server
         } catch (IOException e) {
-            System.out.println("Non sono riuscito a spedire il messaggio: " + e.getMessage());
-
+            System.out.println("Errore nell'invio della risposta: " + e.getMessage());
         }
-
     }
 }
