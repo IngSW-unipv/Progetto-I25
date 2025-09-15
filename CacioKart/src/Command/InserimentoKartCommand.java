@@ -7,7 +7,7 @@ import WebTalker.PHPResponseHandler;
 
 import java.net.Socket;
 
-public class KartInsertCommand implements RequestCommand {
+public class InserimentoKartCommand implements RequestCommand {
     @Override
     public void execute(String in, Socket clientSocket) throws Exception {
         String[] parti = in.split(" ");

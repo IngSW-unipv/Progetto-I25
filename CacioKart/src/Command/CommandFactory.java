@@ -14,7 +14,7 @@ public class CommandFactory {
         commandMap.put(LOGIN, LoginCommand::new);
         commandMap.put(REGISTRAZIONE, RegistrazioneCommand::new);
         commandMap.put(PRENOTAZIONE, PrenotazioneCommand::new);
-        commandMap.put(AGGIUNTA_KART_CONCESSIONARIA, KartInsertCommand::new);
+        commandMap.put(AGGIUNTA_KART_CONCESSIONARIA, InserimentoKartCommand::new);
         commandMap.put(AGGIUNGI_KART_MECCANICO, AggiungiKartMeccanicoCommand::new);
         commandMap.put(MOSTRA_KART_AGGIUNTA, MostraKartAggiuntaCommand::new);
         commandMap.put(MOSTRA_KART_RIMUOVI, MostraKartCommand::new);
